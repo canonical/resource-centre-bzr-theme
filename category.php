@@ -88,15 +88,15 @@ if ( !defined('ABSPATH')) exit;
 				<dt class="accessibility-aid">Location:</dt>
 				<?php if ( $location ) : ?><dd class="location" itemprop="location" itemscope itemtype="http://schema.org/PostalAddress"><?php echo $location; ?></dd><?php endif; ?>
 				<dt class="accessibility-aid">Date:</dt>
-				<dd>
+				<dd class="event-date">
 					<?php if ($start_day != $end_day && $start_month == $end_month) : ?>
-						<?php echo $start_day . '-' . $end_day . ' ' . $start_month . ' ' . $end_year; ?>
+						<?php echo ltrim($start_day, '0') . '-' . ltrim($end_day, '0') . ' ' . $start_month . ' ' . $end_year; ?>
 					<?php endif; ?>
 					<?php if ($start_month != $end_month) : ?>
-						<?php echo $start_day . ' ' . $start_month . ' - ' .$end_day . ' ' . $end_month . ' ' . $end_year; ?>
+						<?php echo ltrim($start_day, '0') . ' ' . $start_month . ' - ' . ltrim($end_day, '0') . ' ' . $end_month . ' ' . $end_year; ?>
 					<?php endif; ?>
 					<?php if ($start_day == $end_day) : ?>
-						<?php echo $start_day. ' ' . $start_month . ' ' . $end_year; ?>
+						<?php echo ltrim($start_day, '0'). ' ' . $start_month . ' ' . $end_year; ?>
 					<?php endif; ?>
 					<span class="accesibilty-aid">
 						<time itemprop="startDate" datetime="<?php echo $start_year .'-' . $start_nummonth . '-' . $start_day . 'T' . $start_hour . ':' . $start_minute; ?>"></time></dd>
@@ -109,14 +109,14 @@ if ( !defined('ABSPATH')) exit;
 			</div><!-- /.article-content -->
 			<div class="article-image six-col last-col">
 				<a href="<?php the_permalink(); ?>">
-				<?php if('video' == get_post_type()) { ?>
+				<?php if('$video_content' == get_post_type()) { ?>
 					<img src="http://img.youtube.com/vi/<?php echo $video_content; ?>/0.jpg" width="260" height="146" alt="" />
 				<?php } else { ?>	
 				<?php the_post_thumbnail('medium'); ?> 	
 				<?php } ?>
 				</a>
 			</div><!-- /.article-image -->
-			<?php the_excerpt(); ?>
+			<p><?php echo get_excerpt(); ?></p>
 				<?php if('ebook' == get_post_type() || 'whitepaper' == get_post_type()) : ?> 
 				<p><a class="link-cta-ubuntu" href="<?php the_permalink(); ?>">Get <?php echo $post_type->labels->title_friendly; ?> download</a></p>
 				<?php endif; // end if('ebook' == get_post_type() || 'whitepaper' == get_post_type()) ?>
@@ -182,15 +182,15 @@ if ( !defined('ABSPATH')) exit;
 				<dt class="accessibility-aid">Location:</dt>
 				<?php if ( $location ) : ?><dd class="location" itemprop="location" itemscope itemtype="http://schema.org/PostalAddress"><?php echo $location; ?></dd><?php endif; ?>
 				<dt class="accessibility-aid">Date:</dt>
-				<dd>
+				<dd class="event-date">
 					<?php if ($start_day != $end_day && $start_month == $end_month) : ?>
-						<?php echo $start_day . '-' . $end_day . ' ' . $start_month . ' ' . $end_year; ?>
+						<?php echo ltrim($start_day, '0') . '-' . ltrim($end_day, '0') . ' ' . $start_month . ' ' . $end_year; ?>
 					<?php endif; ?>
 					<?php if ($start_month != $end_month) : ?>
-						<?php echo $start_day . ' ' . $start_month . ' - ' .$end_day . ' ' . $end_month . ' ' . $end_year; ?>
+						<?php echo ltrim($start_day, '0') . ' ' . $start_month . ' - ' . ltrim($end_day, '0') . ' ' . $end_month . ' ' . $end_year; ?>
 					<?php endif; ?>
 					<?php if ($start_day == $end_day) : ?>
-						<?php echo $start_day. ' ' . $start_month . ' ' . $end_year; ?>
+						<?php echo ltrim($start_day, '0'). ' ' . $start_month . ' ' . $end_year; ?>
 					<?php endif; ?>
 					<span class="accesibilty-aid">
 						<time itemprop="startDate" datetime="<?php echo $start_year .'-' . $start_nummonth . '-' . $start_day . 'T' . $start_hour . ':' . $start_minute; ?>"></time></dd>
@@ -209,7 +209,7 @@ if ( !defined('ABSPATH')) exit;
 					<?php endif ; ?>
 					<?php if(has_post_thumbnail() || 'video' == get_post_type()) { echo '</div><!-- /.three-col -->'; } ?>
 					<?php if(has_post_thumbnail() || 'video' == get_post_type()) { ?><div class="five-col last-col"><?php }?>
-				<?php the_excerpt(); ?>	
+			<p><?php echo get_excerpt(); ?></p>
 			<div>
 			</div>
 					<?php if(has_post_thumbnail() || 'video' == get_post_type()) { echo '</div><!-- /.five-col -->'; } ?>

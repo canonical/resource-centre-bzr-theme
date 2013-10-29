@@ -8,7 +8,7 @@
  */
 function add_products_and_services() {
 	// Add new "products-and-services" taxonomy to Posts
-	register_taxonomy('products-and-services',array('whitepaper', 'ebook', 'post', 'video', 'attachment', 'casestudy', 'infographic', 'productbusinesscard', 'checklists', 'webinar', 'event', 'case-study', 'presskits', 'promo'), array(
+	register_taxonomy('products-and-services',array('whitepaper', 'ebook', 'post', 'video', 'attachment', 'casestudy', 'infographic', 'productbusinesscard', 'webinar', 'event', 'case-study', 'presskits', 'promo'), array(
 		'hierarchical' => true,
 		'show_admin_column' => true,
 		'labels' => array(

@@ -34,9 +34,9 @@ if ( !defined('ABSPATH')) exit;
 			<?php if (is_sticky()) continue; ?>
 <?php if ( is_search() ) : ?>
 <?php $title = get_the_title(); $keys= explode(" ",$s); $title = preg_replace('/('.implode('|', $keys) .')/iu', '<strong class="search-term">\0</strong>', $title); ?>
-<?php $excerpt = get_the_excerpt(); $keys= explode(" ",$s); $excerpt = preg_replace('/('.implode('|', $keys) .')/iu', '<strong class="search-term">\0</strong>', $excerpt); ?>
+<?php $excerpt = get_excerpt(); $keys= explode(" ",$s); $excerpt = preg_replace('/('.implode('|', $keys) .')/iu', '<strong class="search-term">\0</strong>', $excerpt); ?>
 <?php endif; ?>				
-					<li class="row article <?php if(($postCount++ == 1)) { echo ' featured-article'; } ?>"> 
+					<li class="row article <?php if(($postCount++ == 0)) { echo ' featured-article'; } ?>"> 
 					<?php if(has_post_thumbnail()) : ?>
 						<div class="article-image three-col">
 						<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
@@ -83,12 +83,12 @@ if ( !defined('ABSPATH')) exit;
 				<dt class="accessibility-aid">Location:</dt>
 				<?php if ( $location ) : ?><dd class="location" itemprop="location" itemscope itemtype="http://schema.org/PostalAddress"><?php echo $location; ?></dd><?php endif; ?>
 				<dt class="accessibility-aid">Date:</dt>
-				<dd>
+				<dd class="event-date">
 					<?php if ($start_day != $end_day && $start_month == $end_month) : ?>
-						<?php echo $start_day . '-' . $end_day . ' ' . $start_month . ' ' . $end_year; ?>
+						<?php echo ltrim($start_day, '0') . '-' . ltrim($end_day, '0') . ' ' . $start_month . ' ' . $end_year; ?>
 					<?php endif; ?>
 					<?php if ($start_month != $end_month) : ?>
-						<?php echo $start_day . ' ' . $start_month . ' - ' .$end_day . ' ' . $end_month . ' ' . $end_year; ?>
+						<?php echo ltrim($start_day, '0') . ' ' . $start_month . ' - ' . ltrim($end_day, '0') . ' ' . $end_month . ' ' . $end_year; ?>
 					<?php endif; ?>
 					<?php if ($start_day == $end_day) : ?>
 						<?php echo $start_day. ' ' . $start_month . ' ' . $end_year; ?>
@@ -101,10 +101,10 @@ if ( !defined('ABSPATH')) exit;
 			</dl>
 		<?php endif; // event ?>
 					<?php if(has_post_thumbnail()) : ?>
-						<p><?php if ( is_search() ) : echo $excerpt; else : echo the_excerpt(); endif; ?></p>
+						<p><?php if ( is_search() ) : echo $excerpt; else : echo get_excerpt(); endif; ?></p>
 					</div>
 					<?php else : ?>
-						<p><?php if ( is_search() ) : echo $excerpt; else : echo the_excerpt(); endif; ?></p>
+						<p><?php if ( is_search() ) : echo $excerpt; else : echo get_excerpt(); endif; ?></p>
 					<?php endif; ?>
 					</li>			<?php endwhile;?>
 		</ul>
@@ -115,7 +115,7 @@ if ( !defined('ABSPATH')) exit;
 
 </div><!-- /.row -->
 
-<div class="row four-col last-col">
+<div class="row four-col last-col no-border">
 	<?php
 	wp_reset_query();
 	$taxonomy = 'products-and-services';

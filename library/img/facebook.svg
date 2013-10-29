@@ -19,7 +19,7 @@
      id="defs3291" />
   <sodipodi:namedview
      id="base"
-     pagecolor="#ffffff"
+     pagecolor="#808080"
      bordercolor="#666666"
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
@@ -83,7 +83,7 @@
            transform="translate(0,804.3622)" />
       </g>
       <path
-         style="fill:#ffffff;fill-opacity:1;opacity:1"
+         style="fill:#808080;fill-opacity:1;opacity:1"
          d="M 36 6 C 9 6 6 6 6 24 L 6 66 C 6 84 9 84 36 84 L 48 84 L 48 54 L 39 54 L 39 42 L 48 42 L 48 32.03125 C 48 24.49791 53.12426 17.5625 64.34375 17.5625 C 68.88632 17.5625 72.21875 18 72.21875 18 L 71.96875 30 C 71.96875 30 68.55073 29.96875 64.8125 29.96875 C 60.76658 29.96875 60 31.84286 60 34.9375 L 60 42 L 72.28125 42 L 71.75 54 L 60 54 L 60 83.96875 C 81.235423 83.854921 84 82.505181 84 66 L 84 24 C 84 6 81 6 54 6 L 36 6 z "
          transform="translate(789,357.99992)"
          id="path2997" />

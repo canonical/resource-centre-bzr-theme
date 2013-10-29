@@ -27,7 +27,6 @@ audio:not([controls]) {
   display: none;
 }
 html {
-  font-size:  14px;
   overflow-y: scroll;
   -webkit-text-size-adjust: 100%;
   -o-text-size-adjust: 100%;

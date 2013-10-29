@@ -67,8 +67,8 @@ add_action( 'init', 'ep_eventposts' );
  */
 
 function ep_eventposts_metaboxes() {
-	add_meta_box( 'ept_event_date_start', 'Start Date and Time', 'ept_event_date', 'event', 'side', 'default', array( 'id' => '_start') );
-	add_meta_box( 'ept_event_date_end', 'End Date and Time', 'ept_event_date', 'event', 'side', 'default', array('id'=>'_end') );
+	add_meta_box( 'ept_event_date_start', 'Start Date', 'ept_event_date', 'event', 'side', 'default', array( 'id' => '_start') );
+	add_meta_box( 'ept_event_date_end', 'End Date', 'ept_event_date', 'event', 'side', 'default', array('id'=>'_end') );
 	add_meta_box( 'ept_event_location', 'Event Location', 'ept_event_location', 'event', 'normal', 'default', array('id'=>'_end') );
 	add_meta_box( 'ept_event_registration', 'Event registration', 'ept_event_registration', 'event', 'normal', 'default', array('id'=>'_end') );
 }

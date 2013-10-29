@@ -50,24 +50,26 @@ if ( !defined('ABSPATH')) exit;
 <!-- wordpress head functions -->
 <?php wp_head(); ?>
 <!-- end of wordpress head -->
+
+<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 	
 </head>
 <!-- body id should be site url, this might change -->	
 <body id="resources.ubuntu.com" <?php body_class(); ?>>
-
-<div class="site-wrapper">
 		
-<header class="banner global" role="banner">
+<header id="banner" class="banner global" role="banner">
 	<div class="header-inner">
 		<span class="accessibility-aid"><a accesskey="s" href="#main-content">Jump to content</a></span>
 		<div class="logo">
 			<a id="#toggle" class="logo-ubuntu" href="<?php echo get_option('home'); ?>/">
-				<img width="106" height="25" src="http://assets.ubuntu.com/sites/ubuntu/latest/u/img/logos/logo-ubuntu-orange.png" alt="<?php bloginfo('name'); ?> logo" />
-				<span><?php bloginfo('name'); ?></span>
+				<span><img width="106" height="25" src="http://assets.ubuntu.com/sites/ubuntu/latest/u/img/logos/logo-ubuntu-orange.png" alt="<?php bloginfo('name'); ?> logo" /></span>
+				<span class="site-name"><?php bloginfo('name'); ?></span>
 			</a>
 		</div>
 	</div><!-- ./header-inner -->
 </header>
+
+<div class="site-wrapper">
 
 <div class="wrapper clearfix">
 <div id="main-content" class="inner-wrapper clearfix" role="main">
