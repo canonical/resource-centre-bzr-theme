@@ -1,13 +1,23 @@
 jQuery(document).ready(function($){
 //document.domain = 'ubuntu.com';
 
+$('a').filter(function() {
+   return this.hostname && this.hostname !== location.hostname;
+}).addClass("external").wrapInner( "<span></span>" );
+
 // removes no-js class and adds yes-js if js
 $("html").removeClass("no-js").addClass("yes-js");
 
+// add class if below certain width
 if ( $(window).width() <= 9999) {
 	$("html").addClass("mobile");
 }
-	
+
+if ( $(window).width() <= 320) {
+	$("html").addClass("small");
+}
+
+// for single articles	
 if (!$("body").hasClass("single")) {
 
 	$('.prev-post').each(function() {
@@ -33,23 +43,23 @@ if (!$("body").hasClass("single")) {
 	});
 }
 
-// Create share trigger
-$( "#share" ).prependTo( ".header-inner" );
-$("#share").append('<a href="" id="share-trigger" class="nav-trigger">Share</a>');
+// Clone the search box then plop it top & bottom
+$( "#box-search" ).clone().appendTo( $('.header-inner'));
 
-// Create search trigger
-$(".header-inner").append('<a href="" id="search-trigger" class="nav-trigger">Search</a>');
-// Move the search box to the top
-$( "#box-search" ).prependTo( ".header-inner, #nav-global-wrapper p:last-of-type" );
+// create share trigger
+$( "#share" ).appendTo( ".header-inner" );
 
-// Create menu trigger
-$(".header-inner").addClass("js").append('<a href="#main-nav" id="menu" class="nav-trigger">&#9776;</a>');
+var array1 = ['<ul id="nav-triggers" class="inline no-bullets">', '<li><a href="" id="share-trigger" class="nav-trigger">Share</a></li>', '<li><a href="" id="search-trigger" class="nav-trigger">Search</a></li>', '<li><a href="#main-nav" id="menu" class="nav-trigger">&#9776;</a></li>', '</ul>']; $(array1.join('')) .appendTo('.header-inner');
+
+// create search trigger
+
+// create menu trigger
 $( "#main-nav" ).appendTo( ".header-inner" ).append('<p id="nav-global-wrapper-link"><a href="#nav-global-wrapper" class="nav-trigger">Ubuntu websites</a></p>');
  
- 
-$("#share-trigger").on('click touchstart', function(event){
+$("#share-trigger").bind('click touchstart', function(event){
   $("#share div").toggleClass("active");
   $("#share-trigger").toggleClass("active");
+  $( ".header-inner #box-search #s" ).blur();
   $("#box-search div").removeClass("active").addClass("inactive");
   $("#search-trigger").removeClass("active").addClass("inactive");
   $("#main-nav").removeClass("active").addClass("inactive");
@@ -57,10 +67,10 @@ $("#share-trigger").on('click touchstart', function(event){
   event.preventDefault();
 }); 
 
-$("#search-trigger").on('click touchstart', function(event){
+$("#search-trigger").bind('click touchstart', function(event){
   $("#box-search div").toggleClass("active");
   $("#search-trigger").toggleClass("active");
-  $( ".header-inner #box-search #s" ).focus();
+  //$( ".header-inner #box-search #s" ).focus();
   $("#share div").removeClass("active").addClass("inactive");
   $("#share-trigger").removeClass("active").addClass("inactive");
   $("#main-nav").removeClass("active").addClass("inactive");
@@ -68,16 +78,39 @@ $("#search-trigger").on('click touchstart', function(event){
   event.preventDefault();
 }); 
 
-$("#menu").on('click touchstart', function(event){
+$("#menu").bind('click touchstart', function(event){
   $("#main-nav").toggleClass("active");
   $("#menu").toggleClass("active");
+  $(".header-inner #box-search #s").blur();
   $("#box-search div").removeClass("active").addClass("inactive");
   $("#search-trigger").removeClass("active").addClass("inactive");
   $("#share div").removeClass("active").addClass("inactive");
   $("#share-trigger").removeClass("active").addClass("inactive");
   event.preventDefault();
 }); 
+ 
+// smooth scrolling 
+function scrollToElement(selector, time, verticalOffset) {
+    time = typeof(time) != 'undefined' ? time : 1000;
+    verticalOffset = typeof(verticalOffset) != 'undefined' ? verticalOffset : 0;
+    element = $(selector);
+    offset = element.offset();
+    offsetTop = offset.top + verticalOffset;
+    $('html, body').animate({
+        scrollTop: offsetTop
+    }, time);
+}
 
+$('.top-link a').click(function (e) {
+		e.preventDefault();
+    scrollToElement('#banner', 1000);
+}); 
+
+$('#nav-global-wrapper-link a').click(function (e) {
+    e.preventDefault();
+    scrollToElement('#nav-global-wrapper', 1000);
+});
+ 
 // Bind click event listener on the body
 // Hide main menu if user clicks anywhere off of the menu itself.
 $('body').on('click.hideMenu', function(e) {
@@ -90,13 +123,6 @@ $('body').on('click.hideMenu', function(e) {
     }
   }
 });
-
-/*$(".main-navigation").mmenu({
-	 position: "right",
-   configuration: {
-      menuNodetype: "div",
-   }
-});*/
 
 $(function() {
 	$('.mobile #tags ul, .mobile #list-archives').each(function(){
@@ -153,6 +179,7 @@ $('#close-alert').click(function() {
 	$(function(){ $('.block-click').blockClick(); });
 })(jQuery);
 
+// equal heights
 (function($) {
   $.fn.equalHeights = function(options) {
     var opts = $.extend({}, $.fn.equalHeights.defaults, options);

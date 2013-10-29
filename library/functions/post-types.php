@@ -2,7 +2,7 @@
 // show custom post_types on category pages
 function category_query_post_type($query) {
     if ( is_category() && false == $query->query_vars['suppress_filters'] )
-      $query->set( 'post_type', array( 'whitepaper', 'post', 'video', 'attachment', 'casestudy', 'infographic', 'checklists', 'webinar', 'event', 'presskits' ) );
+      $query->set( 'post_type', array( 'whitepaper', 'post', 'video', 'attachment', 'casestudy', 'infographic', 'webinar', 'ebook', 'event', 'presskits' ) );
     return $query;
 }
 add_filter('pre_get_posts', 'category_query_post_type');
@@ -82,53 +82,7 @@ function add_casestudy_category_automatically($post_ID) {
 add_action('publish_casestudy', 'add_casestudy_category_automatically');
 // end add case study post type
 
-// add checklist post type
-add_action('init', 'post_type_checklists');
-function post_type_checklists() 
-{
-  $labels = array(
-    'name' => _x('Checklists', 'post type general name'),
-    'singular_name' => _x('Checklist', 'post type singular name'),
-    'plural_name' => _x('Checklists', 'post type plural name'),
-    'add_new' => _x('Add New', 'checklist'),
-    'add_new_item' => __('Add new checklist'),
-    'view_item' => __('View checklist'),
-    'search_items' => __('Search checklists'),
-    'css_friendly' => __('checklist'),
-    'title_friendly' => __('checklist'),
-    'edit_item' => __('Edit checklist')
-  );
- 
- $args = array(
-    'labels' => $labels,
-    'public' => true,
-    'publicly_queryable' => true,
-    'show_ui' => true, 
-		'show_in_nav_menus' => true,
-    'query_var' => true,
-    'can_export' => true,
-    'taxonomies' => array('category', 'post_tag'),
-    'rewrite' => true,
-    'rewrite' => array( 'slug' => 'checklist' ),
-    'capability_type' => 'post',
-    'hierarchical' => true,
-    'menu_position' => 8,
-    'has_archive' => true,
-    'menu_icon' => get_stylesheet_directory_uri() . '/assets/img/admin/document-text.png',
-    'supports' => array('title', 'excerpt', 'editor', 'thumbnail', 'author','comments'));
-  register_post_type('checklists',$args);
-}
-function add_checklist_category_automatically($post_ID) {
-	global $wpdb;
-	if(!has_term('','category',$post_ID)){
-		$cat = array(76);
-		wp_set_object_terms($post_ID, $cat, 'category');
-	}
-}
-add_action('publish_checklist', 'add_checklist_category_automatically');
-// end add checklist post type
-
-// add checklist post type
+// add ebook post type
 add_action('init', 'post_type_ebook');
 function post_type_ebook() 
 {

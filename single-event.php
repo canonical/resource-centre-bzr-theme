@@ -84,12 +84,12 @@ get_header();
 				<dt class="accessibility-aid">Location:</dt>
 				<?php if ( $location ) : ?><dd class="location" itemprop="location" itemscope itemtype="http://schema.org/PostalAddress"><?php echo $location; ?></dd><?php endif; ?>
 				<dt class="accessibility-aid">Date:</dt>
-				<dd>
+				<dd class="event-date ">
 					<?php if ($start_day != $end_day && $start_month == $end_month) : ?>
-						<?php echo $start_day . '-' . $end_day . ' ' . $start_month . ' ' . $end_year; ?>
+						<?php echo ltrim($start_day, '0') . '-' . ltrim($end_day, '0') . ' ' . $start_month . ' ' . $end_year; ?>
 					<?php endif; ?>
 					<?php if ($start_month != $end_month) : ?>
-						<?php echo $start_day . ' ' . $start_month . ' - ' .$end_day . ' ' . $end_month . ' ' . $end_year; ?>
+						<?php echo ltrim($start_day, '0') . ' ' . $start_month . ' - ' . ltrim($end_day, '0') . ' ' . $end_month . ' ' . $end_year; ?>
 					<?php endif; ?>
 					<?php if ($start_day == $end_day) : ?>
 						<?php echo $start_day. ' ' . $start_month . ' ' . $end_year; ?>

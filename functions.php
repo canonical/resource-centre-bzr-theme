@@ -7,4 +7,5 @@ require('library/functions/post-types.php');
 require('library/functions/metaboxes.php');
 require('library/functions/custom_taxonomies.php');
 require('library/functions/event-posts.php');
+require('library/functions/categories.php');
 ?>

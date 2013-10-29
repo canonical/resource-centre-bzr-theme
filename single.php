@@ -110,40 +110,8 @@ get_header();
 <?php endif; // if have_posts ends ?> 
 	<div class="eight-col<?php $tags = wp_get_post_tags($post->ID); if ($tags) { echo ' has-related'; } ?>">
 		<?php // comments_template(); ?> 
-	</div>
-	
-<div class="four-col last-col">
-	<?php
-		wp_reset_query();
-		$taxonomy = 'products-and-services';
-		$queried_term = get_query_var($taxonomy);
-		$terms = get_terms($taxonomy, 'slug='.$queried_term);
-		$args = array( 'numberposts' => 1, 'products-and-services' => $queried_term, 'post_type' => productbusinesscard );
-		$myposts = get_posts( $args );	foreach( $myposts as $post ) : setup_postdata($post); ?>
-			<div class="glossary-box box box-highlight <?php echo ' promo-', $queried_term; ?>">
-				<h2><span>What is&hellip;</span><?php the_title(); ?></h2>
-				<?php the_content(); ?>
-				<?php echo $term->name; ?>
-			</div>
-	<?php endforeach; ?>
-</div>
-
-<?php
-$taxonomy = 'products-and-services';
-$queried_term = get_query_var($taxonomy);
-$terms = get_terms($taxonomy, 'slug='.$queried_term);
-    echo $term->name;
-?>
-<?php 
-	
-	
-$taxonomy = 'products-and-services';
-$queried_term = get_query_var($taxonomy);
-$term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );	
-echo $term->slug;
-
-?>
-
+	</div><!-- /.eight-col -->
 
 </div><!-- /.row --> 
+
 <?php get_footer(); ?>

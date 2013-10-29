@@ -1,6 +1,40 @@
 <?php
 // post types - add new post types here and at the top of post-types.php
-$post_types = array('whitepaper', 'post', 'video', 'attachment', 'casestudy', 'infographic', 'checklists', 'webinar', 'event', 'case-study', 'presskits');
+$post_types = array('whitepaper', 'post', 'ebook', 'video', 'attachment', 'casestudy', 'infographic', 'webinar', 'event', 'case-study', 'presskits');
+		
+$txfx_iel_use_target_blank = true;
+
+function wp_get_domain_name_from_uri($uri){
+	preg_match("/^(http:\/\/)?([^\/]+)/i", $uri, $matches);
+	$host = $matches[2];
+	preg_match("/[^\.\/]+\.[^\.\/]+$/", $host, $matches);
+	return $matches[0];	   
+}
+
+function parse_external_links($matches){
+	if ( wp_get_domain_name_from_uri($matches[3]) != wp_get_domain_name_from_uri($_SERVER["HTTP_HOST"]) ){
+		return '<a href="' . $matches[2] . '//' . $matches[3] . '"' . $matches[1] . $matches[4] . ' class="external">' . $matches[5] . '</a>';	 
+	} else {
+		return '<a href="' . $matches[2] . '//' . $matches[3] . '"' . $matches[1] . $matches[4] . '><span>' . $matches[5] . '</span></a>';
+	}
+}
+
+function wp_external_links($text) {
+	global $txfx_iel_use_target_blank;
+	$pattern = '/<a (.*?)href="(.*?)\/\/(.*?)"(.*?)>(.*?)<\/a>/i';
+	$text = preg_replace_callback($pattern,'parse_external_links',$text);
+
+	$pattern2 = '/<a (.*?) class="external"(.*?)>(.*?)<img (.*?)<\/a>/i';
+	if ( $txfx_iel_use_target_blank )
+		$text = preg_replace($pattern2, '<a $1 $2 target="_blank">$3<img $4</a>', $text);
+	else
+		$text = preg_replace($pattern2, '<a $1 $2>$3<img $4</a>', $text);
+	return $text;
+}
+
+// filters have high priority to make sure that any markup plugins like Textile or Markdown have already created the HTML links
+add_filter('the_content', 'wp_external_links', 999);
+add_filter('the_excerpt', 'wp_external_links', 999);
 
 function search_url_rewrite_rule() {
 	if ( is_search() && !empty($_GET['s'])) {
@@ -183,16 +217,9 @@ if (function_exists('register_sidebar'))
 register_nav_menu( 'primary-products', __( 'Products and services menu', 'Insights PLUS' ) );
 register_nav_menu( 'primary-categories', __( 'Category menu', 'Insights PLUS' ) );
 
-add_action( 'admin_head-post.php', 'so_13816272_limit_input_title' );
-
 
 // limit titles to 70 characters long
-function so_13816272_limit_input_title(  )
-{
-    global $current_screen;
-    // Not our post type, exit earlier
-    if( 'post' != $current_screen->post_type )
-        return;
+function gb_limit_title() {
     ?>
     <script type="text/javascript">
         jQuery(document).ready( function($) 
@@ -207,7 +234,23 @@ function so_13816272_limit_input_title(  )
     </script>
     <?php 
 }
+add_action('admin_head', 'gb_limit_title');
 // end limit titles to 70 characters long
+
+// remove 'Press and 'Product business card' from categories
+// 245 = press
+// 180 = product business card
+function gb_remove_press() {
+    ?>
+    <script type="text/javascript">
+			jQuery(document).ready( function($) {
+				$("#categorychecklist #category-245, #categorychecklist #category-180").hide();
+			});     
+    </script>
+    <?php 
+}
+add_action('admin_head', 'gb_remove_press');
+// end remove 'Press' from categories
 
 // Removes ul class from wp_nav_menu
 function remove_ul ( $menu ){
@@ -215,16 +258,17 @@ function remove_ul ( $menu ){
 }
 add_filter( 'wp_nav_menu', 'remove_ul' );
 
-// custom excerpt length shorter for teh homepage
-function custom_excerpt_length( $length ) {
-	if ( is_home() ) {
-		return 19;
-	} else {
-		return 38;
-	}
+function get_excerpt(){
+$excerpt = get_the_content();
+$excerpt = preg_replace(" (\[.*?\])",'',$excerpt);
+$excerpt = strip_shortcodes($excerpt);
+$excerpt = strip_tags($excerpt);
+$excerpt = substr($excerpt, 0, 160);
+$excerpt = substr($excerpt, 0, strripos($excerpt, " "));
+$excerpt = trim(preg_replace( '/\s+/', ' ', $excerpt));
+$excerpt = $excerpt.'&hellip;';
+return $excerpt;
 }
-add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
-// end custom excerpt length
 
 // add link to read more link to article excerpt function
 function new_excerpt_more($more) {

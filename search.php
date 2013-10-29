@@ -77,7 +77,7 @@ include("header.php")
 				<dt class="accessibility-aid">Location:</dt>
 				<?php if ( $location ) : ?><dd class="location" itemprop="location" itemscope itemtype="http://schema.org/PostalAddress"><?php echo $location; ?></dd><?php endif; ?>
 				<dt class="accessibility-aid">Date:</dt>
-				<dd>
+				<dd class="event-date">
 					<?php if ($start_day != $end_day && $start_month == $end_month) : ?>
 						<?php echo $start_day . '-' . $end_day . ' ' . $start_month . ' ' . $end_year; ?>
 					<?php endif; ?>

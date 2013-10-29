@@ -5,7 +5,7 @@
 				<ul class="no-bullets">
 					<li>
 						<label class="off-left" for="subscriber">Your email</label>
-						<span><input class="text" type="email" name="author" autocorrect="on" autocapitalize="on" id="subscriber" value="<?php echo $comment_author; ?>" size="22" tabindex="6" <?php if ($req) echo "aria-required='true'"; ?> /></span>
+						<span><input class="text" type="email" placeholder="Your email" name="subscriber" id="subscriber" value="<?php echo $comment_author; ?>" size="22" tabindex="6" <?php if ($req) echo "aria-required='true'"; ?> /></span>
 					</li>
 					<li>
 						<button name="submit" type="submit" id="submit" tabindex="10">Subscribe</button>

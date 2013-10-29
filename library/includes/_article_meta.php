@@ -3,7 +3,7 @@
 		$category = get_the_category(); 
 		if (!($cat->cat_name=='featured')) echo '<li><a href="'.get_category_link($category[0]->term_id ).'" title="View all '.$category[0]->cat_name.' posts">'.$category[0]->cat_name.'</a></li>';
 	?>
-	<?php echo get_the_term_list( $post->ID, 'products-and-services', '<li>', '</li><li>', '</li>' ); ?>
+	<?php echo get_the_term_list( $post->ID, 'products-and-services', '<li class="test">', '</li><li>', '</li>' ); ?>
 
 <!--<?php 
 	if (get_post_type() == 'post'): 

@@ -17,11 +17,11 @@ if ( !defined('ABSPATH')) exit;
  */
 ?>
 
-<?php get_template_part("library/includes/_share_links"); ?>
-<?php get_template_part("library/includes/_site_nav"); ?>
-
 </div><!-- /#main-content -->
 </div><!-- /.wrapper -->
+
+<?php get_template_part("library/includes/_share_links"); ?>
+<?php get_template_part("library/includes/_site_nav"); ?>
 
 <footer class="global clearfix" role="contentinfo">
 	<div class="legal clearfix">

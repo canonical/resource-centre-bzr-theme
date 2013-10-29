@@ -44,11 +44,11 @@ get_header(); ?>
 				<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('medium'); ?></a>
 			</div><!-- /.article-image -->
 		<?php endif //has_post_thumbnail ?>
-			<?php the_excerpt(); ?>
+			<p><?php echo get_excerpt(); ?></p>
 		</div><!-- /.article-content -->
 </div><!-- /.row -->
 
-<div class="twelve-col clearfix">
+<div class="clearfix">
 	<ul class="article-list clearfix no-bullets">
 <?php endwhile; ?>
 <?php } ?>
@@ -114,12 +114,12 @@ echo ' post-', $post_type->labels->css_friendly; ?><?php if(has_post_thumbnail()
 				<dt class="accessibility-aid">Location:</dt>
 				<?php if ( $location ) : ?><dd class="location" itemprop="location" itemscope itemtype="http://schema.org/PostalAddress"><?php echo $location; ?></dd><?php endif; ?>
 				<dt class="accessibility-aid">Date:</dt>
-				<dd>
+				<dd class="event-date">
 					<?php if ($start_day != $end_day && $start_month == $end_month) : ?>
-						<?php echo $start_day . '-' . $end_day . ' ' . $start_month . ' ' . $end_year; ?>
+						<?php echo ltrim($start_day, '0') . '-' . ltrim($end_day, '0') . ' ' . $start_month . ' ' . $end_year; ?>
 					<?php endif; ?>
 					<?php if ($start_month != $end_month) : ?>
-						<?php echo $start_day . ' ' . $start_month . ' - ' .$end_day . ' ' . $end_month . ' ' . $end_year; ?>
+						<?php echo ltrim($start_day, '0') . ' ' . $start_month . ' - ' . ltrim($end_day, '0') . ' ' . $end_month . ' ' . $end_year; ?>
 					<?php endif; ?>
 					<?php if ($start_day == $end_day) : ?>
 						<?php echo $start_day. ' ' . $start_month . ' ' . $end_year; ?>
@@ -142,7 +142,7 @@ echo ' post-', $post_type->labels->css_friendly; ?><?php if(has_post_thumbnail()
 					<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('medium'); ?></a>
 			</div>
 				<?php endif ?>
-				<?php the_excerpt(); ?>
+			<p><?php echo get_excerpt(); ?></p>
 			<?php endif	// end if video ?>
 				<!--<p class="clearfix"><a href="<?php the_permalink(); ?>"><?php if('post' == get_post_type()) { echo 'Read article'; } elseif('video' == get_post_type()) { echo 'Watch video'; } elseif('case-studies' == get_post_type()) { echo 'Read case study'; } elseif('event' == get_post_type()) { echo 'View event details'; } else { ?>Read <?php echo $post_type->labels->title_friendly; ?><?php } ?>&nbsp;&rsaquo; <span class="off-left">'<?php the_title(); ?>' </span></a></p>-->
 	</li>
