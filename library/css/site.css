@@ -431,7 +431,6 @@ header.banner .nav-primary {
   border-left: 1px solid rgb(77.497%, 25.248%, 7.013%);
   border-right: 1px solid rgb(92.905%, 40.05%, 21.604%);
   margin: 0 auto;
-  overflow: hidden;
   width: 984px;
 }
 header.banner .nav-primary ul {
@@ -541,7 +540,7 @@ header.banner a, header.banner h2 a:link, header.banner h2 a:visited {
   border-bottom: 0;
 }
 header.banner .logo {
-  border-left: 1px solid rgb(92.905%, 40.05%, 21.604%);
+  border-left: 0;
   float: left;
   height: 48px;
   overflow: hidden;

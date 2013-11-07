@@ -30,7 +30,7 @@ if ( !defined('ABSPATH')) exit;
 
 	<div class="eight-col">
 		<ul class="article-list  no-bullets">
-			<?php while (have_posts()) : the_post(); ?>
+			<?php if ( have_posts() ) : while (have_posts()) : the_post(); ?>
 			<?php if (is_sticky()) continue; ?>
 <?php if ( is_search() ) : ?>
 <?php $title = get_the_title(); $keys= explode(" ",$s); $title = preg_replace('/('.implode('|', $keys) .')/iu', '<strong class="search-term">\0</strong>', $title); ?>
@@ -39,9 +39,12 @@ if ( !defined('ABSPATH')) exit;
 					<li class="row article <?php if(($postCount++ == 0)) { echo ' featured-article'; } ?>"> 
 					<?php if(has_post_thumbnail()) : ?>
 						<div class="article-image three-col">
-						<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
+						<?php if('$video_content' == get_post_type()) : ?>
+							<a href="<?php the_permalink(); ?>"><img src="http://img.youtube.com/vi/<?php echo $video_content; ?>/0.jpg" width="100" height="100" alt="" /></a>
+						<?php else : ?>	
+							<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('thumbnail'); ?></a>
+						<?php endif; ?>
 						</div>
-						<div class="five-col last-col">
 					<?php endif; ?>	
 					<h2><a href="<?php the_permalink() ?>"><?php if ( is_search() ) : echo $title; else : echo  the_title(); endif; ?></a></h2>
 						<?php get_template_part("library/includes/_article_meta"); ?>
@@ -101,12 +104,15 @@ if ( !defined('ABSPATH')) exit;
 			</dl>
 		<?php endif; // event ?>
 					<?php if(has_post_thumbnail()) : ?>
+						<div class="five-col last-col">
+					<?php endif; ?>	
+					<?php if(has_post_thumbnail()) : ?>
 						<p><?php if ( is_search() ) : echo $excerpt; else : echo get_excerpt(); endif; ?></p>
 					</div>
 					<?php else : ?>
 						<p><?php if ( is_search() ) : echo $excerpt; else : echo get_excerpt(); endif; ?></p>
 					<?php endif; ?>
-					</li>			<?php endwhile;?>
+					</li><?php endwhile; else: ?><div class=""><p><?php _e('Sorry, no posts matched your criteria.'); ?></p></div><?php endif; ?>
 		</ul>
 	</div><!-- /.eight-col -->
 	<div class="eight-col">

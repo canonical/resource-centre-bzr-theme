@@ -17,10 +17,8 @@ include("header.php")
 	?>"
 	</h1>
 	<h2>We've found 
-	<?php	 
-		echo $count . ' '; _e('articles'); 
-		wp_reset_query(); 
-	?>.</h2>
+	<?php echo $count; ?>
+	<?php echo _n( 'article', 'articles', $count, 'ubuntu-resources' ); ?>.</h2>
 </div><!-- /.row -->
 <div class="eight-col">
 	<?php if (have_posts()) : ?>

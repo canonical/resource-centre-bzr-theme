@@ -45,13 +45,12 @@ if ( !defined('ABSPATH')) exit;
 <!-- stylesheet -->
 <link rel="stylesheet" type="text/css" media="all" href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,400italic" />
 <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" />
+<link rel="stylesheet" media="print" href="/wp-content/themes/resource-centre/library/css/print.css" type="text/css" />
 <!-- <link rel="stylesheet" type="text/css" media="screen" href="http://assets.ubuntu.com/sites/ubuntu/534/u/css/global.css" /> -->
 
 <!-- wordpress head functions -->
 <?php wp_head(); ?>
 <!-- end of wordpress head -->
-
-<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 	
 </head>
 <!-- body id should be site url, this might change -->	
@@ -63,7 +62,7 @@ if ( !defined('ABSPATH')) exit;
 		<div class="logo">
 			<a id="#toggle" class="logo-ubuntu" href="<?php echo get_option('home'); ?>/">
 				<span><img width="106" height="25" src="http://assets.ubuntu.com/sites/ubuntu/latest/u/img/logos/logo-ubuntu-orange.png" alt="<?php bloginfo('name'); ?> logo" /></span>
-				<span class="site-name"><?php bloginfo('name'); ?></span>
+				<span class="site-name">resources</span>
 			</a>
 		</div>
 	</div><!-- ./header-inner -->

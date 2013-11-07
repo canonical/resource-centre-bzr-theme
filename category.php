@@ -31,6 +31,7 @@ if ( !defined('ABSPATH')) exit;
 
 <?php if(!is_paged()) : ?>
 <?php 
+	$do_not_duplicate = array();
 	query_posts( array('post_type' => $post_types, 'cat' => $cat, 'posts_per_page' => 1, 'meta_key' => 'dbt_checkbox_featured', 'orderby' => 'date'));
 	while (have_posts()) : the_post();
 	$thePostID = $post->ID;
@@ -40,13 +41,21 @@ if ( !defined('ABSPATH')) exit;
 	$articlecat = $category = get_the_category()->category_nicename;
 	$key = 'postVideo';
 	$video_content = get_post_meta($post->ID, $key, TRUE);
-	$do_not_duplicate = $post->ID;
+	$do_not_duplicate[] = $post->ID;
 ?>
 
 <?php if($articlecat == $pagecat) { ?>
 	<li class="row featured article<?php the_category_unlinked(' post-'); ?>">
 			<div class="article-content six-col">
-				<header>
+			<?php if(has_post_thumbnail()) : ?><div class="article-image six-col last-col">
+				<a href="<?php the_permalink(); ?>">
+				<?php if('$video_content' == get_post_type()) { ?>
+					<img src="http://img.youtube.com/vi/<?php echo $video_content; ?>/0.jpg" width="100" height="100" alt="" />
+				<?php } else { ?>	
+				<?php the_post_thumbnail('thumbnail'); ?> 	
+				<?php } ?>
+				</a>
+			</div><!-- /.article-image --><?php endif; ?>
 					<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 				<?php get_template_part("library/includes/_article_meta"); ?>
 				
@@ -105,21 +114,8 @@ if ( !defined('ABSPATH')) exit;
 				</dd>
 			</dl>
 		<?php endif; ?>
-				</header>
 			</div><!-- /.article-content -->
-			<div class="article-image six-col last-col">
-				<a href="<?php the_permalink(); ?>">
-				<?php if('$video_content' == get_post_type()) { ?>
-					<img src="http://img.youtube.com/vi/<?php echo $video_content; ?>/0.jpg" width="260" height="146" alt="" />
-				<?php } else { ?>	
-				<?php the_post_thumbnail('medium'); ?> 	
-				<?php } ?>
-				</a>
-			</div><!-- /.article-image -->
 			<p><?php echo get_excerpt(); ?></p>
-				<?php if('ebook' == get_post_type() || 'whitepaper' == get_post_type()) : ?> 
-				<p><a class="link-cta-ubuntu" href="<?php the_permalink(); ?>">Get <?php echo $post_type->labels->title_friendly; ?> download</a></p>
-				<?php endif; // end if('ebook' == get_post_type() || 'whitepaper' == get_post_type()) ?>
 	</li>
 <?php } /*end if($articlecat == $pagecat)*/ endwhile; /* (have_posts()) */ endif; // end if(is_paged()) ?>
 
@@ -131,7 +127,7 @@ if ( !defined('ABSPATH')) exit;
 	$postCount = 0;
 
 	if ( have_posts() ) : while (have_posts()) : the_post();
-	if( $post->ID == $do_not_duplicate ) continue;
+	$do_not_duplicate[] = $post->ID;
 ?>
 
 	<?php if($thePostID == $post->ID) { } else { ?>
@@ -142,6 +138,14 @@ if ( !defined('ABSPATH')) exit;
 				$lock = 'dbt_checkbox';
 				$gated_content = get_post_meta($post->ID, $lock, TRUE);
         	?>
+				<?php if(has_post_thumbnail() || 'video' == get_post_type()) { ?><div class="article-image three-col"><?php } ?>
+				<?php if('video' == get_post_type()) { ?>
+					<a href="<?php the_permalink(); ?>"><img src="http://img.youtube.com/vi/<?php echo $video_content; ?>/0.jpg" width="100" height="100" alt="" /></a>
+				<?php }	?>	
+					<?php if(has_post_thumbnail()) : ?>
+						<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('thumbnail'); ?></a>
+					<?php endif ; ?>
+					<?php if(has_post_thumbnail() || 'video' == get_post_type()) { echo '</div><!-- /.three-col -->'; } ?>
 				<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 				<?php get_template_part("library/includes/_article_meta"); ?>
 			<?php if('event' == get_post_type()) : ?>
@@ -199,20 +203,7 @@ if ( !defined('ABSPATH')) exit;
 				</dd>
 			</dl>
 		<?php endif; ?>
-				<?php if (get_post_type() != 'video') { ?><?php } // end $video_content ?>
-				<?php if(has_post_thumbnail() || 'video' == get_post_type()) { ?><div class="article-image three-col"><?php } ?>
-				<?php if('video' == get_post_type()) { ?>
-					<img src="http://img.youtube.com/vi/<?php echo $video_content; ?>/0.jpg" width="260" height="146" alt="" />
-				<?php }	?>	
-					<?php if(has_post_thumbnail()) : ?>
-						<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
-					<?php endif ; ?>
-					<?php if(has_post_thumbnail() || 'video' == get_post_type()) { echo '</div><!-- /.three-col -->'; } ?>
-					<?php if(has_post_thumbnail() || 'video' == get_post_type()) { ?><div class="five-col last-col"><?php }?>
 			<p><?php echo get_excerpt(); ?></p>
-			<div>
-			</div>
-					<?php if(has_post_thumbnail() || 'video' == get_post_type()) { echo '</div><!-- /.five-col -->'; } ?>
         </li>
 
     <?php } // end if($thePostID == $post->ID) ?>
@@ -230,8 +221,8 @@ if ( !defined('ABSPATH')) exit;
 	<?php get_template_part("library/includes/_pagination"); ?>
 	</div><!-- /.eight-col -->
 
-<div class="aside three-col last-col">
-	<h2>Filter <span class="lowercase"><?php single_cat_title() ?></span> by product or service</h2>
+<!--<div class="aside three-col last-col">
+	<h2>Filter <span class="lowercase"><?php single_cat_title() ?></span> by topic</h2>
 	<ul class="no-bullets">	 
 	<li<?php if (!$term) echo ' class="current"'; ?>><a href="/topics/<?php $cat = get_term_by('name', single_cat_title('',false), 'category'); echo $cat->slug; ?>">All <span class="lowercase"><?php single_cat_title() ?></span></a></li>
 	<?php 
@@ -262,7 +253,7 @@ if ( !defined('ABSPATH')) exit;
    <?php } ?>
    </ul>
 	
-</div><!-- /.four-col -->	
+</div> -->	
 	
 </div><!-- /.row -->
 

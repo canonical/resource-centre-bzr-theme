@@ -28,9 +28,6 @@ function my_init() {
     	// load infinite scroll jquery		
 		wp_register_script( 'infinite_scroll',  get_template_directory_uri() . '/library/js/jquery.infinitescroll.min.js', array('jquery'),null,true );
 
-    	// load responsive nav		
-		wp_register_script( 'mmenu',  get_template_directory_uri() . '/library/js/jquery.mmenu.min.js', array('jquery'),null,true );
-		
     	// load manual-trigger.js jquery		
 		wp_register_script( 'infinite_scroll_trigger',  get_template_directory_uri() . '/library/js/manual-trigger.js', array('jquery'),null,true );
 		    if( ! is_singular() ) {

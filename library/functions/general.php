@@ -1,7 +1,8 @@
 <?php
 // post types - add new post types here and at the top of post-types.php
 $post_types = array('whitepaper', 'post', 'ebook', 'video', 'attachment', 'casestudy', 'infographic', 'webinar', 'event', 'case-study', 'presskits');
-		
+
+/*		
 $txfx_iel_use_target_blank = true;
 
 function wp_get_domain_name_from_uri($uri){
@@ -34,7 +35,7 @@ function wp_external_links($text) {
 
 // filters have high priority to make sure that any markup plugins like Textile or Markdown have already created the HTML links
 add_filter('the_content', 'wp_external_links', 999);
-add_filter('the_excerpt', 'wp_external_links', 999);
+add_filter('the_excerpt', 'wp_external_links', 999);*/
 
 function search_url_rewrite_rule() {
 	if ( is_search() && !empty($_GET['s'])) {
@@ -207,7 +208,7 @@ function wpse7687_pre_get_posts( &$wp_query ) {
 }
 
 add_theme_support( 'post-thumbnails' );
-set_post_thumbnail_size( 300, 180, true );
+set_post_thumbnail_size( 100, 100, true );
 add_theme_support( 'automatic-feed-links' );
 
 if (function_exists('register_sidebar'))
@@ -263,7 +264,7 @@ $excerpt = get_the_content();
 $excerpt = preg_replace(" (\[.*?\])",'',$excerpt);
 $excerpt = strip_shortcodes($excerpt);
 $excerpt = strip_tags($excerpt);
-$excerpt = substr($excerpt, 0, 160);
+$excerpt = substr($excerpt, 0, 120);
 $excerpt = substr($excerpt, 0, strripos($excerpt, " "));
 $excerpt = trim(preg_replace( '/\s+/', ' ', $excerpt));
 $excerpt = $excerpt.'&hellip;';

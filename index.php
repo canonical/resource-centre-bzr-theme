@@ -36,14 +36,14 @@ get_header(); ?>
 	$post_type = get_post_type_object( get_post_type($post));
 ?>
 <div class="row featured-article <?php the_category_unlinked(' post-'); ?>">
-	<div class="article-content six-col">
-		<h2 class="clearfix"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-		<?php get_template_part("library/includes/_article_meta"); ?>
 		<?php if(has_post_thumbnail()): ?>
-			<div class="article-image six-col last-col">
-				<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('medium'); ?></a>
+			<div class="article-image six-col">
+				<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('thumbnail'); ?></a>
 			</div><!-- /.article-image -->
 		<?php endif //has_post_thumbnail ?>
+	<div class="article-content six-col last-col">
+		<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+		<?php get_template_part("library/includes/_article_meta"); ?>
 			<p><?php echo get_excerpt(); ?></p>
 		</div><!-- /.article-content -->
 </div><!-- /.row -->
@@ -74,6 +74,12 @@ get_header(); ?>
 <?php if($thePostID == $post->ID) {  } else { ?>
 	<li class="row article <?php if(is_home() && !is_paged() && ++$postCount == 3) { echo ' last-col'; } ?><?php the_category_unlinked(' post-'); ?><?php $k = $style_index%3; echo "$style_classes[$k]"; $style_index++; ?><?php $post_type = get_post_type_object( get_post_type($post) );
 echo ' post-', $post_type->labels->css_friendly; ?><?php if(has_post_thumbnail()): echo ' has-image'; endif; ?>">
+			<?php if(has_post_thumbnail()): ?>
+			<div class="article-image six-col">
+				<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('thumbnail'); ?></a>
+			</div><!-- /.article-image -->
+			<?php endif ?>
+			<div class="article-content six-col last-col">
 				<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 				<?php get_template_part("/library/includes/_article_meta"); ?>
 			<?php if('event' == get_post_type()) : ?>
@@ -137,14 +143,10 @@ echo ' post-', $post_type->labels->css_friendly; ?><?php if(has_post_thumbnail()
 				<img src="http://img.youtube.com/vi/<?php echo $video_content; ?>/0.jpg" width="260" height="146" alt=""/>
 			</div>
 			<?php else: ?>		
-				<?php if(has_post_thumbnail()): ?>
-			<div class="article-image">
-					<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('medium'); ?></a>
-			</div>
-				<?php endif ?>
 			<p><?php echo get_excerpt(); ?></p>
 			<?php endif	// end if video ?>
 				<!--<p class="clearfix"><a href="<?php the_permalink(); ?>"><?php if('post' == get_post_type()) { echo 'Read article'; } elseif('video' == get_post_type()) { echo 'Watch video'; } elseif('case-studies' == get_post_type()) { echo 'Read case study'; } elseif('event' == get_post_type()) { echo 'View event details'; } else { ?>Read <?php echo $post_type->labels->title_friendly; ?><?php } ?>&nbsp;&rsaquo; <span class="off-left">'<?php the_title(); ?>' </span></a></p>-->
+		</div><!-- /.article-content -->
 	</li>
 <?php } // end if($thePostID == $post->ID) ?>
 <?php endwhile; ?>

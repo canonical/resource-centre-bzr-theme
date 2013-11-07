@@ -25,7 +25,10 @@ if ( !defined('ABSPATH')) exit;
 
 <footer class="global clearfix" role="contentinfo">
 	<div class="legal clearfix">
-		<p>&copy; <?php echo date('Y'); ?> Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://canonical.com">Canonical Ltd</a>. <a class="container" href="https://bugs.launchpad.net/resource-centre">Report a bug on this site &rsaquo;</a></p>
+		<p>&copy; <?php echo date('Y'); ?> Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://canonical.com">Canonical Ltd</a></p> 
+		<ul class="no-bullets inline">
+			<li><a class="screen-only container" href="https://bugs.launchpad.net/resource-centre">Report a bug on this site</a></li>
+			<li><a href="">Feedback</a></li>
 	</div>
 </footer>
 

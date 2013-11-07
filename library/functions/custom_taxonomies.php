@@ -12,22 +12,22 @@ function add_products_and_services() {
 		'hierarchical' => true,
 		'show_admin_column' => true,
 		'labels' => array(
-			'name' => _x( 'Products and services', 'taxonomy general name' ),
-			'singular_name' => _x( 'Products and services', 'taxonomy singular name' ),
-			'search_items' =>  __( 'Search products and services' ),
-			'all_items' => __( 'All products and services' ),
-			'parent_item' => __( 'Parent Products and services' ),
+			'name' => _x( 'Topic', 'taxonomy general name' ),
+			'singular_name' => _x( 'Topic', 'taxonomy singular name' ),
+			'search_items' =>  __( 'Search topics' ),
+			'all_items' => __( 'All topics' ),
+			'parent_item' => __( 'Parent topics' ),
 			'parent_item_colon' => __( 'Parent asset type:' ),
 			'edit_item' => __( 'Edit asset type' ),
 			'update_item' => __( 'Update asset type' ),
-			'add_new_item' => __( 'Add new product or service' ),
-			'new_item_name' => __( 'New product or service name' ),
-			'menu_name' => __( 'Products and services' ),
+			'add_new_item' => __( 'Add new topic' ),
+			'new_item_name' => __( 'New topic name' ),
+			'menu_name' => __( 'Topics' ),
 			'menu_position' => 6
 		),
 		// Control the slugs used for this taxonomy
 		'rewrite' => array(
-			'slug' => 'products-and-services', 'with_front' => false // This controls the base slug that will display before each term
+			'slug' => 'topic', 'with_front' => false // This controls the base slug that will display before each term
 		),
 	));
 }

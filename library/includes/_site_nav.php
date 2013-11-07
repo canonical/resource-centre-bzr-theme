@@ -3,7 +3,7 @@
 	
 		<div id="main-nav">
 			<ul class="main-nav no-bullets">
-				<li><h2>By subject</h2>
+				<li><h2>By topic</h2>
 					<ul class="no-bullets">
 					<?php wp_nav_menu( array( 
 						'theme_location' => 'primary-products', 

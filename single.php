@@ -112,6 +112,10 @@ get_header();
 		<?php // comments_template(); ?> 
 	</div><!-- /.eight-col -->
 
+<div class="row four-col last-col no-border">
+<?php get_template_part("library/includes/_business_card"); ?>
+</div>
+
 </div><!-- /.row --> 
 
 <?php get_footer(); ?>

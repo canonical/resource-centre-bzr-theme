@@ -1,9 +1,18 @@
 jQuery(document).ready(function($){
 //document.domain = 'ubuntu.com';
 
+$('.accordion h2').bind('click touchstart', function(event){
+    $(this).next('ul').slideToggle('slow');
+    event.preventDefault();
+}).next().hide();
+
 $('a').filter(function() {
    return this.hostname && this.hostname !== location.hostname;
-}).addClass("external").wrapInner( "<span></span>" );
+}).addClass( "external" );
+
+$("a:has(img)").filter(function() {
+   return !$.trim($(this).text()).length; 
+}).addClass("external-img");
 
 // removes no-js class and adds yes-js if js
 $("html").removeClass("no-js").addClass("yes-js");
@@ -49,7 +58,7 @@ $( "#box-search" ).clone().appendTo( $('.header-inner'));
 // create share trigger
 $( "#share" ).appendTo( ".header-inner" );
 
-var array1 = ['<ul id="nav-triggers" class="inline no-bullets">', '<li><a href="" id="share-trigger" class="nav-trigger">Share</a></li>', '<li><a href="" id="search-trigger" class="nav-trigger">Search</a></li>', '<li><a href="#main-nav" id="menu" class="nav-trigger">&#9776;</a></li>', '</ul>']; $(array1.join('')) .appendTo('.header-inner');
+var array1 = ['<ul id="nav-triggers" class="inline no-bullets">', '<li><a href="" id="share-trigger" class="nav-trigger">Share</a></li>', '<li id="testtt"><a href="" id="search-trigger" class="nav-trigger">Search</a></li>', '<li><a href="#main-nav" id="menu" class="nav-trigger">&#9776;</a></li>', '</ul>']; $(array1.join('')) .appendTo('.header-inner');
 
 // create search trigger
 

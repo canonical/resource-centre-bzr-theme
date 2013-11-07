@@ -5,7 +5,7 @@
 		<img src="http://assets.ubuntu.com/sites/ubuntu/latest/u/img/error/error404-hero-full.png" alt="Error owl" />
 	</div>
 	<div class="six-col last-col">
-		<h1>404: Page not found.</h1>
+		<h1>404: page not found</h1>
 		<p>Sorry, we couldn&rsquo;t find that page.</p>
 	</div>
 </div><!-- / .row -->

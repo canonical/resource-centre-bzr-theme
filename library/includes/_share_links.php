@@ -6,17 +6,12 @@
 <div id="share">
 	<div> 
 		<h2>Share 
-		<?php if(is_single() ) : ?>this
-			<?php if('post' == get_post_type()) : ?>article<?php endif;?>
-			<?php if('event' == get_post_type()) : ?>event<?php endif;?>
-			<?php if('e-book' == get_post_type()) : ?>e-book<?php endif;?>
-			<?php echo $post_type->labels->title_friendly; ?>
-		<?php elseif (is_home()) : ?>this website<?php elseif (is_search()) : ?> these search results
+		<?php if(is_single() ) : ?>this <?php if('post' == get_post_type()) : ?>article<?php endif;?><?php if('event' == get_post_type()) : ?>event<?php endif;?><?php if('e-book' == get_post_type()) : ?>e-book<?php endif;?><?php echo $post_type->labels->title_friendly; ?><?php elseif (is_home()) : ?>this website<?php elseif (is_search()) : ?> these search results
 		<?php else : ?>this page<?php endif; ?>:
 		</h2>
 		<ul class="no-bullets">
 			<li>
-				<a id="share-facebook" class="share" href="http://www.facebook.com/sharer.php?u=<?php the_permalink(); ?>&amp;t=<?php the_title(); ?>">Facebook</a>
+				<a id="share-facebook" class="share" href="http://www.facebook.com/sharer.php?s=100&amp;p[url]=<?php echo urlencode( the_permalink( $post->ID ) ); ?>&p[title]=<?php echo urlencode(the_title()); ?>&amp;p[summary]=<?php echo urlencode(get_excerpt()); ?>&amp;p%5Bimages%5D%5B0%5D=<?php $src = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), array( 300,300 ), false, '' ); echo $src[0]; ?>">Facebook</a>	
 			</li>
 			<li>
 				<a id="share-twitter" class="share" href="http://twitter.com/share?text=<?php if(is_single() ) : ?><?php echo urlencode(the_title()); ?><?php else : ?><?php single_tag_title(); ?><?php endif ; ?>&url=<?php if(is_single() ) : ?><?php echo urlencode( wp_get_shortlink( $post->ID ) ); ?><?php else : ?><?php echo "http://" . $_SERVER['HTTP_HOST']  . $_SERVER['REQUEST_URI']; ?><?php endif; ?>&hashtags=ubuntu" title="Share on Twitter" rel="nofollow">Twitter</a>
@@ -25,8 +20,16 @@
 				<a id="share-googleplus" class="share" href="https://plus.google.com/share?url=<?php urlencode(wp_get_shortlink());?>">Google+</a>
 			</li>
 			<li>
-				<a id="share-email" class="share" title="Share '<?php the_title(); ?>' via Email" href="mailto:?subject=Saw%20this%20and%20thought%20of%20you&amp;body=I've%20just%20read%20'
-				<?php if(is_single() ) : ?><?php single_post_title(); ?><?php elseif ( is_home() ) : ?>Ubuntu Resources<?php else : ?><?php single_tag_title(); ?><?php endif; ?>'%20on%20the%20Ubuntu%20resource%20website%20and%20thought%20you%20would%20like%20it.%20Check%20it%20out:%20<?php if ( is_home() ) : ?><?php bloginfo('url'); ?><?php else : ?><?php the_permalink(); ?><?php endif; ?>">Email</a>
+				<a id="share-email" class="share" title="Share '<?php the_title(); ?>' via Email" href="mailto:?subject=Saw%20this%20and%20thought%20of%20you&amp;body=
+				<?php if(is_single() ) : ?>
+					I've just read '<?php single_post_title(); ?>' on the Ubuntu Resources website and thought you would like it. Check it out: <?php the_permalink(); ?>
+				<?php elseif( is_tax('products-and-services') ) : ?>
+					I've just visited the '<?php single_tag_title(); ?>' section on the Ubuntu Resources website and thought you would like it. Check it out: <?php echo "http://" . $_SERVER['HTTP_HOST']  . $_SERVER['REQUEST_URI']; ?>
+				<?php elseif(is_home() ): ?>
+					I've just visited the Ubuntu Resources website and thought you would like it. Check it out: <?php bloginfo('url'); ?>
+				<?php else : ?>
+					I've just visited the '<?php single_tag_title(); ?>' section on the Ubuntu Resources website and thought you would like it. Check it out: <?php echo "http://" . $_SERVER['HTTP_HOST']  . $_SERVER['REQUEST_URI']; ?>
+				<?php endif; ?>">Email</a>
 			</li>
 		</ul>
 	</div>
