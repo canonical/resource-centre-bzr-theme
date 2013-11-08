@@ -121,7 +121,7 @@ if ( !defined('ABSPATH')) exit;
 
 </div><!-- /.row -->
 
-<div class="row four-col last-col no-border">
+<!-- <div class="row four-col last-col no-border">
 	<?php
 	wp_reset_query();
 	$taxonomy = 'products-and-services';
@@ -133,6 +133,6 @@ if ( !defined('ABSPATH')) exit;
 			<?php the_content(); ?>
 		</div>
 	<?php endforeach; ?>
-</div>
+</div> -->
 
 <?php get_footer(); ?>

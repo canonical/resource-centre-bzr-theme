@@ -2,9 +2,17 @@
 							<?php
 							foreach((get_the_category()) as $category) {
 							    if (($category->cat_name != 'Featured') && ($category->cat_name != 'E-book') && ($category->cat_name != 'Gated')) { ?>
-							    	<li><a href="<?php echo get_category_link( $category->term_id ); ?>" onclick="_gaq.push(['_trackEvent', 'Internal Link', '<?php the_title(); ?>', 'From category - '<?php echo $category->name; ?>' link']);"><?php echo $category->name; ?></a></li> 
+							    	<li><a href="<?php echo get_category_link( $category->term_id ); ?>?utm_source=<?php the_title(); ?>&amp;utm_medium=internal+link&amp;utm_content=<?php echo $category->name; ?>"><?php echo $category->name; ?></a></li>
 							    <?php	}
 							    }
 							?>	
-							<?php echo get_the_term_list( get_the_ID(), 'products-and-services', '<li>', '</li><li>', '</li>' ); ?>
+						<?php
+						$terms = wp_get_post_terms( get_the_ID(), 'products-and-services');
+						foreach ($terms as $term) {
+						//Always check if it's an error before continuing. get_term_link() can be finicky sometimes
+						$term_link = get_term_link( $term, 'products-and-services' );
+						if( is_wp_error( $term_link ) )
+						continue;?>
+							<li><a href="<?php echo $term_link; ?>?utm_source=<?php the_title(); ?>&amp;utm_medium=internal+link&amp;utm_content=<?php echo $category->name; ?>"><?php echo $term->name; ?></a></li>
+						<?php } ?>
 						</ul>

@@ -31,7 +31,7 @@ include("header.php")
 					<li class="row article <?php if(($postCount++ == 1)) { echo ' featured-article'; } ?>"> 
 					<?php if(has_post_thumbnail()) : ?>
 						<div class="article-image three-col">
-						<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
+						<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('thumbnail'); ?></a>
 						</div>
 						<div class="five-col last-col">
 					<?php endif; ?>	

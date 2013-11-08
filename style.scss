@@ -175,7 +175,15 @@ nav div.footer-a div,
 	max-width: 70rem;
 }
 
-#main-content { padding-bottom: 0; }
+.category #main-content,
+.home #main-content,
+.tax-products-and-services  #main-content { 
+	padding-bottom: 0; 
+}
+
+.error404 #main-content {
+	padding-bottom: 20px;
+}
 
 .single-post-cats {
 	overflow-y: hidden;
@@ -547,7 +555,6 @@ form label {
 	display: block;
 	float: left;
 	margin-bottom: 0; 
-	margin-top: -1px;
 	padding: 10px 0 6px;
 	position: relative;
 	text-align: center;
@@ -555,7 +562,6 @@ form label {
 }
 
 .yes-js .home .navigation {
-	border: 0;
 	margin-bottom: 0;
 }
 
@@ -1360,7 +1366,7 @@ header.banner .nav-primary ul {
 
 /* main nav
 ----------------------------------------------------------------- */
-.no-js .main-nav { padding-left: 20px; }
+.no-js .main-nav { padding-left: 10px; }
 
 .yes-js #main-nav {
 	background: $nav_bg;
@@ -1439,11 +1445,16 @@ header.banner .nav-primary ul {
 
 /* global nav
 ----------------------------------------------------------------- */
+#nav-global-wrapper {
+	padding-left: 10px;	
+}
+
 .yes-js #nav-global-wrapper {
 	background: $nav_bg;
 	display: inline-block;
 	overflow: hidden;
 	position: relative;
+	padding-left: 0;
 	width: 100%;
 	float: left;
 	
@@ -1600,9 +1611,6 @@ header.global .nav-primary {
 	position: absolute;
 	right: 0;
 	
-	li {
-	}
-
 	li a {
 		margin: 0;
 		height: 48px;
@@ -1647,7 +1655,7 @@ header.global .nav-primary {
 	}
 		
 	li a.active:after {
-		background: url(library/img/nav-arrow-v3.png) 50% 130% no-repeat;
+		background: url('library/img/nav-arrow-v3.png') 50% 27px no-repeat;
 		content: '';
 		display: block;
 		height: 23px;
@@ -1717,6 +1725,10 @@ header.global .header-inner {
   padding: 0;
   width: 100%;
 	z-index: 1;
+}
+
+#box-search form button {
+	display: block !important;
 }
 
 #box-search div { 

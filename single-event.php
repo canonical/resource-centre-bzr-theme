@@ -162,7 +162,7 @@ get_header();
 <?php endwhile; // while have_posts ends ?> 
 <?php endif; // if have_posts ends ?> 
 	<div class="eight-col<?php $tags = wp_get_post_tags($post->ID); if ($tags) { echo ' has-related'; } ?>">
-		<?php comments_template(); ?> 
+		<?php //comments_template(); ?> 
 	</div>
 </div><!-- /.row --> 
 <div class="row four-col last-col no-border">

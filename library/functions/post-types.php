@@ -116,7 +116,7 @@ function post_type_ebook()
     'rewrite' => true,
     'rewrite' => array( 'slug' => 'ebook' ),
     'show_ui' => true, 
-    'supports' => array( 'attachments', 'title', 'excerpt', 'editor', 'thumbnail', 'author','comments' ),
+    'supports' => array( 'revisions', 'attachments', 'title', 'excerpt', 'editor', 'thumbnail', 'author','comments' ),
     'taxonomies' => array('category', 'post_tag'));
   register_post_type('ebook',$args);
 }
@@ -163,7 +163,7 @@ function post_type_event()
     'comments' => true,
     'has_archive' => true,
     'menu_icon' => get_stylesheet_directory_uri() . '/assets/img/admin/calendar-day.png',
-    'supports' => array( 'title', 'editor', 'thumbnail', 'excerpt', 'author','comments' ));
+    'supports' => array( 'revisions', 'attachments', 'title', 'excerpt', 'editor', 'thumbnail', 'author','comments' ));
   register_post_type('event',$args);
 }
 function add_event_category_automatically($post_ID) {
@@ -208,7 +208,7 @@ function post_type_productbusinesscard()
     'menu_position' => 10,
     'has_archive' => true,
     'menu_icon' => get_stylesheet_directory_uri() . '/assets/img/admin/document-text.png',
-    'supports' => array( 'title', 'editor', 'thumbnail', 'excerpt', 'author','comments' ));
+    'supports' => array( 'revisions', 'attachments', 'title', 'excerpt', 'editor', 'thumbnail', 'author','comments' ));
   register_post_type('productbusinesscard',$args);
 }
 function add_productbusinesscard_category_automatically($post_ID) {
@@ -255,7 +255,7 @@ function post_type_presskits()
     'menu_position' => 7,
     'has_archive' => true,
     'menu_icon' => get_stylesheet_directory_uri() . '/assets/img/admin/document-text.png',
-    'supports' => array( 'title', 'editor', 'thumbnail', 'excerpt', 'author','comments' ));
+    'supports' => array( 'revisions', 'attachments', 'title', 'excerpt', 'editor', 'thumbnail', 'author','comments' ));
   register_post_type('presskits',$args);
  
 }
@@ -293,7 +293,7 @@ function post_type_video()
     'menu_position' => 9,
     'has_archive' => true,
     'menu_icon' => get_stylesheet_directory_uri() . '/assets/img/admin/film.png',
-    'supports' => array( 'title', 'editor', 'thumbnail', 'excerpt', 'author','comments' ));
+    'supports' => array( 'revisions', 'attachments', 'title', 'excerpt', 'editor', 'thumbnail', 'author','comments' ));
   register_post_type('video',$args);
  
 }
@@ -331,7 +331,7 @@ function post_type_webinar()
     'menu_position' => 6,
     'has_archive' => true,
     'menu_icon' => get_stylesheet_directory_uri() . '/assets/img/admin/film.png',
-    'supports' => array( 'title', 'editor', 'thumbnail', 'excerpt', 'author','comments' ));
+    'supports' => array( 'revisions', 'attachments', 'title', 'excerpt', 'editor', 'thumbnail', 'author','comments' ));
   register_post_type('webinar',$args);
  
 }
@@ -370,7 +370,7 @@ function post_type_whitepaper()
     'menu_position' => 6,
     'has_archive' => true,
     'menu_icon' => get_stylesheet_directory_uri() . '/assets/img/admin/document-pdf-text.png',
-    'supports' => array( 'title', 'editor', 'thumbnail', 'excerpt', 'author','comments' ));
+    'supports' => array( 'revisions', 'attachments', 'title', 'excerpt', 'editor', 'thumbnail', 'author','comments' ));
   register_post_type('whitepaper',$args);
  
 }

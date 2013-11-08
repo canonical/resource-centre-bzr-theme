@@ -95,7 +95,7 @@ get_header();
 						<?php $attachments = get_children( array('post_parent' => get_the_ID(), 'post_type' => 'attachment') );
 							if ( $attachments ) { ?>
 					<div id="download-item">
-						<p><a class="link-cta-ubuntu" href="<?php echo wp_get_attachment_url( $attachment_id ); ?>">Download <?php echo $post_type->labels->title_friendly, ''; ?></a></p>
+						<p><a class="link-cta-ubuntu" href="<?php echo wp_get_attachment_url( $attachment_id ); ?>?utm_source=<?php the_title(); ?>&amp;utm_medium=download+link&amp;utm_content=<?php echo $post_type->labels->title_friendly, ''; ?>">Download <?php echo $post_type->labels->title_friendly, ''; ?></a></p>
 					</div><?php } // end if ( $attachments ) ?>
 		<?php endif; ?>
 		<?php endif; // if video  ?>

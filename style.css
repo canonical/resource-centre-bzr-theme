@@ -1,6 +1,6 @@
 @import url("library/css/site.css");
 /* 
-Theme Name: Ubuntu Resources
+Theme Name: Insights PLUS
 Theme URI: http://canonical.com
 Description: Ubuntu theme
 Version: 1
@@ -68,7 +68,9 @@ body { background: #fff; }
 
 .wrapper, nav div.footer-a div, .inline-lists ul, .legal { width: auto !important; max-width: 70rem; }
 
-#main-content { padding-bottom: 0; }
+.category #main-content, .home #main-content, .tax-products-and-services #main-content { padding-bottom: 0; }
+
+.error404 #main-content { padding-bottom: 20px; }
 
 .single-post-cats { overflow-y: hidden; margin: -20px 0 20px 0; }
 
@@ -192,9 +194,9 @@ form label { width: auto; float: none; display: inline-block; }
 ----------------------------------------------------------------- */
 .yes-js #main-content { margin-bottom: 0; }
 
-.yes-js .navigation { border-top: 1px dotted #aea79f; clear: both; display: block; float: left; margin-bottom: 0; margin-top: -1px; padding: 10px 0 6px; position: relative; text-align: center; width: 100%; }
+.yes-js .navigation { border-top: 1px dotted #aea79f; clear: both; display: block; float: left; margin-bottom: 0; padding: 10px 0 6px; position: relative; text-align: center; width: 100%; }
 
-.yes-js .home .navigation { border: 0; margin-bottom: 0; }
+.yes-js .home .navigation { margin-bottom: 0; }
 
 .yes-js .navigation ul { margin-bottom: .5rem; }
 
@@ -560,7 +562,7 @@ header.banner .nav-primary ul { border: 0; margin: 0; padding: 0; }
 
 /* main nav
 ----------------------------------------------------------------- */
-.no-js .main-nav { padding-left: 20px; }
+.no-js .main-nav { padding-left: 10px; }
 
 .yes-js #main-nav { background: #f0f0f0; display: none; float: left; margin: 0; padding: 0; top: 0; width: 100%; }
 .yes-js #main-nav h2 { border-bottom: 1px solid #d4d7d4; color: #808080; font-size: 90%; left: 0; margin: 0; padding: 8px 10px; text-indent: 0; text-transform: none; top: auto; }
@@ -580,7 +582,9 @@ header.banner .nav-primary ul { border: 0; margin: 0; padding: 0; }
 
 /* global nav
 ----------------------------------------------------------------- */
-.yes-js #nav-global-wrapper { background: #f0f0f0; display: inline-block; overflow: hidden; position: relative; width: 100%; float: left; }
+#nav-global-wrapper { padding-left: 10px; }
+
+.yes-js #nav-global-wrapper { background: #f0f0f0; display: inline-block; overflow: hidden; position: relative; padding-left: 0; width: 100%; float: left; }
 .yes-js #nav-global-wrapper h2 { border-bottom: 1px solid #d4d7d4; box-shadow: inset 0 5px 5px -5px rgba(0, 0, 0, 0.3); color: #9fa097; font-size: 90%; margin: 0; padding: 10px; }
 .yes-js #nav-global-wrapper h2:before { background-image: url("library/img/external-link-9fa097.svg"); background-size: 14px 14px; background-repeat: no-repeat; content: ""; display: inline-block; height: 15px; width: 15px; margin-right: 3px; top: 3px; position: relative; }
 .yes-js #nav-global-wrapper p { clear: both; display: block; float: left; padding: 10px 10px 0; position: relative; width: 100%; }
@@ -616,7 +620,7 @@ header.global .nav-primary { border-bottom: 0; overflow: visible; position: rela
 #nav-triggers #search-trigger { background-image: url("library/img/search_icon_white_64.png"); background-image: url("library/img/search.svg"); -o-background-size: 20px 20px; -webkit-background-size: 20px 20px; -moz-background-size: 20px 20px; background-size: 20px 20px; }
 #nav-triggers #search-trigger:hover { background-color: none !important; }
 #nav-triggers #share-trigger { -o-background-size: 17px 17px; -webkit-background-size: 17px 17px; -moz-background-size: 17px 17px; background-size: 17px 17px; background-image: url("library/img/icon-share.png"); background-image: url("library/img/share.svg"); }
-#nav-triggers li a.active:after { background: url(library/img/nav-arrow-v3.png) 50% 130% no-repeat; content: ''; display: block; height: 23px; margin-left: 0; padding-bottom: 18px; position: relative; top: 0; width: 48px; z-index: 999; }
+#nav-triggers li a.active:after { background: url("library/img/nav-arrow-v3.png") 50% 27px no-repeat; content: ''; display: block; height: 23px; margin-left: 0; padding-bottom: 18px; position: relative; top: 0; width: 48px; z-index: 999; }
 
 /* end #nav-triggers */
 /* video
@@ -639,6 +643,8 @@ header.global .header-inner { margin: 0 auto; overflow: visible; position: relat
 .no-js #box-search { margin-bottom: 20px; padding-bottom: 10px; }
 
 #box-search { border: 0; margin-bottom: 0; position: relative; display: block; float: left; margin: 0; padding: 0; width: 100%; z-index: 1; }
+
+#box-search form button { display: block !important; }
 
 #box-search div { background: #f0f0f0; position: relative; z-index: 1; box-shadow: inset 0 -4px 4px -4px rgba(0, 0, 0, 0.3), inset 0 5px 5px -5px rgba(0, 0, 0, 0.3); }
 
