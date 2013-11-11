@@ -1,6 +1,6 @@
 @import url("library/css/site.css");
 /* 
-Theme Name: Insights PLUS
+Theme Name: Ubuntu Resources
 Theme URI: http://canonical.com
 Description: Ubuntu theme
 Version: 1
@@ -56,7 +56,25 @@ html { font-size: 81.3%; /* 13px */ }
 
 body { background: #fff; }
 
-.external:after, footer.global ul.inline li:last-child:after { background-image: url("library/img/external-link.svg"); background-size: 10px 10px; background-repeat: no-repeat; content: ""; display: inline-block; height: 10px; top: 2px; position: relative; vertical-align: top; width: 10px; }
+.external:after { background-image: url("library/img/external-link.svg"); background-size: 10px 10px; background-repeat: no-repeat; content: ""; display: inline-block; height: 10px; top: 2px; position: relative; vertical-align: top; width: 10px; }
+
+#welcome-message { background: #efefec; color: #939393; position: relative; box-shadow: inset 0 -4px 4px -4px rgba(0, 0, 0, 0.3), inset 0 5px 5px -5px rgba(0, 0, 0, 0.3); margin-bottom: 0; }
+
+#welcome-message div { -o-box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; width: auto !important; padding: 0 40px 10px 10px; max-width: 70rem; margin: 0 auto; }
+
+#welcome-message.off-left { left: -999em; position: absolute; height: 0; }
+
+#welcome-message h1 { font-size: 20px; position: relative; padding-top: 20px; }
+
+.archive #welcome-message h1 { padding-top: 30px; }
+
+#welcome-message #hide-message { position: absolute; top: -10px; right: 10px; font-size: 1.385rem; text-indent: -999em; overflow: hidden; margin-bottom: 0; }
+
+.archive #welcome-message #hide-message { top: 0; }
+
+#welcome-message #hide-message:hover { border-bottom: transparent; }
+
+#welcome-message #hide-message span { width: 10px; height: 10px; top: -20px; left: auto; text-indent: 0; display: block; position: relative; }
 
 #main-content .external:after, footer.global ul.inline li:last-child:after, .legal .external:after { background-image: url("library/img/external-link-orange.svg"); margin-left: 2px; }
 
@@ -72,7 +90,7 @@ body { background: #fff; }
 
 .error404 #main-content { padding-bottom: 20px; }
 
-.single-post-cats { overflow-y: hidden; margin: -20px 0 20px 0; }
+.single-post-cats { overflow-y: hidden; margin: 0 0 20px 0; }
 
 .single-post-cats ul { border: 0; margin: 0; padding: 0; }
 
@@ -150,7 +168,9 @@ h1 span.taxonomy-title + span { text-transform: lowercase; font-weight: 300; fon
 
 h1 span { font-weight: 300; font-style: normal; float: none; display: inline; }
 
-header.banner { overflow: visible; padding: 0; margin-bottom: 0; }
+header.banner { overflow: visible; padding: 0; margin-bottom: 0; border: 0; }
+
+header.banner { margin-bottom: -3px; z-index: 3; }
 
 header.banner .logo { border: 0; height: 48px; }
 
@@ -176,8 +196,8 @@ form label { width: auto; float: none; display: inline-block; }
 
 /* related posts
 ----------------------------------------------------------------- */
-.related-posts { display: block; float: left; margin-bottom: 20px; width: 100%; }
-.related-posts h2 { clear: both; color: #ADA79F; float: left; font-size: 20px; font-size: 1.53846rem; font-weight: 300; margin-bottom: 10px; width: 100%; }
+.related-posts { border-top: 1px dotted #aea79f; display: block; float: left; margin-bottom: 20px; margin-top: 20px; margin-left: -8px; margin-right: -8px; padding: 20px 8px 0; }
+.related-posts h2 { clear: both; color: #ADA79F; float: left; font-size: 20px; font-size: 1.53846rem; font-weight: 300; margin-bottom: 5px; width: 100%; }
 .related-posts li { border-bottom: 1px dotted #aea79f; clear: both; float: left; display: block; width: 100%; }
 .related-posts li a { line-height: 1.4; }
 .related-posts li span { color: #333; }
@@ -343,7 +363,7 @@ body.category .article-list .eight-col footer p { display: inline-block; margin-
 
 html.yes-js .home #main-content ul.post-cat { margin-left: 0; }
 
-.article-meta li a:after { content: ', '; }
+.article-meta li a:after { content: ','; }
 
 .article-meta li:last-child a:after { content: ''; }
 
@@ -556,7 +576,7 @@ body.author li:hover { background: none; }
 
 .glossary-box h2 span { font-size: 16px; font-size: 1.23077rem; float: left; clear: both; width: 100%; }
 
-header.banner .nav-primary { border: 0; }
+header.banner .nav-primary { border: 0; padding: 0; margin: 0; }
 
 header.banner .nav-primary ul { border: 0; margin: 0; padding: 0; }
 
@@ -613,7 +633,7 @@ header.global { border-bottom: 0; }
 
 header.global .nav-primary { border-bottom: 0; overflow: visible; position: relative; width: 100%; }
 
-#nav-triggers { margin: 0; padding: 0; position: absolute; right: 0; }
+#nav-triggers { margin: 0; padding: 0; position: absolute; right: 0; height: 48px; }
 #nav-triggers li a { margin: 0; height: 48px; width: 48px; box-shadow: none; background-repeat: no-repeat; -webkit-touch-callout: none; -webkit-user-select: none; -moz-user-select: none; -o-user-select: none; -ms-user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); user-select: none; background-position: center center; position: relative; line-height: 1; padding: 0; text-indent: -999em; border: 0; outline: none; }
 #nav-triggers li a:hover { background-color: none !important; }
 #nav-triggers li a#menu { background-image: url("library/img/navigation-menu-plain.svg"); -o-background-size: 24px 24px; -webkit-background-size: 24px 24px; -moz-background-size: 24px 24px; background-size: 24px 24px; }
@@ -642,11 +662,11 @@ header.global .header-inner { margin: 0 auto; overflow: visible; position: relat
 ----------------------------------------------------------------- */
 .no-js #box-search { margin-bottom: 20px; padding-bottom: 10px; }
 
-#box-search { border: 0; margin-bottom: 0; position: relative; display: block; float: left; margin: 0; padding: 0; width: 100%; z-index: 1; }
+#box-search { border: 0; margin-bottom: 0; position: relative; display: block; float: left; margin: 0 0 -1px 0; padding: 0; width: 100%; z-index: 3; border-bottom: 0; }
 
 #box-search form button { display: block !important; }
 
-#box-search div { background: #f0f0f0; position: relative; z-index: 1; box-shadow: inset 0 -4px 4px -4px rgba(0, 0, 0, 0.3), inset 0 5px 5px -5px rgba(0, 0, 0, 0.3); }
+#box-search div { background: #f0f0f0; position: relative; z-index: 1; box-shadow: inset 0 -4px 4px -4px rgba(0, 0, 0, 0.3), inset 0 5px 5px -5px rgba(0, 0, 0, 0.3); margin: 0; }
 
 #box-search form input[type="search"] { background: #fff; border: 0; color: #333; -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) inset, 0 -1px 3px rgba(0, 0, 0, 0.1) inset, 0 0px 0 rgba(255, 255, 255, 0.2); -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) inset, 0 -1px 3px rgba(0, 0, 0, 0.1) inset, 0 0px 0 rgba(0, 0, 0, 0.2); -o-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) inset, 0 -1px 3px rgba(0, 0, 0, 0.1) inset, 0 0px 0 rgba(0, 0, 0, 0.2); box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3) inset, 0 -1px 3px rgba(0, 0, 0, 0.2) inset, 0 2px 0 rgba(255, 255, 255, 0.4); width: 100%; -o-box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; float: left; width: 100%; padding: 9px 10px 9px 10px; height: auto; margin-top: 2px; font-size: 16px; font-size: 1.23077rem; }
 
@@ -671,7 +691,7 @@ header.banner a#share-trigger:hover, header.banner a#share-trigger:active, heade
 .no-js #share #share div { margin-right: 18px; margin-left: 18px; overflow: hidden; padding: 10px 0 5px; }
 
 /* end no-js #share */
-.yes-js #share div { background: #f0f0f0; box-shadow: inset 0 -4px 4px -4px rgba(0, 0, 0, 0.3); float: left; top: 0; z-index: 999; display: none; left: 0; position: relative; text-align: center; width: 100%; }
+.yes-js #share div { background: #f0f0f0; box-shadow: inset 0 -4px 4px -4px rgba(0, 0, 0, 0.3); float: left; top: 0; z-index: 999; display: none; left: 0; position: relative; text-align: center; width: 100%; margin-bottom: -1px; }
 
 .yes-js #share .active { display: block; }
 

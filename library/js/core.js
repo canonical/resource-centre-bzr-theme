@@ -1,6 +1,19 @@
 jQuery(document).ready(function($){
 //document.domain = 'ubuntu.com';
 
+$( "#welcome-message" ).append('<p><a id="hide-message" href="#">Close <span>x</span></a></p>');
+
+// Check (onLoad) if the cookie is there and set the class if it is
+$('#hide-message').click(function (e) {
+	e.preventDefault();
+	$.cookie("welcome_message", "true", { path: '/', expires: 9999 });
+	$("#welcome-message").slideToggle("slow");
+});
+
+if ($.cookie('welcome_message')) {
+    $("#welcome-message").addClass("off-left");
+}
+
 $('.accordion h2').bind('click touchstart', function(event){
     $(this).next('ul').slideToggle('slow');
     event.preventDefault();

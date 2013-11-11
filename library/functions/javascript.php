@@ -28,6 +28,9 @@ function my_init() {
     	// load infinite scroll jquery		
 		wp_register_script( 'infinite_scroll',  get_template_directory_uri() . '/library/js/jquery.infinitescroll.min.js', array('jquery'),null,true );
 
+    	// load cookie jquery  		
+		wp_register_script( 'jquery_cookie',  get_template_directory_uri() . '/library/js/jquery.cookie.js', array('jquery'),null,true );
+
     	// load manual-trigger.js jquery		
 		wp_register_script( 'infinite_scroll_trigger',  get_template_directory_uri() . '/library/js/manual-trigger.js', array('jquery'),null,true );
 		    if( ! is_singular() ) {
@@ -35,9 +38,7 @@ function my_init() {
 		        wp_enqueue_script('infinite_scroll_trigger');
 		        wp_enqueue_script('jquery_masonry');
 		    }
-		
-		wp_enqueue_script('mmenu');
-
+		        wp_enqueue_script('jquery_cookie');
 		// *Load this last* load a JS file for Ubuntu: js/core.js
 		wp_enqueue_script('ubuntu_core', get_bloginfo('template_url') . '/library/js/core.js', array('jquery'), '1.0', true);
 	}

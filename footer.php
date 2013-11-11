@@ -28,7 +28,7 @@ if ( !defined('ABSPATH')) exit;
 		<p>&copy; <?php echo date('Y'); ?> Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://canonical.com">Canonical Ltd</a></p> 
 		<ul class="no-bullets inline">
 			<li><a class="screen-only container" href="https://bugs.launchpad.net/resource-centre">Report a bug on this site</a></li>
-			<li><a href="">Feedback</a></li>
+			<li><a href="http://ubunt.eu/resources-feedback">Feedback</a></li>
 	</div>
 </footer>
 

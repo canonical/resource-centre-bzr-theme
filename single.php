@@ -101,7 +101,7 @@ get_header();
 		<?php endif; // if video  ?>
 <?php } // end if gated ?>
 	</div><!-- /.eight-col -->
-	<?php get_template_part("library/includes/_subscribe"); ?>
+	<?php // get_template_part("library/includes/_subscribe"); ?>
 </div><!-- /.twelve-col -->
 <div class="eight-col instapaper_ignore">
 <?php get_template_part("library/includes/_related_posts"); ?>

@@ -1,5 +1,5 @@
 /* 
-Theme Name: Insights PLUS
+Theme Name: Ubuntu Resources
 Theme URI: http://canonical.com
 Description: Ubuntu theme
 Version: 1
@@ -127,7 +127,7 @@ html  {	font-size: 81.3%; /* 13px */ }
 
 body { background: #fff; }
 
-.external:after, footer.global ul.inline li:last-child:after { 
+.external:after { 
 	background-image: url('library/img/external-link.svg'); 
 	background-size: 10px 10px;
 	background-repeat: no-repeat;
@@ -138,6 +138,68 @@ body { background: #fff; }
 	position: relative;
 	vertical-align: top;
 	width: 10px;
+}
+
+#welcome-message {
+	background: #efefec;
+	color: #939393;
+	position: relative;
+	box-shadow: 
+		inset 0 -4px 4px -4px rgba(0, 0, 0, .3), 
+		inset 0  5px 5px -5px rgba(0, 0, 0, 0.3);
+	margin-bottom: 0;
+}
+
+#welcome-message div {
+	@include box_sizing();	
+	width: auto !important;
+	padding: 0 40px 10px 10px;
+	max-width: 70rem;
+	margin: 0 auto;
+}
+
+#welcome-message.off-left {
+	left: -999em;
+	position: absolute;
+	height: 0;
+}
+
+#welcome-message h1 {
+	font-size: 20px;
+	position: relative;
+	padding-top: 20px;
+}
+
+.archive #welcome-message h1 {
+	padding-top: 30px;
+}
+
+#welcome-message #hide-message {
+	position: absolute;
+	top: -10px;
+	right: 10px;
+	font-size: 1.385rem;
+	text-indent: -999em;
+	overflow: hidden;
+	margin-bottom: 0;
+}
+
+.archive #welcome-message #hide-message {
+	top: 0;
+}
+
+#welcome-message #hide-message:hover {
+	border-bottom: transparent;	
+}
+
+#welcome-message #hide-message span {
+	width: 10px;
+	height: 10px;
+	top: -20px;
+	left: auto;
+	text-indent: 0;
+	display: block;
+	position: relative;
 }
 
 #main-content .external:after,
@@ -181,13 +243,11 @@ nav div.footer-a div,
 	padding-bottom: 0; 
 }
 
-.error404 #main-content {
-	padding-bottom: 20px;
-}
+.error404 #main-content { padding-bottom: 20px; }
 
 .single-post-cats {
 	overflow-y: hidden;
-	margin: -20px 0 20px 0;
+	margin: 0 0 20px 0;
 }
 
 .single-post-cats ul {
@@ -384,6 +444,12 @@ header.banner {
 	overflow: visible; 
 	padding: 0;
 	margin-bottom: 0;
+	border: 0;
+}
+
+header.banner { 
+	margin-bottom: -3px;
+	z-index: 3;
 }
 
 header.banner .logo { 
@@ -466,10 +532,14 @@ form label {
 /* related posts
 ----------------------------------------------------------------- */
 .related-posts  {
+	border-top: 1px dotted $warm_grey;
 	display: block;
 	float: left;
 	margin-bottom: 20px;
-	width: 100%;
+	margin-top: 20px;
+	margin-left: -8px;
+	margin-right: -8px;
+	padding: 20px 8px 0;
 
 	h2 {
 		clear: both;
@@ -477,7 +547,7 @@ form label {
 		float: left;
 		@include font_size (20);
 		font-weight: 300;
-		margin-bottom: 10px;
+		margin-bottom: 5px;
 		width: 100%;
 	}
 		
@@ -888,7 +958,7 @@ html.yes-js .home #main-content ul.post-cat {
 	margin-left: 0;
 }
 
-.article-meta li a:after { content: ', '; }
+.article-meta li a:after { content: ','; }
 
 .article-meta li:last-child a:after { content: ''; }
 
@@ -1356,7 +1426,11 @@ body.author li:hover { background: none; }
 }
 
 
-header.banner .nav-primary { border: 0; }
+header.banner .nav-primary { 
+	border: 0; 
+	padding: 0;
+	margin: 0;
+}
 
 header.banner .nav-primary ul {
   border: 0;
@@ -1610,6 +1684,7 @@ header.global .nav-primary {
 	padding: 0;
 	position: absolute;
 	right: 0;
+	height: 48px;
 	
 	li a {
 		margin: 0;
@@ -1721,10 +1796,11 @@ header.global .header-inner {
 	position: relative;
   display: block;
   float: left;
-  margin: 0;
+  margin: 0 0 -1px 0;
   padding: 0;
   width: 100%;
-	z-index: 1;
+	z-index: 3;
+	border-bottom: 0;
 }
 
 #box-search form button {
@@ -1738,6 +1814,7 @@ header.global .header-inner {
 	box-shadow: 
 		inset 0 -4px 4px -4px rgba(0, 0, 0, .3), 
 		inset 0  5px 5px -5px rgba(0, 0, 0, 0.3);
+	margin: 0;
 }
 
 #box-search form input[type="search"] {
@@ -1839,6 +1916,7 @@ header.banner a#share-trigger:focus {
   position: relative;
   text-align: center;
   width: 100%; 
+	margin-bottom: -1px;	
 }
 
 .yes-js #share .active { display: block; }

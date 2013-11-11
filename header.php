@@ -78,7 +78,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	</div><!-- ./header-inner -->
 </header>
 
-<div class="site-wrapper">
+<?php get_template_part("library/includes/_welcome_message"); ?>
 
+<div class="site-wrapper">
 <div class="wrapper clearfix">
 <div id="main-content" class="inner-wrapper clearfix" role="main">
