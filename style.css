@@ -60,7 +60,7 @@ body { background: #fff; }
 
 #welcome-message { background: #efefec; color: #939393; position: relative; box-shadow: inset 0 -4px 4px -4px rgba(0, 0, 0, 0.3), inset 0 5px 5px -5px rgba(0, 0, 0, 0.3); margin-bottom: 0; }
 
-#welcome-message div { -o-box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; width: auto !important; padding: 0 40px 10px 10px; max-width: 70rem; margin: 0 auto; }
+#welcome-message div { -o-box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; width: auto; padding: 0 40px 10px 10px; max-width: 70rem; margin: 0 auto; }
 
 #welcome-message.off-left { left: -999em; position: absolute; height: 0; }
 
@@ -68,13 +68,19 @@ body { background: #fff; }
 
 .archive #welcome-message h1 { padding-top: 30px; }
 
-#welcome-message #hide-message { position: absolute; top: -10px; right: 10px; font-size: 1.385rem; text-indent: -999em; overflow: hidden; margin-bottom: 0; }
+#welcome-message #hide-message { color: #939393; font-size: 1.385rem; margin-bottom: 0; overflow: hidden; position: absolute; right: 10px; text-indent: -999em; top: -10px; }
 
 .archive #welcome-message #hide-message { top: 0; }
 
 #welcome-message #hide-message:hover { border-bottom: transparent; }
 
 #welcome-message #hide-message span { width: 10px; height: 10px; top: -20px; left: auto; text-indent: 0; display: block; position: relative; }
+
+#welcome-message a { color: #939393; }
+
+#welcome-message a:hover { border-bottom-color: #939393; }
+
+#welcome-message a.external:after { margin-left: 3px; }
 
 #main-content .external:after, footer.global ul.inline li:last-child:after, .legal .external:after { background-image: url("library/img/external-link-orange.svg"); margin-left: 2px; }
 

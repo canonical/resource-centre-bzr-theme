@@ -152,7 +152,7 @@ body { background: #fff; }
 
 #welcome-message div {
 	@include box_sizing();	
-	width: auto !important;
+	width: auto;
 	padding: 0 40px 10px 10px;
 	max-width: 70rem;
 	margin: 0 auto;
@@ -175,13 +175,14 @@ body { background: #fff; }
 }
 
 #welcome-message #hide-message {
-	position: absolute;
-	top: -10px;
-	right: 10px;
+	color: #939393;
 	font-size: 1.385rem;
-	text-indent: -999em;
-	overflow: hidden;
 	margin-bottom: 0;
+	overflow: hidden;
+	position: absolute;
+	right: 10px;
+	text-indent: -999em;
+	top: -10px;
 }
 
 .archive #welcome-message #hide-message {
@@ -200,6 +201,19 @@ body { background: #fff; }
 	text-indent: 0;
 	display: block;
 	position: relative;
+}
+
+#welcome-message a {
+	color: #939393;
+}
+
+#welcome-message a:hover {
+	border-bottom-color: #939393;
+}
+
+
+#welcome-message a.external:after {
+	margin-left: 3px;
 }
 
 #main-content .external:after,
