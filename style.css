@@ -248,7 +248,9 @@ li:hover, body.home .promo:hover { color: #000; }
 
 #popular-posts { margin-bottom: 20px; clear: both; }
 
-body.home .box, #authors .box, body.category .box, body.post-type-archive .box { -moz-box-shadow: 0 2px 2px 0 #ddd; -webkit-box-shadow: 0 2px 2px 0 #ddd; -o-box-shadow: 0 2px 2px 0 #ddd; box-shadow: 0 2px 2px 0 #ddd; padding-bottom: 0; position: relative; }
+body.home .box, #authors .box, body.category .box, body.post-type-archive .box { -moz-box-shadow: 0 2px 2px 0 #ddd; -webkit-box-shadow: 0 2px 2px 0 #ddd; -o-box-shadow: 0 2px 2px 0 #ddd; box-shadow: 0 2px 2px 0 #ddd; padding-bottom: 0; position: relative; margin-bottom: 20px; }
+
+.single .box { margin-bottom: 20px; }
 
 .article-list li h2 { margin-bottom: 5px; }
 
@@ -350,7 +352,7 @@ body.single .eight-col img.full-width { margin-left: -5rem; max-width: none; }
 
 #content li.post-e-book img.wp-post-image, #content li.post-whitepaper img.wp-post-image { margin-left: 1px; }
 
-.category #main-content li.four-col { margin-bottom: 20px; }
+.category #main-content li.four-col, .single #main-content .four-col, .single #main-content .five-col, .single #main-content .six-col, .single #main-content .seven-col, .single #main-content .eight-col { margin-bottom: 20px; }
 
 /* category pages */
 body.category .row li.four-col article { -webkit-transition-duration: .5s; -moz-transition-duration: .5s; -o-transition-duration: .5s; transition-duration: .5s; }

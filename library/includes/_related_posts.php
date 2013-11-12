@@ -1,6 +1,4 @@
 <div class="related-posts clearfix">
-<h2>You may also be interested in</h2>
-
 <ul class="list clearfix no-bullets">
 <?php
 	$style_classes = array('',' last-col');

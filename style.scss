@@ -705,6 +705,11 @@ body.post-type-archive .box {
 	box-shadow: 0 2px 2px 0 #ddd;
 	padding-bottom: 0;	
 	position: relative;
+	margin-bottom: 20px;
+}
+
+.single .box {
+	margin-bottom: 20px;
 }
 
 .article-list li h2 { margin-bottom: 5px; }
@@ -924,7 +929,12 @@ body.single .eight-col img.full-width {
 	margin-left: 1px;	
 }
 
-.category #main-content li.four-col {
+.category #main-content li.four-col,
+.single #main-content .four-col,
+.single #main-content .five-col,
+.single #main-content .six-col,
+.single #main-content .seven-col,
+.single #main-content .eight-col {
 	margin-bottom: 20px;
 }
 
