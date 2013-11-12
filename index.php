@@ -74,11 +74,17 @@ get_header(); ?>
 <?php if($thePostID == $post->ID) {  } else { ?>
 	<li class="row article <?php if(is_home() && !is_paged() && ++$postCount == 3) { echo ' last-col'; } ?><?php the_category_unlinked(' post-'); ?><?php $k = $style_index%3; echo "$style_classes[$k]"; $style_index++; ?><?php $post_type = get_post_type_object( get_post_type($post) );
 echo ' post-', $post_type->labels->css_friendly; ?><?php if(has_post_thumbnail()): echo ' has-image'; endif; ?>">
-			<?php if(has_post_thumbnail()): ?>
+			<?php if('video' == get_post_type()): ?>
 			<div class="article-image six-col">
-				<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('thumbnail'); ?></a>
+				<img src="http://img.youtube.com/vi/<?php echo $video_content; ?>/0.jpg" width="260" height="146" alt=""/>
 			</div><!-- /.article-image -->
-			<?php endif ?>
+			<?php else : ?>
+				<?php if(has_post_thumbnail()): ?>
+			<div class="article-image six-col">
+					<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('thumbnail'); ?></a>
+			</div><!-- /.article-image -->
+				<?php endif; ?>
+			<?php endif; ?>
 			<div class="article-content six-col last-col">
 				<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 				<?php get_template_part("/library/includes/_article_meta"); ?>
@@ -137,14 +143,7 @@ echo ' post-', $post_type->labels->css_friendly; ?><?php if(has_post_thumbnail()
 				</dd>
 			</dl>
 		<?php endif; // event ?>
-				<?php if (get_post_type() != 'video') { ?><?php } // end $video_content ?>
-			<?php if('video' == get_post_type()): ?>
-			<div class="article-image">
-				<img src="http://img.youtube.com/vi/<?php echo $video_content; ?>/0.jpg" width="260" height="146" alt=""/>
-			</div>
-			<?php else: ?>		
 			<p><?php echo get_excerpt(); ?></p>
-			<?php endif	// end if video ?>
 				<!--<p class="clearfix"><a href="<?php the_permalink(); ?>"><?php if('post' == get_post_type()) { echo 'Read article'; } elseif('video' == get_post_type()) { echo 'Watch video'; } elseif('case-studies' == get_post_type()) { echo 'Read case study'; } elseif('event' == get_post_type()) { echo 'View event details'; } else { ?>Read <?php echo $post_type->labels->title_friendly; ?><?php } ?>&nbsp;&rsaquo; <span class="off-left">'<?php the_title(); ?>' </span></a></p>-->
 		</div><!-- /.article-content -->
 	</li>
