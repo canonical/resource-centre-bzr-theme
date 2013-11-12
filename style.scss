@@ -207,10 +207,7 @@ body { background: #fff; }
 	color: #939393;
 }
 
-#welcome-message a:hover {
-	border-bottom-color: #939393;
-}
-
+#welcome-message a:hover { border-bottom-color: #939393; }
 
 #welcome-message a.external:after {
 	margin-left: 3px;
@@ -1043,14 +1040,22 @@ article footer {
 }
 
 .eight-col .article-meta {
-	border-bottom: 0;
+	border-bottom: transparent;
 }
 
 .article-meta a {
 	color: #ADA79F;
 }
 
+.article-meta a:hover {
+	border-bottom-color: #ADA79F;
+}
+
 .single .article-meta, .category .eight-col .article-meta { border: 0; }
+
+.single .article-meta {
+	margin-bottom: 20px;	
+}
 
 footer.author-meta {
 	@include box_sizing();	

@@ -14,17 +14,15 @@
 	$category_ids = array();
 
 $tags = wp_get_post_tags($post->ID);
-if ($tags) {
+if ($tags || $categories) {
 	$tag_ids = array();
 	foreach($tags as $individual_tag) $tag_ids[] = $individual_tag->term_id;
 	
 	$args=array(
 	'tag__in' => $tag_ids,
 	'post_type' => 'any',
-	'category__in' => $category_ids,
 	'taxonomy'  => 'products-and-services',
   'post__not_in' => array($post->ID),
-  'post_type' => $post_types,
 	'ignore_sticky_posts'   => 1,
 	'posts_per_page' => 3, // Number of related posts that will be shown.
 	'caller_get_posts'=>1

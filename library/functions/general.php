@@ -2,41 +2,6 @@
 // post types - add new post types here and at the top of post-types.php
 $post_types = array('whitepaper', 'post', 'ebook', 'video', 'attachment', 'casestudy', 'infographic', 'webinar', 'event', 'case-study', 'presskits');
 
-/*		
-$txfx_iel_use_target_blank = true;
-
-function wp_get_domain_name_from_uri($uri){
-	preg_match("/^(http:\/\/)?([^\/]+)/i", $uri, $matches);
-	$host = $matches[2];
-	preg_match("/[^\.\/]+\.[^\.\/]+$/", $host, $matches);
-	return $matches[0];	   
-}
-
-function parse_external_links($matches){
-	if ( wp_get_domain_name_from_uri($matches[3]) != wp_get_domain_name_from_uri($_SERVER["HTTP_HOST"]) ){
-		return '<a href="' . $matches[2] . '//' . $matches[3] . '"' . $matches[1] . $matches[4] . ' class="external">' . $matches[5] . '</a>';	 
-	} else {
-		return '<a href="' . $matches[2] . '//' . $matches[3] . '"' . $matches[1] . $matches[4] . '><span>' . $matches[5] . '</span></a>';
-	}
-}
-
-function wp_external_links($text) {
-	global $txfx_iel_use_target_blank;
-	$pattern = '/<a (.*?)href="(.*?)\/\/(.*?)"(.*?)>(.*?)<\/a>/i';
-	$text = preg_replace_callback($pattern,'parse_external_links',$text);
-
-	$pattern2 = '/<a (.*?) class="external"(.*?)>(.*?)<img (.*?)<\/a>/i';
-	if ( $txfx_iel_use_target_blank )
-		$text = preg_replace($pattern2, '<a $1 $2 target="_blank">$3<img $4</a>', $text);
-	else
-		$text = preg_replace($pattern2, '<a $1 $2>$3<img $4</a>', $text);
-	return $text;
-}
-
-// filters have high priority to make sure that any markup plugins like Textile or Markdown have already created the HTML links
-add_filter('the_content', 'wp_external_links', 999);
-add_filter('the_excerpt', 'wp_external_links', 999);*/
-
 function search_url_rewrite_rule() {
 	if ( is_search() && !empty($_GET['s'])) {
 		wp_redirect(home_url("/search/") . urlencode(get_query_var('s')));

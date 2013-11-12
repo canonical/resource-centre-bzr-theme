@@ -400,11 +400,15 @@ article footer { background: none; font-size: 1.25rem; }
 
 .article-meta { color: #ADA79F; }
 
-.eight-col .article-meta { border-bottom: 0; }
+.eight-col .article-meta { border-bottom: transparent; }
 
 .article-meta a { color: #ADA79F; }
 
+.article-meta a:hover { border-bottom-color: #ADA79F; }
+
 .single .article-meta, .category .eight-col .article-meta { border: 0; }
+
+.single .article-meta { margin-bottom: 20px; }
 
 footer.author-meta { -o-box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; background: #efefef; padding: .625rem .625rem 0; width: 100%; display: inline-block; }
 
