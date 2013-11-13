@@ -27,6 +27,7 @@ if ($tags || $categories) {
 	);
 	$my_query = new wp_query($args);
 	if( $my_query->have_posts() ) {
+	echo '<h2>You may also be interested in</h2>';
 		while ($my_query->have_posts()) {
 			$my_query->the_post();
 		?>
@@ -51,6 +52,7 @@ if ($tags || $categories) {
 	);
 		$my_query = new wp_query($args);
 	if( $my_query->have_posts() ) {
+	echo '<h2>You may also be interested in</h2>';
 		while ($my_query->have_posts()) {
 			$my_query->the_post();
 		?>

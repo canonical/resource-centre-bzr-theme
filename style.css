@@ -202,7 +202,7 @@ form label { width: auto; float: none; display: inline-block; }
 
 /* related posts
 ----------------------------------------------------------------- */
-.related-posts { border-top: 1px dotted #aea79f; display: block; float: left; margin-bottom: 20px; margin-top: 20px; margin-left: -8px; margin-right: -8px; padding: 20px 8px 0; }
+.related-posts { border-top: 1px dotted #aea79f; display: block; float: left; margin-bottom: 20px; margin-top: 20px; margin-left: -8px; margin-right: -8px; padding: 20px 8px 0; width: 100%; }
 .related-posts h2 { clear: both; color: #ADA79F; float: left; font-size: 20px; font-size: 1.53846rem; font-weight: 300; margin-bottom: 5px; width: 100%; }
 .related-posts li { border-bottom: 1px dotted #aea79f; clear: both; float: left; display: block; width: 100%; }
 .related-posts li a { line-height: 1.4; }
