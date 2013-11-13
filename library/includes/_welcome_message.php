@@ -1,4 +1,4 @@
-<div id="welcome-message">
+<div id="welcome-message" class="off-left">
 	<div>
 		<h1>Welcome to the alpha release of the new Ubuntu Resources website.</h1>
 		<p>A knowlegde hub where you can find all the Ubuntu content like news, events, case studies, white papers and more.</p>

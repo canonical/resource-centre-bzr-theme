@@ -10,8 +10,8 @@ $('#hide-message').click(function (e) {
 	$("#welcome-message").slideToggle("slow");
 });
 
-if ($.cookie('welcome_message')) {
-    $("#welcome-message").addClass("off-left");
+if ($.cookie('welcome_message') == null) {
+    $("#welcome-message").removeClass("off-left");
 }
 
 $('.accordion h2').bind('click touchstart', function(event){
