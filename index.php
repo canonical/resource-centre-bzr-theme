@@ -76,7 +76,7 @@ get_header(); ?>
 echo ' post-', $post_type->labels->css_friendly; ?><?php if(has_post_thumbnail()): echo ' has-image'; endif; ?>">
 			<?php if('video' == get_post_type()): ?>
 			<div class="article-image six-col">
-				<img src="http://img.youtube.com/vi/<?php echo $video_content; ?>/0.jpg" width="260" height="146" alt=""/>
+				<a href="<?php the_permalink(); ?>"><img src="http://img.youtube.com/vi/<?php echo $video_content; ?>/0.jpg" width="260" height="146" alt=""/></a>
 			</div><!-- /.article-image -->
 			<?php else : ?>
 				<?php if(has_post_thumbnail()): ?>
