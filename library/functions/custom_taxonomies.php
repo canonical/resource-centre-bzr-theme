@@ -6,9 +6,9 @@
  * Additional custom taxonomies can be defined here
  * http://codex.wordpress.org/Function_Reference/register_taxonomy
  */
-function add_products_and_services() {
-	// Add new "products-and-services" taxonomy to Posts
-	register_taxonomy('products-and-services',array('whitepaper', 'ebook', 'post', 'video', 'attachment', 'casestudy', 'infographic', 'productbusinesscard', 'webinar', 'event', 'case-study', 'presskits', 'promo'), array(
+function add_topics() {
+	// Add new "topic" taxonomy to Posts
+	register_taxonomy('topic',array('whitepaper', 'ebook', 'article', 'post', 'video', 'attachment', 'casestudy', 'infographic', 'productbusinesscard', 'webinar', 'event', 'case-study', 'presskits', 'promo'), array(
 		'hierarchical' => true,
 		'show_admin_column' => true,
 		'labels' => array(
@@ -25,13 +25,14 @@ function add_products_and_services() {
 			'menu_name' => __( 'Topics' ),
 			'menu_position' => 6
 		),
-		// Control the slugs used for this taxonomy
 		'rewrite' => array(
-			'slug' => 'topic', 'with_front' => false // This controls the base slug that will display before each term
+			'slug' => 'topic', // This controls the base slug that will display before each term
+			'with_front' => false, // Don't display the category base before "/locations/"
+			'hierarchical' => true // This will allow URL's like "/locations/boston/cambridge/"
 		),
 	));
 }
-add_action( 'init', 'add_products_and_services', 0 );
+add_action( 'init', 'add_topics', 0 );
 
 
 /*function add_audience() {
