@@ -6,8 +6,8 @@
 	$orig_post = $post;
 	global $post;
 	$tags = wp_get_post_tags($post->ID);
-	$taxonomy = 'products-and-services';//  e.g. post_tag, category, custom taxonomy
-	$param_type = 'products-and-services'; //  e.g. tag__in, category__in, but genre__in will NOT work
+	$taxonomy = 'topic';//  e.g. post_tag, category, custom taxonomy
+	$param_type = 'topic'; //  e.g. tag__in, category__in, but genre__in will NOT work
 	$categories = get_the_category($post->ID);
 	$category_ids = array();
 
@@ -19,7 +19,7 @@ if ($tags || $categories) {
 	$args=array(
 	'tag__in' => $tag_ids,
 	'post_type' => 'any',
-	'taxonomy'  => 'products-and-services',
+	'taxonomy'  => 'topic',
   'post__not_in' => array($post->ID),
 	'ignore_sticky_posts'   => 1,
 	'posts_per_page' => 3, // Number of related posts that will be shown.
@@ -45,7 +45,7 @@ if ($tags || $categories) {
 	$args=array(
 		'category__in' => $category_ids,
 		'post_type' => 'any',
-		'taxonomy'  => 'products-and-services',
+		'taxonomy'  => 'topic',
 		'post__not_in' => array($post->ID),
 		'showposts'=>3, // Number of related posts that will be shown.
 		'caller_get_posts'=>1

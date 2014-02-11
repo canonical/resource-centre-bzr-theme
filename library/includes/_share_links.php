@@ -23,7 +23,7 @@
 				<a id="share-email" class="share" title="Share '<?php the_title(); ?>' via Email" href="mailto:?subject=Saw%20this%20and%20thought%20of%20you&amp;body=
 				<?php if(is_single() ) : ?>
 					I've just read '<?php single_post_title(); ?>' on the Ubuntu Resources website and thought you would like it. Check it out: <?php the_permalink(); ?>
-				<?php elseif( is_tax('products-and-services') ) : ?>
+				<?php elseif( is_tax('topic') ) : ?>
 					I've just visited the '<?php single_tag_title(); ?>' section on the Ubuntu Resources website and thought you would like it. Check it out: <?php echo "http://" . $_SERVER['HTTP_HOST']  . $_SERVER['REQUEST_URI']; ?>
 				<?php elseif(is_home() ): ?>
 					I've just visited the Ubuntu Resources website and thought you would like it. Check it out: <?php bloginfo('url'); ?>

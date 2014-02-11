@@ -1,12 +1,12 @@
 <?php
 	global $post;
 	$tmp_post = $post;
-	$term = get_the_term_list( get_the_ID(), 'products-and-services' );
+	$term = get_the_term_list( get_the_ID(), 'topic' );
 	
 	$args = array( 
 		'numberposts' => 1, 
 		'post_type' => productbusinesscard,
-		'products-and-services' => $term
+		'topic' => $term
 	);
 	$myposts = get_posts( $args );
 	foreach( $myposts as $post ) : setup_postdata($post); ?>

@@ -1,13 +1,13 @@
 <?php
 $queried_object = get_queried_object();  
 $term_slug = $queried_object->slug; 
-$custom_taxterms = wp_get_object_terms( $post->ID, 'products-and-services', array('fields' => 'ids') );
+$custom_taxterms = wp_get_object_terms( $post->ID, 'topic', array('fields' => 'ids') );
 
     $args=array(
       'post_type' => 'productbusinesscard',
       'tax_query' => array(
 		    array(
-		        'taxonomy' => 'products-and-services',
+		        'taxonomy' => 'topic',
 		        'field' => 'id',
 		        'terms' => $custom_taxterms
 		    )
