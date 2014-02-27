@@ -24,7 +24,7 @@ get_header();
 
 <div id="content" role="main" class="row no-border">
 	<div class="two-col">
-		<?php get_template_part("/library/includes/_nav_archive"); ?>
+		<?php get_template_part("/includes/_nav_archive"); ?>
 	</div><!-- /.two-col -->
 <?php $postCount = 0; ?>
 	<?php if(++$postCount == 1): ?>
@@ -33,7 +33,7 @@ get_header();
 			<ul class="article-list no-bullets">
 	<?php endif; ?>
             <?php $recent = new WP_Query("showposts=10"); while($recent->have_posts()) : $recent->the_post();?>
-			<?php get_template_part("/library/includes/_result_list_item"); ?>		
+			<?php get_template_part("/includes/_result_list_item"); ?>		
             <?php endwhile;?>
 			</ul>
 	</div><!-- end .entry-content -->

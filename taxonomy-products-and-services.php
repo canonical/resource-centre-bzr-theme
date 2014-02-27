@@ -7,7 +7,7 @@ if ( !defined('ABSPATH')) exit;
  * Category Template
  *
  *
- * @file           taxonomy-products-and-services.php
+ * @file           taxonomy-topic.php
  * @package        Ubuntu blog theme 
  * @author         Canonical Web Team 
  * @copyright      2012 Canonical Ltd
@@ -47,7 +47,7 @@ if ( !defined('ABSPATH')) exit;
 						</div>
 					<?php endif; ?>	
 					<h2><a href="<?php the_permalink() ?>"><?php if ( is_search() ) : echo $title; else : echo  the_title(); endif; ?></a></h2>
-						<?php get_template_part("library/includes/_article_meta"); ?>
+						<?php get_template_part("includes/_article_meta"); ?>
 			<?php if('event' == get_post_type()) : ?>
 				<?php 
 					$current_time = current_time('mysql'); 
@@ -116,17 +116,51 @@ if ( !defined('ABSPATH')) exit;
 		</ul>
 	</div><!-- /.eight-col -->
 	<div class="eight-col">
-		<?php get_template_part("library/includes/_pagination"); ?>
+		<?php get_template_part("includes/_pagination"); ?>
 	</div><!-- /.eight-col -->
 
 </div><!-- /.row -->
 
-<!-- <div class="row four-col last-col no-border">
+<div class="aside three-col last-col">
+	<h2>Filter <span class="lowercase"><?php single_tag_title() ?></span> by type</h2>
+	<ul class="no-bullets">	 
+	<li<?php if (!$term) echo ' class="current"'; ?>><a href="/topics/<?php $cat = get_term_by('name', single_tag_title('',false), 'category'); echo $cat->slug; ?>">All <span class="lowercase"><?php single_tag_title() ?></span></a></li>
+	<?php 
+		$pagecat = $this_category->category_nicename;
+		$term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
+		$services = get_terms( 'topic', 'hide_empty=1&pad_counts=1');
+    $args = array();
+    $args['paged'] = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+    if ( isset( $_GET['service'] ) ) {
+        $args['service'] = $_GET['topic'];
+        $page_link = add_query_arg( 'topic', $_GET['topic'], $page_link );
+    }
+    if ( is_array( $services ) ) {
+        foreach ( $services as $service ) {
+        		if ( $term->slug == $service->slug ) {
+        			echo '<li class="current">';
+        		} else {
+        			echo '<li>';
+            }
+            	echo '<a href="' . htmlentities( add_query_arg( 'topic', $service->slug, $page_link ) ) . '">' . $service->name . '';
+            	//$cat = get_term_by('name', single_cat_title('',false), 'category'); 
+            	//echo $cat->slug;
+            	echo '</a></li>';
+        }
+     
+ ?>
+ 
+   <?php } ?>
+   </ul>
+	
+</div>
+
+<!--<div class="row four-col last-col no-border">
 	<?php
 	wp_reset_query();
-	$taxonomy = 'products-and-services';
+	$taxonomy = 'topic';
 	$queried_term = get_query_var($taxonomy);
-	$args = array( 'numberposts' => 1, 'products-and-services' => $queried_term, 'post_type' => productbusinesscard );
+	$args = array( 'numberposts' => 1, 'topic' => $queried_term, 'post_type' => productbusinesscard );
 	$myposts = get_posts( $args );	foreach( $myposts as $post ) : setup_postdata($post); ?>
 		<div class="glossary-box box box-highlight <?php echo ' promo-', $queried_term; ?>">
 			<h2><span>What is&hellip;</span><?php the_title(); ?></h2>

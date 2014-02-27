@@ -44,7 +44,7 @@ $count = 0;
 			else :
 		?>			
 				<div class="two-col">
-					<?php get_template_part("/library/includes/_nav_archive"); ?>
+					<?php get_template_part("/includes/_nav_archive"); ?>
 				</div><!-- /.two-col -->
 				<h1>Posts from <?php the_time(' F Y') ?></h1>
 		    <?php
@@ -67,7 +67,7 @@ $count = 0;
 		    <?php
 			endif;
 		?>			
-			<?php get_template_part("/library/includes/_result_list_item"); ?>		
+			<?php get_template_part("/includes/_result_list_item"); ?>		
 			</li>	
 	<?php endwhile; ?>
 	<?php endif; // end have_posts ?>

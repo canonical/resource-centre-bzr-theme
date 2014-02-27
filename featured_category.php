@@ -11,7 +11,7 @@
 	$mything = 'dbt_checkbox_featured';
 	$featured_content = get_post_meta($post->ID, $mything, TRUE);
 	$video_content = get_post_meta($post->ID, $key, TRUE);
-	$terms = get_the_term_list( $post->ID, 'products-and-services' );
+	$terms = get_the_term_list( $post->ID, 'topic' );
 	$terms = strip_tags( $terms );
 	$attachment_id = $wpdb->get_var("SELECT ID FROM $wpdb->posts WHERE post_parent = '$post->ID' AND post_status = 'inherit' AND post_type='attachment' ORDER BY post_date DESC LIMIT 1");
 ?>
@@ -20,7 +20,7 @@
 	<div class="featured-article box twelve-col<?php the_category_unlinked(' post-'); ?>">
 <?php if ($featured_content) : echo 'yes'; endif; ?>
 		<div class="article-content six-col">
-			<?php get_template_part("library/includes/_article_meta"); ?>
+			<?php get_template_part("includes/_article_meta"); ?>
 			<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 			<?php the_excerpt(); ?>
 			<?php if('casestudy' == get_post_type() || 'ebook' == get_post_type() || 'whitepaper' == get_post_type()) : ?> 

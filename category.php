@@ -21,219 +21,89 @@ if ( !defined('ABSPATH')) exit;
 
 <?php get_header(); 
 	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
+	$term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
 ?>
 <div class="no-border">
-<h1 class="cat-title row no-border"><?php $term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) ); ?><?php if( $term != '' ) : ?><span class="taxonomy-title"><?php echo $term->name; ?></span><?php endif; ?> <span><?php single_cat_title(); ?></span></h1>
+<div class="row no-border">
+	<h1><?php if(is_taxonomy('topic', 'category')) : echo 'Your search results for "'; endif ; ?><?php $term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) ); ?><span></span><?php if( $term != '' ) : ?><span class="taxonomy-title"><?php echo $term->name; ?></span><?php endif; ?> <span><?php single_cat_title(); ?></span><?php if(is_taxonomy('topic', 'category')) : echo '"'; endif ; ?></h1>
+	
+	<?php if(is_taxonomy('topic', 'category')) : ?>
+	<h2>We've found 		
+		<?php printf( __( ' %d %s' ), $wp_query->found_posts, _n( 'result', 'results', $wp_query->found_posts), get_posts() ); ?>.
+	</h2>
+	<?php endif ; ?>
+</div>
 
-<section>
-<div class="eight-col">
-<ul class="article-list no-bullets">
+<div class="no-margin-bottom">
+<ul class="article-list infinitescroll no-bullets">
 
-<?php if(!is_paged()) : ?>
-<?php 
-	$do_not_duplicate = array();
-	query_posts( array('post_type' => $post_types, 'cat' => $cat, 'posts_per_page' => 1, 'meta_key' => 'dbt_checkbox_featured', 'orderby' => 'date'));
-	while (have_posts()) : the_post();
-	$thePostID = $post->ID;
-	$postCount = 0;
-	$post_type = get_post_type_object( get_post_type($post));
-	$pagecat = $this_category->category_nicename;
-	$articlecat = $category = get_the_category()->category_nicename;
-	$key = 'postVideo';
-	$video_content = get_post_meta($post->ID, $key, TRUE);
-	$do_not_duplicate[] = $post->ID;
+<?php
+/* ============== pull in latest articles (specific to the current taxonomy term/s) ============== */
+	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
+	$current_cat = get_query_var('category_name');
+	query_posts( $args );
+	$args=array(
+	'posts_per_page'=> '-1',
+	'post_type'=> 'any',
+	'post__not_in' => $do_not_duplicate,
+	'paged'=>$paged,
+	'tax_query' => array(
+        'relation' => 'OR',
+        array(
+            'taxonomy' => 'topic',
+            'field' => 'slug',
+            'terms' => array('cloud'),
+        ),
+        array(
+            'taxonomy' => 'category',
+            'field' => 'slug',
+            'terms' => array('events'),
+            'operator' => 'IN',
+        ),
+		)
+);
+wp_reset_query();
 ?>
 
-<?php if($articlecat == $pagecat) { ?>
-	<li class="row featured article<?php the_category_unlinked(' post-'); ?>">
-			<div class="article-content six-col">
-			<?php if(has_post_thumbnail()) : ?><div class="article-image six-col last-col">
-				<a href="<?php the_permalink(); ?>">
-				<?php if('$video_content' == get_post_type()) { ?>
-					<img src="http://img.youtube.com/vi/<?php echo $video_content; ?>/0.jpg" width="100" height="100" alt="" />
-				<?php } else { ?>	
-				<?php the_post_thumbnail('thumbnail'); ?> 	
-				<?php } ?>
-				</a>
-			</div><!-- /.article-image --><?php endif; ?>
-					<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-				<?php get_template_part("library/includes/_article_meta"); ?>
-				
-			<?php if('event' == get_post_type()) : ?>
-				<?php 
-					$current_time = current_time('mysql'); 
-					list( $today_year, $today_month, $today_day, $hour, $minute, $second ) = split( '([^0-9])', $current_time );
-					$current_timestamp = $today_year . $today_month . $today_day . $hour . $minute;
-					// Gets the event start month from the meta field
-					$start_nummonth = get_post_meta( $post->ID, '_start_month', true );
-					$start_month = get_post_meta( $post->ID, '_start_month', true );
-					// Converts the month number to the month name
-					$start_month = $wp_locale->get_month( $start_month );
-					// Gets the event start day
-					$start_day = get_post_meta( $post->ID, '_start_day', true );
-					// Gets the event start year
-					$start_year = get_post_meta( $post->ID, '_start_year', true );
-					// Gets the event start hour
-					$start_hour = get_post_meta( $post->ID, '_start_hour', true );
-					// Gets the event start minute
-					$start_minute = get_post_meta( $post->ID, '_start_minute', true );
-					$end_nummonth = get_post_meta( $post->ID, '_end_month', true );
-					$end_month = get_post_meta( $post->ID, '_end_month', true );
-					// Converts the month number to the month name
-					$end_month = $wp_locale->get_month( $end_month );
-					// Gets the event start day
-					$end_day = get_post_meta( $post->ID, '_end_day', true );
-					// Gets the event start year
-					$end_year = get_post_meta( $post->ID, '_end_year', true );
-					// Gets the event start hour
-					$end_hour = get_post_meta( $post->ID, '_end_hour', true );
-					// Gets the event start minute
-					$end_minute = get_post_meta( $post->ID, '_end_minute', true );
-					$location = get_post_meta( $post->ID, '_event_location', true );
-					$registration = get_post_meta( $post->ID, '_event_registration', true );
-				?>
-				</p>
-				<dl class="event-details clearfix">
-				<dt class="accessibility-aid">Location:</dt>
-				<?php if ( $location ) : ?><dd class="location" itemprop="location" itemscope itemtype="http://schema.org/PostalAddress"><?php echo $location; ?></dd><?php endif; ?>
-				<dt class="accessibility-aid">Date:</dt>
-				<dd class="event-date">
-					<?php if ($start_day != $end_day && $start_month == $end_month) : ?>
-						<?php echo ltrim($start_day, '0') . '-' . ltrim($end_day, '0') . ' ' . $start_month . ' ' . $end_year; ?>
-					<?php endif; ?>
-					<?php if ($start_month != $end_month) : ?>
-						<?php echo ltrim($start_day, '0') . ' ' . $start_month . ' - ' . ltrim($end_day, '0') . ' ' . $end_month . ' ' . $end_year; ?>
-					<?php endif; ?>
-					<?php if ($start_day == $end_day) : ?>
-						<?php echo ltrim($start_day, '0'). ' ' . $start_month . ' ' . $end_year; ?>
-					<?php endif; ?>
-					<span class="accesibilty-aid">
-						<time itemprop="startDate" datetime="<?php echo $start_year .'-' . $start_nummonth . '-' . $start_day . 'T' . $start_hour . ':' . $start_minute; ?>"></time></dd>
-						<time itemprop="endDate" datetime="<?php echo $end_year .'-' . $end_nummonth . '-' . $end_day . 'T' . $end_hour . ':' . $end_minute; ?>"></time>
-					</span>
-				</dd>
-			</dl>
-		<?php endif; ?>
-			</div><!-- /.article-content -->
-			<p><?php echo get_excerpt(); ?></p>
+<?php 
+	while ( have_posts() ) : the_post();
+	$do_not_duplicate[] = $post->ID ?>
+	
+	<li class="row article">
+		<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+	<?php if('event' == get_post_type()) : ?>
+		<?php get_template_part("/includes/_event_meta"); ?>
+	<?php else : ?>
+		<p><?php echo get_excerpt(); ?></p>
+		<?php get_template_part("/includes/_article_meta"); ?>
+		<!--<p><?php //echo getPostViews(get_the_ID()); ?></p>-->	
+	<?php endif ; ?>
 	</li>
-<?php } /*end if($articlecat == $pagecat)*/ endwhile; /* (have_posts()) */ endif; // end if(is_paged()) ?>
-
-<?php 
-	wp_reset_query();
-	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-	$style_classes = array('','',' last-col');
-	$style_index = 0;
-	$postCount = 0;
-
-	if ( have_posts() ) : while (have_posts()) : the_post();
-	$do_not_duplicate[] = $post->ID;
+<?php endwhile; // if have_posts ends 
+/* ============== end pull in latest articles ============== */
 ?>
 
-	<?php if($thePostID == $post->ID) { } else { ?>
-		<li class="row article<?php $k = $style_index%3; echo "$style_classes[$k]"; $style_index++; ?><?php $post_type = get_post_type_object( get_post_type($post) ); echo ' post-', $post_type->labels->css_friendly; ?>">
-        	<?php
-				$key = 'postVideo';
-				$video_content = get_post_meta($post->ID, $key, TRUE);
-				$lock = 'dbt_checkbox';
-				$gated_content = get_post_meta($post->ID, $lock, TRUE);
-        	?>
-				<?php if(has_post_thumbnail() || 'video' == get_post_type()) { ?><div class="article-image three-col"><?php } ?>
-				<?php if('video' == get_post_type()) { ?>
-					<a href="<?php the_permalink(); ?>"><img src="http://img.youtube.com/vi/<?php echo $video_content; ?>/0.jpg" width="100" height="100" alt="" /></a>
-				<?php }	?>	
-					<?php if(has_post_thumbnail()) : ?>
-						<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('thumbnail'); ?></a>
-					<?php endif ; ?>
-					<?php if(has_post_thumbnail() || 'video' == get_post_type()) { echo '</div><!-- /.three-col -->'; } ?>
-				<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-				<?php get_template_part("library/includes/_article_meta"); ?>
-			<?php if('event' == get_post_type()) : ?>
-				<?php 
-					$current_time = current_time('mysql'); 
-					list( $today_year, $today_month, $today_day, $hour, $minute, $second ) = split( '([^0-9])', $current_time );
-					$current_timestamp = $today_year . $today_month . $today_day . $hour . $minute;
-					// Gets the event start month from the meta field
-					$start_nummonth = get_post_meta( $post->ID, '_start_month', true );
-					$start_month = get_post_meta( $post->ID, '_start_month', true );
-					// Converts the month number to the month name
-					$start_month = $wp_locale->get_month( $start_month );
-					// Gets the event start day
-					$start_day = get_post_meta( $post->ID, '_start_day', true );
-					// Gets the event start year
-					$start_year = get_post_meta( $post->ID, '_start_year', true );
-					// Gets the event start hour
-					$start_hour = get_post_meta( $post->ID, '_start_hour', true );
-					// Gets the event start minute
-					$start_minute = get_post_meta( $post->ID, '_start_minute', true );
-					$end_nummonth = get_post_meta( $post->ID, '_end_month', true );
-					$end_month = get_post_meta( $post->ID, '_end_month', true );
-					// Converts the month number to the month name
-					$end_month = $wp_locale->get_month( $end_month );
-					// Gets the event start day
-					$end_day = get_post_meta( $post->ID, '_end_day', true );
-					// Gets the event start year
-					$end_year = get_post_meta( $post->ID, '_end_year', true );
-					// Gets the event start hour
-					$end_hour = get_post_meta( $post->ID, '_end_hour', true );
-					// Gets the event start minute
-					$end_minute = get_post_meta( $post->ID, '_end_minute', true );
-					$location = get_post_meta( $post->ID, '_event_location', true );
-					$registration = get_post_meta( $post->ID, '_event_registration', true );
-				?>
-				</p>
-				<dl class="event-details clearfix">
-				<dt class="accessibility-aid">Location:</dt>
-				<?php if ( $location ) : ?><dd class="location" itemprop="location" itemscope itemtype="http://schema.org/PostalAddress"><?php echo $location; ?></dd><?php endif; ?>
-				<dt class="accessibility-aid">Date:</dt>
-				<dd class="event-date">
-					<?php if ($start_day != $end_day && $start_month == $end_month) : ?>
-						<?php echo ltrim($start_day, '0') . '-' . ltrim($end_day, '0') . ' ' . $start_month . ' ' . $end_year; ?>
-					<?php endif; ?>
-					<?php if ($start_month != $end_month) : ?>
-						<?php echo ltrim($start_day, '0') . ' ' . $start_month . ' - ' . ltrim($end_day, '0') . ' ' . $end_month . ' ' . $end_year; ?>
-					<?php endif; ?>
-					<?php if ($start_day == $end_day) : ?>
-						<?php echo ltrim($start_day, '0'). ' ' . $start_month . ' ' . $end_year; ?>
-					<?php endif; ?>
-					<span class="accesibilty-aid">
-						<time itemprop="startDate" datetime="<?php echo $start_year .'-' . $start_nummonth . '-' . $start_day . 'T' . $start_hour . ':' . $start_minute; ?>"></time></dd>
-						<time itemprop="endDate" datetime="<?php echo $end_year .'-' . $end_nummonth . '-' . $end_day . 'T' . $end_hour . ':' . $end_minute; ?>"></time>
-					</span>
-				</dd>
-			</dl>
-		<?php endif; ?>
-			<p><?php echo get_excerpt(); ?></p>
-        </li>
-
-    <?php } // end if($thePostID == $post->ID) ?>
-
-<?php 
-	endwhile;
-	endif;
-	wp_reset_query();
-?>
 </ul>
+	<?php get_template_part("includes/_pagination"); ?>
 </div><!-- /.eight-col -->
-</section>
 
-	<div class="eight-col">
-	<?php get_template_part("library/includes/_pagination"); ?>
+<?php /*	<div class="eight-col">
+	<?php get_template_part("includes/_pagination"); ?>
 	</div><!-- /.eight-col -->
 
-<!--<div class="aside three-col last-col">
+<div class="aside three-col last-col">
 	<h2>Filter <span class="lowercase"><?php single_cat_title() ?></span> by topic</h2>
 	<ul class="no-bullets">	 
 	<li<?php if (!$term) echo ' class="current"'; ?>><a href="/topics/<?php $cat = get_term_by('name', single_cat_title('',false), 'category'); echo $cat->slug; ?>">All <span class="lowercase"><?php single_cat_title() ?></span></a></li>
 	<?php 
 		$pagecat = $this_category->category_nicename;
 		$term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
-		$services = get_terms( 'products-and-services', 'hide_empty=1&pad_counts=1');
+		$services = get_terms( 'topic', 'hide_empty=1&pad_counts=1');
     $args = array();
     $args['paged'] = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
     if ( isset( $_GET['service'] ) ) {
-        $args['service'] = $_GET['products-and-services'];
-        $page_link = add_query_arg( 'products-and-services', $_GET['products-and-services'], $page_link );
+        $args['service'] = $_GET['topic'];
+        $page_link = add_query_arg( 'topic', $_GET['topic'], $page_link );
     }
     if ( is_array( $services ) ) {
         foreach ( $services as $service ) {
@@ -242,18 +112,16 @@ if ( !defined('ABSPATH')) exit;
         		} else {
         			echo '<li>';
             }
-            	echo '<a href="' . htmlentities( add_query_arg( 'products-and-services', $service->slug, $page_link ) ) . '">' . $service->name . '';
+            	echo '<a href="' . htmlentities( add_query_arg( 'topic', $service->slug, $page_link ) ) . '">' . $service->name . '';
             	//$cat = get_term_by('name', single_cat_title('',false), 'category'); 
             	//echo $cat->slug;
             	echo '</a></li>';
         }
-     
- ?>
- 
-   <?php } ?>
+	?>
+	<?php } ?>
    </ul>
 	
-</div> -->	
+</div> */?>
 	
 </div><!-- /.row -->
 
