@@ -33,74 +33,22 @@ get_header();
 	global $posted;
 	$attachment_id = $wpdb->get_var("SELECT ID FROM $wpdb->posts WHERE post_parent = '$post->ID' AND post_status = 'inherit' AND post_type='attachment' ORDER BY post_date DESC LIMIT 1");
 	$articlecat = $category = get_the_category()->category_nicename;
+	$current_time = current_time('mysql'); 
+	list( $today_year, $today_month, $today_day, $hour, $minute, $second ) = split( '([^0-9])', $current_time );
+	$current_timestamp = $today_year . $today_month . $today_day . $hour . $minute;
 ?>
 
 <div itemscope itemtype="http://schema.org/BusinessEvent" class="row no-border">
 	<?php if (have_posts()) : ?>
 		<?php while (have_posts()) : the_post(); ?>
 		<?php if(!current_user_can('administrator')){ echo setPostViews(get_the_ID()); } ?>
-	<div class="twelve-col">
-			<?php get_template_part("library/includes/_cat_headings"); ?>
-		<h1 class="eight-col"><?php the_title(); ?></h1>
+	<div class="twelve-col no-margin-bottom">
+			<?php get_template_part("includes/_cat_headings"); ?>
+		<h1><?php the_title(); ?></h1>
 	</div>
-	<div class="twelve-col">
-	<div class="eight-col">
-<?php
-	// http://codex.wordpress.org/Function_Reference/current_time
-	$current_time = current_time('mysql'); 
-	list( $today_year, $today_month, $today_day, $hour, $minute, $second ) = split( '([^0-9])', $current_time );
-	$current_timestamp = $today_year . $today_month . $today_day . $hour . $minute;
-	?>			
-<dl class="event-details clearfix">
-<?php 
-				// Gets the event start month from the meta field
-				$start_nummonth = get_post_meta( $post->ID, '_start_month', true );
-				$start_month = get_post_meta( $post->ID, '_start_month', true );
-				// Converts the month number to the month name
-				$start_month = $wp_locale->get_month( $start_month );
-				// Gets the event start day
-				$start_day = get_post_meta( $post->ID, '_start_day', true );
-				// Gets the event start year
-				$start_year = get_post_meta( $post->ID, '_start_year', true );
-				// Gets the event start hour
-				$start_hour = get_post_meta( $post->ID, '_start_hour', true );
-				// Gets the event start minute
-				$start_minute = get_post_meta( $post->ID, '_start_minute', true );
-				$end_nummonth = get_post_meta( $post->ID, '_end_month', true );
-				$end_month = get_post_meta( $post->ID, '_end_month', true );
-				// Converts the month number to the month name
-				$end_month = $wp_locale->get_month( $end_month );
-				// Gets the event start day
-				$end_day = get_post_meta( $post->ID, '_end_day', true );
-				// Gets the event start year
-				$end_year = get_post_meta( $post->ID, '_end_year', true );
-				// Gets the event start hour
-				$end_hour = get_post_meta( $post->ID, '_end_hour', true );
-				// Gets the event start minute
-				$end_minute = get_post_meta( $post->ID, '_end_minute', true );
-				$location = get_post_meta( $post->ID, '_event_location', true );
-				$registration = get_post_meta( $post->ID, '_event_registration', true );
-				?>
-				<dt class="accessibility-aid">Location:</dt>
-				<?php if ( $location ) : ?><dd class="location" itemprop="location" itemscope itemtype="http://schema.org/PostalAddress"><?php echo $location; ?></dd><?php endif; ?>
-				<dt class="accessibility-aid">Date:</dt>
-				<dd class="event-date ">
-					<?php if ($start_day != $end_day && $start_month == $end_month) : ?>
-						<?php echo ltrim($start_day, '0') . '-' . ltrim($end_day, '0') . ' ' . $start_month . ' ' . $end_year; ?>
-					<?php endif; ?>
-					<?php if ($start_month != $end_month) : ?>
-						<?php echo ltrim($start_day, '0') . ' ' . $start_month . ' - ' . ltrim($end_day, '0') . ' ' . $end_month . ' ' . $end_year; ?>
-					<?php endif; ?>
-					<?php if ($start_day == $end_day) : ?>
-						<?php echo $start_day. ' ' . $start_month . ' ' . $end_year; ?>
-					<?php endif; ?>
-					<span class="accesibilty-aid">
-						<time itemprop="startDate" datetime="<?php echo $start_year .'-' . $start_nummonth . '-' . $start_day . 'T' . $start_hour . ':' . $start_minute; ?>"></time></dd>
-						<time itemprop="endDate" datetime="<?php echo $end_year .'-' . $end_nummonth . '-' . $end_day . 'T' . $end_hour . ':' . $end_minute; ?>"></time>
-					</span>
-				</dd>
-			</dl>
-				<?php if(has_post_thumbnail()) { the_post_thumbnail('medium'); } ?>
+	<div class="twelve-col no-margin-bottom">
+	<div class="no-margin-bottom">
+		<?php get_template_part("/includes/_event_meta"); ?>
 			<?php if('post' != get_post_type() && $gated_content == 'on') { the_content(); } ?>
 <?php if(($gated_content == 'on') && ($posted != $postdate . $postid)) { ?>
 					<?php if($posted == $postdate . $postid ) { // check if the form has been posted ?>
@@ -154,19 +102,54 @@ get_header();
 		<?php endif; // if video  ?>
 <?php } // end if gated ?>
 	</div><!-- /.eight-col -->
-	<?php // get_template_part("library/includes/_subscribe"); ?>
 </div><!-- /.twelve-col -->
 <div class="eight-col instapaper_ignore">
-<?php get_template_part("library/includes/_related_posts"); ?>
+<?php //get_template_part("includes/_subscribe"); ?>
+<?php get_template_part("includes/_related_posts"); ?>
 </div>
 <?php endwhile; // while have_posts ends ?> 
 <?php endif; // if have_posts ends ?> 
 	<div class="eight-col<?php $tags = wp_get_post_tags($post->ID); if ($tags) { echo ' has-related'; } ?>">
 		<?php //comments_template(); ?> 
 	</div>
+
+<?php
+wp_reset_query();
+global $wpdb;
+global $posted;
+$queried_object = get_queried_object();  
+$term_slug = $queried_object->slug; 
+$custom_taxterms = wp_get_object_terms( $post->ID, 'topic', array('fields' => 'ids') );
+
+  $args=array(
+    'post_type' => 'productbusinesscard',
+    'tax_query' => array(
+	    array(
+	        'taxonomy' 	=> 'topic',
+	        'field' 		=> 'id',
+	        'terms'			=> $custom_taxterms
+	    )
+	),
+    'post_status' => 'publish',
+    'posts_per_page' => 1,
+    'order' => 'ASC',
+    'caller_get_posts'=> 1,
+    'orderby' => 'rand'
+  );
+
+    $my_query = null;
+    $my_query = new WP_Query($args);
+    if( $my_query->have_posts() ) {
+      while ($my_query->have_posts()) : $my_query->the_post(); ?>
+      <?php echo $title; ?>
+			<div class="row product-business-card no-border<?php if( is_single() ) : echo ' box box-highlight'; endif; ?>">
+				<div class="clearfix">
+					<h2<?php if( ! is_single() ) : echo ' class="accessibility-aid"'; endif; ?>><span>What is&hellip;</span><?php the_title(); ?></h2>
+					<?php the_content(); ?>
+				</div>
+			</div>
+        
+<?php endwhile; } wp_reset_query(); ?>
 </div><!-- /.row --> 
-<div class="row four-col last-col no-border">
-<?php get_template_part("library/includes/_business_card"); ?>
-</div>
 
 <?php get_footer(); ?>

@@ -5,101 +5,55 @@
  */
 $key = wp_specialchars($s, 1); 
 $search_title = ('Search results for "' . $key . '"');
-include("header.php")
+include("header.php");
 ?>
 <div class="row no-border">
-	<h1>Your search results for "<?php /* Search Count */ 
+	<h1>Your search results for "<?php 
+		/* Search Count */ 
+		global $post;
+		if( is_category() ){
+			$category = end(get_the_category());
+			$current =$category->cat_ID;
+			$current_name = $category->cat_name;
+		}
 		$allsearch = &new WP_Query("s=$s&showposts=-1"); 
 		$key = wp_specialchars($s, 1); 
-		$count = $allsearch->post_count; _e('');
+		$count = $wp_query->found_posts; _e('');
 		 _e(''); 
-		 echo $key; _e(''); 
+		 echo $key; _e(' ');
+		 echo strtolower($current_name); 
 	?>"
 	</h1>
 	<h2>We've found 
-	<?php echo $count; ?>
-	<?php echo _n( 'article', 'articles', $count, 'ubuntu-resources' ); ?>.</h2>
+		<?php echo $wp_query->found_posts; ?>
+		<?php echo _n( 'article', 'articles', $count, 'ubuntu-resources' ); ?>.
+	</h2>
 </div><!-- /.row -->
-<div class="eight-col">
+<div class="no-margin-bottom">
+
 	<?php if (have_posts()) : ?>
-	<ul class="article-list no-bullets">
+	<ul class="article-list infinitescroll no-bullets">
 		<?php while (have_posts()) : the_post(); ?>
 <?php if ( is_search() ) : ?>
 <?php $title = get_the_title(); $keys= explode(" ",$s); $title = preg_replace('/('.implode('|', $keys) .')/iu', '<strong class="search-term">\0</strong>', $title); ?>
 <?php $excerpt = get_the_excerpt(); $keys= explode(" ",$s); $excerpt = preg_replace('/('.implode('|', $keys) .')/iu', '<strong class="search-term">\0</strong>', $excerpt); ?>
 <?php endif; ?>				
-					<li class="row article <?php if(($postCount++ == 1)) { echo ' featured-article'; } ?>"> 
-					<?php if(has_post_thumbnail()) : ?>
-						<div class="article-image three-col">
-						<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('thumbnail'); ?></a>
-						</div>
-						<div class="five-col last-col">
-					<?php endif; ?>	
-					<h2><a href="<?php the_permalink() ?>"><?php if ( is_search() ) : echo $title; else : echo  the_title(); endif; ?></a></h2>
-						<?php get_template_part("library/includes/_article_meta"); ?>
+					<li class="row article"> 
+					<h3><a href="<?php the_permalink() ?>"><?php if ( is_search() ) : echo $title; else : echo  the_title(); endif; ?></a></h3>
 			<?php if('event' == get_post_type()) : ?>
-				<?php 
-					$current_time = current_time('mysql'); 
-					list( $today_year, $today_month, $today_day, $hour, $minute, $second ) = split( '([^0-9])', $current_time );
-					$current_timestamp = $today_year . $today_month . $today_day . $hour . $minute;
-					// Gets the event start month from the meta field
-					$start_nummonth = get_post_meta( $post->ID, '_start_month', true );
-					$start_month = get_post_meta( $post->ID, '_start_month', true );
-					// Converts the month number to the month name
-					$start_month = $wp_locale->get_month( $start_month );
-					// Gets the event start day
-					$start_day = get_post_meta( $post->ID, '_start_day', true );
-					// Gets the event start year
-					$start_year = get_post_meta( $post->ID, '_start_year', true );
-					// Gets the event start hour
-					$start_hour = get_post_meta( $post->ID, '_start_hour', true );
-					// Gets the event start minute
-					$start_minute = get_post_meta( $post->ID, '_start_minute', true );
-					$end_nummonth = get_post_meta( $post->ID, '_end_month', true );
-					$end_month = get_post_meta( $post->ID, '_end_month', true );
-					// Converts the month number to the month name
-					$end_month = $wp_locale->get_month( $end_month );
-					// Gets the event start day
-					$end_day = get_post_meta( $post->ID, '_end_day', true );
-					// Gets the event start year
-					$end_year = get_post_meta( $post->ID, '_end_year', true );
-					// Gets the event start hour
-					$end_hour = get_post_meta( $post->ID, '_end_hour', true );
-					// Gets the event start minute
-					$end_minute = get_post_meta( $post->ID, '_end_minute', true );
-					$location = get_post_meta( $post->ID, '_event_location', true );
-					$registration = get_post_meta( $post->ID, '_event_registration', true );
-				?>
-				</p>
-				<dl class="event-details clearfix">
-				<dt class="accessibility-aid">Location:</dt>
-				<?php if ( $location ) : ?><dd class="location" itemprop="location" itemscope itemtype="http://schema.org/PostalAddress"><?php echo $location; ?></dd><?php endif; ?>
-				<dt class="accessibility-aid">Date:</dt>
-				<dd class="event-date">
-					<?php if ($start_day != $end_day && $start_month == $end_month) : ?>
-						<?php echo $start_day . '-' . $end_day . ' ' . $start_month . ' ' . $end_year; ?>
-					<?php endif; ?>
-					<?php if ($start_month != $end_month) : ?>
-						<?php echo $start_day . ' ' . $start_month . ' - ' .$end_day . ' ' . $end_month . ' ' . $end_year; ?>
-					<?php endif; ?>
-					<?php if ($start_day == $end_day) : ?>
-						<?php echo $start_day. ' ' . $start_month . ' ' . $end_year; ?>
-					<?php endif; ?>
-					<span class="accesibilty-aid">
-						<time itemprop="startDate" datetime="<?php echo $start_year .'-' . $start_nummonth . '-' . $start_day . 'T' . $start_hour . ':' . $start_minute; ?>"></time></dd>
-						<time itemprop="endDate" datetime="<?php echo $end_year .'-' . $end_nummonth . '-' . $end_day . 'T' . $end_hour . ':' . $end_minute; ?>"></time>
-					</span>
-				</dd>
-			</dl>
-		<?php endif; // event ?>
+				<?php get_template_part("/includes/_event_meta"); ?>
+			<?php endif; // event ?>
 					<?php if(has_post_thumbnail()) : ?>
-						<p><?php if ( is_search() ) : echo $excerpt; else : echo the_excerpt(); endif; ?></p>
-					</div>
+						<p><?php if ( is_search() ) : echo wp_trim_words($excerpt, 40); else : echo wp_trim_words(the_excerpt(), 40); endif; ?></p>
 					<?php else : ?>
-						<p><?php if ( is_search() ) : echo $excerpt; else : echo the_excerpt(); endif; ?></p>
+						<p><?php if ( is_search() ) : echo wp_trim_words($excerpt , 40); else : echo the_excerpt(), 40; endif; ?></p>
 					<?php endif; ?>
-					</li>		<?php endwhile; ?>
+						<?php get_template_part("includes/_article_meta"); ?>
+											</li>		
+					<?php endwhile; ?>
 		</ul>
+	<?php get_template_part("includes/_pagination"); ?>
+</div>
 	<?php else : ?>
 
 	<div class="row">
@@ -107,7 +61,84 @@ include("header.php")
 		<?php get_search_form(); ?>
 	</div>
 	<?php endif; // end have_posts ?>
-	<div class="eight-col">
-	<?php get_template_part("library/includes/_pagination"); ?>
-	</div><!-- /.eight-col -->
+<!-- <div class="aside three-col last-col">
+	
+<?php
+wp_reset_query();
+$taxonomiese[] = array(
+	'name'      => 'topic',
+	'query_var' => 'topic',
+	'heading'   => __( 'Filter by topic' ),
+); ?>
+<?php foreach ( $taxonomiese as $tax ): ?>
+	<?php $current_term = get_query_var( $tax['query_var'] ); ?>
+<aside class="search-filter">
+<header class="head">
+	<h3><?php echo esc_html( $tax['heading'] ); ?></h3>
+</header>
+<div class="content">
+<ul class="blogroll">
+	<li>
+	<?php if (! isset( $_GET[$tax['query_var']] ) ): ?>
+	<strong>All</strong>
+	<?php else : ?>
+	<a href="<?php echo esc_url( remove_query_arg( $tax['query_var'] ) ) ?>">All</a>
+	<?php endif; ?>
+	</li>
+	<?php foreach( get_terms( $tax['name'] ) as $term ): ?>
+	<?php $tax_shortcut = $tax['query_var'] ?>
+	<?php $term_shortcut = $term->slug ?>
+	<li>
+	<?php if ( $current_term == $term->slug ): ?>
+	<strong><?php echo esc_html( $term->name ) ?></strong>
+	<?php else : ?>
+	<a href="<?php echo esc_url( add_query_arg( $tax_shortcut, $term_shortcut ) ) ?>"><?php echo esc_html( $term->name ) ?></a>
+	<?php endif; ?>
+	</li>
+	<?php endforeach; ?>
+</ul>
+</div>
+</aside>
+<?php endforeach ?>
+<?php wp_reset_query(); ?>
+
+<?php
+wp_reset_query();
+$taxonomies[] = array(
+	'name'      => 'category',
+	'query_var' => 'cat',
+	'heading'   => __( 'Filter by type' ),
+); ?>
+<?php foreach ( $taxonomies as $tax ): ?>
+	<?php $current_term = get_query_var( $tax['query_var'] ); ?>
+<aside class="search-filter">
+<header class="head">
+	<h3><?php echo esc_html( $tax['heading'] ); ?></h3>
+</header>
+<div class="content">
+<ul class="blogroll">
+	<li>
+	<?php if (! isset( $_GET[$tax['query_var']] ) ): ?>
+	<strong>All</strong>
+	<?php else : ?>
+	<a href="<?php echo esc_url( remove_query_arg( $tax['query_var'] ) ) ?>">All</a>
+	<?php endif; ?>
+	</li>
+	<?php foreach( get_terms( $tax['name'] ) as $term ): ?>
+	<?php $tax_shortcut = $tax['query_var'] ?>
+	<?php $term_shortcut = $term->term_id ?>
+	<li>
+	<?php if ( $current_term == $term->slug ): ?>
+	<strong><?php echo esc_html( $term->name ) ?></strong>
+	<?php else : ?>
+	<a href="<?php echo esc_url( add_query_arg( $tax_shortcut, $term_shortcut ) ) ?>"><?php echo esc_html( $term->name ) ?></a>
+	<?php endif; ?>
+	</li>
+	<?php endforeach; ?>
+</ul>
+</div>
+</div>
+</aside>
+<?php endforeach ?>-->
+	
 <?php get_footer(); ?>

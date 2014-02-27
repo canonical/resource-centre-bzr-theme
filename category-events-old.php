@@ -64,7 +64,7 @@ if ( !defined('ABSPATH')) exit;
 				$gated_content = get_post_meta($post->ID, $lock, TRUE);
         	?>
 				<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-				<?php get_template_part("library/includes/_article_meta"); ?>
+				<?php get_template_part("includes/_article_meta"); ?>
 				<?php 
 					$current_time = current_time('mysql'); 
 					list( $today_year, $today_month, $today_day, $hour, $minute, $second ) = split( '([^0-9])', $current_time );
@@ -142,7 +142,7 @@ if ( !defined('ABSPATH')) exit;
 </div><!-- /.eight-col -->
 
 <div class="eight-col">
-<?php get_template_part("library/includes/_pagination"); ?>
+<?php get_template_part("includes/_pagination"); ?>
 </div><!-- /.eight-col -->
 
 <?php 
@@ -180,7 +180,7 @@ if ( !defined('ABSPATH')) exit;
  
    <?php } ?>
    </ul>
-	<?php //get_template_part("library/includes/_promo"); ?>
+	<?php //get_template_part("includes/_promo"); ?>
 	
 </div><!-- /.row -->
 

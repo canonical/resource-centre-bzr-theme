@@ -32,29 +32,32 @@ if ( !defined('ABSPATH')) exit;
 <meta name="keywords" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="apple-touch-icon" href="touch-icon-iphone.png" />
-<link rel="apple-touch-icon" sizes="72x72" href="touch-icon-ipad.png" />
-<link rel="apple-touch-icon" sizes="114x114" href="touch-icon-iphone-retina.png" />
-<link rel="apple-touch-icon" sizes="144x144" href="touch-icon-ipad-retina.png" />
+<link rel="apple-touch-icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/touch-icon-iphone.png" />
+<link rel="apple-touch-icon" sizes="72x72" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/touch-icon-ipad.png" />
+<link rel="apple-touch-icon" sizes="114x114" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/touch-icon-iphone-retina.png" />
+<link rel="apple-touch-icon" sizes="144x144" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/touch-icon-ipad-retina.png" />
 
 <!-- Google Chrome Frame for IE -->
 <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
 
-<link rel="shortcut icon" href="http://assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
+<link rel="shortcut icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
 
 <!-- stylesheet -->
 <link rel="stylesheet" type="text/css" media="all" href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,400italic" />
+<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/dev/ubuntu-styles.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/dev/beta/global.css" />
 <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" />
-<link rel="stylesheet" media="print" href="/wp-content/themes/resource-centre/library/css/print.css" type="text/css" />
-<!-- <link rel="stylesheet" type="text/css" media="screen" href="http://assets.ubuntu.com/sites/ubuntu/534/u/css/global.css" /> -->
+<link rel="stylesheet" media="print" href="<?php bloginfo('template_directory'); ?>/static/css/print.css" type="text/css" />
 
 <!-- wordpress head functions -->
 <?php wp_head(); ?>
-<!-- end of wordpress head -->
+
+<!-- modernizr -->
+<script src="<?php bloginfo('template_directory'); ?>/static/js/plugins/modernizr.2.7.1.js"></script>
 	
 </head>
-<!-- body id should be site url, this might change -->	
-<body id="resources.ubuntu.com" <?php body_class(); ?>>
+
+<body itemscope itemtype="http://schema.org/Article" id="resources.ubuntu.com" <?php body_class(); ?>>
 
 <!-- Google Tag Manager -->
 <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-W3SR7K"
@@ -70,16 +73,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	<div class="header-inner">
 		<span class="accessibility-aid"><a accesskey="s" href="#main-content">Jump to content</a></span>
 		<div class="logo">
-			<a id="#toggle" class="logo-ubuntu" href="<?php echo get_option('home'); ?>/">
-				<span><img width="106" height="25" src="http://assets.ubuntu.com/sites/ubuntu/latest/u/img/logos/logo-ubuntu-orange.png" alt="<?php bloginfo('name'); ?> logo" /></span>
+			<a class="logo-ubuntu" href="<?php echo get_option('home'); ?>/">
+				<span><img width="106" height="25" src="//assets.ubuntu.com/sites/ubuntu/latest/u/img/logos/logo-ubuntu-orange.png" alt="<?php bloginfo('name'); ?> logo" /></span>
 				<span class="site-name">resources</span>
 			</a>
 		</div>
+		<ul id="nav-triggers" class="inline no-bullets">
+			<li><a href="#share" id="share-trigger" class="share-toggle">Share</a></li>
+			<li><a href="#box-search" id="search-trigger" class="search-toggle">Search</a></li>
+			<li><a href="#main-nav" id="menu" class="nav-toggle">Menu</a></li>
+		</ul>
 	</div><!-- ./header-inner -->
 </header>
-
-<?php get_template_part("library/includes/_welcome_message"); ?>
 
 <div class="site-wrapper">
 <div class="wrapper clearfix">
 <div id="main-content" class="inner-wrapper clearfix" role="main">
+<?php get_template_part("includes/_welcome_message"); ?>

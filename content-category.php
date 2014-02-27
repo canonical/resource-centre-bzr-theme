@@ -7,7 +7,7 @@
 				$gated_content = get_post_meta($post->ID, $lock, TRUE);
         	?>
 				<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-				<?php get_template_part("library/includes/_article_meta"); ?>
+				<?php get_template_part("includes/_article_meta"); ?>
 			<?php if('event' == get_post_type()) : ?>
 				<?php 
 					$current_time = current_time('mysql'); 

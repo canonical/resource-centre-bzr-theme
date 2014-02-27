@@ -41,41 +41,44 @@ get_header();
 <div class="alert">
 	<p>Thank you!<?php if('video' == get_post_type()) : ?> Enjoy the video.<?php elseif('post' == get_post_type()) : ?> Enjoy the article. <?php else : ?> Your download should start automatically. If it doesn't, <a class="" href="<?php echo wp_get_attachment_url( $attachment_id ); ?>">download now</a>.<?php endif; ?></p>
 </div><!-- /.alert -->
-<?php endif; // end if(($gated_content ... ?>
+<?php endif; // end if(($posted == $postdate . $postid)) ?>
+
 	<?php if (have_posts()) : ?>
 		<?php while (have_posts()) : the_post(); ?>
 		<?php if(!current_user_can('administrator')){ echo setPostViews(get_the_ID()); } ?>
 		
-	<div class="twelve-col">
-			<?php get_template_part("library/includes/_cat_headings"); ?>
+	<div class="twelve-col no-margin-bottom">
+			<?php get_template_part("includes/_cat_headings"); ?>
 
-		<h1 class="eight-col"><?php the_title(); ?></h1>
-		<?php get_template_part("library/includes/_post_meta"); ?>
+		<h1 itemprop="name"><?php the_title(); ?></h1>
+		<?php get_template_part("includes/_post_meta"); ?>
 	</div>
-	<div class="twelve-col">
-	<div class="eight-col">
+	<div class="twelve-col no-margin-bottom">
+	<div class="no-margin-bottom">
 		<?php if(has_post_thumbnail()) { the_post_thumbnail('medium'); } ?>
+		<meta itemprop="image" content="<?php echo wp_get_attachment_thumb_url( get_post_thumbnail_id( $post->ID ) ); ?>" />
 			<?php if('post' != get_post_type() && $gated_content == 'on') { the_content(); } ?>
 			<?php if(($gated_content == 'on') && ($posted != $postdate . $postid)) { ?>
 					<?php if($posted == $postdate . $postid ) { // check if the form has been posted ?>
 					<?php } else { // show this if the form has not been posted ?>
 					<?php if('post' == get_post_type()) the_excerpt(); ?>
 					<div id="gated-content">
-						<p>Please enter your details to view the <?php echo $post_type->labels->title_friendly; ?>  '<?php the_title(); ?>'</p>
-						
+						<p>Please enter your details to view the <?php echo $post_type->labels->title_friendly; ?>  '<?php the_title(); ?>'</p><meta itemprop="image" content="/some/url/to/an/image.gif" />						
 					<?php $term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) ); ?><?php echo $term->name; ?>
 						
 					<?php $theurl = rtrim(get_permalink(),'/'); ?>
 					<iframe height="620" width="420" src="https://pages.ubuntu.com/confirmed-download-<?php $terms_as_text = strip_tags( get_the_term_list( $wp_query->post->ID, 'topic', '', ', ', '' ) ); echo $terms_as_text; ?>.html?url_param=<?php echo $theurl; ?>&amp;posted_param=<?php echo $postdate . $postid; ?>&amp;cat=<?php the_category_unlinked(''); ?>" name="iframe_w_param" id="iframe_w_param"></iframe>
 					</div><!-- /#gated-content -->
 					<?php } // end if market_form completed ?>
+					
 <?php } elseif(($gated_content == 'on' && $posted == $postdate . $postid)) { // show this if is gated and the form has been posted ?>
+
 		<?php if('video' == get_post_type()) : ?>
 					<div class="video-wrapper"><iframe class="post-video" width="596" height="335" src="http://www.youtube.com/embed/<?php echo $video_content; ?>?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe></div>
 					<?php the_content(); ?>
 		<?php else : ?>
 		<?php if('post' == get_post_type()) : ?>
-				<?php the_content(); ?>
+					<div itemprop="description"><?php the_content(); ?></div>
 		<?php else : ?>
 					<iframe width="1" height="1" frameborder="0" src="<?php echo wp_get_attachment_url( $attachment_id ); ?>"></iframe>
 		<?php endif; ?>
@@ -84,11 +87,11 @@ get_header();
 		<?php if('video' == get_post_type()) : ?>
 				<?php the_excerpt(); ?>
 					<div class="video-wrapper"><iframe class="post-video" width="596" height="335" src="http://www.youtube.com/embed/<?php echo $video_content; ?>?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe></div>
-				<?php the_content(); ?>
+					<div itemprop="description"><?php the_content(); ?></div>
 		<?php elseif('post' == get_post_type() || 'presskits' == get_post_type()) : ?>
-					<?php the_content(); ?>
+					<div itemprop="description"><?php the_content(); ?></div>
 		<?php else : ?>
-					<?php the_content(); ?>
+					<div itemprop="description"><?php the_content(); ?></div>
 		<?php if(!$gated_content && $posted) : ?>
 					<iframe width="1" height="1" src="<?php echo wp_get_attachment_url( $attachment_id ); ?>" style='display:none;'></iframe>
 		<?php else : ?>
@@ -101,20 +104,58 @@ get_header();
 		<?php endif; // if video  ?>
 <?php } // end if gated ?>
 	</div><!-- /.eight-col -->
-	<?php // get_template_part("library/includes/_subscribe"); ?>
 </div><!-- /.twelve-col -->
-<div class="eight-col instapaper_ignore">
-<?php get_template_part("library/includes/_related_posts"); ?>
-</div>
+
+<div class="instapaper_ignore">
+<?php //get_template_part("includes/_subscribe"); ?>
+<?php get_template_part("includes/_related_posts"); ?>
+</div><!-- /.instapaper_ignore -->
 <?php endwhile; // while have_posts ends ?> 
 <?php endif; // if have_posts ends ?> 
-	<div class="eight-col<?php $tags = wp_get_post_tags($post->ID); if ($tags) { echo ' has-related'; } ?>">
-		<?php // comments_template(); ?> 
-	</div><!-- /.eight-col -->
 
-<div class="row four-col last-col no-border">
-<?php get_template_part("library/includes/_business_card"); ?>
-</div>
+<?php /*
+<div class="four-col<?php $tags = wp_get_post_tags($post->ID); if ($tags) { echo ' has-related'; } ?>">
+	<?php // comments_template(); ?> 
+</div><!-- /.four-col -->
+*/ ?>
+
+<?php
+wp_reset_query();
+global $wpdb;
+global $posted;
+$queried_object = get_queried_object();  
+$term_slug = $queried_object->slug; 
+$custom_taxterms = wp_get_object_terms( $post->ID, 'topic', array('fields' => 'ids') );
+
+  $args=array(
+    'post_type' => 'productbusinesscard',
+    'tax_query' => array(
+	    array(
+				'taxonomy' 	=> 'topic',
+				'field' 		=> 'id',
+				'terms'			=> $custom_taxterms
+	    )
+	),
+    'post_status' 			=> 'publish',
+    'posts_per_page' 		=> 1,
+    'order' 						=> 'ASC',
+    'orderby' 					=> 'date',
+    'caller_get_posts'	=> 1
+  );
+
+    $my_query = null;
+    $my_query = new WP_Query($args);
+    if( $my_query->have_posts() ) {
+      while ($my_query->have_posts()) : $my_query->the_post(); ?>
+      <?php echo $title; ?>
+			<div class="row product-business-card no-border<?php if( is_single() ) : echo ' box box-highlight'; endif; ?>">
+				<div class="clearfix">
+					<h2<?php if( ! is_single() ) : echo ' class="accessibility-aid"'; endif; ?>><span>What is&hellip;</span><?php the_title(); ?></h2>
+					<?php the_content(); ?>
+				</div>
+			</div>
+        
+<?php endwhile; } wp_reset_query(); ?>
 
 </div><!-- /.row --> 
 
