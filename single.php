@@ -32,7 +32,7 @@ get_header();
 	global $wpdb;
 	global $posted;
 	$attachment_id = $wpdb->get_var("SELECT ID FROM $wpdb->posts WHERE post_parent = '$post->ID' AND post_status = 'inherit' AND post_type='attachment' ORDER BY post_date DESC LIMIT 1");
-	$articlecat = $category = get_the_category()->category_nicename;
+	$articlecat = $category = get_the_category()->category_nicename; 
 ?>
 
 <div class="row no-border">
@@ -90,16 +90,21 @@ get_header();
 					<div itemprop="description"><?php the_content(); ?></div>
 		<?php elseif('post' == get_post_type() || 'presskits' == get_post_type()) : ?>
 					<div itemprop="description"><?php the_content(); ?></div>
+						<?php $attachments = get_children( array('post_parent' => get_the_ID(), 'post_type' => 'attachment') );
+							if ( $attachments ) : ?>
+					<div id="download-item">
+						<p><a class="link-cta-ubuntu" href="<?php echo wp_get_attachment_url( $attachment_id ); ?>?utm_source=<?php the_title(); ?>&amp;utm_medium=download+link&amp;utm_content=<?php echo $post_type->labels->title_friendly, ''; ?>">Download <?php echo $post_type->labels->title_friendly, ''; ?></a></p>
+					</div><?php endif ; // end if ( $attachments ) ?>
 		<?php else : ?>
 					<div itemprop="description"><?php the_content(); ?></div>
 		<?php if(!$gated_content && $posted) : ?>
 					<iframe width="1" height="1" src="<?php echo wp_get_attachment_url( $attachment_id ); ?>" style='display:none;'></iframe>
 		<?php else : ?>
 						<?php $attachments = get_children( array('post_parent' => get_the_ID(), 'post_type' => 'attachment') );
-							if ( $attachments ) { ?>
+							if ( $attachments ) : ?>
 					<div id="download-item">
-						<p><a class="link-cta-ubuntu" href="<?php echo wp_get_attachment_url( $attachment_id ); ?>?utm_source=<?php the_title(); ?>&amp;utm_medium=download+link&amp;utm_content=<?php echo $post_type->labels->title_friendly, ''; ?>">Download <?php echo $post_type->labels->title_friendly, ''; ?></a></p>
-					</div><?php } // end if ( $attachments ) ?>
+						<p><a class="link-cta-ubuntu" href="<?php echo wp_get_attachment_url( $attachment_id ); ?>?utm_source=<?php the_title(); ?>&amp;utm_medium=download+link&amp;utm_content=<?php echo $post_type->labels->title_friendly, ''; ?>">Download <?php single_cat_title(); ?></a></p>
+					</div><?php endif ; // end if ( $attachments ) ?>
 		<?php endif; ?>
 		<?php endif; // if video  ?>
 <?php } // end if gated ?>

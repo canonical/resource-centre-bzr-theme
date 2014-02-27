@@ -167,7 +167,7 @@ wp_reset_query();
  
 <?php if (have_posts()) : ?> 
 	<li class="row">
-		<h2>Ubuntu on phones</h2>
+		<h2>Phone</h2>
 		<ul class="no-bullets phone-articles">
 <?php 
 	while( $query->have_posts() ): 
@@ -197,7 +197,7 @@ wp_reset_query();
 ?>
  
 <?php if (have_posts()) : ?> 
-		<h2>Ubuntu on tablets</h2>
+		<h2>Tablet</h2>
 		<ul class="no-bullets">
 <?php 
 	while( $query->have_posts() ): 

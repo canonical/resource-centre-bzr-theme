@@ -103,7 +103,7 @@ get_header();
 <?php } // end if gated ?>
 	</div><!-- /.eight-col -->
 </div><!-- /.twelve-col -->
-<div class="eight-col instapaper_ignore">
+<div class="instapaper_ignore">
 <?php //get_template_part("includes/_subscribe"); ?>
 <?php get_template_part("includes/_related_posts"); ?>
 </div>

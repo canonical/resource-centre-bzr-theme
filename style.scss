@@ -604,6 +604,11 @@ footer.global .legal {
 	padding: 10px;
 }
 
+footer.global .legal.has-cookie { 
+	/* if the cookie message is being displayed add padding so the legal links are still visible */
+	padding-bottom: 80px;
+}
+
 .inner-wrapper {
 	background: none;
 	  -moz-box-shadow: none;
@@ -1419,6 +1424,10 @@ img.attachment-medium { margin-bottom: 1.25em; }
 
 .product-business-card {
 	margin-top: 20px;
+	
+	h2 span {
+		display: block;
+	}
 	
 	img {
 		margin-top: 0;
@@ -2494,6 +2503,8 @@ body.single .eight-col .image-wrap img {
 }
 
 .event-map img {
+	height: 78px;
+	width: 78px;
 }
 
 .event-details {

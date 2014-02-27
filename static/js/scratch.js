@@ -218,7 +218,7 @@ core.businessCard = function() {
 	});
 };*/
 
-core.startCarousel = function() {
+/*core.startCarousel = function() {
 	var carousel = new Y.Carousel({ 
 		boundingBox: "#carousel-container",
 		contentBox: "#carousel-container > ul", 
@@ -237,7 +237,7 @@ core.startCarousel = function() {
 		}
 	});
 	carousel.render();
-}
+}*/
 
 core.resizeListener();
 core.cookiePolicy();

@@ -16,7 +16,6 @@ include("header.php");
 			$current =$category->cat_ID;
 			$current_name = $category->cat_name;
 		}
-		$allsearch = &new WP_Query("s=$s&showposts=-1"); 
 		$key = wp_specialchars($s, 1); 
 		$count = $wp_query->found_posts; _e('');
 		 _e(''); 
