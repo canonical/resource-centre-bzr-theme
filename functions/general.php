@@ -564,3 +564,23 @@ function get_category_id($cat_slug) {
 	$category = &get_category($cat_slug);
 	return $category->id;
 }
+
+// rewrite all the slugs to be structured by date
+function wpa37911_permastructs(){
+    global $wp_rewrite;
+    $wp_rewrite->extra_permastructs['category']['struct'] = '/category/%category%';
+    $wp_rewrite->extra_permastructs['post_tag']['struct'] = '/tag/%post_tag%';
+}
+add_action( 'init', 'wpa37911_permastructs' );
+
+// so we can show an image caption
+function the_post_thumbnail_caption() {
+  global $post;
+
+  $thumbnail_id    = get_post_thumbnail_id($post->ID);
+  $thumbnail_image = get_posts(array('p' => $thumbnail_id, 'post_type' => 'attachment'));
+
+  if ($thumbnail_image && isset($thumbnail_image[0])) {
+    echo '<p class="image-meta">'.$thumbnail_image[0]->post_excerpt.'</span>';
+  }
+}

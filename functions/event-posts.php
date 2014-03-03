@@ -137,7 +137,7 @@ function ept_event_location() {
 	wp_nonce_field( plugin_basename( __FILE__ ), 'ep_eventposts_nonce' );
 	// The metabox HTML
 	$event_location = get_post_meta( $post->ID, '_event_location', true );
-	echo '<label for="_event_location">Location:</label>';
+	echo '<label for="_event_location">Location: </label>';
 	echo '<input type="text" name="_event_location" value="' . $event_location  . '" required />';
 }
 
@@ -147,8 +147,8 @@ function ept_event_registration() {
 	wp_nonce_field( plugin_basename( __FILE__ ), 'ep_eventposts_nonce' );
 	// The metabox HTML
 	$event_registration = get_post_meta( $post->ID, '_event_registration', true );
-	echo '<label for="_event_registration">Registration URL:</label>';
-	echo '<input type="text" name="_event_registration" value="' . $event_registration  . '" />';
+	echo '<label for="_event_registration">Registration URL: </label>';
+	echo '<input type="text" name="_event_registration" value="' . $event_registration  . '" required />';
 }
 
 // Save the Metabox Data

@@ -22,7 +22,7 @@ get_header();
 	$ga_conversion = get_post_meta($post->ID, $field, TRUE);
 	$the_ga_code = $ga_conversion;
 	$key = 'postVideo';
-	$video_content = get_post_meta($post->ID, $key, TRUE); 
+	$video_content = get_post_meta($post->ID, $key, TRUE);
 	$lock = 'dbt_checkbox_gated';
 	$gated_content = get_post_meta($post->ID, $lock, TRUE);
 	$posted = $_GET['posted'];
@@ -33,10 +33,11 @@ get_header();
 	global $posted;
 	$attachment_id = $wpdb->get_var("SELECT ID FROM $wpdb->posts WHERE post_parent = '$post->ID' AND post_status = 'inherit' AND post_type='attachment' ORDER BY post_date DESC LIMIT 1");
 	$articlecat = $category = get_the_category()->category_nicename; 
+	$category = get_the_category();
+	$firstCategory = $category[0]->category_description;
 ?>
 
 <div class="row no-border">
-
 <?php if(($posted == $postdate . $postid)): ?>
 <div class="alert">
 	<p>Thank you!<?php if('video' == get_post_type()) : ?> Enjoy the video.<?php elseif('post' == get_post_type()) : ?> Enjoy the article. <?php else : ?> Your download should start automatically. If it doesn't, <a class="" href="<?php echo wp_get_attachment_url( $attachment_id ); ?>">download now</a>.<?php endif; ?></p>
@@ -55,7 +56,8 @@ get_header();
 	</div>
 	<div class="twelve-col no-margin-bottom">
 	<div class="no-margin-bottom">
-		<?php if(has_post_thumbnail()) { the_post_thumbnail('medium'); } ?>
+		<?php if(has_post_thumbnail()) : the_post_thumbnail('medium'); endif ; ?>
+		<?php if(the_post_thumbnail_caption()) : echo "<p>", the_post_thumbnail_caption(), "</p>"; endif ; ?>
 		<meta itemprop="image" content="<?php echo wp_get_attachment_thumb_url( get_post_thumbnail_id( $post->ID ) ); ?>" />
 			<?php if('post' != get_post_type() && $gated_content == 'on') { the_content(); } ?>
 			<?php if(($gated_content == 'on') && ($posted != $postdate . $postid)) { ?>
@@ -73,7 +75,7 @@ get_header();
 					
 <?php } elseif(($gated_content == 'on' && $posted == $postdate . $postid)) { // show this if is gated and the form has been posted ?>
 
-		<?php if('video' == get_post_type()) : ?>
+		<?php if ( get_post_meta($post->ID, 'postVideo', true) ) : ?>
 					<div class="video-wrapper"><iframe class="post-video" width="596" height="335" src="http://www.youtube.com/embed/<?php echo $video_content; ?>?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe></div>
 					<?php the_content(); ?>
 		<?php else : ?>
@@ -84,16 +86,15 @@ get_header();
 		<?php endif; ?>
 		<?php endif; // if video  ?>
 			<?php } else { // show this if the post is not gated ?>
-		<?php if('video' == get_post_type()) : ?>
-				<?php the_excerpt(); ?>
+		<?php if ( get_post_meta($post->ID, 'postVideo', true) ) : ?>
+				<?php if ( !empty( $post->post_excerpt ) ) :	the_excerpt(); else : false; endif; ?>
 					<div class="video-wrapper"><iframe class="post-video" width="596" height="335" src="http://www.youtube.com/embed/<?php echo $video_content; ?>?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe></div>
 					<div itemprop="description"><?php the_content(); ?></div>
 		<?php elseif('post' == get_post_type() || 'presskits' == get_post_type()) : ?>
 					<div itemprop="description"><?php the_content(); ?></div>
-						<?php $attachments = get_children( array('post_parent' => get_the_ID(), 'post_type' => 'attachment') );
-							if ( $attachments ) : ?>
+						<?php $attachments = get_children( array('post_parent' => get_the_ID(), 'post_type' => 'attachment') ); if ( $attachments ) : ?>
 					<div id="download-item">
-						<p><a class="link-cta-ubuntu" href="<?php echo wp_get_attachment_url( $attachment_id ); ?>?utm_source=<?php the_title(); ?>&amp;utm_medium=download+link&amp;utm_content=<?php echo $post_type->labels->title_friendly, ''; ?>">Download <?php echo $post_type->labels->title_friendly, ''; ?></a></p>
+						<p><a class="link-cta-ubuntu" href="<?php echo wp_get_attachment_url( $attachment_id ); ?>?utm_source=<?php the_title(); ?>&amp;utm_medium=download+link&amp;utm_content=<?php echo $post_type->labels->title_friendly, ''; ?>">Download <?php echo $firstCategory; ?></a></p>
 					</div><?php endif ; // end if ( $attachments ) ?>
 		<?php else : ?>
 					<div itemprop="description"><?php the_content(); ?></div>

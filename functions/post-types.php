@@ -33,6 +33,7 @@ function change_post_object_label() {
     add_action( 'admin_menu', 'edit_admin_menus' );
 // end change 'Posts' to 'Articles'
 
+/*
 // add case study post type
 add_action('init', 'post_type_casestudy');
 function post_type_casestudy() 
@@ -109,6 +110,7 @@ function post_type_ebook()
   register_post_type('ebook',$args);
 }
 // end add ebook post type
+*/
 
 // add events post type
 add_action('init', 'post_type_event');
@@ -218,7 +220,7 @@ function post_type_topiccta()
 }
 // end add topiccta post type
 
-
+/*
 // add press kit post type
 add_action('init', 'post_type_presskits');
 function post_type_presskits() 
@@ -291,6 +293,7 @@ function post_type_video()
  
 }
 // end add video post type
+*/
 
 // add webinar post type
 add_action('init', 'post_type_webinar');
@@ -329,6 +332,7 @@ function post_type_webinar()
 }
 // end add webinar post type
 
+/*
 // add white paper post type
 add_action('init', 'post_type_whitepaper');
 function post_type_whitepaper() 
@@ -365,4 +369,6 @@ function post_type_whitepaper()
   register_post_type('whitepaper',$args);
 }
 // end add whitepaper post type
+*/
+
 ?>

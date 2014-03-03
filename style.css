@@ -90,6 +90,12 @@ body { background: none; font-size: 14px; }
 
 .opera-mini .external:after, .no-svg .external:after { background-image: url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/external-link.png"); }
 
+a:link, a:visited { border: 1px solid transparent; text-decoration: none; }
+
+a:active, a:focus, a:hover { border-bottom: 1px solid #dd4814; }
+
+a:active img, a:focus img, a:hover img { border-bottom: 0; }
+
 /* welcome-message
 ----------------------------------------------------------------- */
 #welcome-message { color: #939393; position: relative; box-shadow: inset 0 -4px 4px -4px rgba(0, 0, 0, 0.3), inset 0 5px 5px -5px rgba(0, 0, 0, 0.3); margin-bottom: 0; padding-bottom: 30px; overflow: hidden; }
@@ -212,13 +218,15 @@ footer.global ul.inline li:last-child { width: 150px; }
 
 footer #nav-global { -o-box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; border-top: 0; margin: 0; border-bottom: 0; }
 
-footer #nav-global h2 { margin-bottom: -1px; }
+footer #nav-global div.active + .top-link { display: none; }
 
 #nav-global h2 span { background-position: 0 3px; }
 
 #nav-global h2.active span { background-position: 0 2px; }
 
-footer #nav-global div.active { margin-bottom: -3px; }
+#nav-global h2 { margin-bottom: -1px; }
+
+#nav-global h2.active { margin-bottom: 0; }
 
 footer #nav-global ul { margin-bottom: 0; }
 
@@ -226,9 +234,13 @@ footer #nav-global li { border-bottom: 0; }
 
 footer #nav-global li a { border-bottom: 0; }
 
-footer #nav-global .external:after { display: none; }
+#nav-global .external:after { display: none; }
 
 footer #nav-global li.more li a { font-size: 1.334em; }
+
+footer #nav-global a:hover, footer #nav-global li.more li a:hover { background: #f0f0f0; text-decoration: none; }
+
+footer #nav-global li.more { margin-bottom: -2px; }
 
 /* 
 ==Add back to larger screens
@@ -538,6 +550,8 @@ html.yes-js .home #main-content ul.post-cat { margin-left: 0; }
 
 .article-meta li a:hover { border-bottom-color: #ada79f; }
 
+.image-meta { font-style: italic; font-size: .857em; margin-top: -10px; }
+
 /* single article */
 h1 { line-height: 1.2; margin-bottom: .65em; }
 
@@ -761,6 +775,8 @@ body.author li:hover { background: none; }
 
 .open-message.active { background-image: url("static/img/icons/info.svg"); background-size: 22px 22px; height: 22px; width: 22px; top: -34px; right: 7px; }
 
+.toggle-message:hover { border-bottom: transparent; }
+
 .glossary-box .external:after { background-image: url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/external-link-orange.svg"); margin-left: 2px; }
 
 /* main nav
@@ -797,8 +813,8 @@ footer.global .top-link a:hover { border-bottom: 0; }
 .opera-mini footer.global .top-link a, .no-svg footer.global .top-link a { -o-background-size: 15px 15px; -webkit-background-size: 15px 15px; -moz-background-size: 15px 15px; background-size: 15px 15px; background-image: url("static/img/icons/icon-info.png"); background-position: 10px 50%; }
 
 /* This is the link that takes you from the main nav at the top down to the global nav at the bottom */
-#nav-global-wrapper-link { font-size: 16px; font-size: 1.23077em; -moz-box-shadow: inset 0 -4px 4px -4px rgba(0, 0, 0, 0.3); -webkit-box-shadow: inset 0 -4px 4px -4px rgba(0, 0, 0, 0.3); border-top: 2px solid #dd4814; box-shadow: inset 0 -4px 4px -4px rgba(0, 0, 0, 0.3); color: #333; display: block; float: left; margin-top: -1px; margin: 0; padding-bottom: 10px; width: 100%; }
-#nav-global-wrapper-link a { -o-box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; color: #333; display: block; margin-top: -2px; padding: 12px 24px 0 10px; position: relative; width: 100%; }
+#nav-global-wrapper-link { font-size: 16px; font-size: 1.23077em; -moz-box-shadow: inset 0 -4px 4px -4px rgba(0, 0, 0, 0.3); -webkit-box-shadow: inset 0 -4px 4px -4px rgba(0, 0, 0, 0.3); border-top: 2px solid #dd4814; box-shadow: inset 0 -4px 4px -4px rgba(0, 0, 0, 0.3); color: #333; display: block; float: left; margin: 0; margin-top: -1px; position: relative; padding-bottom: 10px; width: 100%; }
+#nav-global-wrapper-link a { -o-box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; color: #333; border-bottom: 0; display: block; margin-top: -2px; padding: 12px 24px 0 10px; position: relative; width: 100%; }
 
 /* end #nav-global-wrapper-link */
 header.global { border-bottom: 0; }
@@ -831,7 +847,7 @@ header.banner .nav-toggle { background-image: url("//assets.ubuntu.com/sites/ubu
 
 /* images
 ----------------------------------------------------------------- */
-.article-image img { width: 100%; height: auto; max-width: 320px; }
+.article-image img { width: 100%; height: auto; max-width: 360px; }
 
 li.row { clear: both; }
 
@@ -903,7 +919,7 @@ header.banner a#share-trigger:hover, header.banner a#share-trigger:active, heade
 
 #share div li:last-child { border-bottom: 0; padding-bottom: 9px; }
 
-#share div li a { -o-background-size: 30px 30px; -webkit-background-size: 30px 30px; -moz-background-size: 30px 30px; background-size: 30px 30px; -o-box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; background-position: 10px 50%; background-repeat: no-repeat; color: #f7f7f7; display: block; height: 26px; margin-bottom: 8px; margin-top: 6px; overflow: hidden; padding: 9px 0 9px 50px; text-align: center; text-indent: -999em; width: 46px; }
+#share div li a { -o-background-size: 30px 30px; -webkit-background-size: 30px 30px; -moz-background-size: 30px 30px; background-size: 30px 30px; -o-box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; background-position: 10px 50%; background-repeat: no-repeat; border-bottom: 0; color: #f7f7f7; display: block; height: 27px; margin-bottom: 8px; margin-top: 6px; overflow: hidden; padding: 9px 0 9px 50px; text-align: center; text-indent: -999em; width: 46px; }
 
 .no-js #share div li a, .opera-mini #share div li a { padding-bottom: 0; }
 
@@ -915,12 +931,14 @@ header.banner a#share-trigger:hover, header.banner a#share-trigger:active, heade
 
 #share div li a#share-email { background-image: url("static/img/gmail.svg"); }
 
+#share div li a:hover { border-bottom: 0; }
+
 .opera-mini #share div li a#share-facebook, .opera-mini #share div li a#share-twitter, .opera-mini #share div li a#share-googleplus, .opera-mini #share div li a#share-email, .no-svg #share div li a#share-facebook, .no-svg #share div li a#share-twitter, .no-svg #share div li a#share-googleplus, .no-svg #share div li a#share-email { -o-background-size: 35px 104px; -webkit-background-size: 35px 104px; -moz-background-size: 35px 104px; background-size: 35px 104px; background-image: url("static/img/image-sprite-share.png"); background-position: 50% 0; }
 .opera-mini #share div li a#share-twitter, .no-svg #share div li a#share-twitter { background-position: 50% -26px; }
 .opera-mini #share div li a#share-googleplus, .no-svg #share div li a#share-googleplus { background-position: 50% -52px; }
 .opera-mini #share div li a#share-email, .no-svg #share div li a#share-email { background-position: 50% -78px; }
 
-/**/
+/* squircle */
 .image-wrap { background-size: 78px 78px; position: relative; display: inline-block; max-width: 100%; vertical-align: middle; margin-bottom: 0; }
 
 .image-wrap img, body.single .eight-col .image-wrap img { vertical-align: bottom; height: 78px; width: 78px; }

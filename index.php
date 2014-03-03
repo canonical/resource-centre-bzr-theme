@@ -49,7 +49,6 @@ if(is_home() && !is_paged()) : ?>
 <?php endif; 
 /* ============== end pull in featured ============== */
 ?>
- 
 <?php
 /* ============== pull in latest events ============== */
 	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
@@ -59,7 +58,6 @@ if(is_home() && !is_paged()) : ?>
   'post__not_in' => $do_not_duplicate,
 	'paged'=>$paged
 	));
-	$do_not_duplicate[] = $post->ID
 ?>
 
 <?php if ( $query->have_posts() ) : ?> 
@@ -68,8 +66,8 @@ if(is_home() && !is_paged()) : ?>
 		<ul class="no-bullets">
 <?php 
 	while( $query->have_posts() ): 
-	$query->the_post(); 
-?>
+	$query->the_post();
+	$do_not_duplicate[] = $post->ID ?>
 
 	<li>
 		<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
@@ -95,7 +93,6 @@ wp_reset_query();
   'post__not_in' => $do_not_duplicate,
 	'paged'=>$paged
 	));
-	$do_not_duplicate[] = $post->ID
 ?>
 
  
@@ -105,7 +102,8 @@ wp_reset_query();
 		<ul class="no-bullets">
 <?php 
 	while( $query->have_posts() ): 
-	$query->the_post(); ?>
+	$query->the_post();
+	$do_not_duplicate[] = $post->ID ?>
 	
 	<?php get_template_part("content_home"); ?>	
 
@@ -129,7 +127,6 @@ wp_reset_query();
   'post__not_in' => $do_not_duplicate,
 	'paged'=>$paged
 	));
-	$do_not_duplicate[] = $post->ID
 ?>
  
 <?php if (have_posts()) : ?> 
@@ -138,7 +135,8 @@ wp_reset_query();
 		<ul class="no-bullets">
 <?php 
 	while( $query->have_posts() ): 
-	$query->the_post(); ?>
+	$query->the_post();
+	$do_not_duplicate[] = $post->ID ?>
 	
 	<?php get_template_part("content_home"); ?>	
 
@@ -162,7 +160,6 @@ wp_reset_query();
   'post__not_in' => $do_not_duplicate,
 	'paged'=>$paged
 	));
-	$do_not_duplicate[] = $post->ID
 ?>
  
 <?php if (have_posts()) : ?> 
@@ -171,7 +168,8 @@ wp_reset_query();
 		<ul class="no-bullets phone-articles">
 <?php 
 	while( $query->have_posts() ): 
-	$query->the_post(); ?>
+	$query->the_post(); 
+	$do_not_duplicate[] = $post->ID ?>
 	
 	<?php get_template_part("content_home"); ?>	
 
@@ -193,7 +191,6 @@ wp_reset_query();
   'post__not_in' => $do_not_duplicate,
 	'paged'=>$paged
 	));
-	$do_not_duplicate[] = $post->ID
 ?>
  
 <?php if (have_posts()) : ?> 
@@ -201,7 +198,8 @@ wp_reset_query();
 		<ul class="no-bullets">
 <?php 
 	while( $query->have_posts() ): 
-	$query->the_post(); ?>
+	$query->the_post();
+	$do_not_duplicate[] = $post->ID ?>
 	
 	<?php get_template_part("content_home"); ?>	
 
@@ -224,7 +222,6 @@ wp_reset_query();
   'post__not_in' => $do_not_duplicate,
 	'paged'=>$paged
 	));
-	$do_not_duplicate[] = $post->ID
 ?>
  
 <?php if (have_posts()) : ?> 
@@ -233,7 +230,8 @@ wp_reset_query();
 		<ul class="no-bullets">
 <?php 
 	while( $query->have_posts() ): 
-	$query->the_post(); ?>
+	$query->the_post();
+	$do_not_duplicate[] = $post->ID ?>
 	
 	<?php get_template_part("content_home"); ?>	
 
@@ -255,7 +253,7 @@ wp_reset_query();
 				$terms = get_terms( $taxonomy, '' );
 				if ($terms) {
 					foreach($terms as $term) {
-						if(($term->term_id) != "303") echo '<li>' . '<a href="' . $term->slug . '" ' . '>' . $term->name.'</a></li> ';
+						if(($term->slug) != "tv") echo '<li>' . '<a href="' . $term->slug . '" ' . '>' . $term->name.' (' . $term->count . ')</a></li> ';
 						//(' . $term->count . ')
 					}
 				} 
@@ -266,10 +264,7 @@ wp_reset_query();
 //$terms = get_terms_by_post_type('tag','','snippet','name');
 wp_reset_query();
 ?>
-	
-	
 <?php /* ============== end links to all topics ============== */ ?>
-
 </ul>
 <?php //get_template_part("includes/_pagination"); ?>
 </div><!-- /#articles -->

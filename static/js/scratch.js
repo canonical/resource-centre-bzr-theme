@@ -16,6 +16,7 @@ core.globalInit = function() {
 	if (document.documentElement.clientWidth < 768) {
 		core.globalPrepend = 'footer.global';
 		core.setupGlobalNav();
+		Y.one( "#main-nav" ).append('<p id="nav-global-wrapper-link"><a href="#nav-global" class="nav-trigger">Ubuntu websites</a></p>');	
 		Y.one('.nav-global-wrapper').insert('<h2>Ubuntu websites</h2>','before');
 			Y.one('#nav-global h2').setStyle('cursor', 'pointer').append('<span></span>').on('click',function(e) {
 				this.toggleClass('active');
@@ -34,6 +35,7 @@ core.redrawGlobal = function() {
 		if (globalNav) {
 			globalNav.remove();
 			core.setupGlobalNav();
+			Y.one( ".header-inner #main-nav" ).append('<p id="nav-global-wrapper-link"><a href="#nav-global" class="nav-trigger">Ubuntu websites</a></p>');	
 			Y.one('.nav-global-wrapper').insert('<h2>Ubuntu websites</h2>','before');
 			Y.one('#nav-global h2').setStyle('cursor', 'pointer').append('<span></span>').on('click',function(e) {
 				this.toggleClass('active');
@@ -42,6 +44,7 @@ core.redrawGlobal = function() {
 		}
 	} else if (document.documentElement.clientWidth >= 768 && core.globalPrepend != 'body') {
 		core.globalPrepend = 'body';
+		Y.one( "#nav-global-wrapper-link" ).remove();
 		if (globalNav) {
 			globalNav.remove();
 			core.setupGlobalNav();
@@ -108,8 +111,7 @@ core.cookiePolicy = function() {
 };
 
 core.setUpNav = function() {
-	
-	Y.one( "#main-nav" ).appendTo( ".header-inner" ).append('<p id="nav-global-wrapper-link"><a href="#nav-global" class="nav-trigger">Ubuntu websites</a></p>');
+	Y.one( "#main-nav" ).appendTo( ".header-inner" );	
 };
 
 core.mobileNav = function() {

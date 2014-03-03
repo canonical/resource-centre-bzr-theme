@@ -116,7 +116,7 @@ function mytheme_save_data($post_id) {
 add_action('admin_menu', 'insights_meta_boxes');
 function insights_meta_boxes() {
     if ( function_exists('add_meta_box') ) { 
-        add_meta_box('post_id', 'YouTube', 'custom_post_video', 'video', 'normal', 'high');
+        add_meta_box('post_id', 'YouTube', 'custom_post_video', 'post', 'normal', 'high');
         //add_meta_box('post_id', 'YouTube', 'custom_post_video', 'video', 'normal', 'high');
     }
 }
