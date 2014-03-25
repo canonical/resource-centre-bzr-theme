@@ -126,7 +126,7 @@ get_header();
 				<?php if('event' == get_post_type()) : ?>
 				<?php $event_timestamp = get_post_meta( $post->ID, '_start_eventtimestamp', true ); ?>
 					<?php // only show the register link if event not started
-						if($current_timestamp <= $event_timestamp) :  ?>
+						if($current_timestamp <= $event_timestamp && $registration) :  ?>
 					<div id="download-item">
 						<p><a itemprop="url" class="link-cta-ubuntu" href="<?php echo $registration; ?>">Register now</a></p>
 					</div>

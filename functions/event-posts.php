@@ -148,7 +148,7 @@ function ept_event_registration() {
 	// The metabox HTML
 	$event_registration = get_post_meta( $post->ID, '_event_registration', true );
 	echo '<label for="_event_registration">Registration URL: </label>';
-	echo '<input type="text" name="_event_registration" value="' . $event_registration  . '" required />';
+	echo '<input type="text" name="_event_registration" value="' . $event_registration  . '" />';
 }
 
 // Save the Metabox Data
