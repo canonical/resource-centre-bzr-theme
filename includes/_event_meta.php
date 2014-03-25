@@ -30,8 +30,9 @@
 					$end_minute = get_post_meta( $post->ID, '_end_minute', true );
 					$location = get_post_meta( $post->ID, '_event_location', true );
 					$registration = get_post_meta( $post->ID, '_event_registration', true );
-				?>
+				?>				
 				<div class="event-details-wrapper clearfix">
+					<?php if(! is_single() ) : ?><h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3><?php endif; ?>
 					<div class="event-map">
 					<?php if(has_post_thumbnail()) : ?>
 						<span class="image-wrap avatar" style="width: auto; height: auto;"><img class="avatar" src="<?php $src = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), array( 156,156 ), false, '' ); echo $src[0]; ?>" alt="" /></span>

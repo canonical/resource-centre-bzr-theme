@@ -16,8 +16,8 @@ if(is_admin()) {
 }  
 
 // add jquery
-function my_init() {
-	if (!is_admin()) {
+function jquery_init() {
+	if (!is_admin() && is_search() || is_category() ) {
 		wp_deregister_script('jquery');
 		wp_register_script('jquery', get_template_directory_uri() . '/static/js/jquery.min.js', false, '1.9.1', true);
 		wp_enqueue_script('jquery');
@@ -34,16 +34,8 @@ function my_init() {
 		    }
 	}
 }
-add_action('wp_footer', 'my_init');
+add_action('wp_footer', 'jquery_init');
 // end add jquery
-
-
-function add_brighttalk() {
-	if (is_page('webinars')) {
-		echo '';
-	}
-}
-add_action( 'wp_footer', 'add_brighttalk' );
 
 // add google plus and marketo for single only (atm)
 function wpse53364() {

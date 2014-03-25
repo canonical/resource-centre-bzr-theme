@@ -1,4 +1,5 @@
-	<div class="single-post-cats">
+<div class="row single-post-cats">
+	<div class="inner-wrapper">
 		<h2 class="accessibility-aid">Posted under:</h2>
 			<?php if(is_single() ) : ?>
 				<ul class="no-bullets clearfix inline smaller">
@@ -14,3 +15,4 @@
 				<?php $term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) ); ?> <span><?php single_cat_title(); ?></span>
 			<?php endif; ?>
 	</div>
+</div>

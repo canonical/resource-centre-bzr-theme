@@ -23,10 +23,12 @@ if ( !defined('ABSPATH')) exit;
 <?php get_template_part("includes/_share_links"); ?>
 <?php get_template_part("includes/_site_nav"); ?>
 
+</div><!-- /.site-wrapper -->
+
 <footer class="global clearfix" role="contentinfo">
 	<p class="top-link"><a href="#resources.ubuntu.com">Back to the top</a></p>
 	<div class="legal clearfix">
-		<p>&copy; <?php echo date('Y'); ?> Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://canonical.com">Canonical Ltd</a></p> 
+		<p>&copy; <?php echo date('Y'); ?> Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://canonical.com" title="Visit the Canonical website">Canonical Ltd</a></p> 
 		<ul class="no-bullets inline">
 			<li><a href="http://ubunt.eu/resources-feedback">Feedback</a></li>
 			<li><a href="http://www.ubuntu.com/legal">Legal information</a></li>
@@ -46,18 +48,27 @@ if ( !defined('ABSPATH')) exit;
 	}
 </script>
 
+<?php /*<script>
+	var size = window.getComputedStyle(document.body,':after').getPropertyValue('content');
+	if (size.indexOf("medium") !=-1) {
+	    console.log(size);
+	} else {
+	    console.log('not');
+	}
+</script> */ ?>
+
 <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/plugins/yui-min.js"></script>
 <script>
 	if(!core){ var core = {}; }
 	core.globalPrepend = 'body';
 </script>
 <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/core.js"></script>
+<?php if(is_category() || is_search()) : ?>
 <script src="<?php bloginfo('template_directory'); ?>/static/js/core.js"></script>
-<script src="<?php bloginfo('template_directory'); ?>/static/js/scratch.js"></script>
+<?php endif ; ?>
+<script src="<?php bloginfo('template_directory'); ?>/static/js/scratch.min.js"></script>
 <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/global.js"></script>
 <script src="<?php bloginfo('template_directory'); ?>/static/js/plugins/respond.min.js"></script>
-
-</div><!-- /.site-wrapper -->
 
 </body>
 </html>

@@ -34,13 +34,17 @@ get_header();
 	$attachment_id = $wpdb->get_var("SELECT ID FROM $wpdb->posts WHERE post_parent = '$post->ID' AND post_status = 'inherit' AND post_type='attachment' ORDER BY post_date DESC LIMIT 1");
 	$articlecat = $category = get_the_category()->category_nicename; 
 	$category = get_the_category();
+	$category = $category[0]->category_nicename;
 	$firstCategory = $category[0]->category_description;
+	$registration = get_post_meta( $post->ID, '_event_registration', true );
 ?>
+
+<?php get_template_part("includes/_cat_headings"); ?>
 
 <div class="row no-border">
 <?php if(($posted == $postdate . $postid)): ?>
 <div class="alert">
-	<p>Thank you!<?php if('video' == get_post_type()) : ?> Enjoy the video.<?php elseif('post' == get_post_type()) : ?> Enjoy the article. <?php else : ?> Your download should start automatically. If it doesn't, <a class="" href="<?php echo wp_get_attachment_url( $attachment_id ); ?>">download now</a>.<?php endif; ?></p>
+	<p>Thank you! <?php if('post' == get_post_type()) : ?> Enjoy the article. <?php else : ?> Your download should start automatically. If it doesn't, <a class="" href="<?php echo wp_get_attachment_url( $attachment_id ); ?>">download now</a>.<?php endif; ?></p>
 </div><!-- /.alert -->
 <?php endif; // end if(($posted == $postdate . $postid)) ?>
 
@@ -48,17 +52,27 @@ get_header();
 		<?php while (have_posts()) : the_post(); ?>
 		<?php if(!current_user_can('administrator')){ echo setPostViews(get_the_ID()); } ?>
 		
+<div class="inner-wrapper">
 	<div class="twelve-col no-margin-bottom">
-			<?php get_template_part("includes/_cat_headings"); ?>
-
-		<h1 itemprop="name"><?php the_title(); ?></h1>
-		<?php get_template_part("includes/_post_meta"); ?>
-	</div>
-	<div class="twelve-col no-margin-bottom">
-	<div class="no-margin-bottom">
-		<?php if(has_post_thumbnail()) : the_post_thumbnail('medium'); endif ; ?>
+		<h1 class="eight-col" itemprop="name"><?php the_title(); ?></h1>
+	<div class="content eight-col no-margin-bottom">
+		<?php if ($category == 'events') : ?>
+			<?php get_template_part("/includes/_event_meta"); ?>
+		<?php else : ?>
+			<?php get_template_part("includes/_post_meta"); ?>
+			<!-- <p><?php //post_read_time(); ?></p> -->
+		<?php endif ; ?>
+		<?php if(has_post_thumbnail()) : ?>
+		<div itemprop="image" class="article-image">
+		<?php if ( isMobilePhone() ) : ?>
+			<?php the_post_thumbnail('small'); ?>
+		<?php else : ?>
+		<?php if ($category == 'events') : else : ?>
+			<?php the_post_thumbnail('large'); ?>
+		<?php endif ; endif ; ?>
+		</div><!-- /.article-image -->
+		<?php endif ; ?>
 		<?php if(the_post_thumbnail_caption()) : echo "<p>", the_post_thumbnail_caption(), "</p>"; endif ; ?>
-		<meta itemprop="image" content="<?php echo wp_get_attachment_thumb_url( get_post_thumbnail_id( $post->ID ) ); ?>" />
 			<?php if('post' != get_post_type() && $gated_content == 'on') { the_content(); } ?>
 			<?php if(($gated_content == 'on') && ($posted != $postdate . $postid)) { ?>
 					<?php if($posted == $postdate . $postid ) { // check if the form has been posted ?>
@@ -92,10 +106,10 @@ get_header();
 					<div itemprop="description"><?php the_content(); ?></div>
 		<?php elseif('post' == get_post_type() || 'presskits' == get_post_type()) : ?>
 					<div itemprop="description"><?php the_content(); ?></div>
-						<?php $attachments = get_children( array('post_parent' => get_the_ID(), 'post_type' => 'attachment') ); if ( $attachments ) : ?>
+						<?php $attachments = get_children( array('post_parent' => get_the_ID(), 'post_type' => 'attachment') ); if ( $attachments ) : if (! wp_attachment_is_image($attachment_id) ) : ?>
 					<div id="download-item">
 						<p><a class="link-cta-ubuntu" href="<?php echo wp_get_attachment_url( $attachment_id ); ?>?utm_source=<?php the_title(); ?>&amp;utm_medium=download+link&amp;utm_content=<?php echo $post_type->labels->title_friendly, ''; ?>">Download <?php echo $firstCategory; ?></a></p>
-					</div><?php endif ; // end if ( $attachments ) ?>
+					</div><?php endif; endif; // end if ( $attachments ) ?>
 		<?php else : ?>
 					<div itemprop="description"><?php the_content(); ?></div>
 		<?php if(!$gated_content && $posted) : ?>
@@ -109,13 +123,21 @@ get_header();
 		<?php endif; ?>
 		<?php endif; // if video  ?>
 <?php } // end if gated ?>
-	</div><!-- /.eight-col -->
-</div><!-- /.twelve-col -->
+				<?php if('event' == get_post_type()) : ?>
+				<?php $event_timestamp = get_post_meta( $post->ID, '_start_eventtimestamp', true ); ?>
+					<?php // only show the register link if event not started
+						if($current_timestamp <= $event_timestamp) :  ?>
+					<div id="download-item">
+						<p><a itemprop="url" class="link-cta-ubuntu" href="<?php echo $registration; ?>">Register now</a></p>
+					</div>
+					<?php endif; ?>
+				<?php endif; // if event ?>
 
-<div class="instapaper_ignore">
+	</div><!-- /.eight-col -->
+
+<div class="four-col last-col instapaper_ignore">
 <?php //get_template_part("includes/_subscribe"); ?>
 <?php get_template_part("includes/_related_posts"); ?>
-</div><!-- /.instapaper_ignore -->
 <?php endwhile; // while have_posts ends ?> 
 <?php endif; // if have_posts ends ?> 
 
@@ -154,7 +176,7 @@ $custom_taxterms = wp_get_object_terms( $post->ID, 'topic', array('fields' => 'i
     if( $my_query->have_posts() ) {
       while ($my_query->have_posts()) : $my_query->the_post(); ?>
       <?php echo $title; ?>
-			<div class="row product-business-card no-border<?php if( is_single() ) : echo ' box box-highlight'; endif; ?>">
+			<div class="four-col product-business-card no-border box box-highlight">
 				<div class="clearfix">
 					<h2<?php if( ! is_single() ) : echo ' class="accessibility-aid"'; endif; ?>><span>What is&hellip;</span><?php the_title(); ?></h2>
 					<?php the_content(); ?>
@@ -162,7 +184,9 @@ $custom_taxterms = wp_get_object_terms( $post->ID, 'topic', array('fields' => 'i
 			</div>
         
 <?php endwhile; } wp_reset_query(); ?>
-
+</div><!-- /.instapaper_ignore -->
+</div><!-- /.twelve-col -->
+</div><!-- /.inner-wrapper -->
 </div><!-- /.row --> 
 
 <?php get_footer(); ?>

@@ -1,5 +1,5 @@
-<div id="welcome-message" class="off-left">
-	<div class="welcome-message-inner">
+<div id="welcome-message" class="row off-left no-border">
+	<div class="welcome-message-inner inner-wrapper">
 		<h1>Welcome to the beta release of the Ubuntu Resources website.</h1>
 		<h3>Discover resources by topic:</h3>
 		<!-- <div id="carousel-container"> -->

@@ -5,31 +5,105 @@
  */
 $key = wp_specialchars($s, 1); 
 $search_title = ('Search results for "' . $key . '"');
+if (isset($_GET['termlist']) && is_array($_GET['termlist']) OR isset($_GET['topiclist']) && is_array($_GET['topiclist'])) : $hasFilter = '1'; endif;
 include("header.php");
 ?>
-<div class="row no-border">
-	<h1>Your search results for "<?php 
-		/* Search Count */ 
-		global $post;
-		if( is_category() ){
-			$category = end(get_the_category());
-			$current =$category->cat_ID;
-			$current_name = $category->cat_name;
-		}
-		$key = wp_specialchars($s, 1); 
-		$count = $wp_query->found_posts; _e('');
-		 _e(''); 
-		 echo $key; _e(' ');
-		 echo strtolower($current_name); 
-	?>"
-	</h1>
-	<h2>We've found 
-		<?php echo $wp_query->found_posts; ?>
-		<?php echo _n( 'article', 'articles', $count, 'ubuntu-resources' ); ?>.
-	</h2>
-</div><!-- /.row -->
-<div class="no-margin-bottom">
+<div class="row row-hero no-border<?php if ($hasFilter) : ?> has-filter-wrap<?php else : ?> no-filter-wrap<?php endif; ?>">
+	<div class="inner-wrapper">
+		<h1>We've found <?php echo $wp_query->found_posts; ?> <?php echo _n( 'result', 'results', $count, 'ubuntu-resources' ); ?> for "<?php /* Search Count */ 
+			global $post;
+			if( is_category() ){
+				$category = end(get_the_category());
+				$current =$category->cat_ID;
+				$current_name = $category->cat_name;
+			}
+			if( is_tax() ){
+				$term = end(get_the_terms($post->ID, 'topic'));
+				$current_term =$term->cat_ID;
+				$current_term_name = $term->name;
+			}
+			$key = wp_specialchars($s, 1); 
+			$count = $wp_query->found_posts; _e('');
+			 _e(''); 
+			 echo $key; _e('');
+			 if ( $current_name ) {
+				 //echo '&nbsp;';
+				 //echo strtolower($current_name); 
+			 }
+		?>&nbsp;"<?php if ( $count == "0") : echo ', try a different search?'; endif; ?>
+		</h1>
+		
+<?php //dynamic_sidebar( 'search-sidebar' ); ?>	
+<?php //echo do_shortcode("[ULWPQSF id=6153]"); ?>
 
+<form id="search-form" method="get" action="<?php bloginfo('url'); ?>">
+<input type="search" name="s" value="<?php echo wp_specialchars($s, 1); ?>" placeholder="search&hellip;" maxlength="50" required="required" />
+
+<div class="search-filter<?php if ( $count == "0") : echo ' no-results'; endif; ?>">
+<h2>Filter your search results</h2>
+<div class="search-inner <?php if ($hasFilter) : ?> has-filter<?php endif; ?>">
+	<fieldset class="four-col">
+	<h3>By topic</h3>
+	<ul class="no-bullets search-filters">
+	<?php
+	// generate list of topics
+	$exclude = get_cat_id('TV');
+	$post_ancestors = ($post->ancestors) ? $post->ancestors : array();
+	$gb = ($_GET['topiclist']);
+	$terms = wp_get_post_terms( $post->ID, 'wedding_cat');
+	$topics = get_terms('topic',array( 'taxonomy' => 'topic', 'exclude' => $exclude, 'hide_empty' => 1 ));
+	foreach ($topics as $topic) :
+	  echo
+			'<li><label>',
+			'<input type="checkbox" name="topiclist[]" value="',  $topic->slug, '"   '?>
+			<?php if (isset($_GET['topiclist']) && is_array($_GET['topiclist'])) : ?>
+			<?php	if (in_array($topic->slug, $gb)) { echo ' checked'; } ?>
+			<?php endif ; ?>
+			<?php echo '/>' ?>
+			<?php echo $topic->name; '</label></li>' ?>
+	<?php endforeach;
+	?>
+	</ul>
+	</fieldset>
+	
+	<fieldset class="four-col last-col">
+	<h3>By type</h3>
+	<ul class="no-bullets search-filters">
+	<?php
+	// generate list of types
+	$exclude = get_cat_id('Product business card');
+	$o = '';
+	$o = ($_GET['termlist']);
+	$cats = get_categories(array('exclude' => $exclude, 'taxonomy' => 'category', 'hide_empty' => 1, 'hierarchical' => 0, 'parent' => 0));
+	//echo '<li><label><input type="checkbox" value="0" id="SelectAll">Select all</label></li>';
+	foreach ($cats as $cat) :
+	  echo
+			'<li><label>',
+			'<input type="checkbox" name="termlist[]" value="',  $cat->slug, '"   '?>
+			<?php if (isset($_GET['termlist']) && is_array($_GET['termlist'])) : ?>
+			<?php	if (in_array($cat->slug, $o)) { echo ' checked'; } ?>
+			<?php endif ; ?>
+			<?php echo '/>' ?>
+			<?php echo $cat->name; '</label></li>' ?>
+		 
+	<?php endforeach;
+	?>
+	</ul>
+	</fieldset>
+</div>
+
+<fieldset class="twelve-col">
+<button class="search-submit" type="submit">Update results</button>
+<?php if ($hasFilter) : ?><a href="<?php bloginfo('url'); ?>?s=<?php echo wp_specialchars($s, 1); ?>">Remove filters</a><?php endif; ?>
+<!-- <button type="submit">Reset</button> -->
+</fieldset>
+</div>
+</form>
+
+</div><!-- /.inner-wrapper --> 
+</div><!-- /.row -->
+
+<div class="no-margin-bottom">
 	<?php if (have_posts()) : ?>
 	<ul class="article-list infinitescroll no-bullets">
 		<?php while (have_posts()) : the_post(); ?>
@@ -38,106 +112,26 @@ include("header.php");
 <?php $excerpt = get_the_excerpt(); $keys= explode(" ",$s); $excerpt = preg_replace('/('.implode('|', $keys) .')/iu', '<strong class="search-term">\0</strong>', $excerpt); ?>
 <?php endif; ?>				
 					<li class="row article"> 
-					<h3><a href="<?php the_permalink() ?>"><?php if ( is_search() ) : echo $title; else : echo  the_title(); endif; ?></a></h3>
+					<div class="inner-wrapper">
+					<div class="eight-col no-margin-bottom">
 			<?php if('event' == get_post_type()) : ?>
 				<?php get_template_part("/includes/_event_meta"); ?>
-			<?php endif; // event ?>
+			<?php else : ?>
+					<h3><a href="<?php the_permalink() ?>"><?php if ( is_search() ) : echo $title; else : echo  the_title(); endif; ?></a></h3>
 					<?php if(has_post_thumbnail()) : ?>
 						<p><?php if ( is_search() ) : echo wp_trim_words($excerpt, 40); else : echo wp_trim_words(the_excerpt(), 40); endif; ?></p>
 					<?php else : ?>
 						<p><?php if ( is_search() ) : echo wp_trim_words($excerpt , 40); else : echo the_excerpt(), 40; endif; ?></p>
 					<?php endif; ?>
 						<?php get_template_part("includes/_article_meta"); ?>
-											</li>		
+			<?php endif; // event ?>
+					</div>
+						</div>
+						</li>		
 					<?php endwhile; ?>
 		</ul>
 	<?php get_template_part("includes/_pagination"); ?>
 </div>
-	<?php else : ?>
-
-	<div class="row">
-		<h2>No posts found. Try a different search?</h2>
-		<?php get_search_form(); ?>
-	</div>
 	<?php endif; // end have_posts ?>
-<!-- <div class="aside three-col last-col">
-	
-<?php
-wp_reset_query();
-$taxonomiese[] = array(
-	'name'      => 'topic',
-	'query_var' => 'topic',
-	'heading'   => __( 'Filter by topic' ),
-); ?>
-<?php foreach ( $taxonomiese as $tax ): ?>
-	<?php $current_term = get_query_var( $tax['query_var'] ); ?>
-<aside class="search-filter">
-<header class="head">
-	<h3><?php echo esc_html( $tax['heading'] ); ?></h3>
-</header>
-<div class="content">
-<ul class="blogroll">
-	<li>
-	<?php if (! isset( $_GET[$tax['query_var']] ) ): ?>
-	<strong>All</strong>
-	<?php else : ?>
-	<a href="<?php echo esc_url( remove_query_arg( $tax['query_var'] ) ) ?>">All</a>
-	<?php endif; ?>
-	</li>
-	<?php foreach( get_terms( $tax['name'] ) as $term ): ?>
-	<?php $tax_shortcut = $tax['query_var'] ?>
-	<?php $term_shortcut = $term->slug ?>
-	<li>
-	<?php if ( $current_term == $term->slug ): ?>
-	<strong><?php echo esc_html( $term->name ) ?></strong>
-	<?php else : ?>
-	<a href="<?php echo esc_url( add_query_arg( $tax_shortcut, $term_shortcut ) ) ?>"><?php echo esc_html( $term->name ) ?></a>
-	<?php endif; ?>
-	</li>
-	<?php endforeach; ?>
-</ul>
-</div>
-</aside>
-<?php endforeach ?>
-<?php wp_reset_query(); ?>
-
-<?php
-wp_reset_query();
-$taxonomies[] = array(
-	'name'      => 'category',
-	'query_var' => 'cat',
-	'heading'   => __( 'Filter by type' ),
-); ?>
-<?php foreach ( $taxonomies as $tax ): ?>
-	<?php $current_term = get_query_var( $tax['query_var'] ); ?>
-<aside class="search-filter">
-<header class="head">
-	<h3><?php echo esc_html( $tax['heading'] ); ?></h3>
-</header>
-<div class="content">
-<ul class="blogroll">
-	<li>
-	<?php if (! isset( $_GET[$tax['query_var']] ) ): ?>
-	<strong>All</strong>
-	<?php else : ?>
-	<a href="<?php echo esc_url( remove_query_arg( $tax['query_var'] ) ) ?>">All</a>
-	<?php endif; ?>
-	</li>
-	<?php foreach( get_terms( $tax['name'] ) as $term ): ?>
-	<?php $tax_shortcut = $tax['query_var'] ?>
-	<?php $term_shortcut = $term->term_id ?>
-	<li>
-	<?php if ( $current_term == $term->slug ): ?>
-	<strong><?php echo esc_html( $term->name ) ?></strong>
-	<?php else : ?>
-	<a href="<?php echo esc_url( add_query_arg( $tax_shortcut, $term_shortcut ) ) ?>"><?php echo esc_html( $term->name ) ?></a>
-	<?php endif; ?>
-	</li>
-	<?php endforeach; ?>
-</ul>
-</div>
-</div>
-</aside>
-<?php endforeach ?>-->
 	
 <?php get_footer(); ?>

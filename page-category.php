@@ -27,9 +27,9 @@ if ( !defined('ABSPATH')) exit;
 	$post = $wp_query->get_queried_object();
 	$current_cat = basename(get_permalink());
 ?>
-<div class="no-border">
-	<h1 class="cat-title cat-page-title row no-border"><?php wp_title(''); ?></h1>
-<div class="no-margin-bottom">
+<div class="row row-hero cat-page-title no-border">
+	<h1 class="cat-title inner-wrapper no-border"><?php wp_title(''); ?></h1>
+</div>
 
 <?php
 /* ============== pull in featured ============== */
@@ -44,18 +44,24 @@ if ( !defined('ABSPATH')) exit;
 ?>
 <?php if ($query->have_posts()) : ?>
 	<div class="row featured-article">
-		<h2>Editor's pick</h2>
-		<ul class="no-bullets">
-<?php 
-	while( $query->have_posts() ): 
-	$query->the_post(); 
-	$do_not_duplicate[] = $post->ID ?>
- 
-	<?php get_template_part("content_home"); ?>	
-<?php endwhile; ?>
-		</ul>
-	</div>
-
+		<div class="inner-wrapper">
+			<div class="eight-col no-margin-bottom">
+				<h2>Editor's pick</h2>
+				<ul class="no-bullets">
+				<?php 
+					while( $query->have_posts() ): 
+					$query->the_post(); 
+					$do_not_duplicate[] = $post->ID ?>
+					<?php if ('event' == get_post_type()) : ?>
+						<?php get_template_part("includes/_event_meta"); ?>
+					<?php else : ?>
+						<?php get_template_part("content_home"); ?>	
+					<?php endif ; ?>
+				<?php endwhile; ?>
+				</ul>
+			</div><!-- /.eight-col -->
+		</div><!-- /.inner-wrapper -->
+	</div><!-- /.row -->
 <?php else : ?>	
 <?php 
 // The Query
@@ -67,23 +73,27 @@ if ( !defined('ABSPATH')) exit;
 	));
 ?>
 	<div class="row featured-article">
-		<ul class="no-bullets">
-<?php 
-	while( $new_query->have_posts() ): 
-	$new_query->the_post(); 
-	$do_not_duplicate[] = $post->ID
-?>
-	<?php get_template_part("content_home"); ?>	
-		
-<?php endwhile; wp_reset_postdata(); ?>
-			</ul>
-	</div>
+		<div class="inner-wrapper">
+			<div class="eight-col no-margin-bottom">
+				<ul class="no-bullets">
+				<?php 
+					while( $new_query->have_posts() ): 
+					$new_query->the_post(); 
+					$do_not_duplicate[] = $post->ID
+				?>
+					<?php get_template_part("content_home"); ?>	
+						
+				<?php endwhile; wp_reset_postdata(); ?>
+					</ul>
+			</div><!-- /.eight-col -->
+		</div><!-- /.inner-wrapper -->
+	</div><!-- /.row -->
 
 <?php endif; // if have_posts ends 
 /* ============== end pull in featured ============== */
 ?>
 
-<ul class="article-list  no-bullets">
+<div class="article-list">
 <?php
 /* ============== pull in latest events ============== */
   wp_reset_query();
@@ -98,22 +108,23 @@ if ( !defined('ABSPATH')) exit;
 ?>
 
 <?php if ($query->have_posts()) : ?>
-	<li class="row<?php if ( is_page('events') ) : echo ' row-events-latest'; endif ; ?>">
-		<h2>Upcoming and recent events</h2>
-		<ul class="no-bullets">
-<?php 
-	while( $query->have_posts() ): 
-	$query->the_post(); 
-	$do_not_duplicate[] = $post->ID ?>
-
-	<li>
-		<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-		<?php get_template_part("/includes/_event_meta"); ?>
-	</li>
-
-<?php endwhile; ?>
-		</ul>
-	</li>
+<div class="row<?php if ( is_page('events') ) : echo ' row-events-latest'; endif ; ?>">
+	<div class="inner-wrapper">
+		<div class="eight-col no-margin-bottom">
+			<h2>Upcoming and recent events</h2>
+			<ul class="no-bullets">
+			<?php 
+				while( $query->have_posts() ): 
+				$query->the_post(); 
+				$do_not_duplicate[] = $post->ID ?>
+				<li>
+					<?php get_template_part("/includes/_event_meta"); ?>
+				</li>
+			<?php endwhile ; ?>
+			</ul>
+		</div><!-- /.eight-col -->
+	</div><!-- /.inner-wrapper -->
+</div><!-- /.row -->
 <?php endif; // if have_posts ends 
 
 /* ============== end pull in latest events ============== */
@@ -133,24 +144,26 @@ if ( !defined('ABSPATH')) exit;
 ?>
  
 <?php if ($query->have_posts()) : ?>
-	<li class="row">
-		<h2>Latest <?php echo strtolower(wp_title( '', false, 'right' )); ?></h2>
-		<ul class="no-bullets">
-<?php 
-	while( $query->have_posts() ): 
-	$query->the_post(); 
-	$do_not_duplicate[] = $post->ID ?>
-	
-	<?php if ( is_page('events') ) : ?>
-		<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-		<?php get_template_part("/includes/_event_meta"); ?>
-	<?php else : ?>
-		<?php get_template_part("content_home"); ?>	
-	<?php endif; ?>
-	
-<?php endwhile; ?>
-		</ul>
-	</li>
+<div class="row">
+	<div class="inner-wrapper">
+		<div class="eight-col no-margin-bottom">
+			<h2>Latest <?php echo strtolower(wp_title( '', false, 'right' )); ?></h2>
+			<ul class="no-bullets">
+			<?php 
+				while( $query->have_posts() ): 
+				$query->the_post(); 
+				$do_not_duplicate[] = $post->ID ?>
+				
+				<?php if ( is_page('events') ) : ?>
+					<?php get_template_part("/includes/_event_meta"); ?>
+				<?php else : ?>
+					<?php get_template_part("content_home"); ?>	
+				<?php endif; ?>
+			<?php endwhile; ?>
+			</ul>
+		</div><!-- /.eight-col -->
+	</div><!-- /.inner-wrapper -->
+</div><!-- /.row -->
 <?php endif; // if have_posts ends 
 
 /* ============== end pull in latest articles ============== */
@@ -170,27 +183,27 @@ if ( !defined('ABSPATH')) exit;
 	'paged'=>$paged
 	));
 ?>
-
  
 <?php if ($query->have_posts()) : ?>
-	<li class="row<?php if ( is_page('events') ) : echo ' row-events'; endif ; ?>">
-		<h2>Most viewed <span><?php echo strtolower(wp_title( '', false, 'right' )); ?></span></h2>
-		<ul class="no-bullets">
-<?php 
-	while( $query->have_posts() ): 
-	$query->the_post(); 
-	$do_not_duplicate[] = $post->ID ?>
-	
-	<?php if ( is_page('events') ) : ?>
-		<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-		<?php get_template_part("/includes/_event_meta"); ?>
-	<?php else : ?>
-		<?php get_template_part("content_home"); ?>	
-	<?php endif; ?>
-
-<?php endwhile; ?>
-		</ul>
-	</li>
+<div class="row<?php if ( is_page('events') ) : echo ' row-events'; endif ; ?>">
+	<div class="inner-wrapper">
+		<div class="eight-col no-margin-bottom">
+			<h2>Most viewed <span><?php echo strtolower(wp_title( '', false, 'right' )); ?></span></h2>
+			<ul class="no-bullets">
+			<?php 
+				while( $query->have_posts() ): 
+				$query->the_post(); 
+				$do_not_duplicate[] = $post->ID ?>
+				<?php if ( is_page('events') ) : ?>
+					<?php get_template_part("/includes/_event_meta"); ?>
+				<?php else : ?>
+					<?php get_template_part("content_home"); ?>	
+				<?php endif ; ?>
+			<?php endwhile; ?>
+			</ul>
+		</div><!-- /.eight-col -->
+	</div><!-- /.inner-wrapper -->
+</div><!-- /.row -->
 <?php endif; // if have_posts ends 
 
 /* ============== end pull in most viewed articles ============== */
@@ -198,45 +211,42 @@ if ( !defined('ABSPATH')) exit;
 ?>
 
 <?php /* ============== links to all topics ============== */ ?>
-	<li class="row row-resource-list">
-	<h2><?php wp_title(''); ?> by topic</h2>
-		<ul class="no-bullets">
-		<?php
-			$current_tax = basename(get_permalink());
-			$category = get_category_by_slug($current_tax);
-			$the_id = $category->term_id;
-      $term_args = array(
-          'taxonomy' => 'topic',
-          'orderby' => 'slug',
-          'order' => 'ASC'
-      );
-			$cats = get_categories($term_args); 
-			// loop through the categries
-				foreach ($cats as $cat) :
-					// setup the cateogory ID
-          $query_args = array(
-						'post_type' => 'any',
-						'posts_per_page' => '1',
-						'cat' => $the_id,
-						'topic' => $cat->name
-					);
-
-          query_posts($query_args); //create our own custom query based on above arguments
-					// start the wordpress loop!
-			      if (have_posts()) : while (have_posts()) : the_post(); 
-							echo "<li><a href='/type/" . $current_tax . "?topic=".$cat->slug."'>".$cat->name." (" .$wp_query->found_posts . ")</a></li>";
-			      ?>
-						<?php endwhile; endif; // done our wordpress loop. Will start again for each category ?>
-				<?php endforeach; // done the foreach statement ?>
-
-		</ul>
-	</li>				
+	<div class="row row-resource-list">
+		<div class="inner-wrapper">
+		<h2><?php wp_title(''); ?> by topic</h2>
+			<ul class="no-bullets">
+			<?php
+				$current_tax = basename(get_permalink());
+				$category = get_category_by_slug($current_tax);
+				$the_id = $category->term_id;
+	      $term_args = array(
+	          'taxonomy' => 'topic',
+	          'orderby' => 'slug',
+	          'order' => 'ASC'
+	      );
+				$cats = get_categories($term_args); 
+				// loop through the categries
+					foreach ($cats as $cat) :
+						// setup the cateogory ID
+	          $query_args = array(
+							'post_type' => 'any',
+							'posts_per_page' => '1',
+							'cat' => $the_id,
+							'topic' => $cat->name
+						);
+	
+	          query_posts($query_args); //create our own custom query based on above arguments
+						// start the wordpress loop!
+				      if (have_posts()) : while (have_posts()) : the_post(); 
+								echo "<li><a href='/category/" . $current_tax . "?topic=".$cat->slug."'>".$cat->name." (" .$wp_query->found_posts . ")</a></li>";
+				      ?>
+							<?php endwhile; endif; // done our wordpress loop. Will start again for each category ?>
+					<?php endforeach; // done the foreach statement ?>
+	
+			</ul>
+	</div><!-- /.inner-wrapper -->
+</div><!-- /.row -->				
 <?php /* ============== end links to all topics ============== */ 
 wp_reset_query();
-?>
-
-</ul>
-	
-</div><!-- /.eight-col -->
-	
+?>	
 <?php get_footer(); ?>

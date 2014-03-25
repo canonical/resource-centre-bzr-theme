@@ -24,22 +24,21 @@ if ( !defined('ABSPATH')) exit;
 <?php $curauth = (isset($_GET['author_name'])) ? get_user_by('slug', $author_name) : get_userdata(intval($author)); ?>
 
 <div class="row no-border">
-<div class="seven-col">
-    <div id="hcard-<?php echo $curauth->first_name; ?>-<?php echo $curauth->last_name; ?>" class="vcard">
-	    <div id="author-info" class="five-col last-col">
-	    	<header>
-				    <?php if(get_the_author_meta('user_photo', $curauth->ID)): ?>
-					    <img src="<?php bloginfo('url'); ?>/wp-content/uploads/<?php echo $curauth->user_photo; ?>" alt="<?php echo $curauth->first_name; ?>'s photo" class="avatar avatar-140 photo" width="50" height="50" />
-				    <?php else : ?>
-					    	<?php echo get_avatar($curauth->user_email, '50', $avatar); ?>
-				    <?php endif; ?>
-		    		<h1><?php echo $curauth->display_name; ?></h1>
-		    	<?php if(get_the_author_meta('user_job_title',$curauth->ID)){ ?>
+	<div id="hcard-<?php echo $curauth->first_name; ?>-<?php echo $curauth->last_name; ?>" class="vcard inner-wrapper">
+		<div id="author-info" class="seven-col">
+			<header>
+				<span class="image-wrap avatar" style="width: auto; height: auto;"><?php if(get_the_author_meta('user_photo', $curauth->ID)) : ?>
+					<img src="<?php bloginfo('url'); ?>/wp-content/uploads/<?php echo $curauth->user_photo; ?>" alt="<?php echo $curauth->first_name; ?>'s photo" class="avatar-140 photo" width="156" height="156" />
+				<?php else : ?>
+					<?php echo get_avatar($curauth->user_email, '156', $avatar); ?>
+				<?php endif; ?></span>
+				<h1><?php echo $curauth->display_name; ?></h1>
+		    <?php if(get_the_author_meta('user_job_title',$curauth->ID)) : ?>
 					<p class="role"><?php echo $curauth->user_job_title; ?></p>
-				<?php } ?>
-	    		<?php if(get_the_author_meta('location',$curauth->ID)){ ?>
+				<?php endif; ?>
+	    	<?php if(get_the_author_meta('location',$curauth->ID)) : ?>
 					<p class="location"><?php echo $curauth->location; ?></p>
-				<?php } ?>
+				<?php endif; ?>
 	    	</header>
 				<ul id="social-links" class="no-bullets">
 					<li><a class="social-rss url" href="/author/<?php the_author_meta('user_nicename',$curauth->ID); ?>/feed/" title="Subscribe to <?php the_author_meta('first_name',$curauth->ID); ?>'s RSS feed">Subscribe to <?php the_author_meta('first_name',$curauth->ID); ?>'s RSS feed</a></li>
@@ -56,17 +55,14 @@ if ( !defined('ABSPATH')) exit;
 					<li><a class="social-launchpad url" href="https://launchpad.net/~<?php echo $curauth->user_launchpad; ?>" title="View <?php echo $curauth->first_name; ?> on Launchpad">Launchpad</a></li>
 				<?php endif; ?>
 				</ul>
-<?php if(get_the_author_meta('user_description', $curauth->ID)) : ?>
-<div id="author-description" class="">
-	<?php echo $curauth->user_description; ?>
-</div><!-- /#author-description -->
-<?php endif; // user_description ?>
-	    </div><!-- /.seven-col -->
-    </div><!-- /.vcard -->
-</div><!-- /.twelve-col -->  
+				<?php if(get_the_author_meta('user_description', $curauth->ID)) : ?>
+				<div id="author-description" class="">
+					<?php echo $curauth->user_description; ?>
+				</div><!-- /#author-description -->
+				<?php endif; // user_description ?>
+	</div><!-- /.five-col -->
 
 <div class="five-col last-col">
-	<aside>
 	<?php $postCount = 0; ?>	
 		<div id="author-articles" class="box">
 		<h3>Recently posted by <?php if(get_the_author_meta('first_name', $curauth->ID)): ?><?php echo $curauth->first_name; ?><?php else : ?><?php echo $curauth->display_name; ?><?php endif; ?></h3>
@@ -91,7 +87,7 @@ if ( !defined('ABSPATH')) exit;
 	<?php } ?>
 	</aside>
 </div><!-- /.five-col --> 
-  
+</div><!-- /.hcard -->
 </div><!-- /.twelve-col -->
 
 <?#php get_sidebar(); ?>

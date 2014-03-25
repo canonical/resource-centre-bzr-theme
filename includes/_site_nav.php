@@ -1,7 +1,7 @@
 <nav role="navigation" class="nav-primary" >
 	<div id="main-navigation" class="main-navigation">
 			<div id="main-nav">
-				<ul class="main-nav no-bullets">
+				<ul class="main-nav topic-nav no-bullets">
 					<li><h2>By topic</h2>
 						<ul class="no-bullets">
 						<?php wp_nav_menu( array( 
@@ -10,7 +10,7 @@
 						</ul>
 					</li>
 				</ul>
-				<ul class="main-nav no-bullets">
+				<ul class="main-nav type-nav no-bullets">
 					<li><h2>By content type</h2>
 						<ul class="no-bullets">
 							<?php wp_nav_menu( array( 
@@ -20,7 +20,7 @@
 					</li>
 				</ul>
 			</div><!-- /#main-nav -->
-	</div>
+	</div><!-- /.#main-navigation -->
 	
 		<div id="box-search">
 			<div>
