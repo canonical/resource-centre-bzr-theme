@@ -1,3 +1,29 @@
+/* 
+Theme Name: Ubuntu Resources
+Theme URI: http://canonical.com
+Description: Ubuntu resource hub theme
+Version: 1
+Author: Canonical Ltd 
+Author URI: http://canonical.com
+
+Copyright (C) 2012 Canonical Ltd 
+
+Contents:
+
+	general
+	welcome-message
+	search
+	single article
+	glossary-box
+	main nav
+	related posts
+	product-business-card
+	events
+	search filters
+	vcard
+
+*/	
+
 @import "static/css/core-constants";
 @import "static/css/core-mixins";
 
@@ -7,7 +33,7 @@ $warm_grey:				    #aea79f; 	/* warm grey */
 $cool_grey:				    #333333; 	/* cool grey */
 $light_grey:			    #f7f7f7; 	/* light grey */
 $meta_grey:						#888; 		/* meta grey */
-$nav_bg:							#f0f0f0;
+$nav_bg:							#F7F7F7;
 $nav_link_color:			#333;
 $nav_border_dark:			#d4d7d4;
 $nav_border_light:		#f2f2f4;
@@ -16,16 +42,14 @@ $base: 14;
 
 /* assets database path */
 $asset_path: "//assets.ubuntu.com/sites/ubuntu/latest/u/img/";
-/* usage: background: url(#{$asset_path}/site/background.jpg) no-repeat 0 0; */
+/* usage: background: url(#{$asset_path}/folder/image.jpg) no-repeat 0 0; */
 
 $grid_unit_small: 10;
 $grid_unit_med:   20;
 
 /* general
 ----------------------------------------------------------------- */
-body {
-	background: url("#{$asset_path}backgrounds/image-background-paper.png") repeat-y center center;
-}
+body { background: url("#{$asset_path}backgrounds/image-background-paper.png") repeat-y center center; }
 
 body:after {
 	content: 'medium';
@@ -37,8 +61,8 @@ body:after {
 /* welcome-message
 ----------------------------------------------------------------- */
 #welcome-message div.welcome-message-inner { 
-	padding: 0 0 20px; 
 	margin-top: -20px;
+	padding: 0 0 20px; 
 }
 
 #nav-global {
@@ -47,8 +71,7 @@ body:after {
 
 	ul li.open { min-width: 122px; }
 	
-	li.more li {
-		height: auto;
+	li.more li { height: auto;
 		a { 
 			border-bottom: 0;
 			padding-bottom: 0;
@@ -68,9 +91,9 @@ body { font-size: 15px; }
 .search .row { padding-bottom: 30px; }
 
 .search #main-content .row-hero {
+	margin-bottom: -20px;
 	margin-top: 0;
 	padding-bottom: 0;
-	margin-bottom: -20px;
 }
 
 .inner-wrapper {
@@ -81,22 +104,20 @@ body { font-size: 15px; }
 #main-content .cat-title { padding: 10px 30px 0 0; }
 
 .page-template-page-category-php #main-content .cat-title { 
-	padding-bottom: 0; 
 	margin-bottom: 0;
+	padding-bottom: 0; 
 }
 
 .article-list ul.phone-articles { border-bottom: 0; }
 
 /* search
 ----------------------------------------------------------------- */
-form fieldset .search-submit {
-	top: -101px;
-}
+form fieldset .search-submit { top: -101px; }
 
 .has-filter-wrap fieldset .search-submit,
 form fieldset .search-submit.active {
-	width: auto;
 	float: left;
+	width: auto;
 }
 
 .has-filter-wrap button.search-submit + a {
@@ -130,9 +151,7 @@ form fieldset .search-submit.active {
 	padding: 0;
 }
 
-.search-filter h2 {
-	margin-bottom: 20px;
-}
+.search-filter h2 { margin-bottom: 20px; }
 
 /* single article
 ----------------------------------------------------------------- */
@@ -228,6 +247,7 @@ body.single .row { padding-top: 10px; }
 	width: 100%;
 	clear: both;
 	display: block;
+	margin-top: 0;
 }
 
 .event-map {
@@ -266,8 +286,133 @@ body.single .eight-col .image-wrap img,
 ----------------------------------------------------------------- */
 div#uwpqsf_id {
 	
-	.togglecheck {
-		width: 40%;
-	}
+	.togglecheck { width: 40%; }
 }
+
+/* vcard 
+----------------------------------------------------------------- */
+#author-info.has-avatar { padding-left: 120px; }
+
+.vcard .avatar {
+	position: absolute;
+	left: 0;
+}
+
+/* main navigation
+----------------------------------------------------------------- */
+.yes-js {
+	#main-navigation {
+		background: $nav_bg;
+		float: none;
+		margin: 0 auto;
+		max-width: 984px;
+		position: relative;
+	}
+
+	#main-nav.active {
+		@include rounded_corners(0 0 2px 2px);
+		background: $nav_bg;
+		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+		width: 400px;	
+		display: block;
+		float: right;
+		right: 0;
+		position: absolute;
+	}
+
+	#main-nav.active h2 {
+		background: none;
+	}
+	
+	#main-nav.active li li a { 
+		font-size: 18px; 
+	}
+	
+	#main-nav.active a { 
+		color: #333;
+		}
+
+	#main-nav.active
+
+	.main-nav {
+		background: none;
+		border-right: 0;
+
+		border-bottom: 0;
+		box-shadow: none;
+	}
+		
+	#main-nav.active .topic-nav {
+		border-bottom: 1px solid $nav_border_dark;
+		border-left: 0;	
+	}
+	
+} // end yes-js
+
+#nav-triggers {
+	position: relative;
+	float: right;
+	li a.active:after {
+		background-image: url("#{$asset_path}/patterns/arrow-up-smaller.png");
+	}
+} /* end #nav-triggers */
+
+.type-nav li li:last-child {
+	box-shadow: none;
+}
+
+/* share
+----------------------------------------------------------------- */
+.yes-js #share {
+	background: none;
+	max-width: 984px;
+	margin: 0 auto;
+	float: none;
+}
+
+#share div.share-inner,
+#share div ul,
+#share div h2 {
+	background: $nav_bg;
+}
+
+.yes-js #share .share-inner.active { 
+	@include rounded_corners(0 0 2px 2px);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+	position: absolute;
+	width: auto;
+	right: 0;
+	padding: 5px 10px 0 5px;
+	left: auto;
+	float: none;
+}
+
+/* search
+----------------------------------------------------------------- */
+.yes-js #box-search {	
+	background: $nav_bg;
+}
+
+.yes-js #box-search div {
+	@include rounded_corners(0 0 2px 2px);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+	background: $nav_bg;
+	padding: 10px;
+}
+
+.yes-js header.global #box-search {
+	margin: 0 auto;
+	float: none;
+	max-width: 984px;
+}
+
+.yes-js header.global #box-search div.active {
+	display: block;
+	right: 0;
+	position: absolute;
+	width: 400px;
+}
+
+
+
 

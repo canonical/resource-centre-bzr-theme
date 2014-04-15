@@ -27,9 +27,9 @@ if ( !defined('ABSPATH')) exit;
 	$post = $wp_query->get_queried_object();
 	$current_cat = basename(get_permalink());
 ?>
-<div class="no-border">
-	<h1 class="row no-border"><?php wp_title(''); ?></h1>
-<div class="eight-col no-margin-bottom">
+<div class="row row-hero cat-page-title no-border">
+	<h1 class="cat-title inner-wrapper no-border"><?php wp_title(''); ?></h1>
+</div>
 
 <?php
 /* ============== pull in business card ============== */
@@ -80,17 +80,21 @@ if ( !defined('ABSPATH')) exit;
 ?>
 <?php if ($query->have_posts()) : ?>
 	<div class="row featured-article">
-		<h2>Editor's pick</h2>
-		<ul class="no-bullets">
-<?php 
-	while( $query->have_posts() ): 
-	$query->the_post(); 
-	$do_not_duplicate[] = $post->ID ?>
- 
-	<?php get_template_part("content_home"); ?>	
-<?php endwhile; ?>
-		</ul>
-	</div>
+		<div class="inner-wrapper">
+			<div class="eight-col no-margin-bottom">
+				<h2>Editor's pick</h2>
+				<ul class="no-bullets">
+		<?php 
+			while( $query->have_posts() ): 
+			$query->the_post(); 
+			$do_not_duplicate[] = $post->ID ?>
+		 
+			<?php get_template_part("content_home"); ?>	
+		<?php endwhile; ?>
+				</ul>
+			</div><!-- /.eight-col -->
+		</div><!-- /.inner-wrapper -->
+	</div><!-- /.row -->
 
 <?php else : ?>	
 <?php 
@@ -103,19 +107,23 @@ if ( !defined('ABSPATH')) exit;
 	));
 ?>
 	<div class="row featured-article">
-		<ul class="no-bullets">
-<?php while( $new_query->have_posts() ): $new_query->the_post(); ?>
-	<?php get_template_part("content_home"); ?>	
-		
-<?php endwhile; wp_reset_postdata(); ?>
-			</ul>
-	</div>
+		<div class="inner-wrapper">
+			<div class="eight-col no-margin-bottom">
+				<ul class="no-bullets">
+		<?php while( $new_query->have_posts() ): $new_query->the_post(); ?>
+			<?php get_template_part("content_home"); ?>	
+				
+		<?php endwhile; wp_reset_postdata(); ?>
+					</ul>
+			</div><!-- /.eight-col -->
+		</div><!-- /.inner-wrapper -->
+	</div><!-- /.row -->
 
 <?php endif; // if have_posts ends 
 /* ============== end pull in featured ============== */
 ?>
 
-<ul class="article-list  no-bullets">
+<div class="article-list">
 <?php
 /* ============== pull in latest events ============== */
   wp_reset_query();
@@ -168,19 +176,23 @@ if ( !defined('ABSPATH')) exit;
 
  
 <?php if ($query->have_posts()) : ?>
-	<li class="row">
-		<h2>Latest news</h2>
-		<ul class="no-bullets">
-<?php 
-	while( $query->have_posts() ): 
-	$query->the_post(); 
-	$do_not_duplicate[] = $post->ID ?>
-	
- 	<?php get_template_part("content_home"); ?>	
-
-<?php endwhile; ?>
-		</ul>
-	</li>
+	<div class="row">
+		<div class="inner-wrapper">
+			<div class="eight-col no-margin-bottom">
+				<h2>Latest news</h2>
+				<ul class="no-bullets">
+		<?php 
+			while( $query->have_posts() ): 
+			$query->the_post(); 
+			$do_not_duplicate[] = $post->ID ?>
+			
+		 	<?php get_template_part("content_home"); ?>	
+		
+		<?php endwhile; ?>
+				</ul>
+			</div><!-- /.eight-col -->
+		</div><!-- /.inner-wrapper -->
+	</div><!-- /.row -->
 <?php endif; // if have_posts ends 
 
 /* ============== end pull in latest press releases ============== */
@@ -202,19 +214,23 @@ if ( !defined('ABSPATH')) exit;
 
  
 <?php if ($query->have_posts()) : ?>
-	<li class="row">
-		<h2>Latest press releases</h2>
-		<ul class="no-bullets">
-<?php 
-	while( $query->have_posts() ): 
-	$query->the_post(); 
-	$do_not_duplicate[] = $post->ID ?>
+	<div class="row">
+		<div class="inner-wrapper">
+			<div class="eight-col no-margin-bottom">
+			<h2>Latest press releases</h2>
+			<ul class="no-bullets">
+	<?php 
+		while( $query->have_posts() ): 
+		$query->the_post(); 
+		$do_not_duplicate[] = $post->ID ?>
+		
+	 	<?php get_template_part("content_home"); ?>	
 	
- 	<?php get_template_part("content_home"); ?>	
-
-<?php endwhile; ?>
-		</ul>
-	</li>
+	<?php endwhile; ?>
+			</ul>
+			</div><!-- /.eight-col -->
+		</div><!-- /.inner-wrapper -->
+	</div><!-- /.row -->
 <?php endif; // if have_posts ends 
 
 /* ============== end pull in latest press releases ============== */
@@ -256,14 +272,4 @@ if ( !defined('ABSPATH')) exit;
 
 /* ============== end pull in most viewed articles ============== */
 ?>
-
-
-<li class="row">
-	<h2><?php wp_title(''); ?> by topic</h2>
-</li>	
-		
-</ul>
-	
-</div><!-- /.eight-col -->
-	
 <?php get_footer(); ?>

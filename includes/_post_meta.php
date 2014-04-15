@@ -4,7 +4,7 @@
 </p>
 
 <?php if ( is_single() ) : ?>
-	<ul class="save-links no-bullets inline">
+	<ul class="save-links no-bullets inline instapaper_ignore">
 		<li><a id="social-instapaper" href="http://www.instapaper.com/hello2?url=<?php echo urlencode( the_permalink( $post->ID ) ); ?>&amp;title=<?php echo urlencode( get_the_title() ); ?>" title="Add '<?php echo the_title(); ?>' to Instapaper">Add to Instapaper</a></li>
 		<li><a id="social-pocket" href="http://getpocket.com/save?url=<?php echo urlencode( the_permalink( $post->ID ) ); ?>&amp;title=<?php echo urlencode( get_the_title() ); ?>" title="Add '<?php echo urlencode(the_title()); ?>' to Pocket">Add to Pocket</a></li>
 	</ul>

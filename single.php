@@ -64,7 +64,7 @@ get_header();
 		<?php endif ; ?>
 		<?php if(has_post_thumbnail()) : ?>
 		<div itemprop="image" class="article-image">
-		<?php if ( isMobilePhone() ) : ?>
+		<?php if ( is_mobile_phone() ) : ?>
 			<?php the_post_thumbnail('small'); ?>
 		<?php else : ?>
 		<?php if ($category == 'events') : else : ?>
@@ -124,9 +124,12 @@ get_header();
 		<?php endif; // if video  ?>
 <?php } // end if gated ?>
 				<?php if('event' == get_post_type()) : ?>
-				<?php $event_timestamp = get_post_meta( $post->ID, '_start_eventtimestamp', true ); ?>
-					<?php // only show the register link if event not started
-						if($current_timestamp <= $event_timestamp && $registration) :  ?>
+				<?php 
+					$current_time = current_time('mysql'); 
+					list( $today_year, $today_month, $today_day, $hour, $minute, $second ) = split( '([^0-9])', $current_time );
+					$current_timestamp = $today_year . $today_month . $today_day . $hour . $minute;
+					$event_timestamp = get_post_meta( $post->ID, '_start_eventtimestamp', true ); ?>
+					<?php if(($current_timestamp <= $event_timestamp) && $registration) : ?>
 					<div id="download-item">
 						<p><a itemprop="url" class="link-cta-ubuntu" href="<?php echo $registration; ?>">Register now</a></p>
 					</div>
@@ -135,7 +138,7 @@ get_header();
 
 	</div><!-- /.eight-col -->
 
-<div class="four-col last-col instapaper_ignore">
+<div id="sidebar" class="four-col last-col instapaper_ignore">
 <?php //get_template_part("includes/_subscribe"); ?>
 <?php get_template_part("includes/_related_posts"); ?>
 <?php endwhile; // while have_posts ends ?> 
@@ -188,5 +191,7 @@ $custom_taxterms = wp_get_object_terms( $post->ID, 'topic', array('fields' => 'i
 </div><!-- /.twelve-col -->
 </div><!-- /.inner-wrapper -->
 </div><!-- /.row --> 
+
+<?php // dynamic_sidebar( 'search-sidebar' ); ?>	
 
 <?php get_footer(); ?>

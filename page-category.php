@@ -45,9 +45,8 @@ if ( !defined('ABSPATH')) exit;
 <?php if ($query->have_posts()) : ?>
 	<div class="row featured-article">
 		<div class="inner-wrapper">
-			<div class="eight-col no-margin-bottom">
+			<div class="eight-col<?php if(in_category( $press_cats )) echo ' has-time'; ?>">
 				<h2>Editor's pick</h2>
-				<ul class="no-bullets">
 				<?php 
 					while( $query->have_posts() ): 
 					$query->the_post(); 
@@ -55,10 +54,9 @@ if ( !defined('ABSPATH')) exit;
 					<?php if ('event' == get_post_type()) : ?>
 						<?php get_template_part("includes/_event_meta"); ?>
 					<?php else : ?>
-						<?php get_template_part("content_home"); ?>	
+						<?php get_template_part("content_home_featured"); ?>	
 					<?php endif ; ?>
 				<?php endwhile; ?>
-				</ul>
 			</div><!-- /.eight-col -->
 		</div><!-- /.inner-wrapper -->
 	</div><!-- /.row -->

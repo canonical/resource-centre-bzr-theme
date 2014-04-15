@@ -16,4 +16,7 @@ endforeach;
 endif;
 ?>
 	</ul>
+<!--<time datetime="<?php the_time('Y-m-d') ?>">
+		<?php //the_time('j') ?><?php the_time(' F Y') ?>
+</time> -->	
 </div><!-- /.article-meta -->

@@ -23,20 +23,25 @@ $style_classes = array('','',' last-col'); // cycle last col
 $style_index = 0; // count for cycle
 $postCount = 0;
 $post_type = get_post_type_object( get_post_type($post) );
+$category = get_the_category(); $press_cats = array('press-releases', 'news'); 
 ?><?php  /* ============== pull in featured ============== */
 
+
 if(is_home() && !is_paged()) : ?><?php
-    $my_query = new WP_Query('post_type=any&posts_per_page=1&meta_key=dbt_checkbox_featured_home&orderby=date&order=DESC');
+    $my_query = new WP_Query('post_type=any&posts_per_page=1&meta_key=dbt_checkbox_featured_home&orderby=rand&order=DESC');
 while ($my_query->have_posts()) : $my_query->the_post();
 $post_type = get_post_type_object( get_post_type($post));
-$do_not_duplicate[] = $post->ID
+$do_not_duplicate[] = $post->ID;
 ?>
-<div class="row featured-article &lt;?php the_category_unlinked(' post-'); ?&gt;">
+<div class="row featured-article <?php the_category_unlinked(' post-'); ?><?php if(in_category( $press_cats )) echo ' has-time'; ?>">
     <div class="inner-wrapper">
         <div class="eight-col no-margin-bottom">
             <h2>Editor's pick</h2>
-            <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-            <p><?php echo get_excerpt(); ?></p><?php get_template_part("includes/_article_meta"); ?>
+					<?php if ('event' == get_post_type()) : ?>
+						<?php get_template_part("includes/_event_meta"); ?>
+					<?php else : ?>
+						<?php get_template_part("content_home_featured"); ?>	
+					<?php endif ; ?>
         </div><!-- /.eight-col -->
     </div><!-- /.inner-wrapper -->
 </div><!-- /.row -->
@@ -87,19 +92,18 @@ $do_not_duplicate[] = $post->ID
     ?><?php if (have_posts()) : ?>
 
     <div class="row">
-        <div class="inner-wrapper">
-            <div class="eight-col no-margin-bottom">
-                <h2>Ubuntu Cloud</h2>
-
-                <ul class="no-bullets">
-                    <?php
-                        while( $query->have_posts() ):
-												$query->the_post();
-                        $do_not_duplicate[] = $post->ID ?><?php if ('event' == get_post_type()) : ?><?php get_template_part("includes/_event_meta"); ?><?php else : ?><?php get_template_part("content_home"); ?><?php endif ; ?><?php endwhile; ?>
-                </ul>
-            </div><!-- ./eight-col -->
-        </div><!-- /.inner-wrapper -->
-    </div><!-- /.row -->
+			<div class="inner-wrapper">
+				<div class="eight-col no-margin-bottom">
+					<h2>Ubuntu Cloud</h2>
+					<ul class="no-bullets">
+				    <?php
+				        while( $query->have_posts() ):
+								$query->the_post();
+				        $do_not_duplicate[] = $post->ID ?><?php if ('event' == get_post_type()) : ?><?php get_template_part("includes/_event_meta"); ?><?php else : ?><?php get_template_part("content_home"); ?><?php endif ; ?><?php endwhile; ?>
+					</ul>
+				</div><!-- ./eight-col -->
+			</div><!-- /.inner-wrapper -->
+		</div><!-- /.row -->
     <?php endif; // if have_posts ends
     /* ============== end pull in latest cloud articles ============== */
     wp_reset_query();

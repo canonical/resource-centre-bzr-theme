@@ -5,37 +5,35 @@
  */
 $key = wp_specialchars($s, 1); 
 $search_title = ('Search results for "' . $key . '"');
+$category = get_the_category(); $press_cats = array('press-releases', 'news');
 if (isset($_GET['termlist']) && is_array($_GET['termlist']) OR isset($_GET['topiclist']) && is_array($_GET['topiclist'])) : $hasFilter = '1'; endif;
 include("header.php");
 ?>
 <div class="row row-hero no-border<?php if ($hasFilter) : ?> has-filter-wrap<?php else : ?> no-filter-wrap<?php endif; ?>">
-	<div class="inner-wrapper">
-		<h1>We've found <?php echo $wp_query->found_posts; ?> <?php echo _n( 'result', 'results', $count, 'ubuntu-resources' ); ?> for "<?php /* Search Count */ 
-			global $post;
-			if( is_category() ){
-				$category = end(get_the_category());
-				$current =$category->cat_ID;
-				$current_name = $category->cat_name;
-			}
-			if( is_tax() ){
-				$term = end(get_the_terms($post->ID, 'topic'));
-				$current_term =$term->cat_ID;
-				$current_term_name = $term->name;
-			}
-			$key = wp_specialchars($s, 1); 
-			$count = $wp_query->found_posts; _e('');
-			 _e(''); 
-			 echo $key; _e('');
-			 if ( $current_name ) {
-				 //echo '&nbsp;';
-				 //echo strtolower($current_name); 
-			 }
-		?>&nbsp;"<?php if ( $count == "0") : echo ', try a different search?'; endif; ?>
-		</h1>
+<div class="inner-wrapper">
+	<h1>We've found <?php echo $wp_query->found_posts; ?> <?php echo _n( 'result', 'results', $count, 'ubuntu-resources' ); ?> for "<?php /* Search Count */ 
+		global $post;
+		if( is_category() ){
+			$category = end(get_the_category());
+			$current =$category->cat_ID;
+			$current_name = $category->cat_name;
+		}
+		if( is_tax() ){
+			$term = end(get_the_terms($post->ID, 'topic'));
+			$current_term =$term->cat_ID;
+			$current_term_name = $term->name;
+		}
+		$key = wp_specialchars($s, 1); 
+		$count = $wp_query->found_posts; _e('');
+		 _e(''); 
+		 echo $key; _e('');
+		 if ( $current_name ) {
+			 //echo '&nbsp;';
+			 //echo strtolower($current_name); 
+		 }
+	?>&nbsp;"<?php if ( $count == "0") : echo ', try a different search?'; endif; ?>
+	</h1>
 		
-<?php //dynamic_sidebar( 'search-sidebar' ); ?>	
-<?php //echo do_shortcode("[ULWPQSF id=6153]"); ?>
-
 <form id="search-form" method="get" action="<?php bloginfo('url'); ?>">
 <input type="search" name="s" value="<?php echo wp_specialchars($s, 1); ?>" placeholder="search&hellip;" maxlength="50" required="required" />
 
@@ -50,7 +48,7 @@ include("header.php");
 	$exclude = get_cat_id('TV');
 	$post_ancestors = ($post->ancestors) ? $post->ancestors : array();
 	$gb = ($_GET['topiclist']);
-	$terms = wp_get_post_terms( $post->ID, 'wedding_cat');
+	$terms = wp_get_post_terms( $post->ID, 'topic');
 	$topics = get_terms('topic',array( 'taxonomy' => 'topic', 'exclude' => $exclude, 'hide_empty' => 1 ));
 	foreach ($topics as $topic) :
 	  echo
@@ -113,18 +111,12 @@ include("header.php");
 <?php endif; ?>				
 					<li class="row article"> 
 					<div class="inner-wrapper">
-					<div class="eight-col no-margin-bottom">
-			<?php if('event' == get_post_type()) : ?>
-				<?php get_template_part("/includes/_event_meta"); ?>
-			<?php else : ?>
-					<h3><a href="<?php the_permalink() ?>"><?php if ( is_search() ) : echo $title; else : echo  the_title(); endif; ?></a></h3>
-					<?php if(has_post_thumbnail()) : ?>
-						<p><?php if ( is_search() ) : echo wp_trim_words($excerpt, 40); else : echo wp_trim_words(the_excerpt(), 40); endif; ?></p>
+					<div class="eight-col no-margin-bottom<?php if(in_category( $press_cats )) echo ' has-time'; ?>">
+					<?php if ('event' == get_post_type()) : ?>
+						<?php get_template_part("includes/_event_meta"); ?>
 					<?php else : ?>
-						<p><?php if ( is_search() ) : echo wp_trim_words($excerpt , 40); else : echo the_excerpt(), 40; endif; ?></p>
-					<?php endif; ?>
-						<?php get_template_part("includes/_article_meta"); ?>
-			<?php endif; // event ?>
+						<?php get_template_part("content_home_featured"); ?>	
+					<?php endif ; ?>
 					</div>
 						</div>
 						</li>		

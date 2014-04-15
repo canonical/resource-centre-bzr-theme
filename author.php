@@ -25,13 +25,12 @@ if ( !defined('ABSPATH')) exit;
 
 <div class="row no-border">
 	<div id="hcard-<?php echo $curauth->first_name; ?>-<?php echo $curauth->last_name; ?>" class="vcard inner-wrapper">
-		<div id="author-info" class="seven-col">
+		<div id="author-info" class="<?php if(get_the_author_meta('user_photo', $curauth->ID)) echo 'has-avatar '; ?>seven-col">
 			<header>
-				<span class="image-wrap avatar" style="width: auto; height: auto;"><?php if(get_the_author_meta('user_photo', $curauth->ID)) : ?>
-					<img src="<?php bloginfo('url'); ?>/wp-content/uploads/<?php echo $curauth->user_photo; ?>" alt="<?php echo $curauth->first_name; ?>'s photo" class="avatar-140 photo" width="156" height="156" />
+				<?php if(get_the_author_meta('user_photo', $curauth->ID)) : ?>
+				<span class="image-wrap avatar" style="width: auto; height: auto;"><img src="<?php bloginfo('url'); ?><?php echo $curauth->user_photo; ?>" alt="<?php echo $curauth->first_name; ?>'s photo" class="avatar-140 photo" width="156" height="156" /></span>
 				<?php else : ?>
-					<?php echo get_avatar($curauth->user_email, '156', $avatar); ?>
-				<?php endif; ?></span>
+				<?php endif; ?>
 				<h1><?php echo $curauth->display_name; ?></h1>
 		    <?php if(get_the_author_meta('user_job_title',$curauth->ID)) : ?>
 					<p class="role"><?php echo $curauth->user_job_title; ?></p>
@@ -41,7 +40,6 @@ if ( !defined('ABSPATH')) exit;
 				<?php endif; ?>
 	    	</header>
 				<ul id="social-links" class="no-bullets">
-					<li><a class="social-rss url" href="/author/<?php the_author_meta('user_nicename',$curauth->ID); ?>/feed/" title="Subscribe to <?php the_author_meta('first_name',$curauth->ID); ?>'s RSS feed">Subscribe to <?php the_author_meta('first_name',$curauth->ID); ?>'s RSS feed</a></li>
 				<?php if(get_the_author_meta('user_twitter', $curauth->ID)): ?>
 					<li><a class="social-twitter url" href="http://twitter.com/<?php the_author_meta('user_twitter', $curauth->ID); ?>" title="Follow <?php the_author_meta('first_name', $curauth->ID); ?> on Twitter">Follow <?php the_author_meta('first_name',$curauth->ID); ?> on Twitter</a></li>
 				<?php endif; ?>
@@ -57,7 +55,7 @@ if ( !defined('ABSPATH')) exit;
 				</ul>
 				<?php if(get_the_author_meta('user_description', $curauth->ID)) : ?>
 				<div id="author-description" class="">
-					<?php echo $curauth->user_description; ?>
+					<p><?php echo $curauth->user_description; ?></p>
 				</div><!-- /#author-description -->
 				<?php endif; // user_description ?>
 	</div><!-- /.five-col -->
@@ -66,6 +64,7 @@ if ( !defined('ABSPATH')) exit;
 	<?php $postCount = 0; ?>	
 		<div id="author-articles" class="box">
 		<h3>Recently posted by <?php if(get_the_author_meta('first_name', $curauth->ID)): ?><?php echo $curauth->first_name; ?><?php else : ?><?php echo $curauth->display_name; ?><?php endif; ?></h3>
+		<p class="social-rss"><a class="url" href="/author/<?php the_author_meta('user_nicename',$curauth->ID); ?>/feed/">Subscribe to <?php the_author_meta('first_name',$curauth->ID); ?>'s posts</a></p>
 			<?php $loop = new WP_Query( array( 'post_type' => $post_types, 'author' => $curauth->ID, 'posts_per_page' => 5 ) ); ?>
 			<?php if ( $loop->have_posts() ) : ?>
 				<ul class="no-bullets">

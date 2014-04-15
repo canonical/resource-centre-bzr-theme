@@ -8,7 +8,7 @@
 						echo '<li><a href="/'.$category[0]->slug.'">'.$category[0]->cat_name.'</a></li>';
 					?>
 					<?php foreach(get_the_terms($post->ID, 'topic', '<li>', '&nbsp;</li><li>', '&nbsp;</li>' ) as $term)
-			     echo '<li><a href="/'.$term->slug. '">'.$term->name.'</a>&nbsp;</li>' ?>
+			     echo '<li><a href="/'.$term->slug. '">'.$term->name.'</a></li>' ?>
 				</ul>
 			<?php elseif ( is_home() || is_page( 'Webinars' ) || is_author() || is_search() ) : ?>
 			<?php else : ?>

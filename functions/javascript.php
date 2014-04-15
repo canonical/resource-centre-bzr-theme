@@ -36,16 +36,6 @@ function jquery_init() {
 }
 add_action('wp_footer', 'jquery_init');
 // end add jquery
-
-// add google plus and marketo for single only (atm)
-function wpse53364() {
-    if( !is_admin() && is_single() ) {
-    	// load google plus button js
-		wp_register_script('plusone', 'https://apis.google.com/js/plusone.js', false,'1', true);		wp_enqueue_script('plusone');
-    }
-}
-add_action( 'wp_enqueue_scripts', 'wpse53364' );
-// end add google plus and marketo
     
 // add google analytics to footer
 function add_google_analytics() {

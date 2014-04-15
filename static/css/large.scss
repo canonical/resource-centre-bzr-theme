@@ -1,3 +1,51 @@
+/* 
+Theme Name: Ubuntu Resources
+Theme URI: http://canonical.com
+Description: Ubuntu resource hub theme
+Version: 1
+Author: Canonical Ltd 
+Author URI: http://canonical.com
+
+Copyright (C) 2012 Canonical Ltd 
+
+Contents:
+
+	typography
+	main navigation
+	welcome-message
+	search
+	share
+	product-business-card
+
+*/	
+
+@import "static/css/core-constants";
+@import "static/css/core-mixins";
+
+@mixin font_size($size) {
+  font-size: ($size) + px;  //Fallback in px
+  font-size: calculateem($size);
+}
+
+$ubuntu_orange:			  #dd4814; 	/* ubuntu orange */
+$light_orange:        #fdf6f2; 	/* used as background on pre text */
+$warm_grey:				    #aea79f; 	/* warm grey */
+$cool_grey:				    #333333; 	/* cool grey */
+$light_grey:			    #f7f7f7; 	/* light grey */
+$meta_grey:						#888; 		/* meta grey */
+$nav_bg:							#F7F7F7;
+$nav_link_color:			#333;
+$nav_border_dark:			#d4d7d4;
+$nav_border_light:		#f2f2f4;
+
+/* assets database path */
+$asset_path: "//assets.ubuntu.com/sites/ubuntu/latest/u/img/";
+/* usage: background: url(#{$asset_path}/site/background.jpg) no-repeat 0 0; */
+
+$grid_unit_small: 10;
+$grid_unit_med:   20;
+
+
 body {
 	background-attachment: fixed; 
 	font-size: 16px;
@@ -17,10 +65,10 @@ header.banner .logo-ubuntu { background-position: -20px 50%; }
 header.banner .logo-ubuntu span { width: 85px; }
 
 .row .inner-wrapper {
-	width: 984px;
-	margin: 0 auto;
-	float: none;
 	display: block;
+	float: none;
+	margin: 0 auto;
+	width: 984px;
 }
 
 #nav-global { padding-left: 0; }
@@ -28,7 +76,16 @@ header.banner .logo-ubuntu span { width: 85px; }
 .row { padding: 30px 30px 20px; }
 
 .header-inner { width: 984px; }
-	
+
+.row .link-cta-ubuntu {
+	display: inline-block;
+	text-align: inherit;
+}
+
+/* typography
+----------------------------------------------------------------- */	
+h1 { font-size: 2.8125em; }
+
 /* welcome-message
 ----------------------------------------------------------------- */	
 #welcome-message div.welcome-message-inner {
@@ -36,21 +93,10 @@ header.banner .logo-ubuntu span { width: 85px; }
 	position: relative;
 }
 
-footer.global .top-link {
-	margin-left: -20px;
-	padding-left: 0;
+footer.global .legal { 
+	padding-left: 0; 
+	padding-top: 13px;
 }
-
-footer.global .top-link a {
-	width: 984px;
-	margin: 0 auto;
-	float: none;
-	right: 0;
-	
-	a { margin: 0; }
-}
-
-footer.global .legal { padding-left: 0; }
 
 .single-post-cats { padding-top: 0; }
 
@@ -64,40 +110,44 @@ footer.global .legal { padding-left: 0; }
 ----------------------------------------------------------------- */
 .glossary-box { padding: 0; }
 
-.toggle-message { top: -44px; }
+.toggle-message { top: -54px; }
 
-.close-message { top: -55px; }
+.close-message { top: -65px; }
 
-/* search
------------------------------------------------------------------ */
 .search .row { padding-bottom: 40px; }
 
 .search .no-results {
-	margin-bottom: 40px;	
 	display: inline-block;
 	float: left;
+	margin-bottom: 40px;	
 	width: 100%;
 }
 
 button#searchsubmit { top: -2px; }
 
-.search #main-content form#search-form { 
-	margin-bottom: 20px; 
-}
+.search #main-content form#search-form { margin-bottom: 20px; }
 
-form fieldset .search-submit {
-	top: -105px;
-}
+form fieldset .search-submit { top: -105px; }
 
-form fieldset .search-submit.active{
-	width: auto;
+form fieldset .search-submit.active {
 	float: left;
 	margin-bottom: 20px;
+	width: auto;
 }
 
-.search-filter fieldset.twelve-col {
-	margin: 0;
+.search-filter fieldset.twelve-col { margin: 0; }
+
+/* product-business-card
+----------------------------------------------------------------- */
+.product-business-card img {
+	float: right;
+	margin: 0 0 20px 20px;
 }
 
+/* footer
+----------------------------------------------------------------- */
+footer.global .top-link { display: none; }
 
-
+.yes-js #main-nav.active li li a { 
+	font-size: 18px; 
+}

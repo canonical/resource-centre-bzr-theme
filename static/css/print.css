@@ -49,9 +49,8 @@ nav,
 header.banner,
 footer.global ul,
 .top-link,
-.legal {
-	display: none !important;
-}
+.legal, 
+.instapaper_ignore { display: none !important; }
 
 
 

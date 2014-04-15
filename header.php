@@ -16,6 +16,7 @@ if ( !defined('ABSPATH')) exit;
  * @filesource     wp-content/themes/insights-theme/header.php
  * @since          available since Release 1.0
  */
+ $term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
 ?>
 <!doctype html>
 <!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="en" dir="ltr"> <![endif]-->
@@ -25,6 +26,7 @@ if ( !defined('ABSPATH')) exit;
 
 <head>
 
+<!-- Get the Ubuntu font from Google -->
 <script>
   WebFontConfig = {
     google: { families: [ 'Ubuntu:300,400,400italic:latin' ] }
@@ -40,26 +42,29 @@ if ( !defined('ABSPATH')) exit;
   })(); 
 </script>
 
-<title><?php if (is_search()) : ?> <?php echo $search_title; ?> <?php else : ?> <?php wp_title(''); ?><?php endif; ?> <?php if (!is_home()) : ?>|<? endif; ?> <?php bloginfo('name'); ?></title>
+<title><?php if (is_search()) : ?> <?php echo $search_title; ?> <?php elseif (is_category()) : ?><?php $term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) ); ?><?php if( $term != '' ) : ?><?php echo $term->name; ?><?php endif; ?> <?php echo strtolower(single_cat_title( '', false, 'right' )); ?><?php if(is_taxonomy('topic', 'category')) : endif ; ?><?php else : ?> <?php wp_title(''); ?><?php endif; ?> <?php if (!is_home()) : ?>|<? endif; ?> <?php bloginfo('name'); ?></title>
 
 <meta charset="utf-8" />
 <meta name="description" content="" />
 <meta name="keywords" content="" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="author" content="Canonical" />
 
+<!-- shortcut icons -->
 <link rel="shortcut icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
 <link rel="apple-touch-icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/touch-icon-iphone.png" />
 <link rel="apple-touch-icon" sizes="72x72" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/touch-icon-ipad.png" />
 <link rel="apple-touch-icon" sizes="114x114" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/touch-icon-iphone-retina.png" />
 <link rel="apple-touch-icon" sizes="144x144" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/touch-icon-ipad-retina.png" />
 
-<!-- stylesheet -->
+<!-- stylesheets -->
 <link rel="stylesheet" href="//assets.ubuntu.com/sites/guidelines/css/dev/ubuntu-styles.css" type="text/css" />
 <link rel="stylesheet" href="//assets.ubuntu.com/sites/guidelines/css/dev/beta/global.css" type="text/css" />
 <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" />
 <link rel="stylesheet" media="print" href="<?php bloginfo('template_directory'); ?>/static/css/print.css" type="text/css" />
 
-<!-- wordpress head functions -->
+<?php get_template_part("includes/_feeds"); ?>
+
 <?php wp_head(); ?>
 
 <!-- modernizr -->
