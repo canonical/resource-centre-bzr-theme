@@ -155,6 +155,10 @@ core.mobileNav = function() {
 		Y.one('#s').blur();
 	});
 	
+	Y.all('.nav-toggle').on('clickoutside', function(e) {
+    Y.all('#main-navigation div, .nav-toggle').removeClass('active');
+	});
+	
 };
 
 core.mobileSearch = function() {
@@ -166,6 +170,11 @@ core.mobileSearch = function() {
 		Y.one('input#s').focus(),9000;
 		e.preventDefault();
 	});
+
+	Y.all('.search-toggle').on('bluroutside', function(e) {
+    Y.all('#box-search div, .search-toggle').removeClass('active');
+	});
+	
 };
 
 core.mobileShare = function() {
@@ -177,6 +186,11 @@ core.mobileShare = function() {
 		e.preventDefault();
 		Y.one('#s').blur();
 	});
+	
+	Y.all('.share-toggle').on('clickoutside', function(e) {
+    Y.all('#share div, .share-toggle').removeClass('active');
+	});
+	
 };
 
 core.svgFallback = function() {
@@ -249,7 +263,7 @@ core.businessCard = function() {
 
 core.searchFilter = function() {
 	Y.all('.no-filter-wrap .search-filter h2').setStyle('cursor', 'default');
-	Y.all('no-filter-wrap .search-filter h2').setStyle('cursor', 'pointer').append('<span></span>').on('click', function(e) {
+	Y.all('.no-filter-wrap .search-filter h2').setStyle('cursor', 'pointer').append('<span></span>').on('click', function(e) {
 		Y.all('.search-filter div.search-inner, .filter-toggle, .search-filter .search-submit, .search-filter h2').toggleClass('active');
 		e.preventDefault();
 	});
