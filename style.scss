@@ -2688,6 +2688,10 @@ body.single .eight-col .image-wrap img {
 	width: 78px;
 }
 
+.event-map a:hover {
+	border-bottom: 0;
+}
+
 .event-details {
 	color: #888;
 	@include font_size (13);
