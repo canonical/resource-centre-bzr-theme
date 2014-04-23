@@ -5,7 +5,8 @@
  */
 $key = wp_specialchars($s, 1); 
 $search_title = ('Search results for "' . $key . '"');
-$category = get_the_category(); $press_cats = array('press-releases', 'news');
+$category = get_the_category(); 
+$press_cats = array('press-releases', 'news');
 if (isset($_GET['termlist']) && is_array($_GET['termlist']) OR isset($_GET['topiclist']) && is_array($_GET['topiclist'])) : $hasFilter = '1'; endif;
 include("header.php");
 ?>

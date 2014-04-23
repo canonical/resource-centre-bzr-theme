@@ -63,7 +63,7 @@ wp_reset_query();
 
 	<li class="row article">
 		<div class="inner-wrapper">
-			<div class="eight-col no-margin-bottom">
+			<div class="eight-col no-margin-bottom<?php if(in_category( $press_cats )) echo ' has-time'; ?>">
 			<?php if ('event' == get_post_type()) : ?>
 				<?php get_template_part("includes/_event_meta"); ?>
 			<?php else : ?>
