@@ -93,23 +93,6 @@ core.moveShare = function() {
 	Y.one('#share').appendTo('header.global');
 }
 
-core.welcomeMessage = function() {
-	Y.one("#welcome-message div").append("<a class='hide-message' href='#'>close</a>");	
-
-	Y.all('#welcome-message .hide-message').on('click', function(e) {
-		e.preventDefault();
-		Y.all('#welcome-message').addClass('off-left');
-		Y.Cookie.set("_welcome_message", "true", { 
-			path: "/",
-			expires: new Date("January 12, 2025") 
-		});
-	});
-	
-	if(Y.Cookie.get("_welcome_message") != 'true'){
-		Y.one("#welcome-message").removeClass("off-left");
-	}
-}
-
 core.cookiePolicy = function() {
 	function open() {
 		YUI().use('node', function(Y) {
@@ -275,7 +258,6 @@ core.setupHtmlClass();
 core.cloneSearch();
 core.mobileNav();
 core.moveShare();
-core.welcomeMessage();
 core.setUpNav();
 core.mobileSearch();
 core.mobileShare();

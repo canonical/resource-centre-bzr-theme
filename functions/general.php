@@ -124,7 +124,7 @@ function my_add_counts_to_dashboard() {
 // prevent business cards from apearing in search results
 function searchfilter($query) {
 	if ($query->is_search) {
-		$query->set('post_type',array('whitepaper', 'ebook', 'post', 'video', 'attachment', 'casestudy', 'infographic', 'checklists', 'webinar', 'event', 'presskits'));
+		$query->set('post_type',array('whitepaper', 'ebook', 'post', 'video', 'attachment', 'casestudy', 'attachment', 'infographic', 'checklists', 'webinar', 'event', 'presskits'));
 	}
 	return $query;
 }
@@ -440,22 +440,18 @@ if (is_admin()){
 		'context' => 'normal',            // where the meta box appear: normal (default), advanced, side; optional
 		'fields' => array(),            // list of meta fields (can be added by field arrays)
 		'local_images' => false,          // Use local or hosted images (meta box images for add/remove)
-		'use_with_theme' => false          //change path if used with theme set to true, false for a plugin or anything else for a custom path(default false).
+		'use_with_theme' => true          //change path if used with theme set to true, false for a plugin or anything else for a custom path(default false).
 	);
-
 
 	/*
    * Initiate your meta box
    */
 	$my_meta =  new Tax_Meta_Class($config);
 
-	/*
-   * Add fields to your meta box
-   */
+	/* * Add fields to your meta box */
 
 	//text field
 	$my_meta->addText($prefix.'singular',array('name'=> __('Singular ','tax-meta')));
-	//textarea field
 	$my_meta->addText($prefix.'plural',array('name'=> __('Plural ','tax-meta')));
 	/*
    * To Create a reapeater Block first create an array of fields

@@ -108,7 +108,7 @@ get_header();
 					<div itemprop="description"><?php the_content(); ?></div>
 						<?php $attachments = get_children( array('post_parent' => get_the_ID(), 'post_type' => 'attachment') ); if ( $attachments ) : if (! wp_attachment_is_image($attachment_id) ) : ?>
 					<div id="download-item">
-						<p><a class="link-cta-ubuntu" href="<?php echo wp_get_attachment_url( $attachment_id ); ?>?utm_source=<?php the_title(); ?>&amp;utm_medium=download+link&amp;utm_content=<?php echo $post_type->labels->title_friendly, ''; ?>">Download <?php echo $firstCategory; ?></a></p>
+						<p><a class="link-cta-ubuntu" href="<?php echo wp_get_attachment_url( $attachment_id ); ?>?utm_source=<?php the_title(); ?>&amp;utm_medium=download+link&amp;utm_content=<?php echo $post_type->labels->title_friendly, ''; ?>">Download  <?php $term_id = the_category_ID($echo=false); $saved_data = get_tax_meta($term_id,'ba_singular'); echo $saved_data; ?></a></p>
 					</div><?php endif; endif; // end if ( $attachments ) ?>
 		<?php else : ?>
 					<div itemprop="description"><?php the_content(); ?></div>

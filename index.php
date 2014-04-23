@@ -28,7 +28,7 @@ $category = get_the_category(); $press_cats = array('press-releases', 'news');
 
 
 if(is_home() && !is_paged()) : ?><?php
-    $my_query = new WP_Query('post_type=any&posts_per_page=1&meta_key=dbt_checkbox_featured_home&orderby=rand&order=DESC');
+    $my_query = new WP_Query('post_type=any&posts_per_page=1&meta_key=dbt_checkbox_featured_home&orderby=date&order=DESC');
 while ($my_query->have_posts()) : $my_query->the_post();
 $post_type = get_post_type_object( get_post_type($post));
 $do_not_duplicate[] = $post->ID;

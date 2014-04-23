@@ -145,6 +145,10 @@ a:link, a:visited {
   text-decoration: none;
 }
 
+div[itemprop="description"] a:visited {
+	color: #be3e11;
+}
+
 a { ::-moz-selection { background: transparent; } }
 
 a:active, a:focus, a:hover { border-bottom: 1px solid #dd4814; }
@@ -2550,12 +2554,11 @@ header.banner a#share-trigger:focus {
 }
 
 #share div li:last-of-type {
-	margin-bottom: inherit;
 }
 
 #share div li:last-child {
 	border-bottom: 0;
-	padding-bottom: 9px;
+	margin-bottom: 10px;
 }
 
 #share div li a {
@@ -2904,6 +2907,7 @@ blockquote p span {
   .link-cta {
 		@include background_size(16px 15px);
     background: url("static/img/icons/close.svg") no-repeat;
+    background-size: 15px;
     color: #fff;
     float: right;
     font-size: 1em;
@@ -2912,7 +2916,7 @@ blockquote p span {
     margin-top: 12px;
     padding: 0;
     text-decoration: none;
-    text-indent: -9999px;
+    text-indent: -999em;
     width: 16px;
   }
 }

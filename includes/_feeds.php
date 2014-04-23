@@ -3,21 +3,24 @@
 	global $post, $wp_locale;
 	$term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
 	$current_cat = basename(get_permalink());
+	$current_catt = get_query_var('category_name');
 	$category = get_category_by_slug($current_tax);
 ?>
 
 <?php if (is_home()) : ?>
 	<link rel="alternate" type="application/rss+xml" title="Ubuntu resources feed" href="<?php bloginfo('url'); ?>/feed/" />
-<?php endif; // end is_home ?>
 
-<?php if (is_search()) : $key = wp_specialchars($s, 1); ?>
+<?php elseif (is_search()) : $key = wp_specialchars($s, 1); ?>
 	<link rel="alternate" type="application/rss+xml" title="Ubuntu resources '<?php echo $s; ?>' search feed" href="<?php bloginfo('url'); ?>/feed<?php echo $_SERVER['REQUEST_URI']; ?>" />
-<?php endif; // end is_search ?>
 
-<?php if (is_category()) : ?>
-	<link rel="alternate" type="application/rss+xml" title="Ubuntu resources cat feed" href="<?php bloginfo('url'); ?>/feed/" />
-<?php endif; // end is_category ?>
+<?php elseif ( is_page_template('page-category.php') ) : ?>
+	<link rel="alternate" type="application/rss+xml" title="Ubuntu resources '<?php echo $current_cat; ?>' feed" href="<?php bloginfo('url'); ?>/category/<?php echo $current_cat; ?>/feed/" />
 
-<?php if (is_category('topic')) : ?>
-	<link rel="alternate" type="application/rss+xml" title="Ubuntu resources topic feed" href="<?php bloginfo('url'); ?>/feed/" />
+<?php elseif ( is_page_template('page-topics.php') ) : ?>
+	<link rel="alternate" type="application/rss+xml" title="Ubuntu resources topic feed" href="<?php bloginfo('url'); ?>/topic/<?php echo $current_cat; ?>/feed/" />
+
+<?php elseif ( is_single()) : ?>
+
+<?php else : ?>
+	<link rel="alternate" type="application/rss+xml" title="Ubuntu resources <?php echo $term->slug; ?> <?php echo $current_catt; ?> feed" href="<?php bloginfo('url'); ?>/topic/<?php echo $term->slug; ?>/feed?category_name=<?php echo $current_catt; ?>" />
 <?php endif; // end is_category ?>
