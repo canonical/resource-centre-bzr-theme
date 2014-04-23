@@ -502,7 +502,7 @@ function add_fb_open_graph_tags() {
 		global $wpdb;
 		global $posted;
 ?>
-	<meta property="og:description" content="I've just searched for '<?php $key = wp_specialchars($s, 1); echo $key; _e(''); ?>' on the Ubuntu Resources website and thought I'd share the results." />
+	<meta property="og:description" content="I've just searched for '<?php $key = wp_specialchars($s, 1); echo $key; _e(''); ?>' on the Ubuntu Insights website and thought I'd share the results." />
 <?php  } elseif (is_taxonomy('topic', 'category')) {
 		$post_type = get_post_type_object( get_post_type($post));
 		$term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
@@ -517,7 +517,7 @@ function add_fb_open_graph_tags() {
 ?>
 	<meta property="og:title" content="<?php echo get_bloginfo('name'); ?> <?php if($cat_plural == '') : ?><?php echo $get_page_name; ?> resources<?php else : ?><?php echo $cat_plural; ?><?php endif ; ?>" />
 	<meta property="og:url" content="<?php echo "http://" . $_SERVER['HTTP_HOST']  . $_SERVER['REQUEST_URI']; ?>" />
-	<meta property="og:description" content="See all <?php if($cat_plural == '') : ?> <?php echo $get_page_name; ?> resources<?php else : ?><?php echo $cat_plural; ?><?php endif ; ?> on Ubuntu Resources." />
+	<meta property="og:description" content="See all <?php if($cat_plural == '') : ?> <?php echo $get_page_name; ?> resources<?php else : ?><?php echo $cat_plural; ?><?php endif ; ?> on Ubuntu Insights." />
 	<meta property="og:image" content="<?php echo get_template_directory_uri(); ?>/static/img/facebook.png">
 <?php } ?>
 	<meta property="og:site_name" content="<?php echo get_bloginfo('name'); ?>" />

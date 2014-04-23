@@ -34,6 +34,7 @@ if ( !defined('ABSPATH')) exit;
 			<li><a href="http://www.ubuntu.com/legal">Legal information</a></li>
 			<li><a href="http://www.ubuntu.com/privacy-policy">Privacy policy</a></li>
 			<li><a class="screen-only" href="https://bugs.launchpad.net/resource-centre">Report a bug on this site</a></li>
+			<li><?php get_template_part("includes/_feeds-footer"); ?></li>
 		</ul>
 	</div>
 </footer>
