@@ -45,10 +45,10 @@ if ( !defined('ABSPATH')) exit;
 <title><?php if (is_search()) : ?> <?php echo $search_title; ?> <?php elseif (is_category()) : ?><?php $term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) ); ?><?php if( $term != '' ) : ?><?php echo $term->name; ?><?php endif; ?> <?php echo strtolower(single_cat_title( '', false, 'right' )); ?><?php if(is_taxonomy('topic', 'category')) : endif ; ?><?php else : ?> <?php wp_title(''); ?><?php endif; ?> <?php if (!is_home()) : ?>|<? endif; ?> <?php bloginfo('name'); ?></title>
 
 <meta charset="utf-8" />
-<meta name="description" content="" />
-<meta name="keywords" content="" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Ubuntu Insights - The Ubuntu resource center" />
+<meta name="keywords" content="Ubuntu, Ubuntu operating system, OS, platform, Linux, distribution, OpenStack, Ubuntu OpenStack, Ubuntu Cloud, server, tablet, smartphone, phone, Windows alternative, Mac alternative, free software, open source, thin client, Juju, MAAS, Landscape, Ubuntu Advantage, download Ubuntu, deployment, provisioning, service orchestration, services, commercial support, paid support, long term support, LTS, 14.04, Trusty Tahr, Icehouse, maas" />
 <meta name="author" content="Canonical" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <!-- shortcut icons -->
 <link rel="shortcut icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
@@ -72,7 +72,7 @@ if ( !defined('ABSPATH')) exit;
 	
 </head>
 
-<body itemscope itemtype="http://schema.org/Article" id="resources.ubuntu.com" <?php body_class(); ?>>
+<body itemscope itemtype="http://schema.org/Article" id="insights.ubuntu.com" <?php body_class(); ?>>
 
 <!-- Google Tag Manager -->
 <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-W3SR7K"

@@ -26,11 +26,10 @@ if ( !defined('ABSPATH')) exit;
 </div><!-- /.site-wrapper -->
 
 <footer class="global clearfix" role="contentinfo">
-	<p class="top-link"><a href="#resources.ubuntu.com">Back to the top</a></p>
+	<p class="top-link"><a href="#insights.ubuntu.com">Back to the top</a></p>
 	<div class="legal clearfix">
 		<p>&copy; <?php echo date('Y'); ?> Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://canonical.com" title="Visit the Canonical website">Canonical Ltd</a></p> 
 		<ul class="no-bullets inline">
-			<li><a href="http://ubunt.eu/resources-feedback">Feedback</a></li>
 			<li><a href="http://www.ubuntu.com/legal">Legal information</a></li>
 			<li><a href="http://www.ubuntu.com/privacy-policy">Privacy policy</a></li>
 			<li><a class="screen-only" href="https://bugs.launchpad.net/resource-centre">Report a bug on this site</a></li>

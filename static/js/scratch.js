@@ -61,7 +61,6 @@ core.redrawGlobal = function() {
 	}
 };
 
-
 core.cloneSearch = function() {
 	var searchNav = Y.one("#box-search");
 	searchNav.appendTo('header.global');
@@ -198,6 +197,7 @@ core.externalLinks = function() {
 	Y.all('a').filter(function() {
 	   return this.hostname && this.hostname !== location.hostname;
 	}).addClass( "external" ).append("&nbsp;<span></span>");
+	Y.all("a:visited").addClass( "external-visited" );
 	
 	Y.all("a:has(img)").filter(function() {
 	   return !Y.Lang.trim(Y.one(this).text()).length; 
