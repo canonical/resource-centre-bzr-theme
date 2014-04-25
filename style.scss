@@ -359,7 +359,9 @@ footer.global .legal p .external span { top: -2px; }
 
 .single-post-cats a:link { border: 0; }
 
-.single-post-cats a:hover { background: rgba(174, 167, 159, 0.90); }
+#main-content .single-post-cats a:hover { 
+	background: darken( rgba(174, 167, 159, 0.60), 10% ); 
+}
 
 .single-post-cats span {
 	@include font_size (12);
