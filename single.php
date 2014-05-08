@@ -8,8 +8,8 @@ if ( !defined('ABSPATH')) exit;
  *
  *
  * @file           single.php
- * @package        Ubuntu blog theme 
- * @author         Canonical Web Team 
+ * @package        Ubuntu blog theme
+ * @author         Canonical Web Team
  * @copyright      2012 Canonical Ltd
  * @license
  * @version        Release: 1.0
@@ -17,7 +17,7 @@ if ( !defined('ABSPATH')) exit;
  * @link           http://codex.wordpress.org/Theme_Development#Footer_.28footer.php.29
  * @since          available since Release 1.0
  */
-get_header(); 
+get_header();
 	$field = 'dbt_ga_tracking_label';
 	$ga_conversion = get_post_meta($post->ID, $field, TRUE);
 	$the_ga_code = $ga_conversion;
@@ -32,7 +32,7 @@ get_header();
 	global $wpdb;
 	global $posted;
 	$attachment_id = $wpdb->get_var("SELECT ID FROM $wpdb->posts WHERE post_parent = '$post->ID' AND post_status = 'inherit' AND post_type='attachment' ORDER BY post_date DESC LIMIT 1");
-	$articlecat = $category = get_the_category()->category_nicename; 
+	$articlecat = $category = get_the_category()->category_nicename;
 	$category = get_the_category();
 	$category = $category[0]->category_nicename;
 	$firstCategory = $category[0]->category_description;
@@ -51,7 +51,7 @@ get_header();
 	<?php if (have_posts()) : ?>
 		<?php while (have_posts()) : the_post(); ?>
 		<?php if(!current_user_can('administrator')){ echo setPostViews(get_the_ID()); } ?>
-		
+
 <div class="inner-wrapper">
 	<div class="twelve-col no-margin-bottom">
 		<h1 class="eight-col" itemprop="name"><?php the_title(); ?></h1>
@@ -79,18 +79,18 @@ get_header();
 					<?php } else { // show this if the form has not been posted ?>
 					<?php if('post' == get_post_type()) the_excerpt(); ?>
 					<div id="gated-content">
-						<p>Please enter your details to view the <?php echo $post_type->labels->title_friendly; ?>  '<?php the_title(); ?>'</p><meta itemprop="image" content="/some/url/to/an/image.gif" />						
+						<p>Please enter your details to view the <?php echo $post_type->labels->title_friendly; ?>  '<?php the_title(); ?>'</p><meta itemprop="image" content="/some/url/to/an/image.gif" />
 					<?php $term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) ); ?><?php echo $term->name; ?>
-						
+
 					<?php $theurl = rtrim(get_permalink(),'/'); ?>
 					<iframe height="620" width="420" src="https://pages.ubuntu.com/confirmed-download-<?php $terms_as_text = strip_tags( get_the_term_list( $wp_query->post->ID, 'topic', '', ', ', '' ) ); echo $terms_as_text; ?>.html?url_param=<?php echo $theurl; ?>&amp;posted_param=<?php echo $postdate . $postid; ?>&amp;cat=<?php the_category_unlinked(''); ?>" name="iframe_w_param" id="iframe_w_param"></iframe>
 					</div><!-- /#gated-content -->
 					<?php } // end if market_form completed ?>
-					
+
 <?php } elseif(($gated_content == 'on' && $posted == $postdate . $postid)) { // show this if is gated and the form has been posted ?>
 
 		<?php if ( get_post_meta($post->ID, 'postVideo', true) ) : ?>
-					<div class="video-wrapper"><iframe class="post-video" width="596" height="335" src="http://www.youtube.com/embed/<?php echo $video_content; ?>?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe></div>
+					<div class="video-wrapper"><iframe class="post-video" width="596" height="335" src="https://www.youtube.com/embed/<?php echo $video_content; ?>?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe></div>
 					<?php the_content(); ?>
 		<?php else : ?>
 		<?php if('post' == get_post_type()) : ?>
@@ -102,7 +102,7 @@ get_header();
 			<?php } else { // show this if the post is not gated ?>
 		<?php if ( get_post_meta($post->ID, 'postVideo', true) ) : ?>
 				<?php if ( !empty( $post->post_excerpt ) ) :	the_excerpt(); else : false; endif; ?>
-					<div class="video-wrapper"><iframe class="post-video" width="596" height="335" src="http://www.youtube.com/embed/<?php echo $video_content; ?>?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe></div>
+					<div class="video-wrapper"><iframe class="post-video" width="596" height="335" src="https://www.youtube.com/embed/<?php echo $video_content; ?>?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe></div>
 					<div itemprop="description"><?php the_content(); ?></div>
 		<?php elseif('post' == get_post_type() || 'presskits' == get_post_type()) : ?>
 					<div itemprop="description"><?php the_content(); ?></div>
@@ -124,8 +124,8 @@ get_header();
 		<?php endif; // if video  ?>
 <?php } // end if gated ?>
 				<?php if('event' == get_post_type()) : ?>
-				<?php 
-					$current_time = current_time('mysql'); 
+				<?php
+					$current_time = current_time('mysql');
 					list( $today_year, $today_month, $today_day, $hour, $minute, $second ) = split( '([^0-9])', $current_time );
 					$current_timestamp = $today_year . $today_month . $today_day . $hour . $minute;
 					$event_timestamp = get_post_meta( $post->ID, '_start_eventtimestamp', true ); ?>
@@ -141,12 +141,12 @@ get_header();
 <div id="sidebar" class="four-col last-col instapaper_ignore">
 <?php //get_template_part("includes/_subscribe"); ?>
 <?php get_template_part("includes/_related_posts"); ?>
-<?php endwhile; // while have_posts ends ?> 
-<?php endif; // if have_posts ends ?> 
+<?php endwhile; // while have_posts ends ?>
+<?php endif; // if have_posts ends ?>
 
 <?php /*
 <div class="four-col<?php $tags = wp_get_post_tags($post->ID); if ($tags) { echo ' has-related'; } ?>">
-	<?php // comments_template(); ?> 
+	<?php // comments_template(); ?>
 </div><!-- /.four-col -->
 */ ?>
 
@@ -154,8 +154,8 @@ get_header();
 wp_reset_query();
 global $wpdb;
 global $posted;
-$queried_object = get_queried_object();  
-$term_slug = $queried_object->slug; 
+$queried_object = get_queried_object();
+$term_slug = $queried_object->slug;
 $custom_taxterms = wp_get_object_terms( $post->ID, 'topic', array('fields' => 'ids') );
 
   $args=array(
@@ -185,13 +185,13 @@ $custom_taxterms = wp_get_object_terms( $post->ID, 'topic', array('fields' => 'i
 					<?php the_content(); ?>
 				</div>
 			</div>
-        
+
 <?php endwhile; } wp_reset_query(); ?>
 </div><!-- /.instapaper_ignore -->
 </div><!-- /.twelve-col -->
 </div><!-- /.inner-wrapper -->
-</div><!-- /.row --> 
+</div><!-- /.row -->
 
-<?php // dynamic_sidebar( 'search-sidebar' ); ?>	
+<?php // dynamic_sidebar( 'search-sidebar' ); ?>
 
 <?php get_footer(); ?>

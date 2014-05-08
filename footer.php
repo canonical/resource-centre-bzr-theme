@@ -7,8 +7,8 @@ if ( !defined('ABSPATH')) exit;
  *
  *
  * @file           footer.php
- * @package        Ubuntu theme 
- * @author         Canonical Web Team 
+ * @package        Ubuntu theme
+ * @author         Canonical Web Team
  * @copyright      2012 Canonical Ltd
  * @license
  * @version        Release: 1.0
@@ -28,7 +28,7 @@ if ( !defined('ABSPATH')) exit;
 <footer class="global clearfix" role="contentinfo">
 	<p class="top-link"><a href="#insights.ubuntu.com">Back to the top</a></p>
 	<div class="legal clearfix">
-		<p>&copy; <?php echo date('Y'); ?> Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://canonical.com" title="Visit the Canonical website">Canonical Ltd</a></p> 
+		<p>&copy; <?php echo date('Y'); ?> Canonical Ltd. Ubuntu and Canonical are registered trademarks of <a href="http://canonical.com" title="Visit the Canonical website">Canonical Ltd</a></p>
 		<ul class="no-bullets inline">
 			<li><a href="http://www.ubuntu.com/legal">Legal information</a></li>
 			<li><a href="http://www.ubuntu.com/privacy-policy">Privacy policy</a></li>
@@ -64,11 +64,11 @@ if ( !defined('ABSPATH')) exit;
 	core.globalPrepend = 'body';
 </script>
 <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/core.js"></script>
+<script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/global.js"></script>
 <?php if(is_category() || is_search()) : ?>
 <script src="<?php bloginfo('template_directory'); ?>/static/js/core.js"></script>
 <?php endif ; ?>
 <script src="<?php bloginfo('template_directory'); ?>/static/js/scratch.min.js"></script>
-<script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/global.js"></script>
 <script src="<?php bloginfo('template_directory'); ?>/static/js/plugins/respond.min.js"></script>
 
 </body>
