@@ -119,7 +119,7 @@ class WordPress_Radio_Taxonomy {
     }
 
 	 public function admin_script(){  
-		wp_register_script( 'radiotax', get_template_directory_uri() . '/js/radiotax.js', array('jquery'), null, true ); // We specify true here to tell WordPress this script needs to be loaded in the footer  
+		wp_register_script( 'radiotax', get_template_directory_uri() . '/static/js/radiotax.js', array('jquery'), null, true ); // We specify true here to tell WordPress this script needs to be loaded in the footer  
 		wp_localize_script( 'radiotax', 'radio_tax', array('slug'=>self::$taxonomy));
 		wp_enqueue_script( 'radiotax' );  
 	}

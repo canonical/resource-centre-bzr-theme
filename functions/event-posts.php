@@ -48,7 +48,7 @@ function ep_eventposts() {
 		'capability_type' => 'post',
 		'rewrite' => array("slug" => "event"), // Permalinks format
 		'menu_position' => 5,
-		'menu_icon' => plugin_dir_url( __FILE__ ) . '/images/calendar-icon.gif',  // Icon Path
+    'menu_icon' => get_stylesheet_directory_uri() . '/static/img/admin/calendar-day.png',
 		'has_archive' => true
 	); 
 
@@ -257,9 +257,9 @@ function eventposttype_get_the_event_date() {
 add_action('admin_print_styles-post.php', 'ep_eventposts_css');
 add_action('admin_print_styles-post-new.php', 'ep_eventposts_css');
 
-function ep_eventposts_css() {
-	wp_enqueue_style('your-meta-box', plugin_dir_url( __FILE__ ) . '/event-post-metabox.css');
-}
+//function ep_eventposts_css() {
+	//wp_enqueue_style('your-meta-box', plugin_dir_url( __FILE__ ) . '/event-post-metabox.css');
+//}
 
 /**
  * Customize Event Query using Post Meta

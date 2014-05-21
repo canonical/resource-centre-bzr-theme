@@ -10,10 +10,10 @@
 		add google analytics
 		add marketo to footer
 */
-if(is_admin()) {  
-    wp_enqueue_script('jquery-ui-datepicker');  
-    wp_enqueue_style('jquery-ui-custom', get_template_directory_uri().'/css/jquery-ui-custom.css');  
-}  
+//if(is_admin()) {  
+    //wp_enqueue_script('jquery-ui-datepicker');  
+    //wp_enqueue_style('jquery-ui-custom', get_template_directory_uri().'/css/jquery-ui-custom.css');  
+//}  
 
 // add jquery
 function jquery_init() {

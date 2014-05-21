@@ -143,7 +143,7 @@ function post_type_event()
     'menu_position' => 5,
     'comments' => true,
     'has_archive' => true,
-    'menu_icon' => get_stylesheet_directory_uri() . '/assets/img/admin/calendar-day.png',
+    'menu_icon' => get_stylesheet_directory_uri() . '/static/img/admin/calendar-day.png',
     'supports' => array( 'revisions', 'attachments', 'title', 'excerpt', 'editor', 'thumbnail', 'author','comments' ));
   register_post_type('event',$args);
 }
@@ -179,7 +179,7 @@ function post_type_productbusinesscard()
     'hierarchical' => true,
     'menu_position' => 10,
     'has_archive' => true,
-    'menu_icon' => get_stylesheet_directory_uri() . '/assets/img/admin/document-text.png',
+    'menu_icon' => get_stylesheet_directory_uri() . '/static/img/admin/document-text.png',
     'supports' => array( 'revisions', 'attachments', 'title', 'excerpt', 'editor', 'thumbnail', 'author','comments' ));
   register_post_type('productbusinesscard',$args);
 }
@@ -214,7 +214,7 @@ function post_type_topiccta()
     'hierarchical' => true,
     'menu_position' => 10,
     'has_archive' => true,
-    'menu_icon' => get_stylesheet_directory_uri() . '/assets/img/admin/document-text.png',
+    'menu_icon' => get_stylesheet_directory_uri() . '/static/img/admin/document-text.png',
     'supports' => array( 'revisions', 'attachments', 'title', 'excerpt', 'editor', 'thumbnail', 'author','comments' ));
   register_post_type('topiccta',$args);
 }
@@ -325,7 +325,7 @@ function post_type_webinar()
     'hierarchical' => true,
     'menu_position' => 6,
     'has_archive' => true,
-    'menu_icon' => get_stylesheet_directory_uri() . '/assets/img/admin/film.png',
+    'menu_icon' => get_stylesheet_directory_uri() . '/static/img/admin/film.png',
     'supports' => array( 'revisions', 'attachments', 'title', 'excerpt', 'editor', 'thumbnail', 'author','comments' ));
   register_post_type('webinar',$args);
  
