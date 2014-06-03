@@ -57,7 +57,7 @@ if ( !defined('ABSPATH')) exit;
 	}
 </script> */ ?>
 
-<script src="//assets.ubuntu.com/sites/ubuntu/1042/u/js/plugins/yui-combined.min.js"></script>
+<script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/plugins/yui-combined.min.js"></script>
 
 <script>
 	if(!core){ var core = {}; }
