@@ -166,7 +166,7 @@ if ( !defined('ABSPATH')) exit;
 		while ( $y > 2004 ) { // Pick a reasonable year you want this loop to end at, to save your server some time.
 				$args = array(
 					'posts_per_page' => -1,
-					'cat'		 => 6,
+					'cat'		 => 1189,
 					'year'		 => $y
 				);
 				$cat_q = new WP_Query( $args );
