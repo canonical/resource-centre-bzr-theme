@@ -1,5 +1,5 @@
 <?php
-/* 
+/*
 	Contents:
 		add jquery
 		add google plus and marketo for single only (atm)
@@ -10,22 +10,18 @@
 		add google analytics
 		add marketo to footer
 */
-if(is_admin()) {  
-    wp_enqueue_script('jquery-ui-datepicker');  
-    wp_enqueue_style('jquery-ui-custom', get_template_directory_uri().'/css/jquery-ui-custom.css');  
-}  
 
 // add jquery
 function jquery_init() {
-	if (!is_admin() && is_search() || is_category() ) {
+	if (!is_admin() && is_search() || is_category()) {
 		wp_deregister_script('jquery');
 		wp_register_script('jquery', get_template_directory_uri() . '/static/js/jquery.min.js', false, '1.9.1', true);
 		wp_enqueue_script('jquery');
-						
-    	// load infinite scroll jquery		
+
+    	// load infinite scroll jquery
 		wp_register_script( 'infinite_scroll',  get_template_directory_uri() . '/static/js/jquery.infinitescroll.min.js', array('jquery'),null,true );
 
-    	// load manual-trigger.js jquery		
+    	// load manual-trigger.js jquery
 		wp_register_script( 'infinite_scroll_trigger',  get_template_directory_uri() . '/static/js/manual-trigger.js', array('jquery'),null,true );
 		    if( ! is_singular() ) {
 		        wp_enqueue_script('infinite_scroll');
@@ -36,19 +32,22 @@ function jquery_init() {
 }
 add_action('wp_footer', 'jquery_init');
 // end add jquery
-    
+
 // add google analytics to footer
 function add_google_analytics() {
 	if (!is_admin()) { ?>
         <!-- google analytics -->
 				<script>
-				  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-				  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-				  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-				  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-				
-				  ga('create', 'UA-1018242-45', 'ubuntu.com');
-				  ga('send', 'pageview');
+				var _gaq = _gaq || [];
+				_gaq.push(['_setAccount', 'UA-1018242-39']);
+				_gaq.push(['_trackPageview']);
+				(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+
+				ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				})();
 				</script>
     <?php
     }
@@ -76,9 +75,9 @@ function add_munchkin_tracking() {
 			  };
 			  s.onload = initMunchkin;
 			  document.getElementsByTagName('body')[0].appendChild(s);
-			})();    
+			})();
 		</script>
-		
+
     <?php
     }
 }

@@ -9,7 +9,7 @@
 
 function add_topics() {
 	// Add new "topic" taxonomy to Posts
-	register_taxonomy('topic',array('whitepaper', 'ebook', 'article', 'post', 'video', 'attachment', 'casestudy', 'infographic', 'productbusinesscard', 'topiccta', 'webinar', 'event', 'case-study', 'presskits', 'promo'), array(
+	register_taxonomy('topic',array('whitepaper', 'ebook', 'article', 'post', 'downloads', 'video', 'attachment', 'casestudy', 'infographic', 'productbusinesscard', 'topiccta', 'webinar', 'event', 'case-study', 'presskits', 'promo'), array(
 		'hierarchical' => true,
 		'show_admin_column' => true,
 		'labels' => array(
@@ -34,6 +34,36 @@ function add_topics() {
 	));
 }
 add_action( 'init', 'add_topics', 0 );
+
+function add_download_topics() {
+	// Add new "topic" taxonomy to Posts
+	register_taxonomy('download-type',array('post'), array(
+		'hierarchical' => true,
+		'show_admin_column' => true,
+		'labels' => array(
+			'name' => _x( 'Download category', 'taxonomy general name' ),
+			'singular_name' => _x( 'Download type', 'taxonomy singular name' ),
+			'search_items' =>  __( 'Search download types' ),
+			'all_items' => __( 'All download types' ),
+			'parent_item' => __( 'Parent download types' ),
+			'parent_item_colon' => __( 'Parent download type:' ),
+			'edit_item' => __( 'Edit asset type' ),
+			'update_item' => __( 'Update download type' ),
+			'add_new_item' => __( 'Add new download type' ),
+			'show_ui' => false,
+			'new_item_name' => __( 'New download type name' ),
+			'menu_name' => __( 'Download category' ),
+			'menu_position' => 6
+		),
+		'rewrite' => array(
+			'slug' => 'type', // This controls the base slug that will display before each term
+			'with_front' => false, // Don't display the category base before "/locations/"
+			'hierarchical' => true // This will allow URL's like "/locations/boston/cambridge/"
+		),
+	));
+}
+add_action( 'init', 'add_download_topics', 0 );
+
 
 /*function add_audience() {
 	// Add new "products-and-services" taxonomy to Posts

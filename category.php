@@ -20,12 +20,12 @@ if ( !defined('ABSPATH')) exit;
 
 get_header();
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
-$term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) ); 
-$category = get_the_category(); 
+$term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
+$category = get_the_category();
 $press_cats = array('press-releases', 'news'); ?>
 <div class="row row-hero no-border">
 	<div class="inner-wrapper">
-		<h1 class="cat-title eight-col no-margin-bottom"><?php if(is_taxonomy('topic', 'category')) : echo 'We&#39;ve found '; endif ; ?><?php printf( __( ' %d %s' ), $wp_query->found_posts, _n( 'result', 'results', $wp_query->found_posts), get_posts() ); ?> for "<?php $term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) ); ?><span></span><?php if( $term != '' ) : ?><span class="taxonomy-title"><?php echo $term->name; ?></span><?php endif; ?> <span><?php single_cat_title(); ?></span><?php if(is_taxonomy('topic', 'category')) : echo '"'; endif ; ?></h1>
+		<h1 class="cat-title eight-col no-margin-bottom"><?php if(is_taxonomy('topic', 'category')) : echo 'We&#39;ve found '; endif ; ?><?php printf( __( ' %d %s' ), $wp_query->found_posts, _n( 'result', 'results', $wp_query->found_posts), get_posts() ); ?> for "<?php $term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) ); ?><?php if( $term != '' ) : ?><span class="taxonomy-title"><?php echo $term->name; ?>&nbsp;</span><?php endif; ?><?php if( $year != '' ) : ?><?php echo $year, ' '; ?><?php endif ; ?><span><?php single_cat_title(); ?></span><?php if(is_taxonomy('topic', 'category')) : echo '"'; endif ; ?></h1>
 	</div><!-- /.inner-wrapper -->
 </div><!-- /.row -->
 
@@ -67,7 +67,7 @@ wp_reset_query();
 			<?php if ('event' == get_post_type()) : ?>
 				<?php get_template_part("includes/_event_meta"); ?>
 			<?php else : ?>
-				<?php get_template_part("content_home_featured"); ?>	
+				<?php get_template_part("content_home_featured"); ?>
 			<?php endif ; ?>
       </div><!-- /.eight-col -->
 		</div><!-- /.inner-wrapper -->

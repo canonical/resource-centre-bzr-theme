@@ -48,8 +48,8 @@ function ep_eventposts() {
 		'capability_type' => 'post',
 		'rewrite' => array("slug" => "event"), // Permalinks format
 		'menu_position' => 5,
-		'menu_icon' => plugin_dir_url( __FILE__ ) . '/images/calendar-icon.gif',  // Icon Path
-		'has_archive' => true
+    'menu_icon' => get_stylesheet_directory_uri() . '/static/img/admin/calendar-day.png',
+    'has_archive' => true
 	); 
 
 	register_post_type( 'event', $args );
@@ -70,6 +70,7 @@ function ep_eventposts_metaboxes() {
 	add_meta_box( 'ept_event_date_start', 'Start Date', 'ept_event_date', 'event', 'side', 'default', array( 'id' => '_start') );
 	add_meta_box( 'ept_event_date_end', 'End Date', 'ept_event_date', 'event', 'side', 'default', array('id'=>'_end') );
 	add_meta_box( 'ept_event_location', 'Event Location', 'ept_event_location', 'event', 'normal', 'default', array('id'=>'_end') );
+	add_meta_box( 'ept_event_venue', 'Event Venue', 'ept_event_venue', 'event', 'normal', 'default', array('id'=>'_end') );
 	add_meta_box( 'ept_event_registration', 'Event registration', 'ept_event_registration', 'event', 'normal', 'default', array('id'=>'_end') );
 }
 add_action( 'admin_init', 'ep_eventposts_metaboxes' );
@@ -141,6 +142,16 @@ function ept_event_location() {
 	echo '<input type="text" name="_event_location" value="' . $event_location  . '" required />';
 }
 
+function ept_event_venue() {
+	global $post;
+	// Use nonce for verification
+	wp_nonce_field( plugin_basename( __FILE__ ), 'ep_eventposts_nonce' );
+	// The metabox HTML
+	$event_venue = get_post_meta( $post->ID, '_event_venue', true );
+	echo '<label for="_event_venue">Venue: </label>';
+	echo '<input type="text" name="_event_venue" value="' . $event_venue  . '" required />';
+}
+
 function ept_event_registration() {
 	global $post;
 	// Use nonce for verification
@@ -202,7 +213,10 @@ function ep_eventposts_save_meta( $post_id, $post ) {
     	
     	 $events_meta['_event_location'] = $_POST['_event_location'];	
  
-    	// Save registration Meta
+     	// Save venue Meta
+    	
+    	 $events_meta['_event_venue'] = $_POST['_event_venue'];	
+   	// Save registration Meta
     	
     	 $events_meta['_event_registration'] = $_POST['_event_registration'];	
  

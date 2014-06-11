@@ -23,12 +23,21 @@ $style_classes = array('','',' last-col'); // cycle last col
 $style_index = 0; // count for cycle
 $postCount = 0;
 $post_type = get_post_type_object( get_post_type($post) );
-$category = get_the_category(); $press_cats = array('press-releases', 'news'); 
+$category = get_the_category(); 
+$press_cats = array('press-releases', 'news'); 
 ?><?php  /* ============== pull in featured ============== */
 
-
 if(is_home() && !is_paged()) : ?><?php
-    $my_query = new WP_Query('post_type=any&posts_per_page=1&meta_key=dbt_checkbox_featured_home&orderby=date&order=DESC');
+		$exclude_cat = 'downloads';
+		$category = get_category_by_slug($exclude_cat);
+		$my_query = new WP_Query( array(
+			'cat'	=> -$category->cat_ID,
+			'meta_key' => 'dbt_checkbox_featured_home',
+			'order' => 'DESC',
+			'orderby' => 'date',
+			'post_type' => 'any',
+			'posts_per_page' => 1
+			));
 while ($my_query->have_posts()) : $my_query->the_post();
 $post_type = get_post_type_object( get_post_type($post));
 $do_not_duplicate[] = $post->ID;
@@ -51,13 +60,16 @@ $do_not_duplicate[] = $post->ID;
     /* ============== end pull in featured ============== */
     ?><?php /* ============== pull in latest events ============== */
     $paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
+    $exclude_cat = 'downloads';
+    $category = get_category_by_slug($exclude_cat);
     $query = new WP_Query( array(
-            'posts_per_page' => 2,
-            'post_type' => 'event',
-            'orderby' => 'date',
+            'cat'	=> -$category->cat_ID,
             'order' => 'DESC',
+            'orderby' => 'date',
+            'paged'=>$paged,
             'post__not_in' => $do_not_duplicate,
-            'paged'=>$paged
+            'post_type' => 'event',
+            'posts_per_page' => 2
         ));
     ?><?php if ( $query->have_posts() ) : ?>
 
@@ -82,12 +94,15 @@ $do_not_duplicate[] = $post->ID;
     wp_reset_query();
     ?><?php /* ============== pull in latest cloud articles ============== */
     $paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
+    $exclude_cat = 'downloads';
+    $category = get_category_by_slug($exclude_cat);
     $query = new WP_Query( array(
-            'posts_per_page' => 2,
-            'topic' => 'cloud',
-            'post_type' => 'any',
+            'cat'	=> -$category->cat_ID,
+            'paged'=>$paged,
             'post__not_in' => $do_not_duplicate,
-            'paged'=>$paged
+            'post_type' => 'any',
+            'posts_per_page' => 2,
+            'topic' => 'cloud'
         ));
     ?><?php if (have_posts()) : ?>
 
@@ -110,12 +125,15 @@ $do_not_duplicate[] = $post->ID;
     ?><?php
     /* ============== pull in latest server articles ============== */
     $paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
+    $exclude_cat = 'downloads';
+    $category = get_category_by_slug($exclude_cat);
     $query = new WP_Query( array(
-            'posts_per_page' => 2,
-            'topic' => 'server',
-            'post_type' => 'any',
+            'cat'	=> -$category->cat_ID,
+            'paged'=>$paged,
             'post__not_in' => $do_not_duplicate,
-            'paged'=>$paged
+            'post_type' => 'any',
+            'posts_per_page' => 2,
+            'topic' => 'server'
         ));
     ?><?php if (have_posts()) : ?>
 
@@ -144,13 +162,16 @@ $do_not_duplicate[] = $post->ID;
             <?php
             /* ============== pull in latest phone articles ============== */
             $paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
+            $exclude_cat = 'downloads';
+            $category = get_category_by_slug($exclude_cat);
             $query = new WP_Query( array(
-                    'posts_per_page' => 2,
-                    'topic' => 'phone',
+                    'cat'	=> -$category->cat_ID,
                     'order' => 'DESC',
-                    'post_type' => 'any',
+                    'paged'=>$paged,
                     'post__not_in' => $do_not_duplicate,
-                    'paged'=>$paged
+                    'post_type' => 'any',
+                    'posts_per_page' => 2,
+                    'topic' => 'phone'
                 ));
             ?><?php if (have_posts()) : ?>
 
@@ -161,7 +182,13 @@ $do_not_duplicate[] = $post->ID;
                     <?php
                         while( $query->have_posts() ):
                             $query->the_post();
-                        $do_not_duplicate[] = $post->ID ?><?php if ('event' == get_post_type()) : ?><?php get_template_part("includes/_event_meta"); ?><?php else : ?><?php get_template_part("content_home"); ?><?php endif ; ?><?php endwhile; ?>
+														$do_not_duplicate[] = $post->ID ?>
+														<?php if ('event' == get_post_type()) : ?>
+															<?php get_template_part("includes/_event_meta"); ?>
+														<?php else : ?>
+															<?php get_template_part("content_home"); ?>
+														<?php endif ; ?>
+												<?php endwhile; ?>
                 </ul>
             </div><!-- /.six-col -->
             <?php endif; // if have_posts ends
@@ -170,12 +197,15 @@ $do_not_duplicate[] = $post->ID;
             ?><?php
             /* ============== pull in latest tablet articles ============== */
             $paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
+            $exclude_cat = 'downloads';
+            $category = get_category_by_slug($exclude_cat);
             $query = new WP_Query( array(
-                    'posts_per_page' => 2,
-                    'topic' => 'tablet',
-                    'post_type' => 'any',
+                    'cat'	=> -$category->cat_ID,
+                    'paged'=>$paged,
                     'post__not_in' => $do_not_duplicate,
-                    'paged'=>$paged
+                    'post_type' => 'any',
+                    'posts_per_page' => 2,
+                    'topic' => 'tablet'
                 ));
             ?><?php if (have_posts()) : ?>
 
@@ -185,8 +215,10 @@ $do_not_duplicate[] = $post->ID;
                 <ul class="no-bullets no-margin-bottom">
                     <?php
                         while( $query->have_posts() ):
-                            $query->the_post();
-                        $do_not_duplicate[] = $post->ID ?><?php if ('event' == get_post_type()) : ?><?php get_template_part("includes/_event_meta"); ?><?php else : ?><?php get_template_part("content_home"); ?><?php endif ; ?><?php endwhile; ?>
+													$query->the_post();
+													$do_not_duplicate[] = $post->ID 
+													 ?>
+                        <?php if ('event' == get_post_type()) : ?><?php get_template_part("includes/_event_meta"); ?><?php else : ?><?php get_template_part("content_home"); ?><?php endif ; ?><?php endwhile; ?>
                 </ul>
             </div><!-- /.six-col -->
             <?php endif; // if have_posts ends
@@ -199,12 +231,15 @@ $do_not_duplicate[] = $post->ID;
     <?php
     /* ============== pull in latest desktop articles ============== */
     $paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
+    $exclude_cat = 'downloads';
+    $category = get_category_by_slug($exclude_cat);
     $query = new WP_Query( array(
-            'posts_per_page' => 2,
-            'topic' => 'desktop',
-            'post_type' => 'any',
+            'cat'	=> -$category->cat_ID,
+            'paged'=>$paged,
             'post__not_in' => $do_not_duplicate,
-            'paged'=>$paged
+            'post_type' => 'any',
+            'posts_per_page' => 2,
+            'topic' => 'desktop'
         ));
     ?><?php if (have_posts()) : ?>
 

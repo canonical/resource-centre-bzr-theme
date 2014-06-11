@@ -15,18 +15,16 @@ Copyright (C) 2012 Canonical Ltd
 @import "static/css/core-constants";
 @import "static/css/core-mixins";
 
-$cool_grey:				    #333333; 	/* cool grey */
-$light_grey:			    #f7f7f7; 	/* light grey */
-$light_orange:        #fdf6f2; 	/* used as background on pre text */
-$meta_grey:						#888; 		/* meta grey */
-$nav_bg:							#f0f0f0;
-$nav_border_dark:			#d4d7d4;
-$nav_border_light:		#f2f2f4;
-$nav_link_color:			#333;
-$ubuntu_orange:			  #dd4814; 	/* ubuntu orange */
-$warm_grey:				    #aea79f; 	/* warm grey */
-
-$base: 14;
+$cool_grey:				  #333333; 	/* cool grey */
+$light_grey:			  #f7f7f7; 	/* light grey */
+$light_orange:      #fdf6f2; 	/* used as background on pre text */
+$meta_grey:					#888888;	/* meta grey */
+$nav_bg:						#f0f0f0;
+$nav_border_dark:		#d4d7d4;
+$nav_border_light:	#f2f2f4;
+$nav_link_color:		#333333;
+$ubuntu_orange:			#dd4814; 	/* ubuntu orange */
+$warm_grey:				  #888888; 	/* warm grey */
 
 /* assets database path */
 $asset_path: "//assets.ubuntu.com/sites/ubuntu/latest/u/img/";
@@ -155,120 +153,6 @@ a:active, a:focus, a:hover { border-bottom: 1px solid #dd4814; }
 
 a:active img, a:focus img, a:hover img { border-bottom: 0; }
 
-/* welcome-message
------------------------------------------------------------------ */
-#welcome-message {
-	color: #939393;
-	position: relative;
-	box-shadow: 
-		inset 0 -4px 4px -4px rgba(0, 0, 0, .3), 
-		inset 0  5px 5px -5px rgba(0, 0, 0, 0.3);
-	margin-bottom: 0;
-	padding-bottom: 30px;
-	overflow: hidden;
-}
-
-body.category #welcome-message,
-body.tax-topic #welcome-message,
-body.page #welcome-message,
-body.search #welcome-message,
-body.single #welcome-message { top: -10px; }
-
-#welcome-message div.welcome-message-inner {
-	@include box_sizing();	
-	margin: 0 auto;
-	padding: 0;
-	position: relative;
-}
-
-#welcome-message.off-left {
-	height: 0;
-	left: -999em;
-	position: absolute;
-}
-
-#welcome-message {
-	color: $cool_grey;
-	
-	h1 {
-		font-size: 20px;
-		position: relative;
-		padding: 20px 40px 0 0;
-	}
-	
-	li a {
-		background-position: 50% 0;
-		background-repeat: no-repeat;
-		display: block;
-		float: left;
-		font-size: 1.219em;
-		padding-top: 0;
-		position: relative;
-		width: 48.5%;
-		z-index: 5;
-	}
-	
-	li.nav-phone a {
-		background-image: url("static/img/nav-phone.png");
-		background-size: 58.5px 106.5px;
-	}
-	
-	li.nav-tablet a {
-		background-image: url("static/img/nav-tablet.png");
-		background-size: 171.5px 109.5px;
-	}
-	
-	li.nav-cloud a {
-		background-image: url("static/img/nav-cloud.png");
-		background-size: 100px 100px;
-	}
-	
-	li.nav-server a {
-		background-image: url("static/img/nav-server.png");
-		background-size: 100px 100px;
-	}
-	
-	li.nav-desktop a {
-		background-image: url("static/img/nav-desktop.png");
-		background-size: 210px 105px;
-	}
-	
-	.hide-message:hover { border-bottom: transparent; }
-	
-	a { color: #939393; }
-	
-	a:hover { border-bottom-color: #939393; }
-	
-	a.external span { margin-left: 3px; }
-	
-	ul { margin-bottom: 0; }
-	
-} /* end  welcome message */
-
-
-.hide-message {
-	background-image: url("static/img/close.svg");
-	background-repeat: no-repeat;
-	background-size: 15px 15px;
-	color: #939393;
-	font-family: Arial, sans-serif;
-	font-size: 1.385em;
-	height: 15px;
-	margin: 0;
-	overflow: hidden;
-	padding: 0;
-	position: absolute;
-	right: 0;
-	text-align: center;
-	text-indent: -999em;
-	top: 25px;
-	width: 15px;
-	z-index: 999;
-}
-
-.opera-mini #welcome-message .hide-message,
-.no-svg #welcome-message .hide-message { background-image: url("static/img/icons/close.png"); } 
-
 /* external icon
 ----------------------------------------------------------------- */
 .external span { 
@@ -390,7 +274,7 @@ footer.global ul.inline li {
 }
 
 footer.global ul.inline li:after {
-  color: #AEA79F;
+  color: #888888;
   content: "•";
   margin: 0 5px;
   vertical-align: middle;
@@ -586,6 +470,16 @@ h1 div, h3 span, h2 span {
 
 .lowercase { text-transform: lowercase; }
 
+code {
+	@include rounded_corners(4px);
+	@include box_sizing;
+	background: #FDF6F2;
+	display: inline-block;
+	padding: 10px 20px;
+	word-break: break-word;
+	
+}
+
 h1 span.taxonomy-title + span {
 	text-transform: lowercase;	
 	font-weight: 300;
@@ -778,31 +672,13 @@ form label {
 	padding: 10px ($grid_unit_small + px) 0;
 	width: 100%;
 
-	h2 {
-		font-size: 1em;
-		clear: both;
-		color: $meta_grey;
-		float: left;
-		font-weight: 300;
-		margin-bottom: 5px;
-		width: 100%;
-	}
-	
 	h3 {
 		font-size: 1.219em;
 		margin-bottom: 0;
 	}
 	
 	ul { margin-bottom: 0; }
-		
-	li {
-		border-bottom: 1px dotted $warm_grey;
-		clear: both;
-		float: left;
-		display: block;
-		width: 100%;
-	}
-		
+				
 	li span { 
 		color: #333; 
 	
@@ -829,14 +705,7 @@ form label {
 	}
 
 	li li {
-		border: 0;
 		color: $meta_grey;
-		float: left;
-		display: inline-block;
-		clear: none;
-		padding: 0;
-		width: auto;
-		margin-right: 4px;
 
     &:after {
 	    content: ",";
@@ -866,6 +735,42 @@ form label {
 	}
 
 } /* end related-posts */
+
+#sidebar {
+	h2 {
+		font-size: 1em;
+		clear: both;
+		color: $meta_grey;
+		float: left;
+		font-weight: 300;
+		margin-bottom: 5px;
+		width: 100%;
+	}
+	li {
+		border-bottom: 1px dotted $warm_grey;
+		clear: both;
+		float: left;
+		display: block;
+		width: 100%;
+	}
+	li:last-child {
+		border: 0;
+	}
+	li:last-child ul {
+		border: 0;
+		padding-bottom: 0;
+	}
+	li li {
+		border: 0;
+		float: left;
+		display: inline-block;
+		clear: none;
+		padding: 0;
+		width: auto;
+		margin-right: 4px;
+	}
+
+} // end sidebar
 
 #main-content .related-posts li li a:visited {
 	color: $meta_grey;
@@ -1016,10 +921,30 @@ body.post-type-archive .box {
 }
 
 .article-list li.row:nth-child(even),
-.article-list div.row:nth-child(even) { background: rgba(255, 255, 255, 0.75); }
+.article-list div.row:nth-child(even) { background: rgba(255, 255, 255, 0.60); }
+
+body.page-template-page_downloads-php {
+	.article-list li.row:nth-child(odd),
+	.article-list div.row:nth-child(odd) { background: rgba(255, 255, 255, 0.60); }
+}
+
+.list-follow,
+.list-about {
+	div.row:nth-child(odd) { background: rgba(255, 255, 255, 0.60); }
+}
+
+body.page-template-page_downloads-php {
+	.article-list li.row:nth-child(even),
+	.article-list div.row:nth-child(even) { background: none; }
+}
+
+.list-follow,
+.list-about {
+	div.row:nth-child(even) { background: none; }
+}
 
 body.tax-topic .article-list li.row:nth-child(even),
-body.tax-topic .article-list div.row:nth-child(even) { background: rgba(255, 255, 255, 0.75); }
+body.tax-topic .article-list div.row:nth-child(even) { background: rgba(255, 255, 255, 0.6); }
 
 .article-list li h2 { margin-bottom: 5px; }
 
@@ -1412,10 +1337,21 @@ footer.author-meta {
 
 img.attachment-medium { margin-bottom: 1.25em; }
 
-.product-business-card {
+#sidebar .product-business-card {
 	margin-top: 20px;
 	
-	h2 span { display: block; }
+	h2 { 
+		font-size: 1.438em;
+		margin-bottom: .5em;
+		color: #333;
+		float: none;
+		font-weight: 300;
+		width: auto;
+	}
+	
+	h2 span { 
+		display: block; 
+	}
 	
 	img {
 		margin-top: 0;
@@ -1803,14 +1739,15 @@ p.social-rss {
 	position: relative;
 }
 
-.page-template-page-category-php .cat-title {
+.page-template-page-category-php .cat-title,
+.page-template-page-press-php .cat-title,
+.tax-topic #main-content .cat-title {
 	margin-bottom: 10px;
 }
 
 .category #main-content .cat-title {
 	padding-top: 10px;
 }
-
 
 .glossary-box div div { 
 	display: none; 
@@ -1929,6 +1866,7 @@ p.social-rss {
 		text-transform: none;
 		top: auto;
 	}
+	
 }
 
 .no-js #main-nav { display: block; }
@@ -1987,10 +1925,19 @@ p.social-rss {
 
 }/* end #main-nav */
 
+.yes-js #main-nav .press-nav {
+	position: absolute;
+	left: -999em;
+}
+
 .yes-js #main-nav.active .current_page_item a { color: $ubuntu_orange; }
 
 .yes-js .main-nav:last-of-type {
 	margin-left: -1px;
+}
+
+.yes-js .type-nav {
+	border-left: 0;
 }
 
 footer.global {
@@ -2730,6 +2677,18 @@ body.single .eight-col .image-wrap img {
 	width: 100%;	
 }
 
+.venue {
+	@include background_size(20px 20px);
+	@include box_sizing();
+	background-image: url('static/img/gps.svg');
+	background-position: 0 5px;
+	background-repeat: no-repeat;
+	display: block;
+	float: left;
+	padding: 6px 20px 6px 24px;
+	width: 100%;	
+}
+
 .event-date {
 	@include background_size(20px 20px);
 	background-image: url('static/img/calendar.svg');
@@ -2751,6 +2710,10 @@ body.single .eight-col .image-wrap img {
 		@include background_size(15px 20px);
 		background-image: url('static/img/calendar.png');
 	}
+}
+
+.row-resource-list .six-col {
+	float: left;
 }
 
 .row-resource-list li {
@@ -2778,6 +2741,32 @@ body.search .row:last-child { border: 0; }
 
 /* */
 #download-item { margin: 30px 0; }
+
+/* downloads
+----------------------------------------------------------------- */
+.list-downloads li {
+	padding: 2px 0 2px 32px;
+	background-size: 24px 24px;
+	background-repeat: no-repeat;
+	background-position: 0 50%;
+
+	&.nav-products {
+		background-image: url('http://assets.ubuntu.com/sites/ubuntu/latest/u/img/pictograms/picto-pack/picto-server-orange.svg');
+	}
+
+	&.nav-people {
+		background-image: url('http://assets.ubuntu.com/sites/ubuntu/latest/u/img/pictograms/picto-pack/picto-mergecontacts-orange.svg');
+	}
+	
+	&.nav-logos {
+		background-image: url('http://assets.ubuntu.com/sites/ubuntu/latest/u/img/pictograms/picto-pack/picto-ubuntu.svg');
+	}
+
+	&.nav-all-downloads {
+		background-image: url('http://assets.ubuntu.com/sites/ubuntu/latest/u/img/pictograms/picto-pack/picto-download-orange.svg');
+	}
+	
+} // end .list-downloads
 
 /* responsive
 ----------------------------------------------------------------- */
@@ -2940,6 +2929,12 @@ html.no-svg .cookie-policy .link-cta { background-image: url("static/img/icons/c
 
 .link-cta-ubuntu.external span { background-image: url('static/img/external-link-white.svg') !important; }
 
+/* @section about-canonical
+-------------------------------------------------------------- */
+.about-canonical {
+	margin-top: 30px;
+}
+
 @media only screen and (min-width: 768px) {
 	@import "static/css/medium";
 }
@@ -2951,3 +2946,24 @@ html.no-svg .cookie-policy .link-cta { background-image: url("static/img/icons/c
 }
 /* END @section Large / Desktop viewport
 -------------------------------------------------------------- */
+
+#press-contact:target {
+    -webkit-animation: target-fade 3s 1;
+    -moz-animation: target-fade 3s 1;
+}
+
+@-webkit-keyframes target-fade {
+    0% { background-color: rgba(255,255,0,.3); }
+    100% { background-color: rgba(0,0,0,0); }
+}
+@-moz-keyframes target-fade {
+    0% { background-color: rgba(255,255,0,.3); }
+    100% { background-color: rgba(0,0,0,0); }
+}
+
+#press-contact {
+  -webkit-transition: all 0.5s ease-in-out; 
+  -moz-transition: all 0.5s ease-in-out; 
+  -ms-transition: all 0.5s ease-in-out; 
+  -o-transition: all 0.5s ease-in-out; 
+}

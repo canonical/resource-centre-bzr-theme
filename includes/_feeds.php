@@ -22,9 +22,12 @@
 <?php elseif ( is_page_template('page-events.php') ) : ?>
 	<link rel="alternate" type="application/rss+xml" title="Ubuntu Insights 'events' feed" href="<?php bloginfo('url'); ?>/category/events/feed/" />
 
+<?php elseif ( is_page_template('page-press.php') ) : ?>
+	<link rel="alternate" type="application/rss+xml" title="Ubuntu Insights 'events' feed" href="<?php bloginfo('url'); ?>/category/news/feed/" />
+
 <?php elseif ( is_single()) : ?>
 	<link rel="alternate" type="application/rss+xml" title="Ubuntu Insights feed" href="<?php bloginfo('url'); ?>/feed/" />
 
 <?php else : ?>
-	<link rel="alternate" type="application/rss+xml" title="Ubuntu Insights <?php echo $term->slug; ?> <?php echo $current_catt; ?> feed" href="<?php bloginfo('url'); ?>/topic/<?php echo $term->slug; ?>/feed?category_name=<?php echo $current_catt; ?>" />
+	<link rel="alternate" type="application/rss+xml" title="Ubuntu Insights <?php echo $term->slug; ?> <?php echo $current_catt; ?> feed" href="<?php bloginfo('url'); ?>/topic/<?php echo $term->slug; ?>/feed/" />
 <?php endif; // end is_category ?>

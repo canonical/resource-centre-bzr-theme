@@ -16,15 +16,18 @@
 <?php elseif ( is_page_template('page-category.php') ) : ?>
 	<a href="<?php bloginfo('url'); ?>/category/<?php echo $current_cat; ?>/feed/">RSS feed</a>
 
-<?php elseif ( is_page_template('page-topics.php') ) : ?>
+<?php elseif ( is_page_template('taxonomy-topic.php') ) : ?>
 	<a href="<?php bloginfo('url'); ?>/topic/<?php echo $current_cat; ?>/feed/">RSS feed</a>
 
 <?php elseif ( is_page_template('page-events.php') ) : ?>
 	<a href="<?php bloginfo('url'); ?>/category/events/feed/">RSS feed</a>
 
+<?php elseif ( is_page_template('page-press.php') ) : ?>
+	<a href="<?php bloginfo('url'); ?>/category/news/feed/">RSS feed</a>
+
 <?php elseif ( is_single()) : ?>
 	<a href="<?php bloginfo('url'); ?>/feed/">RSS feed</a>
 
 <?php else : ?>
-	<a href="<?php bloginfo('url'); ?>/topic/<?php echo $term->slug; ?>/feed?category_name=<?php echo $current_catt; ?>">RSS feed</a>
+	<a href="<?php bloginfo('url'); ?>/topic/<?php echo $term->slug; ?>/feed/">RSS feed</a>
 <?php endif; // end is_category ?>

@@ -18,7 +18,17 @@
 								'container' => '' ) ); ?>
 						</ul>
 					</li>
-				</ul>
+				</ul><?php if (! is_mobile_phone() ) : ?>
+				<ul class="main-nav press-nav no-bullets">
+					<li><h2>Press centre</h2>
+						<ul class="no-bullets">
+							<?php wp_nav_menu( array( 
+								'theme_location' => 'press-centre', 
+								'container' => '' ) ); ?>
+							<li><a href="/press-centre/#press-contact">Contact</a></li>
+						</ul>
+					</li>
+				</ul><?php endif; ?>
 			</div><!-- /#main-nav -->
 	</div><!-- /.#main-navigation -->
 	

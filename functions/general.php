@@ -2,24 +2,129 @@
 // post types - add new post types here and at the top of post-types.php
 $post_types = array('whitepaper', 'post', 'ebook', 'video', 'attachment', 'casestudy', 'infographic', 'webinar', 'event', 'case-study', 'presskits');
 
-
-/*function search_url_rewrite_rule() {
-	if ( is_search() && !empty($_GET['s'])) {
-		wp_redirect(home_url("/search/") . urlencode(get_query_var('s')));
-		exit();
-	}	
+add_filter( 'upload_size_limit', 'b5f_increase_upload' );
+function b5f_increase_upload( $bytes ) {
+    return 33554432; // 32 megabytes
 }
-add_action('template_redirect', 'search_url_rewrite_rule');
-*/
+
+add_filter( 'wp_image_editors', 'change_graphic_lib' );
+function change_graphic_lib($array) {
+  return array( 'WP_Image_Editor_GD', 'WP_Image_Editor_Imagick' );
+}
+
+// add excerpts to pages
+function gb_add_excerpts_to_pages() {
+     add_post_type_support( 'page', 'excerpt' );
+}
+add_action( 'init', 'gb_add_excerpts_to_pages' );
+
+function wpse31422_init() {
+    add_rewrite_endpoint( 'year', EP_CATEGORIES );
+}
+add_action( 'init', 'wpse31422_init' );
+
+/*
+ * hide specified categories by username
+ */
+function gb_do_terms_exclusion() {
+$current_user = wp_get_current_user();
+$_menu_unrestricted_users = array( 'admin', 'gbancroft-canonical', 'peterm-ubuntu', 'yaili', 'yaili-2', 'sian-aherne', 'sian.aherne', 'inayaili' );
+
+	if(! in_array( $current_user->user_login, $_menu_unrestricted_users ) ) {
+		remove_menu_page( 'edit.php?post_type=productbusinesscard' );
+		remove_menu_page( 'edit.php?post_type=topiccta' );
+		remove_menu_page( 'edit.php?post_type=download' );
+		remove_meta_box('download-typediv', 'Post', 'side');
+		add_filter( 'list_terms_exclusions', 'gb_list_terms_exclusions', 10, 2 );
+	}
+	
+}
+add_action( 'admin_init', 'gb_do_terms_exclusion' );
+
+function gb_list_terms_exclusions($exclusions,$args) {
+    return $exclusions . " AND ( t.name <> 'News' )  AND ( t.name <> 'Press releases' ) AND ( t.name <> 'Downloads' )";
+}
 
 /**
- * Customize Event Query using Post Meta
+ * Get a post per shortcode.
  *
- * @link http://www.billerickson.net/customize-the-wordpress-query/
- * @param object $query data
- *
+ * @param  array $atts There are three possible attributes:
+ *					id: A post ID. Wins always, works always.
+ *					title: A page title. Show the latest if there is more than one post
+ *					with the same title.
+ *					type: A post type. Only to be used in combination with one of the
+ *					first two attributes. Might help to find the best match.
+ *					Defaults to 'page'.
+ * @return string|void
  */
  
+function t5_embed_post( $atts ) {
+	$defaults = array (
+		'id'    			=> FALSE,
+		'title' 			=> FALSE,
+		'show_title' 	=> TRUE,
+		'excerpt'			=> FALSE,
+		'type'  			=> 'page'
+	);
+	extract( shortcode_atts( $defaults, $atts ) );
+
+	//$page_title = apply_filters( 'the_title', get_the_title() );
+ 
+	// Not enough input data.
+	if ( ! $id and ! $title )
+	{
+		return;
+	}
+ 
+	$post = FALSE;
+ 
+	if ( $id )
+	{
+		$post = get_post( $id );
+	}
+	elseif ( $title )
+	{
+		$post = get_page_by_title( $title, OBJECT, $type );
+	}
+	 
+	if ( $post )
+	{
+		if ( $excerpt )
+		{
+			$page_excerpt = apply_filters( 'the_excerpt', $post->post_excerpt );
+			if ( $show_title ) 
+			{
+				$page_title = strip_tags(apply_filters( 'the_content', $post->post_title ));
+			}
+			return '<h2>'. $page_title . '</h2>' . $page_excerpt . '';					
+		} else {
+			$page_content = apply_filters( 'the_content', $post->post_content );
+			if ( $show_title ) 
+			{
+				$page_title = strip_tags(apply_filters( 'the_content', $post->post_title ));
+			}
+			return '<h2>'. $page_title . '</h2>' . $page_content . '';		
+		}
+	}
+}
+add_shortcode( 'embed_post', 't5_embed_post' );
+
+// make friendly mime names
+function friendly_mime( $mime ){
+	$mime_map = array(
+		"application/pdf"		=> "<abbr title='Portable Document Format'>PDF</abbr>",
+		"application/zip"		=> "ZIP",
+		"image/jpeg"				=> "JPEG",
+		"image/png"					=> "PNG",
+		"image/gif"					=> "GIF"
+	);
+	// if $mime not present in the array, return it unchanged
+	if( empty( $mime_map[ $mime ] ) ){ return $mime; }
+
+	// otherwise, return the friendly mime-type
+	return $mime_map[ $mime ];
+}
+
 function ep_event_query( $query ) {
 
 	// http://codex.wordpress.org/Function_Reference/current_time
@@ -184,6 +289,7 @@ add_theme_support( 'automatic-feed-links' );
 // This theme uses wp_nav_menu() in one location.
 register_nav_menu( 'primary-products', __( 'Products and services menu', 'Insights PLUS' ) );
 register_nav_menu( 'primary-categories', __( 'Category menu', 'Insights PLUS' ) );
+register_nav_menu( 'press-centre', __( 'Press centre', 'Insights PLUS' ) );
 
 
 if (function_exists('register_sidebar'))
@@ -412,7 +518,7 @@ function wpa37911_permastructs(){
 add_action( 'init', 'wpa37911_permastructs' );
 
 // so we can show an image caption
-function the_post_thumbnail_caption() {
+/*function the_post_thumbnail_caption() {
 	global $post;
 
 	$thumbnail_id    = get_post_thumbnail_id($post->ID);
@@ -421,7 +527,7 @@ function the_post_thumbnail_caption() {
 	if ($thumbnail_image && isset($thumbnail_image[0])) {
 		echo '<p class="image-meta">'.$thumbnail_image[0]->post_excerpt.'</span>';
 	}
-}
+}*/
 
 //include the main class file
 require_once("Tax-meta-class/Tax-meta-class.php");
@@ -584,11 +690,11 @@ function unattach_media_row_action( $actions, $post ) {
 //action to set post_parent to 0 on attachment
 function unattach_do_it() {
 	global $wpdb;
-	
+
 	if (!empty($_REQUEST['id'])) {
 		$wpdb->update($wpdb->posts, array('post_parent'=>0), array('id'=>$_REQUEST['id'], 'post_type'=>'attachment'));
 	}
-	
+
 	wp_redirect(admin_url('upload.php'));
 	exit;
 }
@@ -615,7 +721,7 @@ function show_categories_level($cats, $names, $ids,$taxonomy) {
     $res = '';
     foreach ($cats as $cat) {
         if($names)$n = "$names, $cat->name"; else $n = $cat->name;
-        if($ids)$i = "$ids, $cat->term_id"; else $i = $cat->term_id;    
+        if($ids)$i = "$ids, $cat->term_id"; else $i = $cat->term_id;
 				$res = $res."<label for='cat-$i'><input id='cat-$i' name='cat[]' type='checkbox' value='$i' />$n</label>";
     }
     return $res."";
@@ -632,7 +738,7 @@ function show_terms_level($cats, $names, $ids,$taxonomy) {
     $res = '';
     foreach ($cats as $cat) {
         if($names)$n = "$names, $cat->name"; else $n = $cat->name;
-        if($ids)$i = "$ids, $cat->term_id"; else $i = $cat->slug;    
+        if($ids)$i = "$ids, $cat->term_id"; else $i = $cat->slug;
 				$res = $res."<label for='topic-$i'><input id='topic-$i' name='topic[]' type='checkbox' value='$cat->slug' />$n</label>";
     }
     return $res."";
@@ -662,7 +768,7 @@ function advanced_search_query($query) {
         );
 
         $query->set('tax_query', $tax_query_args);
-        
+
     }
 
     return $query;

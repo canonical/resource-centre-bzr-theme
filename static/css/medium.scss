@@ -1,12 +1,12 @@
-/* 
+/*
 Theme Name: Ubuntu Resources
 Theme URI: http://canonical.com
 Description: Ubuntu resource hub theme
 Version: 1
-Author: Canonical Ltd 
+Author: Canonical Ltd
 Author URI: http://canonical.com
 
-Copyright (C) 2012 Canonical Ltd 
+Copyright (C) 2012 Canonical Ltd
 
 Contents:
 
@@ -22,10 +22,10 @@ Contents:
 	search filters
 	vcard
 
-*/	
+*/
 
-@import "static/css/core-constants";
-@import "static/css/core-mixins";
+@import "core-constants";
+@import "core-mixins";
 
 $ubuntu_orange:			  #dd4814; 	/* ubuntu orange */
 $light_orange:        #fdf6f2; 	/* used as background on pre text */
@@ -60,35 +60,40 @@ body:after {
 
 /* welcome-message
 ----------------------------------------------------------------- */
-#welcome-message div.welcome-message-inner { 
+#welcome-message div.welcome-message-inner {
 	margin-top: -20px;
-	padding: 0 0 20px; 
+	padding: 0 0 20px;
 }
 
 #nav-global {
-	@include box_sizing();	
-	padding-left: 9px;	
+	@include box_sizing();
+	padding-left: 9px;
 
 	ul li.open { min-width: 122px; }
-	
+
 	li.more li { height: auto;
-		a { 
+		a {
 			border-bottom: 0;
 			padding-bottom: 0;
 		}
 	}
 } // end nav-global
-	
+
 .last-col { margin-right: 0; }
 
 body { font-size: 15px; }
 
 .row { padding: 30px 30px 20px; }
 
-.tax-topic .row, 
+.tax-topic .row,
 .category .row,
 .row-events,
-.search .row { padding-bottom: 30px; }
+.search .row { padding-bottom: 20px; }
+
+.tax-topic #main-content .row-hero {
+	padding-bottom: 0;
+	margin-bottom: 0;	
+}
 
 .search #main-content .row-hero {
 	margin-bottom: -20px;
@@ -103,9 +108,10 @@ body { font-size: 15px; }
 
 #main-content .cat-title { padding: 10px 30px 0 0; }
 
-.page-template-page-category-php #main-content .cat-title { 
+.page-template-page-category-php #main-content .cat-title,
+.tax-topic #main-content .cat-title  {
 	margin-bottom: 0;
-	padding-bottom: 0; 
+	padding-bottom: 0;
 }
 
 .article-list ul.phone-articles { border-bottom: 0; }
@@ -130,7 +136,7 @@ form fieldset .search-submit.active {
 	margin-bottom: 10px;
 }
 
-.search #main-content form#search-form div.active{ 
+.search #main-content form#search-form div.active{
 	float: left;
 	display: inline-block;
 	width: 100%;
@@ -177,6 +183,8 @@ body.single .row { padding-top: 10px; }
 ----------------------------------------------------------------- */
 .glossary-box { padding: 0 30px 0; }
 
+.tax-topic .glossary-box { padding: 20px 30px 0; }
+
 .toggle-message {
 	top: -44px;
 	right: 0;
@@ -187,8 +195,13 @@ body.single .row { padding-top: 10px; }
 	background-image: url("static/img/icons/info.svg");
 	background-size: 22px 22px;
 }
-	
+
 .archive .featured-article, .page-template .featured-article { margin-bottom: 0 }
+
+.tax-topic .featured-article {
+	padding-bottom: 20px;
+}
+
 
 .home .featured-article {
 	padding-bottom: 30px;
@@ -207,8 +220,8 @@ body.single .row { padding-top: 10px; }
 	border-top: 0;
 	padding: 0;
 	margin-left: 0;
-	margin-right: 0;	
-	
+	margin-right: 0;
+
 	h2 { line-height: 1.5; }
 }
 
@@ -223,27 +236,27 @@ body.single .row { padding-top: 10px; }
 /* events
 ----------------------------------------------------------------- */
 .event-details-wrapper,
-.vertical-divider .event-details-wrapper { 
+.vertical-divider .event-details-wrapper {
 	margin-bottom: 20px;
 	padding-left: 120px;
 }
 
 .event-details-wrapper:last-of-type { margin-bottom: 20px; }
 
-.single .event-details-wrapper { 	
+.single .event-details-wrapper {
 	min-height: 120px;
 	margin-bottom: 20px;
 }
 
 .event-details-wrapper h3 {
-	clear: none;	
+	clear: none;
 	display: block;
 	float: none;
 	width: auto;
 }
 
-.event-details { 
-	margin-bottom: 10px; 
+.event-details {
+	margin-bottom: 10px;
 	width: 100%;
 	clear: both;
 	display: block;
@@ -264,7 +277,7 @@ body.single .eight-col .image-wrap img,
 .event-map img {
 	height: 100px;
 	width: 100px;
-} 
+}
 
 .image-wrap:after,
 .featured-article .image-wrap:after {
@@ -282,14 +295,18 @@ body.single .eight-col .image-wrap img,
 	width: 33%;
 }
 
+.row-resource-list .six-col li {
+	width: 50%;
+}
+
 /* search filters
 ----------------------------------------------------------------- */
 div#uwpqsf_id {
-	
+
 	.togglecheck { width: 40%; }
 }
 
-/* vcard 
+/* vcard
 ----------------------------------------------------------------- */
 #author-info.has-avatar { padding-left: 120px; }
 
@@ -313,7 +330,7 @@ div#uwpqsf_id {
 		@include rounded_corners(0 0 2px 2px);
 		background: $nav_bg;
 		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-		width: 400px;	
+		width: 400px;
 		display: block;
 		float: right;
 		right: 0;
@@ -323,12 +340,12 @@ div#uwpqsf_id {
 	#main-nav.active h2 {
 		background: none;
 	}
-	
-	#main-nav.active li li a { 
-		font-size: 18px; 
+
+	#main-nav.active li li a {
+		font-size: 18px;
 	}
-	
-	#main-nav.active a { 
+
+	#main-nav.active a {
 		color: #333;
 		}
 
@@ -341,13 +358,52 @@ div#uwpqsf_id {
 		border-bottom: 0;
 		box-shadow: none;
 	}
-		
-	#main-nav.active .topic-nav {
-		border-bottom: 1px solid $nav_border_dark;
-		border-left: 0;	
+
+	.main-nav {
+		@include box_sizing();	
+		width: 33.37%;
 	}
 	
+	#main-nav .press-nav {
+		position: relative;
+		left: auto;
+	}
+	
+	#main-nav .type-nav li li:last-child a {
+		border-right: 1px solid $nav_border_dark;
+		margin-top: -1px;
+		padding-top: 9px;
+		padding-bottom: 8px;
+		border-bottom: 0;
+	}
+		
+	#main-nav .press-nav li li:last-child {
+		border-bottom: 1px solid $nav_border_dark;
+	}
+	
+	#main-nav .press-nav li li {
+		
+	}
+		
+	#main-nav.active {
+		width: 500px;
+		
+		.topic-nav {
+			border-bottom: 0;
+			border-left: 0;
+			
+			.nav-tablet {
+				border: 0;
+			}
+		}
+	}/* end main nav */
+
 } // end yes-js
+
+.yes-js .main-nav li li.nav-tablet, 
+.yes-js .main-nav li li.nav-tablet a {
+	border-bottom: 0;
+}
 
 #nav-triggers {
 	position: relative;
@@ -361,6 +417,24 @@ div#uwpqsf_id {
 	box-shadow: none;
 }
 
+.yes-js .type-nav {
+	border-left: 1px solid $nav_border_dark;
+}
+
+/* hide news */ 
+.yes-js .type-nav li.nav-news,
+.yes-js .main-nav li.nav-press-centre {
+	position: absolute;
+	left: -999em;
+}
+
+.yes-js .main-nav li.nav-press-centre a {
+	border: 0;
+	padding: 0;
+	margin: 0;
+	background: #ddd;
+	height: 0;
+}
 /* share
 ----------------------------------------------------------------- */
 .yes-js #share {
@@ -380,7 +454,7 @@ div#uwpqsf_id {
 	margin-bottom: 12px;
 }
 
-.yes-js #share .share-inner.active { 
+.yes-js #share .share-inner.active {
 	@include rounded_corners(0 0 2px 2px);
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 	position: absolute;
@@ -393,7 +467,7 @@ div#uwpqsf_id {
 
 /* search
 ----------------------------------------------------------------- */
-.yes-js #box-search {	
+.yes-js #box-search {
 	background: $nav_bg;
 }
 
@@ -416,7 +490,3 @@ div#uwpqsf_id {
 	position: absolute;
 	width: 400px;
 }
-
-
-
-

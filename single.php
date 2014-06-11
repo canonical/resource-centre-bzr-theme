@@ -72,7 +72,7 @@ get_header();
 		<?php endif ; endif ; ?>
 		</div><!-- /.article-image -->
 		<?php endif ; ?>
-		<?php if(the_post_thumbnail_caption()) : echo "<p>", the_post_thumbnail_caption(), "</p>"; endif ; ?>
+		<?php //if(the_post_thumbnail_caption()) : echo "<p>", the_post_thumbnail_caption(), "</p>"; endif ; ?>
 			<?php if('post' != get_post_type() && $gated_content == 'on') { the_content(); } ?>
 			<?php if(($gated_content == 'on') && ($posted != $postdate . $postid)) { ?>
 					<?php if($posted == $postdate . $postid ) { // check if the form has been posted ?>
@@ -90,7 +90,7 @@ get_header();
 <?php } elseif(($gated_content == 'on' && $posted == $postdate . $postid)) { // show this if is gated and the form has been posted ?>
 
 		<?php if ( get_post_meta($post->ID, 'postVideo', true) ) : ?>
-					<div class="video-wrapper"><iframe class="post-video" width="596" height="335" src="http://www.youtube.com/embed/<?php echo $video_content; ?>?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe></div>
+					<div class="video-wrapper"><iframe class="post-video" width="596" height="335" src="https://www.youtube.com/embed/<?php echo $video_content; ?>?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe></div>
 					<?php the_content(); ?>
 		<?php else : ?>
 		<?php if('post' == get_post_type()) : ?>
@@ -100,16 +100,17 @@ get_header();
 		<?php endif; ?>
 		<?php endif; // if video  ?>
 			<?php } else { // show this if the post is not gated ?>
-		<?php if ( get_post_meta($post->ID, 'postVideo', true) ) : ?>
+		<?php if ( get_post_meta($post->ID, 'postVideo', true) && ($category != 'news') ) : ?>
 				<?php if ( !empty( $post->post_excerpt ) ) :	the_excerpt(); else : false; endif; ?>
-					<div class="video-wrapper"><iframe class="post-video" width="596" height="335" src="http://www.youtube.com/embed/<?php echo $video_content; ?>?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe></div>
+					<div class="video-wrapper"><iframe class="post-video" width="596" height="335" src="https://www.youtube.com/embed/<?php echo $video_content; ?>?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe></div>
 					<div itemprop="description"><?php the_content(); ?></div>
 		<?php elseif('post' == get_post_type() || 'presskits' == get_post_type()) : ?>
 					<div itemprop="description"><?php the_content(); ?></div>
+					<?php if ($category != 'news') : ?>
 						<?php $attachments = get_children( array('post_parent' => get_the_ID(), 'post_type' => 'attachment') ); if ( $attachments ) : if (! wp_attachment_is_image($attachment_id) ) : ?>
 					<div id="download-item">
 						<p><a class="link-cta-ubuntu" href="<?php echo wp_get_attachment_url( $attachment_id ); ?>?utm_source=<?php the_title(); ?>&amp;utm_medium=download+link&amp;utm_content=<?php echo $post_type->labels->title_friendly, ''; ?>">Download  <?php $term_id = the_category_ID($echo=false); $saved_data = get_tax_meta($term_id,'ba_singular'); echo $saved_data; ?></a></p>
-					</div><?php endif; endif; // end if ( $attachments ) ?>
+					</div><?php endif; endif; endif; // end if ( $attachments ) ?>
 		<?php else : ?>
 					<div itemprop="description"><?php the_content(); ?></div>
 		<?php if(!$gated_content && $posted) : ?>
@@ -139,17 +140,53 @@ get_header();
 	</div><!-- /.eight-col -->
 
 <div id="sidebar" class="four-col last-col instapaper_ignore">
+<?php $attachments = get_children( array('exclude'     => get_post_thumbnail_id(), 'post_parent' => get_the_ID(), 'post_type' => 'attachment') ); if ((( $attachments )) && ($category == 'news')) : ?>
+
+<?php get_template_part("includes/_downloads"); ?>
+
+
+<?php $pressLinks = preg_split("/\\r\\n|\\r|\\n/", get_post_meta($post->ID, 'dbt_press_links', true ) );
+
+if ( get_post_meta($post->ID, 'dbt_press_links', true) ) :  ?>
+	<div class="press-release-videos four-col clearfix">
+		<h2>Links</h2>
+		<ul class="list no-bullets">
+	<?php foreach ( $pressLinks as $pressLink ) : ?>
+		 <li>
+			 <?php echo $pressLink; ?>
+     </li>
+	<?php endforeach; ?>
+		</ul>
+	</div>
+<?php endif; ?>
+
+<?php 
+	if ( get_post_meta($post->ID, 'postVideo', true) ) : 
+		get_template_part("includes/_videos"); 
+	endif; 
+?>
+
+<?php 
+$press_contact = make_clickable(get_post_meta( get_the_ID(), 'dbt_press_contact', true ));
+
+// check if the custom field has a value
+if( ! empty( $press_contact ) ) {
+	echo '<h2>Contact details</h2>';
+	echo '<div class="four-col clearfix">';
+  echo wpautop( $press_contact, false );  
+  echo '</div>';
+} 
+?>
+
 <?php //get_template_part("includes/_subscribe"); ?>
+<?php else : ?>
 <?php get_template_part("includes/_related_posts"); ?>
-<?php endwhile; // while have_posts ends ?> 
-<?php endif; // if have_posts ends ?> 
+<?php endif; // if category press-releases ends ?>
+<?php endwhile; // while have_posts ends ?>
+<?php endif; // if have_posts ends ?>
 
-<?php /*
-<div class="four-col<?php $tags = wp_get_post_tags($post->ID); if ($tags) { echo ' has-related'; } ?>">
-	<?php // comments_template(); ?> 
-</div><!-- /.four-col -->
-*/ ?>
-
+<?php if (($category == 'news') &&  (( $attachments ) && (! wp_attachment_is_image($attachment_id) )) ) : ?>
+<?php else : ?>
 <?php
 wp_reset_query();
 global $wpdb;
@@ -187,6 +224,7 @@ $custom_taxterms = wp_get_object_terms( $post->ID, 'topic', array('fields' => 'i
 			</div>
         
 <?php endwhile; } wp_reset_query(); ?>
+<?php endif; // if ($category == array('news','press-releases')) ?>
 </div><!-- /.instapaper_ignore -->
 </div><!-- /.twelve-col -->
 </div><!-- /.inner-wrapper -->

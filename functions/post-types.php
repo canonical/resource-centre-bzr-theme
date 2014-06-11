@@ -2,7 +2,7 @@
 // show custom post_types on category pages
 function category_query_post_type($query) {
     if ( is_category() && false == $query->query_vars['suppress_filters'] )
-      $query->set( 'post_type', array( 'whitepaper', 'post', 'video', 'attachment', 'casestudy', 'infographic', 'webinar', 'ebook', 'event', 'presskits' ) );
+      $query->set( 'post_type', array( 'whitepaper', 'post', 'video', 'attachment', 'downloads', 'casestudy', 'infographic', 'webinar', 'ebook', 'event', 'presskits' ) );
     return $query;
 }
 add_filter('pre_get_posts', 'category_query_post_type');
@@ -16,23 +16,62 @@ function edit_admin_menus() {
     $submenu['edit.php'][10][0] = 'Add an article';  
 }  
 function change_post_object_label() {
-        global $wp_post_types;
-        $labels = &$wp_post_types['post']->labels;
-        $labels->name = 'Articles';
-        $labels->singular_name = 'Article';
-        $labels->add_new = 'Add an article';
-        $labels->add_new_item = 'Add article';
-        $labels->edit_item = 'Edit articles';
-        $labels->new_item = 'Article';
-        $labels->view_item = 'View articles';
-        $labels->search_items = 'Search articles';
-        $labels->not_found = 'No articles found';
-        $labels->not_found_in_trash = 'No articles found in trash';
-    }
-    add_action( 'init', 'change_post_object_label' );
-    add_action( 'admin_menu', 'edit_admin_menus' );
+    global $wp_post_types;
+    $labels = &$wp_post_types['post']->labels;
+    $labels->name = 'Articles';
+    $labels->singular_name = 'Article';
+    $labels->add_new = 'Add an article';
+    $labels->add_new_item = 'Add article';
+    $labels->edit_item = 'Edit articles';
+    $labels->new_item = 'Article';
+    $labels->view_item = 'View articles';
+    $labels->search_items = 'Search articles';
+    $labels->not_found = 'No articles found';
+    $labels->not_found_in_trash = 'No articles found in trash';
+}
+add_action( 'init', 'change_post_object_label' );
+add_action( 'admin_menu', 'edit_admin_menus' );
 // end change 'Posts' to 'Articles'
 
+/*// add downloads post type
+add_action('init', 'downloads');
+function downloads() 
+{
+  $labels = array(
+    'name' => _x('Downloads', 'post type general name'),
+    'singular_name' => _x('Download', 'post type singular name'),
+    'plural_name' => _x('Downloads', 'post type plural name'),
+    'add_new' => _x('Add new', 'download'),
+    'add_new_item' => __('Add new Download'),
+    'view_item' => __('View download post'),
+    'search_items' => __('Search downloads'),
+    'css_friendly' => __('download'),
+    'title_friendly' => __('download'),
+    'edit_item' => __('Edit download')
+  );
+ 
+ $args = array(
+		'exclude_from_search' => false,
+		'rewrite' => array("slug" => "download"), // Permalinks format
+		'can_export' => true,
+		'capability_type' => 'post',
+		'has_archive' => true,
+		'hierarchical' => true,
+		'labels' => $labels,
+		'menu_icon' => get_stylesheet_directory_uri() . '/static/img/admin/document-text.png',
+		'menu_position' => 6,
+		'public' => true,
+		'publicly_queryable' => true,
+		'query_var' => true,
+		'show_in_menu' => true,
+		'show_in_nav_menus' => true,
+		'show_ui' => true, 
+		'supports' => array( 'revisions', 'attachments', 'title', 'excerpt', 'editor', 'thumbnail', 'author','comments' ),    
+		'taxonomies' => array('topic', 'post_tag'));
+  register_post_type('downloads',$args);
+}
+// end add downloads post type
+*/
 /*
 // add case study post type
 add_action('init', 'post_type_casestudy');
@@ -60,7 +99,7 @@ function post_type_casestudy()
     'has_archive' => true,
     'hierarchical' => true,
     'labels' => $labels,
-    'menu_icon' => get_stylesheet_directory_uri() . '/assets/img/admin/document-text.png',
+    'menu_icon' => get_stylesheet_directory_uri() . '/static/img/admin/document-text.png',
     'menu_position' => 6,
     'public' => true,
     'publicly_queryable' => true,
@@ -99,7 +138,7 @@ function post_type_ebook()
     'has_archive' => true,
     'hierarchical' => true,
     'labels' => $labels,
-    'menu_icon' => get_stylesheet_directory_uri() . '/assets/img/admin/document-text.png',
+    'menu_icon' => get_stylesheet_directory_uri() . '/static/img/admin/document-text.png',
     'menu_position' => 6,
     'public' => true,
     'publicly_queryable' => true,
@@ -143,7 +182,7 @@ function post_type_event()
     'menu_position' => 5,
     'comments' => true,
     'has_archive' => true,
-    'menu_icon' => get_stylesheet_directory_uri() . '/assets/img/admin/calendar-day.png',
+    'menu_icon' => get_stylesheet_directory_uri() . '/static/img/admin/calendar-day.png',
     'supports' => array( 'revisions', 'attachments', 'title', 'excerpt', 'editor', 'thumbnail', 'author','comments' ));
   register_post_type('event',$args);
 }
@@ -179,7 +218,7 @@ function post_type_productbusinesscard()
     'hierarchical' => true,
     'menu_position' => 10,
     'has_archive' => true,
-    'menu_icon' => get_stylesheet_directory_uri() . '/assets/img/admin/document-text.png',
+    'menu_icon' => get_stylesheet_directory_uri() . '/static/img/admin/document-text.png',
     'supports' => array( 'revisions', 'attachments', 'title', 'excerpt', 'editor', 'thumbnail', 'author','comments' ));
   register_post_type('productbusinesscard',$args);
 }
@@ -214,7 +253,7 @@ function post_type_topiccta()
     'hierarchical' => true,
     'menu_position' => 10,
     'has_archive' => true,
-    'menu_icon' => get_stylesheet_directory_uri() . '/assets/img/admin/document-text.png',
+    'menu_icon' => get_stylesheet_directory_uri() . '/static/img/admin/document-text.png',
     'supports' => array( 'revisions', 'attachments', 'title', 'excerpt', 'editor', 'thumbnail', 'author','comments' ));
   register_post_type('topiccta',$args);
 }
@@ -251,7 +290,7 @@ function post_type_presskits()
     'hierarchical' => true,
     'menu_position' => 7,
     'has_archive' => true,
-    'menu_icon' => get_stylesheet_directory_uri() . '/assets/img/admin/document-text.png',
+    'menu_icon' => get_stylesheet_directory_uri() . '/static/img/admin/document-text.png',
     'supports' => array( 'revisions', 'attachments', 'title', 'excerpt', 'editor', 'thumbnail', 'author','comments' ));
   register_post_type('presskits',$args);
 }
@@ -287,7 +326,7 @@ function post_type_video()
     'hierarchical' => true,
     'menu_position' => 9,
     'has_archive' => true,
-    'menu_icon' => get_stylesheet_directory_uri() . '/assets/img/admin/film.png',
+    'menu_icon' => get_stylesheet_directory_uri() . '/static/img/admin/film.png',
     'supports' => array( 'revisions', 'attachments', 'title', 'excerpt', 'editor', 'thumbnail', 'author','comments' ));
   register_post_type('video',$args);
  
@@ -325,7 +364,7 @@ function post_type_webinar()
     'hierarchical' => true,
     'menu_position' => 6,
     'has_archive' => true,
-    'menu_icon' => get_stylesheet_directory_uri() . '/assets/img/admin/film.png',
+    'menu_icon' => get_stylesheet_directory_uri() . '/static/img/admin/film.png',
     'supports' => array( 'revisions', 'attachments', 'title', 'excerpt', 'editor', 'thumbnail', 'author','comments' ));
   register_post_type('webinar',$args);
  
@@ -364,7 +403,7 @@ function post_type_whitepaper()
     'hierarchical' => true,
     'menu_position' => 6,
     'has_archive' => true,
-    'menu_icon' => get_stylesheet_directory_uri() . '/assets/img/admin/document-pdf-text.png',
+    'menu_icon' => get_stylesheet_directory_uri() . '/static/img/admin/document-pdf-text.png',
     'supports' => array( 'revisions', 'attachments', 'title', 'excerpt', 'editor', 'thumbnail', 'author','comments' ));
   register_post_type('whitepaper',$args);
 }

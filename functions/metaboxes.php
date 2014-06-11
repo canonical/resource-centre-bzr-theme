@@ -1,46 +1,148 @@
 <?php
+
+define('WYSIWYG_META_BOX_ID', 'dbt_press_links');
+define('WYSIWYG_EDITOR_ID', 'myeditor'); //Important for CSS that this is different
+define('WYSIWYG_META_KEY', 'dbt_press_links');
+ 
+add_action('admin_init', 'wysiwyg_register_meta_box');
+function wysiwyg_register_meta_box(){
+        add_meta_box(WYSIWYG_META_BOX_ID, __('Press release links', 'wysiwyg'), 'wysiwyg_render_meta_box', 'post');
+}
+ 
+function wysiwyg_render_meta_box(){
+	
+        global $post;
+        
+        $meta_box_id = WYSIWYG_META_BOX_ID;
+        $editor_id = WYSIWYG_EDITOR_ID;
+        
+        echo "<p>Add press release links here using the 'insert link' tool on the toolbar (new line for each link)</p>";
+        //Add CSS & jQuery goodness to make this work like the original WYSIWYG
+        echo "
+                <style type='text/css'>
+                        #$meta_box_id #edButtonHTML, #$meta_box_id #edButtonPreview {background-color: #F1F1F1; border-color: #DFDFDF #DFDFDF #CCC; color: #999;}
+                        #$editor_id{width:100%;}
+                        #$meta_box_id #editorcontainer{background:#fff !important;}
+                        #$meta_box_id #$editor_id_fullscreen{display:none;}
+                </style>
+            
+                <script type='text/javascript'>
+                        jQuery(function($){
+                                $('#$meta_box_id #editor-toolbar > a').click(function(){
+                                        $('#$meta_box_id #editor-toolbar > a').removeClass('active');
+                                        $(this).addClass('active');
+                                });
+                                
+                                if($('#$meta_box_id #edButtonPreview').hasClass('active')){
+                                        $('#$meta_box_id #ed_toolbar').hide();
+                                }
+                                
+                                $('#$meta_box_id #edButtonPreview').click(function(){
+                                        $('#$meta_box_id #ed_toolbar').hide();
+                                });
+                                
+                                $('#$meta_box_id #edButtonHTML').click(function(){
+                                        $('#$meta_box_id #ed_toolbar').show();
+                                });
+ 
+				//Tell the uploader to insert content into the correct WYSIWYG editor
+				$('#media-buttons a').bind('click', function(){
+					var customEditor = $(this).parents('#$meta_box_id');
+					if(customEditor.length > 0){
+						edCanvas = document.getElementById('$editor_id');
+					}
+					else{
+						edCanvas = document.getElementById('content');
+					}
+				});
+                        });
+                </script>
+        ";
+        
+        //Create The Editor
+        $content = get_post_meta($post->ID, WYSIWYG_META_KEY, true);
+        wp_editor($content, $editor_id);
+        
+        //Clear The Room!
+        echo "<div style='clear:both; display:block;'></div>";
+}
+ 
+add_action('save_post', 'wysiwyg_save_meta');
+function wysiwyg_save_meta(){
+	
+        $editor_id = WYSIWYG_EDITOR_ID;
+        $meta_key = WYSIWYG_META_KEY;
+	
+        if(isset($_REQUEST[$editor_id]))
+                update_post_meta($_REQUEST['post_ID'], WYSIWYG_META_KEY, $_REQUEST[$editor_id]);
+                
+}
+
+add_filter( 'dbt_press_contact', 'make_clickable', 9 );
+
+function customadmin_feeguide() {
+	if ( is_admin() ) {
+		$script = "
+			<script type='text/javascript'>
+				jQuery(document).ready(function($) {
+					$('.item_dbt_press_contact,#dbt_press_links').hide();
+					$('#in-category-6, #in-category-1189').is(':checked') ? $('.item_dbt_press_contact,#dbt_press_links').show() : $('.item_dbt_press_contact,#dbt_press_links').hide();
+					$('#in-category-6, #in-category-1189').click(function() {
+						$('.item_dbt_press_contact,#dbt_press_links').toggle(this.checked);
+					});
+				});
+		</script>";
+		echo $script;
+    }
+}
+add_action('admin_footer', 'customadmin_feeguide');
+
 $prefix = 'dbt_';
 
 $meta_box = array(
     'id' => 'my-meta-box',
-    'title' => 'Custom post meta',
+    'title' => 'Extras',
     'pages' => $post_types, // multiple post types, accept custom post types
     'context' => 'normal',
     'priority' => 'high',
     'fields' => array(
         array(
-            'name' => 'Enter Google conversion label e.g: tSwUCKDsugMQ4L7f4gM',
-            'id' => $prefix . 'ga_tracking_label',
-            'type' => 'text'
+            'name' => 'Press release contact details',
+            'id' => $prefix . 'press_contact',
+            'type' => 'textarea'
         ),
 				array(
-            'name' => 'Tick checkbox if featured post <br />(landing pages)',
+            'name' => 'Featured post <br />(landing pages)',
             'id' => $prefix . 'checkbox_featured',
             'type' => 'checkbox'
         ),
 				array(
-            'name' => 'Tick checkbox if featured post <br />(home page)',
+            'name' => 'Featured post <br />(home page)',
             'id' => $prefix . 'checkbox_featured_home',
             'type' => 'checkbox'
         ),
         array(
-            'name' => 'Tick checkbox if gated',
+            'name' => 'Tick if gated',
             'id' => $prefix . 'checkbox_gated',
             'type' => 'checkbox'
         )
+        //array(
+            //'name' => 'Enter Google conversion label e.g: tSwUCKDsugMQ4L7f4gM',
+            //'id' => $prefix . 'ga_tracking_label',
+            //'type' => 'text'
+        //)
     )
 ); 
-
  
 add_action('admin_menu', 'mytheme_add_box');
 
 // Add meta box
 function mytheme_add_box() {
-    global $meta_box;
+	global $meta_box;
 
-    foreach ($meta_box['pages'] as $page) {
-        add_meta_box($meta_box['id'], $meta_box['title'], 'mytheme_show_box', $page, $meta_box['context'], $meta_box['priority']);
-    }
+	foreach ($meta_box['pages'] as $page) {
+		add_meta_box($meta_box['id'], $meta_box['title'], 'mytheme_show_box', $page, $meta_box['context'], $meta_box['priority']);
+	}
 }
 
 // Callback function to show fields in meta box
@@ -56,17 +158,20 @@ function mytheme_show_box() {
         // get current post meta data
         $meta = get_post_meta($post->ID, $field['id'], true);
 
-        echo '<tr>',
+        echo '<tr class="item_' . $field['id'] . '">',
                 '<th style="width:20%"><label for="', $field['id'], '">', $field['name'], '</label></th>',
                 '<td>';
         switch ($field['type']) {
         
             case 'checkbox':
 				echo '<input type="checkbox" name="', $field['id'], '" id="', $field['id'], '"', $meta ? ' checked="checked"' : '', ' />';
-                break;
+							break;
             case 'text' :
 				echo '<input type="text" name="'. $field['id']. '" id="'. $field['id'] .'" value="'. ($meta ? $meta : $field['default']) . '" size="30" style="width:40%" />'. $field['desc'];
               break;
+             case 'textarea':
+        echo '<textarea cols="48" rows="7" name="'. $field['id']. '" id="'. $field['id'] .'">'. ($meta ? $meta : $field['default']) . '</textarea>';
+             break;
         }
         echo    '<td>',
             '</tr>';
@@ -131,6 +236,8 @@ function custom_post_video() {
         	<input type="text" name="postVideo" id="postVideo" value="<?php echo get_post_meta($post->ID, 'postVideo', true); ?>">
         </p>
         <p>Enter the YouTube video 11 digit code here e.g from this url http://www.youtube.com/watch?v=D6z6hn6wZlg you need the 11 digits after ?v= i.e <strong>D6z6hn6wZlg</strong></p>
+        
+        <p>Enter the codes comma separated (no space) if you have more than one e.g: <strong>h384z7Ph0gU,5_4fXQcxFRs</strong></p>
     </div>
 <?php
 }

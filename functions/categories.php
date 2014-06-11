@@ -38,6 +38,7 @@ class WordPress_Radio_Taxonomy {
    		remove_meta_box(static::$taxonomy_metabox_id, 'post', 'normal');
    		remove_meta_box(static::$taxonomy_metabox_id, 'whitepaper', 'normal' );  
    		remove_meta_box(static::$taxonomy_metabox_id, 'video', 'normal' );  
+   		remove_meta_box(static::$taxonomy_metabox_id, 'downloads', 'normal' );  
    		remove_meta_box(static::$taxonomy_metabox_id, 'casestudy', 'normal' );  
    		remove_meta_box(static::$taxonomy_metabox_id, 'checklists', 'normal' );  
    		remove_meta_box(static::$taxonomy_metabox_id, 'webinar', 'normal' );  
@@ -48,6 +49,7 @@ class WordPress_Radio_Taxonomy {
 	public function add_meta_box() {  
 		add_meta_box( 'mytaxonomy_id', 'Content type',array(__CLASS__,'metabox'), 'post' ,'side','core');  
 		add_meta_box( 'mytaxonomy_id', 'Content type',array(__CLASS__,'metabox'), 'whitepaper' ,'side','core');  
+		add_meta_box( 'mytaxonomy_id', 'Content type',array(__CLASS__,'metabox'), 'downloads' ,'side','core');  
 		add_meta_box( 'mytaxonomy_id', 'Content type',array(__CLASS__,'metabox'), 'video' ,'side','core');  
 		add_meta_box( 'mytaxonomy_id', 'Content type',array(__CLASS__,'metabox'), 'casestudy' ,'side','core');  
 		add_meta_box( 'mytaxonomy_id', 'Content type',array(__CLASS__,'metabox'), 'checklists' ,'side','core');  
@@ -119,7 +121,7 @@ class WordPress_Radio_Taxonomy {
     }
 
 	 public function admin_script(){  
-		wp_register_script( 'radiotax', get_template_directory_uri() . '/js/radiotax.js', array('jquery'), null, true ); // We specify true here to tell WordPress this script needs to be loaded in the footer  
+		wp_register_script( 'radiotax', get_template_directory_uri() . '/static/js/radiotax.js', array('jquery'), null, true ); // We specify true here to tell WordPress this script needs to be loaded in the footer  
 		wp_localize_script( 'radiotax', 'radio_tax', array('slug'=>self::$taxonomy));
 		wp_enqueue_script( 'radiotax' );  
 	}

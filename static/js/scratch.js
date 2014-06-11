@@ -1,4 +1,4 @@
-YUI().use('substitute', 'node', 'cookie', "event-resize", "event", "transition", function(Y) {
+YUI().use('node', 'cookie', "event-resize", function(Y) {
 
 // removes no-js class and adds yes-js if js
 core.setupHtmlClass = function() {
@@ -205,7 +205,8 @@ core.externalLinks = function() {
 };
 
 core.businessCard = function() {
-	if(Y.one('body').hasClass('page-template-page-topics-php')){
+	var $body = Y.one('body');
+	if ($body.hasClass('page-template-page-topics-php') || $body.hasClass('tax-topic')) {
 		Y.one(".glossary-box .inner-wrapper").append("<a class='open-message toggle-message' href='#'>show</a><a class='close-message toggle-message' href='#'>close</a>");
 		
 		var menu_state = Y.Cookie.get('_business_card');

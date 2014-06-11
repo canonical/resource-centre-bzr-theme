@@ -19,8 +19,8 @@ Contents:
 
 */	
 
-@import "static/css/core-constants";
-@import "static/css/core-mixins";
+@import 'core-constants';
+@import 'core-mixins';
 
 @mixin font_size($size) {
   font-size: ($size) + px;  //Fallback in px
@@ -39,7 +39,7 @@ $nav_border_dark:			#d4d7d4;
 $nav_border_light:		#f2f2f4;
 
 /* assets database path */
-$asset_path: "//assets.ubuntu.com/sites/ubuntu/latest/u/img/";
+$asset_path: '//assets.ubuntu.com/sites/ubuntu/latest/u/img/';
 /* usage: background: url(#{$asset_path}/site/background.jpg) no-repeat 0 0; */
 
 $grid_unit_small: 10;
@@ -81,12 +81,12 @@ header.banner .logo-ubuntu span { width: 85px; }
 	text-align: inherit;
 }
 
-/* typography
------------------------------------------------------------------ */	
+// typography
+// -----------------------------------------------------------------
 h1 { font-size: 2.8125em; }
 
-/* welcome-message
------------------------------------------------------------------ */	
+// welcome-message
+// -----------------------------------------------------------------
 #welcome-message div.welcome-message-inner {
 	padding: 0;
 	position: relative;
@@ -105,8 +105,8 @@ footer.global .legal {
 
 .article-list ul.phone-articles { border-bottom: 0; }
 
-/* glossary-box
------------------------------------------------------------------ */
+// glossary-box
+// -----------------------------------------------------------------
 .glossary-box { padding: 0; }
 
 .toggle-message { top: -54px; }
@@ -136,17 +136,23 @@ form fieldset .search-submit.active {
 
 .search-filter fieldset.twelve-col { margin: 0; }
 
-/* product-business-card
------------------------------------------------------------------ */
+// product-business-card
+// -----------------------------------------------------------------
 .product-business-card img {
 	float: right;
 	margin: 0 0 20px 20px;
 }
 
-/* footer
------------------------------------------------------------------ */
+// footer
+// -----------------------------------------------------------------
 footer.global .top-link { display: none; }
 
 .yes-js #main-nav.active li li a { 
 	font-size: 18px; 
+}
+
+// press centre
+// ----------------------------------------------------------------- 
+body.page-template-page-press-php .row-resource-list .six-col {
+	min-height: 13em;
 }

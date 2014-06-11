@@ -29,6 +29,7 @@
 					// Gets the event start minute
 					$end_minute = get_post_meta( $post->ID, '_end_minute', true );
 					$location = get_post_meta( $post->ID, '_event_location', true );
+					$venue = get_post_meta( $post->ID, '_event_venue', true );
 					$registration = get_post_meta( $post->ID, '_event_registration', true );
 					$endday = $end_year . $end_month . $end_day;
 				?>				
@@ -42,8 +43,6 @@
 					<?php endif ; ?></a>
 				</div><!-- /.event-map -->
 				<dl class="event-details">
-						<dt class="accessibility-aid">Location:</dt>
-						<?php if ( $location ) : ?><dd class="location" itemprop="location" itemscope itemtype="http://schema.org/PostalAddress"><?php echo $location; ?></dd><?php endif; ?>
 						<dt class="accessibility-aid">Date:</dt>
 						<dd class="event-date">
 						<?php if ($start_day != $end_day && $start_month == $end_month) : ?>
@@ -55,10 +54,14 @@
 						<?php if ($start_day == $end_day) : ?>
 							<?php echo $start_day. ' ' . $start_month . ' ' . $end_year; ?>
 						<?php endif; ?>
-						<span class="accesibilty-aid">
-							<time itemprop="startDate" datetime="<?php echo $start_year .'-' . $start_nummonth . '-' . $start_day . 'T' . $start_hour . ':' . $start_minute; ?>"></time>
-							<time itemprop="endDate" datetime="<?php echo $end_year .'-' . $end_nummonth . '-' . $end_day . 'T' . $end_hour . ':' . $end_minute; ?>"></time>
-						</span>
-					</dd>
+							<span class="accesibilty-aid">
+								<time itemprop="startDate" datetime="<?php echo $start_year .'-' . $start_nummonth . '-' . $start_day . 'T' . $start_hour . ':' . $start_minute; ?>"></time>
+								<time itemprop="endDate" datetime="<?php echo $end_year .'-' . $end_nummonth . '-' . $end_day . 'T' . $end_hour . ':' . $end_minute; ?>"></time>
+							</span>
+						</dd><?php if ( $location ) : ?>
+						<dt class="accessibility-aid">Location:</dt>
+						<dd class="location" itemprop="location" itemscope itemtype="http://schema.org/PostalAddress"><?php echo $location; ?></dd><?php endif; ?><?php if ( $venue ) : ?>
+						<dt class="accessibility-aid">Venue:</dt>
+						<dd class="venue" itemprop="venue" itemscope itemtype="http://schema.org/PostalAddress"><?php echo $venue; ?></dd><?php endif; ?>
 				</dl>
 			</div><!-- /.event-details-wrapper -->
