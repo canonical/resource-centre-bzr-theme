@@ -268,8 +268,8 @@ function eventposttype_get_the_event_date() {
 }
 
 // Add custom CSS to style the metabox
-add_action('admin_print_styles-post.php', 'ep_eventposts_css');
-add_action('admin_print_styles-post-new.php', 'ep_eventposts_css');
+//add_action('admin_print_styles-post.php', 'ep_eventposts_css');
+//add_action('admin_print_styles-post-new.php', 'ep_eventposts_css');
 
 //function ep_eventposts_css() {
 	//wp_enqueue_style('your-meta-box', plugin_dir_url( __FILE__ ) . '/event-post-metabox.css');
