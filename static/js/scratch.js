@@ -16,7 +16,7 @@ core.globalInit = function() {
 	if (document.documentElement.clientWidth < 768) {
 		core.globalPrepend = 'footer.global';
 		core.setupGlobalNav();
-		Y.one( "#main-nav" ).append('<p id="nav-global-wrapper-link"><a href="#nav-global" class="nav-trigger">Ubuntu websites</a></p>');	
+		Y.one( "#main-nav" ).append('<p id="nav-global-wrapper-link"><a href="#nav-global" class="nav-trigger">Ubuntu websites</a></p>');
 		Y.one('.nav-global-wrapper').insert('<h2>Ubuntu websites</h2>','before');
 			Y.one('#nav-global h2').setStyle('cursor', 'pointer').append('<span></span>').on('click',function(e) {
 				this.toggleClass('active');
@@ -39,7 +39,7 @@ core.redrawGlobal = function() {
 		if (globalNav) {
 			globalNav.remove();
 			core.setupGlobalNav();
-			Y.one( "header.global #main-nav" ).append('<p id="nav-global-wrapper-link"><a href="#nav-global" class="nav-trigger">Ubuntu websites</a></p>');	
+			Y.one( "header.global #main-nav" ).append('<p id="nav-global-wrapper-link"><a href="#nav-global" class="nav-trigger">Ubuntu websites</a></p>');
 			Y.one('.nav-global-wrapper').insert('<h2>Ubuntu websites</h2>','before');
 			Y.one('#nav-global h2').setStyle('cursor', 'pointer').append('<span></span>').on('click',function(e) {
 				this.toggleClass('active');
@@ -112,9 +112,9 @@ core.cookiePolicy = function() {
 	}
 	function setCookie() {
 		YUI().use('cookie', function (Y) {
-			Y.Cookie.set("_cookies_accepted", "true", { 
+			Y.Cookie.set("_cookies_accepted", "true", {
 				path: "/",
-				expires: new Date("January 12, 2025") 
+				expires: new Date("January 12, 2025")
 			});
 		});
 	}
@@ -124,7 +124,7 @@ core.cookiePolicy = function() {
 };
 
 core.setUpNav = function() {
-	Y.one( "#main-navigation" ).appendTo( "header.global" );	
+	Y.one( "#main-navigation" ).appendTo( "header.global" );
 };
 
 core.mobileNav = function() {
@@ -136,11 +136,11 @@ core.mobileNav = function() {
 		e.preventDefault();
 		Y.one('#s').blur();
 	});
-	
+
 	Y.all('.nav-toggle').on('clickoutside', function(e) {
     Y.all('#main-navigation div, .nav-toggle').removeClass('active');
 	});
-	
+
 };
 
 core.mobileSearch = function() {
@@ -156,7 +156,7 @@ core.mobileSearch = function() {
 	Y.all('.search-toggle').on('bluroutside', function(e) {
     Y.all('#box-search div, .search-toggle').removeClass('active');
 	});
-	
+
 };
 
 core.mobileShare = function() {
@@ -168,11 +168,11 @@ core.mobileShare = function() {
 		e.preventDefault();
 		Y.one('#s').blur();
 	});
-	
+
 	Y.all('.share-toggle').on('clickoutside', function(e) {
     Y.all('#share div, .share-toggle').removeClass('active');
 	});
-	
+
 };
 
 core.svgFallback = function() {
@@ -183,9 +183,9 @@ core.svgFallback = function() {
 	}
 };
 
-core.downloadAlert = function() { 
+core.downloadAlert = function() {
 	if (Y.one(".alert")) {
-		Y.one(".alert").append("<a href='#' id='close-alert'>close</a>");	
+		Y.one(".alert").append("<a href='#' id='close-alert'>close</a>");
 		Y.one('#close-alert').on('click', function(e) {
 		  Y.one('.alert').hide(true);
 			e.preventDefault();
@@ -193,14 +193,14 @@ core.downloadAlert = function() {
 	}
 };
 
-core.externalLinks = function() { 
+core.externalLinks = function() {
 	Y.all('a').filter(function() {
 	   return this.hostname && this.hostname !== location.hostname;
 	}).addClass( "external" ).append("&nbsp;<span></span>");
 	Y.all("a:visited").addClass( "external-visited" );
-	
+
 	Y.all("a:has(img)").filter(function() {
-	   return !Y.Lang.trim(Y.one(this).text()).length; 
+	   return !Y.Lang.trim(Y.one(this).text()).length;
 	}).addClass("external-img");
 };
 
@@ -208,26 +208,26 @@ core.businessCard = function() {
 	var $body = Y.one('body');
 	if ($body.hasClass('page-template-page-topics-php') || $body.hasClass('tax-topic')) {
 		Y.one(".glossary-box .inner-wrapper").append("<a class='open-message toggle-message' href='#'>show</a><a class='close-message toggle-message' href='#'>close</a>");
-		
+
 		var menu_state = Y.Cookie.get('_business_card');
-	
+
 	  if( menu_state == "visible" ) {
 	    Y.one(".glossary-box div div").addClass('active');
 			Y.one(".open-message").removeClass('active');
 			Y.one(".close-message").addClass('active');
-			
+
 	  } else if( menu_state == "hidden" ) {
-	  
-			Y.all(".glossary-box div div").removeClass('active');		
+
+			Y.all(".glossary-box div div").removeClass('active');
 			Y.one(".close-message").removeClass('active');
 			Y.one(".open-message").addClass('active');
-	  
+
 	  } else {
-	  
+
 		  Y.one('.glossary-box div div').addClass('active');
 		  Y.one(".close-message").addClass('active');
 	  }
-	
+
 		Y.one('.close-message').on('click', function(e) {
 			Y.one(".glossary-box div div").removeClass('active');
 			this.removeClass('active');
@@ -235,7 +235,7 @@ core.businessCard = function() {
 	    Y.Cookie.set('_business_card', 'hidden', { path: "/", expires: new Date("January 12, 2025") }); // update (or set) the cookie
 			e.preventDefault();
 		});
-		
+
 		Y.one('.open-message').on('click', function(e) {
 			Y.one(".glossary-box div div").addClass('active');
 			this.removeClass('active');
