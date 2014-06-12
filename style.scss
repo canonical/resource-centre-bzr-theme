@@ -566,14 +566,17 @@ header.banner .logo-ubuntu span.site-name {
 	@include rounded_corners;
 	background: #38b44a;
 	color: #fff;
-	margin-bottom: 1.25em;
-	padding: 10px 20px;
+	margin: 0 auto 1.25em;
+	max-width: 984px;
+	padding: 10px 20px 2px;
 	position: relative;
 }
 
-.alert a {
-	color: #fff;
-	font-weight: 500;
+#main-content{
+	.alert a, .alert p a, .alert a:link, .alert a:visited {
+		color: #fff;
+		font-weight: 500;
+	}
 }
 
 .alert p { 

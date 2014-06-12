@@ -71,8 +71,14 @@ if(have_posts()) : ?>
 				));
 
 				if ($attachments) :
-				    foreach ( $attachments as $attachment ) : ?>
-							 	<h3><a href="<?php echo wp_get_attachment_url( $attachment->ID ); ?>"><?php the_title(); ?></a></h3>
+				    foreach ( $attachments as $attachment ) : 
+				    $type = friendly_mime( $mimetype );
+						$alt = get_post_meta($attachment->ID, '_wp_attachment_image_alt', true);
+						$image_title = $attachment->post_title;
+						$bytes = filesize(get_attached_file($attachment->ID));
+						$mimetype = $attachment->post_mime_type;
+				    ?>
+		<a href="<?php echo wp_get_attachment_url( $attachment->ID); ?>"><?php echo the_title(); echo '&nbsp;[', $type, '&nbsp;', size_format($bytes), ']'; ?>&nbsp;&rsaquo;</a>
 				   <?php endforeach; endif; ?>
 			</li>
 		<?php endwhile; endif; ?>

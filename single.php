@@ -42,9 +42,9 @@ get_header();
 <?php get_template_part("includes/_cat_headings"); ?>
 
 <div class="row no-border">
-<?php if(($posted == $postdate . $postid)): ?>
+<?php if(($posted == $postdate . $postid)): // for gated content ?>
 <div class="alert">
-	<p>Thank you! <?php if('post' == get_post_type()) : ?> Enjoy the article. <?php else : ?> Your download should start automatically. If it doesn't, <a class="" href="<?php echo wp_get_attachment_url( $attachment_id ); ?>">download now</a>.<?php endif; ?></p>
+	<p>Thank you! Your download should start automatically. If it doesn't, <a class="" href="<?php echo wp_get_attachment_url( $attachment_id ); ?>">download now</a>.</p>
 </div><!-- /.alert -->
 <?php endif; // end if(($posted == $postdate . $postid)) ?>
 
@@ -79,11 +79,11 @@ get_header();
 					<?php } else { // show this if the form has not been posted ?>
 					<?php if('post' == get_post_type()) the_excerpt(); ?>
 					<div id="gated-content">
-						<p>Please enter your details to view the <?php echo $post_type->labels->title_friendly; ?>  '<?php the_title(); ?>'</p><meta itemprop="image" content="/some/url/to/an/image.gif" />						
+						<p>Please enter your details to view the <?php echo $post_type->labels->title_friendly; ?>  '<?php the_title(); ?>'</p>						
 					<?php $term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) ); ?><?php echo $term->name; ?>
 						
 					<?php $theurl = rtrim(get_permalink(),'/'); ?>
-					<iframe height="620" width="420" src="https://pages.ubuntu.com/confirmed-download-<?php $terms_as_text = strip_tags( get_the_term_list( $wp_query->post->ID, 'topic', '', ', ', '' ) ); echo $terms_as_text; ?>.html?url_param=<?php echo $theurl; ?>&amp;posted_param=<?php echo $postdate . $postid; ?>&amp;cat=<?php the_category_unlinked(''); ?>" name="iframe_w_param" id="iframe_w_param"></iframe>
+					<iframe height="620" width="420" src="https://pages.ubuntu.com/confirmed-download-<?php $terms_as_text = strip_tags( get_the_term_list( $wp_query->post->ID, 'topic', '', ', ', '' ) ); echo $terms_as_text; ?>.html?url_param=<?php echo $theurl; ?>&amp;myPostedParam=<?php echo $postdate . $postid; ?>&amp;cat=<?php the_category_unlinked(''); ?>" name="iframe_w_param" id="iframe_w_param"></iframe>
 					</div><!-- /#gated-content -->
 					<?php } // end if market_form completed ?>
 					
@@ -95,6 +95,9 @@ get_header();
 		<?php else : ?>
 		<?php if('post' == get_post_type()) : ?>
 					<div itemprop="description"><?php the_content(); ?></div>
+					<div id="download-item">
+						<p><a class="link-cta-ubuntu" href="<?php echo wp_get_attachment_url( $attachment_id ); ?>">Download  <?php $term_id = the_category_ID($echo=false); $saved_data = get_tax_meta($term_id,'ba_singular'); echo $saved_data; ?></a></p>
+					</div>
 		<?php else : ?>
 					<iframe width="1" height="1" frameborder="0" src="<?php echo wp_get_attachment_url( $attachment_id ); ?>"></iframe>
 		<?php endif; ?>
