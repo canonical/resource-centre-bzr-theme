@@ -60,7 +60,7 @@
 							</span>
 						</dd><?php if ( $location ) : ?>
 						<dt class="accessibility-aid">Location:</dt>
-						<dd class="location" itemprop="location" itemscope itemtype="http://schema.org/PostalAddress"><?php echo $location; ?></dd><?php endif; ?><?php if ( $venue ) : ?>
+						<dd class="location" itemprop="location" itemscope itemtype="http://schema.org/PostalAddress"><?php echo $location; ?></dd><?php endif; ?><?php if ( $venue && ( is_single() )) : ?>
 						<dt class="accessibility-aid">Venue:</dt>
 						<dd class="venue" itemprop="venue" itemscope itemtype="http://schema.org/PostalAddress"><?php echo $venue; ?></dd><?php endif; ?>
 				</dl>
