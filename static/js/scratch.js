@@ -3,6 +3,7 @@ YUI().use('node', 'cookie', "event-resize", function(Y) {
 // removes no-js class and adds yes-js if js
 core.setupHtmlClass = function() {
 	Y.all('html').removeClass('no-js').addClass('yes-js');
+	document.domain = 'ubuntu.com';
 }
 
 core.resizeListener = function() {

@@ -1,5 +1,4 @@
 jQuery(document).ready(function($){
-//document.domain = 'ubuntu.com';
 
 // for single articles	
 if ($('.article-list').hasClass('infinitescroll')) {
