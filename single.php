@@ -83,7 +83,7 @@ get_header();
 					<?php $term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) ); ?><?php echo $term->name; ?>
 						
 					<?php $theurl = rtrim(get_permalink(),'/'); ?>
-					<iframe height="620" width="420" src="https://pages.ubuntu.com/confirmed-download-<?php $terms_as_text = strip_tags( get_the_term_list( $wp_query->post->ID, 'topic', '', ', ', '' ) ); echo $terms_as_text; ?>.html?url_param=<?php echo $theurl; ?>&amp;posted_param=<?php echo $postdate . $postid; ?>&amp;cat=<?php the_category_unlinked(''); ?>" name="iframe_w_param" id="iframe_w_param"></iframe>
+					<iframe height="620" width="420" src="https://pages.ubuntu.com/confirmed-download-<?php $terms_as_text = strip_tags( get_the_term_list( $wp_query->post->ID, 'topic', '', ', ', '' ) ); echo $terms_as_text; ?>.html?url_param=<?php echo $theurl; ?>?posted=<?php echo $postdate . $postid; ?>&amp;cat=<?php the_category_unlinked(''); ?>" name="iframe_w_param" id="iframe_w_param"></iframe>
 					</div><!-- /#gated-content -->
 					<?php } // end if market_form completed ?>
 					
