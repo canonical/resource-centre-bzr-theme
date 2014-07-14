@@ -4,11 +4,15 @@
 
      if($postVideos) : ?>
      <ul class="no-bullets">
-     <?php foreach ( $postVideos as $postVideo ) : ?>
+     <?php foreach ( $postVideos as $postVideo ) : 
+			 $url = "http://www.youtube.com/watch?v=$postVideo";
+			 $youtube = "http://www.youtube.com/oembed?url=".urlencode($url)."&format=json";
+			 $json =  json_decode(file_get_contents($youtube));
+     ?>
          	<li>
-				 		<h3><?php $content = file_get_contents("https://youtube.com/get_video_info?video_id=".$postVideo); parse_str($content, $ytarr); echo $ytarr['title']; ?></h3>
+				 		<h3><?php echo $json->title; ?></h3>
 					 	<div class="video-wrapper">
-					 		<?php echo wp_oembed_get( 'https://www.youtube.com/watch?v=' . $postVideo ); ?>
+					 		<?php echo $json->html; ?>
 					 	</div>
 					 	<p>Embed code</p>
 					 	<code>
