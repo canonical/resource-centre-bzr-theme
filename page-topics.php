@@ -131,51 +131,18 @@ if ( !defined('ABSPATH')) exit;
 
 <div class="article-list">
 <?php
-/* ============== pull in latest events ============== */
-  wp_reset_query();
-	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
-	$query = new WP_Query( array(
-	'posts_per_page' => 2,
-	'post_type' => 'event',
-	'topic' => $current_tax,
-  'post__not_in' => $do_not_duplicate,
-	'paged'=>$paged
-	));
-?>
-
-<?php if ($query->have_posts()) : ?>
-	<div class="row">
-		<div class="inner-wrapper">
-			<div class="eight-col no-margin-bottom">
-				<h2>Upcoming and recent <span><?php echo strtolower(wp_title( '', false, 'right' )); ?></span> events</h2>
-				<ul class="no-bullets">
-				<?php 
-					while( $query->have_posts() ): 
-					$query->the_post(); 
-					$do_not_duplicate[] = $post->ID ?>
-					<li>
-						<?php get_template_part("/includes/_event_meta"); ?>
-					</li>
-				<?php endwhile; ?>
-				</ul>
-			</div><!-- /.eight-col -->
-		</div><!-- /.inner-wrapper -->
-	</div><!-- /.row -->
-<?php endif; // if have_posts ends 
-
-/* ============== end pull in latest events ============== */
-?>  
-		
-<?php
 /* ============== pull in latest cloud articles ============== */
   wp_reset_query();
 	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
 	$current_tax = basename(get_permalink());
+	$exclude_cat = 'downloads';
+	$category = get_category_by_slug($exclude_cat);
 	$query = new WP_Query( array(
 	'posts_per_page' => 2,
 	'topic' => $current_tax,
-	'category_name' => 'news,press-releases',
-  'post_type' => 'any',
+	'cat'	=> -$category->cat_ID,
+	//'category_name' => 'news,press-releases',
+  'post_type' => 'post',
   'post__not_in' => $do_not_duplicate,
 	'paged'=>$paged
 	));
@@ -185,7 +152,7 @@ if ( !defined('ABSPATH')) exit;
 	<div class="row">
 		<div class="inner-wrapper">
 			<div class="eight-col no-margin-bottom">
-				<h2>Latest <span><?php echo strtolower(wp_title( '', false, 'right' )); ?></span> news</h2>
+				<h2><?php echo wp_title( '', false, 'right' ); ?> latest <!--<span><?php echo strtolower(wp_title( '', false, 'right' )); ?></span> news --></h2>
 				<ul class="no-bullets">
 				<?php 
 					while( $query->have_posts() ): 
@@ -244,6 +211,42 @@ if ( !defined('ABSPATH')) exit;
 <?php endif; // if have_posts ends 
 /* ============== end pull in most viewed articles ============== */
 ?>
+
+<?php
+/* ============== pull in latest events ============== */
+  wp_reset_query();
+	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
+	$query = new WP_Query( array(
+	'posts_per_page' => 2,
+	'post_type' => 'event',
+	'topic' => $current_tax,
+  'post__not_in' => $do_not_duplicate,
+	'paged'=>$paged
+	));
+?>
+
+<?php if ($query->have_posts()) : ?>
+	<div class="row">
+		<div class="inner-wrapper">
+			<div class="eight-col no-margin-bottom">
+				<h2>Upcoming and recent <span><?php echo strtolower(wp_title( '', false, 'right' )); ?></span> events</h2>
+				<ul class="no-bullets">
+				<?php 
+					while( $query->have_posts() ): 
+					$query->the_post(); 
+					$do_not_duplicate[] = $post->ID ?>
+					<li>
+						<?php get_template_part("/includes/_event_meta"); ?>
+					</li>
+				<?php endwhile; ?>
+				</ul>
+			</div><!-- /.eight-col -->
+		</div><!-- /.inner-wrapper -->
+	</div><!-- /.row -->
+<?php endif; // if have_posts ends 
+
+/* ============== end pull in latest events ============== */
+?>  
 
 <?php /* ============== links to all topics ============== */ ?>
 	<div class="row row-resource-list">
