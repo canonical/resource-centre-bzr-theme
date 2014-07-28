@@ -926,7 +926,9 @@ body.post-type-archive .box {
 .article-list li.row:nth-child(even),
 .article-list div.row:nth-child(even) { background: rgba(255, 255, 255, 0.60); }
 
-body.page-template-page_downloads-php {
+body.page-template-page_downloads-php,
+body.page-template-page-events-php,
+body.page-template-page-webinars-php {
 	.article-list li.row:nth-child(odd),
 	.article-list div.row:nth-child(odd) { background: rgba(255, 255, 255, 0.60); }
 }
@@ -936,7 +938,9 @@ body.page-template-page_downloads-php {
 	div.row:nth-child(odd) { background: rgba(255, 255, 255, 0.60); }
 }
 
-body.page-template-page_downloads-php {
+body.page-template-page_downloads-php,
+body.page-template-page-events-php,
+body.page-template-page-webinars-php {
 	.article-list li.row:nth-child(even),
 	.article-list div.row:nth-child(even) { background: none; }
 }

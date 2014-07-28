@@ -18,7 +18,7 @@ if ( !defined('ABSPATH')) exit;
  * @since          available since Release 1.0
  */
 
- /* Template Name: Categories */
+ /* Template Name: Category page */
 ?>
 
 <?php get_header();

@@ -112,7 +112,7 @@ if ( !defined('ABSPATH')) exit;
 <div class="row<?php if ( is_page('events') ) : echo ' row-events-latest'; endif ; ?>">
 	<div class="inner-wrapper">
 		<div class="eight-col no-margin-bottom">
-			<h2>Upcoming events</h2>
+			<h2>Upcoming and recent events</h2>
 			<ul class="no-bullets">
 			<?php 
 				while( $query->have_posts() ): 

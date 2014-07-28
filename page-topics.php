@@ -152,7 +152,7 @@ if ( !defined('ABSPATH')) exit;
 	<div class="row">
 		<div class="inner-wrapper">
 			<div class="eight-col no-margin-bottom">
-				<h2><?php echo wp_title( '', false, 'right' ); ?> latest <!--<span><?php echo strtolower(wp_title( '', false, 'right' )); ?></span> news --></h2>
+				<h2>Latest in <?php echo wp_title( '', false, 'right' ); ?><!--<span><?php echo strtolower(wp_title( '', false, 'right' )); ?></span> news --></h2>
 				<ul class="no-bullets">
 				<?php 
 					while( $query->have_posts() ): 
