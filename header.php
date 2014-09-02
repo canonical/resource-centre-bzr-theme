@@ -42,7 +42,7 @@ if ( !defined('ABSPATH')) exit;
   })(); 
 </script>
 
-<title><?php if (is_search()) : ?> <?php echo $search_title; ?> <?php elseif (is_category()) : ?><?php $term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) ); ?><?php if( $term != '' ) : ?><?php echo $term->name; ?><?php endif; ?> <?php echo strtolower(single_cat_title( '', false, 'right' )); ?><?php if(is_taxonomy('topic', 'category')) : endif ; ?><?php else : ?> <?php wp_title(''); ?><?php endif; ?> <?php if (!is_home()) : ?>|<? endif; ?> <?php bloginfo('name'); ?></title>
+<title><?php if (is_search()) : ?> <?php echo htmlentities($s,ENT_QUOTES,get_bloginfo('charset')); ?> <?php elseif (is_category()) : ?><?php $term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) ); ?><?php if( $term != '' ) : ?><?php echo $term->name; ?><?php endif; ?> <?php echo strtolower(single_cat_title( '', false, 'right' )); ?><?php if(is_taxonomy('topic', 'category')) : endif ; ?><?php else : ?> <?php wp_title(''); ?><?php endif; ?> <?php if (!is_home()) : ?>|<? endif; ?> <?php bloginfo('name'); ?></title>
 
 <meta charset="utf-8" />
 <meta name="description" content="Ubuntu Insights - The Ubuntu resource center" />
