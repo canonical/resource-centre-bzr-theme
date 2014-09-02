@@ -11,7 +11,7 @@
 	<link rel="alternate" type="application/rss+xml" title="Ubuntu Insights feed" href="<?php bloginfo('url'); ?>/feed/" />
 
 <?php elseif (is_search()) : $key = wp_specialchars($s, 1); ?>
-	<link rel="alternate" type="application/rss+xml" title="Ubuntu Insights '<?php echo $s; ?>' search feed" href="<?php bloginfo('url'); ?>/feed<?php echo $_SERVER['REQUEST_URI']; ?>" />
+	<link rel="alternate" type="application/rss+xml" href="<?php bloginfo('url'); ?>/feed<?php echo $_SERVER['REQUEST_URI']; ?>" />
 
 <?php elseif ( is_page_template('page-category.php') ) : ?>
 	<link rel="alternate" type="application/rss+xml" title="Ubuntu Insights '<?php echo $current_cat; ?>' feed" href="<?php bloginfo('url'); ?>/category/<?php echo $current_cat; ?>/feed/" />
