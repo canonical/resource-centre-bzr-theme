@@ -13,22 +13,23 @@
 
 // add jquery
 function jquery_init() {
-	if (!is_admin() && is_search() || is_category()) {
+	if (!is_admin()) :
 		wp_deregister_script('jquery');
 		wp_register_script('jquery', get_template_directory_uri() . '/static/js/jquery.min.js', false, '1.9.1', true);
+		
 		wp_enqueue_script('jquery');
 
-    	// load infinite scroll jquery
+		// load infinite scroll jquery
+		wp_deregister_script('infinite_scroll');
 		wp_register_script( 'infinite_scroll',  get_template_directory_uri() . '/static/js/jquery.infinitescroll.min.js', array('jquery'),null,true );
 
-    	// load manual-trigger.js jquery
+		// load manual-trigger.js jquery
+		wp_deregister_script('infinite_scroll_trigger');
 		wp_register_script( 'infinite_scroll_trigger',  get_template_directory_uri() . '/static/js/manual-trigger.js', array('jquery'),null,true );
-		    if( ! is_singular() ) {
-		        wp_enqueue_script('infinite_scroll');
-		        wp_enqueue_script('infinite_scroll_trigger');
-		        //wp_enqueue_script('jquery_masonry');
-		    }
-	}
+		
+		wp_enqueue_script('infinite_scroll');
+		wp_enqueue_script('infinite_scroll_trigger');
+	endif;
 }
 add_action('wp_footer', 'jquery_init');
 // end add jquery

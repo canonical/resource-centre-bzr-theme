@@ -371,6 +371,10 @@ body.home .inner-wrapper { padding: 0; }
 .row-events,
 .search .row { padding-bottom: 10px; }
 
+#main-content .row.upcoming,
+#main-content ul.upcoming {
+	border-bottom: 1px dotted $warm_grey;
+}
 
 .category #main-content .row-hero,
 .search #main-content .row-hero {
@@ -928,6 +932,8 @@ body.post-type-archive .box {
 
 body.page-template-page_downloads-php,
 body.page-template-page-events-php,
+body.category-events,
+body.category-webinars,
 body.page-template-page-webinars-php {
 	.article-list li.row:nth-child(odd),
 	.article-list div.row:nth-child(odd) { background: rgba(255, 255, 255, 0.60); }
@@ -940,6 +946,8 @@ body.page-template-page-webinars-php {
 
 body.page-template-page_downloads-php,
 body.page-template-page-events-php,
+body.category-events,
+body.category-webinars,
 body.page-template-page-webinars-php {
 	.article-list li.row:nth-child(even),
 	.article-list div.row:nth-child(even) { background: none; }
@@ -2708,6 +2716,10 @@ body.single .eight-col .image-wrap img {
 	clear: both;
 	display: block;
 	padding: 6px 20px 6px 24px;
+}
+
+body.category-webinars .event-date {
+	background-position: 0 7px;
 }
 
 .opera-mini,
