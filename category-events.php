@@ -35,39 +35,28 @@ $post = $wp_query->get_queried_object();
 </div><!-- /.row -->
 
 <ul class="article-list infinitescroll no-bullets">
-<?php
-/* ============== pull in latest articles (specific to the current taxonomy term/s) ============== */
+
+<?php /* ============== pull in latest articles ============== */
+  wp_reset_query();
 	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
-	$current_cat = get_query_var('category_name');
-	query_posts( $args );
-	$args=array(
-	'posts_per_page'=> '-1',
-	'post_type'=> 'any',
-	'post__not_in' => $do_not_duplicate,
-	'paged'=>$paged,
-	'tax_query' => array(
-        'relation' => 'OR',
-        array(
-            'taxonomy' => 'topic',
-            'field' => 'slug',
-            'terms' => array('cloud'),
-        ),
-        array(
-            'taxonomy' => 'category',
-            'field' => 'slug',
-            'terms' => array('events'),
-            'operator' => 'IN',
-        ),
-		)
-);
-wp_reset_query();
+	$query = new WP_Query( array(
+	'posts_per_page' => 999,
+	'category_name' => 'events',
+  'post_type' => 'event',
+  'post__not_in' => $do_not_duplicate,
+  'meta_key' => '_start_eventtimestamp',
+	'orderby' => 'meta_value',
+	'order' => 'DESC',
+	));
+  wp_reset_query();
 ?>
-<?php
-	while ( have_posts() ) : the_post();
+ 
+<?php if ($query->have_posts()) :
+	while ( $query->have_posts() ) : $query->the_post();
 	$do_not_duplicate[] = $post->ID ?>
 <?php 
 	global $post, $wp_locale;
-	$current_time = current_time('mysql'); 
+	$current_time = current_time('timestamp'); 
 	list( $today_year, $today_month, $today_day, $hour, $minute, $second ) = split( '([^0-9])', $current_time );
 	$end_month = get_post_meta( $post->ID, '_end_month', true );
 	$end_day = get_post_meta( $post->ID, '_end_day', true );
@@ -84,7 +73,9 @@ wp_reset_query();
       </div><!-- /.eight-col -->
 		</div><!-- /.inner-wrapper -->
 	</li><!-- /.row -->
-<?php endwhile; // if have_posts ends
+<?php 
+	endwhile; // if have_posts ends 
+	endif;
 /* ============== end pull in latest articles ============== */
 wp_reset_query();
 ?>
