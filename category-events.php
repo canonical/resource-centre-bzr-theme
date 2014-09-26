@@ -40,7 +40,7 @@ $post = $wp_query->get_queried_object();
   wp_reset_query();
 	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
 	$query = new WP_Query( array(
-	'posts_per_page' => 999,
+	'posts_per_page' => 10,
 	'category_name' => 'events',
   'post_type' => 'event',
   'post__not_in' => $do_not_duplicate,
@@ -53,6 +53,7 @@ $post = $wp_query->get_queried_object();
  
 <?php if ($query->have_posts()) :
 	while ( $query->have_posts() ) : $query->the_post();
+	$post_type = get_post_type_object( get_post_type($post));
 	$do_not_duplicate[] = $post->ID ?>
 <?php 
 	global $post, $wp_locale;
@@ -73,9 +74,8 @@ $post = $wp_query->get_queried_object();
       </div><!-- /.eight-col -->
 		</div><!-- /.inner-wrapper -->
 	</li><!-- /.row -->
-<?php 
-	endwhile; // if have_posts ends 
-	endif;
+<?php endwhile; // while have_posts ends ?>
+<?php endif; // if have_posts ends ; 
 /* ============== end pull in latest articles ============== */
 wp_reset_query();
 ?>
