@@ -143,7 +143,7 @@ wp_reset_query();
 wp_reset_query();
 ?>
 </ul>
-	<?php get_template_part("includes/_pagination"); ?>
+	<?php //get_template_part("includes/_pagination"); ?>
 </div><!-- /.article-list -->
 
 <?php get_footer(); ?>
