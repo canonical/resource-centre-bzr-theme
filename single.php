@@ -228,15 +228,9 @@ $custom_taxterms = wp_get_object_terms( $post->ID, 'topic', array('fields' => 'i
 			</div>
     <?php endwhile; } wp_reset_query(); ?>
 <?php endif; // if ($category == array('news','press-releases')) ?>
-    <!--<div class="box four-col">
-    <?php 
-        global $post;
-        $cat_name = get_category(get_query_var('cat'))->name;
-        $category = get_the_category($post->ID); 
-        
-    ?><h2>Cat: <?php echo $cat_name; ?></h2>
-    	<h2>All resources</h2>
-    	<ul class="no-bullets no-margin-bottom">
+ <!--   <div class="box four-col">
+    	<h2>All <?php echo $term->slug; ?> resources</h2>
+    	<ul class="list no-bullets no-margin-bottom">
     	<?php
     		// get all the categories from the database
     		$cats = get_categories(); 
@@ -254,7 +248,6 @@ $custom_taxterms = wp_get_object_terms( $post->ID, 'topic', array('fields' => 'i
     			<?php endforeach; // done the foreach statement ?>
     	</ul>
     </div>-->
-
 </aside><!-- /.instapaper_ignore -->
 
 </div><!-- /.inner-wrapper -->

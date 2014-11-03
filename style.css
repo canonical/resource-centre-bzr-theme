@@ -3377,7 +3377,7 @@ html.no-svg .cookie-policy .link-cta {
   display: inline-block;
   margin-right: 20px; }
   .list-social li a {
-    background-image: url("//www.canonical.com/static/img/icons/icon-social.svg");
+    background-image: url("static/img/icon-social.svg");
     background-repeat: no-repeat;
     display: block;
     width: 45px;
