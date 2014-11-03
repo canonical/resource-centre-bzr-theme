@@ -37,30 +37,30 @@ get_header();
 	$category = $category[0]->category_nicename;
 	$firstCategory = $category[0]->category_description;
 	$registration = get_post_meta( $post->ID, '_event_registration', true );
+	$press_cats = array('press-releases', 'news');
 ?>
-
-<?php get_template_part("includes/_cat_headings"); ?>
-
 <div class="row no-border">
+<div class="inner-wrapper">
 <?php if(($posted == $postdate . $postid)): // for gated content ?>
 <div class="alert">
 	<p>Thank you! Your download should start automatically. If it doesn't, <a class="" href="<?php echo wp_get_attachment_url( $attachment_id ); ?>">download now</a>.</p>
 </div><!-- /.alert -->
 <?php endif; // end if(($posted == $postdate . $postid)) ?>
 
-	<?php if (have_posts()) : ?>
-		<?php while (have_posts()) : the_post(); ?>
-		<?php if(!current_user_can('administrator')){ echo setPostViews(get_the_ID()); } ?>
+<?php if (have_posts()) : ?>
+<?php while (have_posts()) : the_post(); ?>
+<?php if(!current_user_can('administrator')){ echo setPostViews(get_the_ID()); } ?>
 		
-<div class="inner-wrapper">
-	<div class="twelve-col no-margin-bottom">
-		<h1 class="eight-col" itemprop="name"><?php the_title(); ?></h1>
-	<div class="content eight-col no-margin-bottom">
-		<?php if ($category == 'events') : ?>
-			<?php get_template_part("/includes/_event_meta"); ?>
-		<?php else : ?>
+<div class="content eight-col no-margin-bottom">
+	<div class="box eight-col box-highlight">
+		<h1 itemprop="name"<?php if(in_category( $press_cats )) echo ' class="heading-has-time"'; ?>><?php the_title(); ?></h1>
+		<?php if ($category != 'events') : ?>
 			<?php get_template_part("includes/_post_meta"); ?>
 			<!-- <p><?php //post_read_time(); ?></p> -->
+		<?php endif ; ?>
+        <?php get_template_part("includes/_share_links"); ?>
+		<?php if ($category == 'events') : ?>
+			<?php get_template_part("/includes/_event_meta"); ?>
 		<?php endif ; ?>
 		<?php if(has_post_thumbnail()) : ?>
 		<div itemprop="image" class="article-image">
@@ -127,31 +127,33 @@ get_header();
 		<?php endif; ?>
 		<?php endif; // if video  ?>
 <?php } // end if gated ?>
-				<?php if('event' == get_post_type()) : ?>
-				<?php 
-					$current_time = current_time('mysql'); 
-					list( $today_year, $today_month, $today_day, $hour, $minute, $second ) = split( '([^0-9])', $current_time );
-					$current_timestamp = $today_year . $today_month . $today_day . $hour . $minute;
-					$event_timestamp = get_post_meta( $post->ID, '_start_eventtimestamp', true ); ?>
-					<?php if(($current_timestamp <= $event_timestamp) && $registration) : ?>
-					<div id="download-item">
-						<p><a itemprop="url" class="link-cta-ubuntu" href="<?php echo $registration; ?>">Register now</a></p>
-					</div>
-					<?php endif; ?>
-				<?php endif; // if event ?>
+<?php if('event' == get_post_type()) : ?>
+<?php 
+	$current_time = current_time('mysql'); 
+	list( $today_year, $today_month, $today_day, $hour, $minute, $second ) = split( '([^0-9])', $current_time );
+	$current_timestamp = $today_year . $today_month . $today_day . $hour . $minute;
+	$event_timestamp = get_post_meta( $post->ID, '_start_eventtimestamp', true ); ?>
+	<?php if(($current_timestamp <= $event_timestamp) && $registration) : ?>
+	<div id="download-item">
+		<p><a itemprop="url" class="link-cta-ubuntu" href="<?php echo $registration; ?>">Register now</a></p>
+	</div>
+	<?php endif; ?>
+<?php endif; // if event ?>
+				
+        <?php get_template_part("includes/_cat_headings"); ?>
+	</div><!-- /.box -->
+	    <?php get_template_part("includes/_related_posts"); ?>
+</div><!-- /.eight-col -->
 
-	</div><!-- /.eight-col -->
-
-<div id="sidebar" class="four-col last-col instapaper_ignore">
+<aside id="sidebar" class="four-col last-col instapaper_ignore">
 <?php $attachments = get_children( array('exclude'     => get_post_thumbnail_id(), 'post_parent' => get_the_ID(), 'post_type' => 'attachment') ); if ((( $attachments )) && ($category == 'news')) : ?>
 
 <?php get_template_part("includes/_downloads"); ?>
 
-
 <?php $pressLinks = preg_split("/\\r\\n|\\r|\\n/", get_post_meta($post->ID, 'dbt_press_links', true ) );
 
 if ( get_post_meta($post->ID, 'dbt_press_links', true) ) :  ?>
-	<div class="press-release-videos four-col clearfix">
+	<div class="box box-highlight press-release-videos four-col clearfix">
 		<h2>Links</h2>
 		<ul class="list no-bullets">
 	<?php foreach ( $pressLinks as $pressLink ) : ?>
@@ -174,8 +176,8 @@ $press_contact = make_clickable(get_post_meta( get_the_ID(), 'dbt_press_contact'
 
 // check if the custom field has a value
 if( ! empty( $press_contact ) ) {
+	echo '<div class="box box-highlight four-col">';
 	echo '<h2>Contact details</h2>';
-	echo '<div class="four-col clearfix">';
   echo wpautop( $press_contact, false );  
   echo '</div>';
 } 
@@ -183,7 +185,6 @@ if( ! empty( $press_contact ) ) {
 
 <?php //get_template_part("includes/_subscribe"); ?>
 <?php else : ?>
-<?php get_template_part("includes/_related_posts"); ?>
 <?php endif; // if category press-releases ends ?>
 <?php endwhile; // while have_posts ends ?>
 <?php endif; // if have_posts ends ?>
@@ -203,15 +204,15 @@ $custom_taxterms = wp_get_object_terms( $post->ID, 'topic', array('fields' => 'i
     'tax_query' => array(
 	    array(
 				'taxonomy' 	=> 'topic',
-				'field' 		=> 'id',
-				'terms'			=> $custom_taxterms
+				'field'     => 'id',
+				'terms'		=> $custom_taxterms
 	    )
 	),
-    'post_status' 			=> 'publish',
-    'posts_per_page' 		=> 1,
-    'order' 						=> 'ASC',
-    'orderby' 					=> 'date',
-    'caller_get_posts'	=> 1
+    'post_status'       => 'publish',
+    'posts_per_page'    => 1,
+    'order'             => 'ASC',
+    'orderby'           => 'date',
+    'caller_get_posts'  => 1
   );
 
     $my_query = null;
@@ -225,11 +226,37 @@ $custom_taxterms = wp_get_object_terms( $post->ID, 'topic', array('fields' => 'i
 					<?php the_content(); ?>
 				</div>
 			</div>
-        
-<?php endwhile; } wp_reset_query(); ?>
+    <?php endwhile; } wp_reset_query(); ?>
 <?php endif; // if ($category == array('news','press-releases')) ?>
-</div><!-- /.instapaper_ignore -->
-</div><!-- /.twelve-col -->
+    <!--<div class="box four-col">
+    <?php 
+        global $post;
+        $cat_name = get_category(get_query_var('cat'))->name;
+        $category = get_the_category($post->ID); 
+        
+    ?><h2>Cat: <?php echo $cat_name; ?></h2>
+    	<h2>All resources</h2>
+    	<ul class="no-bullets no-margin-bottom">
+    	<?php
+    		// get all the categories from the database
+    		$cats = get_categories(); 
+    		// loop through the categries
+    			foreach ($cats as $cat) :
+    				// setup the cateogory ID
+    				$cat_id= $cat->term_id;
+    				// create a custom wordpress query
+    				query_posts("topic=$current_tax&cat=$cat_id&posts_per_page=1");
+    				// start the wordpress loop!
+    		      if (have_posts()) : while (have_posts()) : the_post(); 
+    						echo "<li><a href='/topic/" . $current_tax . "?cat=".$cat_id."'>".$cat->name." (" .$wp_query->found_posts . ")</a></li>";
+    		      ?>
+    					<?php endwhile; endif; // done our wordpress loop. Will start again for each category ?>
+    			<?php endforeach; // done the foreach statement ?>
+    	</ul>
+    </div>-->
+
+</aside><!-- /.instapaper_ignore -->
+
 </div><!-- /.inner-wrapper -->
 </div><!-- /.row --> 
 

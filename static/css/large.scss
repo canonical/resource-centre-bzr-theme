@@ -59,9 +59,34 @@ body:after {
 
 header.banner { margin-bottom: 0; }
 
-header.banner .logo-ubuntu { background-position: -20px 50%; }
+header.banner .nav-primary .topics {
+    border-top: 0;   
+}
 
-header.banner .logo-ubuntu span { width: 85px; }
+header.banner .nav-primary li.press-center {
+    display: block;
+}
+
+header.banner .nav-primary .nav-press-centre {
+    display: none;
+}
+
+header.banner .nav-primary ul.second-level-nav.active {
+    //display: none;
+}
+
+header.banner .nav-primary li.topics a {
+    border-right: 0 !important;
+    border-bottom: 0 !important;
+}
+
+header.banner .nav-primary li.topics a:link,
+header.banner .nav-primary li.topics a:visited {
+    display: block;
+    border-right: 0 !important;
+    border-bottom: 0 !important;
+    
+}
 
 .row .inner-wrapper {
 	display: block;
@@ -107,7 +132,76 @@ footer.global .legal {
 
 // glossary-box
 // -----------------------------------------------------------------
-.glossary-box { padding: 0; }
+.glossary-box { 
+    padding-bottom: 30px; 
+    margin-top: -10px;
+    
+    img {
+
+    }
+}
+.glossary-box--home {
+    padding-top: 60px;
+
+    .inner-wrapper .last-col {
+        background-size: 240px 240px;
+        height: 240px;
+        width: 240px;
+        top: -28px;
+        right: 45px;
+   }
+}
+
+.glossary-box-cloud .inner-wrapper .last-col {
+    background-size: 220px 220px;
+    height: 240px;
+    width: 240px;
+    right: 70px;
+    top: -20px;
+}
+
+.glossary-box-desktop .inner-wrapper .last-col {
+    background-image: url('#{$asset_path}desktop/features/image-features.jpg');
+    background-size: 400px 201px;
+    height: 201px;
+    width: 400px;
+    right: 0;
+    top: 30px;
+}
+
+.glossary-box-server .inner-wrapper .last-col {
+    background-image: url('#{$asset_path}server/image-server.svg');
+    background-size: 400px 121px;
+    height: 121px;
+    width: 400px;
+    right: 0;
+    top: 60px;
+}
+
+.glossary-box-tablet .inner-wrapper .last-col {
+    background-image: url('#{$asset_path}tablet/image-tablet-music.jpg');
+    background-size: 350px 223px;
+    height: 254px;
+    width: 400px;
+    top: -20px;
+}
+
+.glossary-box-support .inner-wrapper .last-col {
+    background-image: url('#{$asset_path}management/image-management.svg');
+    background-size: 320px 172px;
+    height: 172px;
+    width: 320px;
+    right: 10px;
+    top: 60px;
+}
+
+.glossary-box-phone .inner-wrapper .last-col {
+    background-size: 400px 252px;
+    height: 252px;
+    width: 400px;
+    right: 0;
+    top: 0;
+}
 
 .toggle-message { top: -54px; }
 
@@ -121,8 +215,6 @@ footer.global .legal {
 	margin-bottom: 40px;	
 	width: 100%;
 }
-
-button#searchsubmit { top: -2px; }
 
 .search #main-content form#search-form { margin-bottom: 20px; }
 
@@ -142,6 +234,25 @@ form fieldset .search-submit.active {
 	float: right;
 	margin: 0 0 20px 20px;
 }
+
+// single
+// -----------------------------------------------------------------
+body.single #main-content .list-social-wrapper {
+    display: table;
+    
+    > div {
+        display: table-cell;
+        vertical-align: middle;
+        border: inherit;
+    }
+}
+
+// aside
+// -----------------------------------------------------------------
+aside .list-social li {
+    margin-right: 20px !important;
+}
+
 
 // footer
 // -----------------------------------------------------------------

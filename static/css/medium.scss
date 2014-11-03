@@ -47,6 +47,12 @@ $asset_path: "//assets.ubuntu.com/sites/ubuntu/latest/u/img/";
 $grid_unit_small: 10;
 $grid_unit_med:   20;
 
+@mixin font_size($size) {
+  font-size: ($size) + px;  //Fallback in px
+  font-size: calculateem($size);
+}
+
+
 /* general
 ----------------------------------------------------------------- */
 body { background: url("#{$asset_path}backgrounds/image-background-paper.png") repeat-y center center; }
@@ -57,13 +63,6 @@ body:after {
 }
 
 .col, .eight-col, .eleven-col, .five-col, .four-col, .nine-col, .one-col, .seven-col, .six-col, .ten-col, .three-col, .twelve-col, .two-col { margin-right: 2.128%; }
-
-/* welcome-message
------------------------------------------------------------------ */
-#welcome-message div.welcome-message-inner {
-	margin-top: -20px;
-	padding: 0 0 20px;
-}
 
 #nav-global {
 	@include box_sizing();
@@ -119,6 +118,15 @@ body { font-size: 15px; }
 }
 
 .article-list ul.phone-articles { border-bottom: 0; }
+
+.row h3 {
+	@include font_size(18.75);
+}
+
+.featured h3 {
+    margin-bottom: 10px;
+    font-size: 2em;
+}
 
 /* search
 ----------------------------------------------------------------- */
@@ -185,13 +193,89 @@ body.single .row { padding-top: 10px; }
 
 /* glossary-box
 ----------------------------------------------------------------- */
-.glossary-box { padding: 0 30px 0; }
+.glossary-box { 
+    box-shadow: 0 2px 2px 0 rgba(212,212,212, .7);
+    padding: 10px 30px 20px;
+    margin-top: -10px;
+    
+    .inner-wrapper .last-col {
+        background-repeat: no-repeat;
+        background-position: right bottom;
+        position: absolute;
+    }
+}
 
-.tax-topic .glossary-box { padding: 20px 30px 0; }
+.glossary-box--home { 
+    padding: 30px 30px 20px;
+    margin-top: 0;
+    
+    .inner-wrapper .last-col {
+        background-image: url('//insights.ubuntu.com/wp-content/uploads/picto-knowledge-orange-and-white.png');
+        background-size: 200px 200px;
+        height: 200px;
+        width: 200px;
+        right: 10px;
+        top: -24px;
+    }
+}
+
+.glossary-box-cloud .inner-wrapper .last-col {
+    background-image: url('#{$asset_path}cloud/image-diversecloudecosystem.svg');
+    background-size: 170px 170px;
+    height: 170px;
+    width: 170px;
+    right: 40px;
+    top: 5px;
+}
+
+.glossary-box-desktop .inner-wrapper .last-col {
+    background-image: url('#{$asset_path}desktop/features/image-features.jpg');
+    background-size: 280px 140px;
+    height: 140px;
+    width: 280px;
+    right: 0;
+    top: 60px;
+}
+
+.glossary-box-server .inner-wrapper .last-col {
+    background-image: url('#{$asset_path}server/image-server.svg');
+    background-size: 300px 90px;
+    height: 90px;
+    width: 300px;
+    right: 0;
+    top: 60px;
+}
+
+.glossary-box-tablet .inner-wrapper .last-col {
+    background-image: url('#{$asset_path}tablet/image-tablet-music.jpg');
+    background-size: 260px 165px;
+    height: 165px;
+    width: 260px;
+    right: -15px;
+    top: 10px;
+}
+
+.glossary-box-support .inner-wrapper .last-col {
+    background-image: url('//insights.ubuntu.com/wp-content/uploads/cloud-management.png');
+    background-size: 320px 172px;
+    height: 172px;
+    width: 320px;
+    right: 0;
+    top: 55px;
+}
+
+.glossary-box-phone .inner-wrapper .last-col {
+    background-image: url('//insights.ubuntu.com/wp-content/uploads/phone-insights-1.jpg');
+    background-size: 300px 189px;
+    height: 189px;
+    width: 300px;
+    right: 0;
+    top: 0;
+}
 
 .toggle-message {
-	top: -44px;
 	right: 0;
+	top: -44px;
 }
 
 .open-message.active {
@@ -206,10 +290,18 @@ body.single .row { padding-top: 10px; }
 	padding-bottom: 20px;
 }
 
-
 .home .featured-article {
-	padding-bottom: 30px;
 	margin-bottom: 0
+}
+
+.home aside {
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+#main-content aside .list-social li {
+    margin-right: -2px;
 }
 
 /* main nav
@@ -219,16 +311,6 @@ body.single .row { padding-top: 10px; }
 
 /* related posts
 ----------------------------------------------------------------- */
-.related-posts  {
-	@include box_sizing;
-	border-top: 0;
-	padding: 0;
-	margin-left: 0;
-	margin-right: 0;
-
-	h2 { line-height: 1.5; }
-}
-
 /* product-business-card
 ----------------------------------------------------------------- */
 .product-business-card img {
@@ -321,6 +403,7 @@ div#uwpqsf_id {
 
 /* main navigation
 ----------------------------------------------------------------- */
+
 .yes-js {
 	#main-navigation {
 		background: $nav_bg;
@@ -358,14 +441,8 @@ div#uwpqsf_id {
 	.main-nav {
 		background: none;
 		border-right: 0;
-
 		border-bottom: 0;
 		box-shadow: none;
-	}
-
-	.main-nav {
-		@include box_sizing();	
-		width: 33.37%;
 	}
 	
 	#main-nav .press-nav {
@@ -403,71 +480,6 @@ div#uwpqsf_id {
 	}/* end main nav */
 
 } // end yes-js
-
-.yes-js .main-nav li li.nav-tablet, 
-.yes-js .main-nav li li.nav-tablet a {
-	border-bottom: 0;
-}
-
-#nav-triggers {
-	position: relative;
-	float: right;
-	li a.active:after {
-		background-image: url("#{$asset_path}/patterns/arrow-up-smaller.png");
-	}
-} /* end #nav-triggers */
-
-.type-nav li li:last-child {
-	box-shadow: none;
-}
-
-.yes-js .type-nav {
-	border-left: 1px solid $nav_border_dark;
-}
-
-/* hide news */ 
-.yes-js .type-nav li.nav-news,
-.yes-js .main-nav li.nav-press-centre {
-	position: absolute;
-	left: -999em;
-}
-
-.yes-js .main-nav li.nav-press-centre a {
-	border: 0;
-	padding: 0;
-	margin: 0;
-	background: #ddd;
-	height: 0;
-}
-/* share
------------------------------------------------------------------ */
-.yes-js #share {
-	background: none;
-	max-width: 984px;
-	margin: 0 auto;
-	float: none;
-}
-
-#share div.share-inner,
-#share div ul,
-#share div h2 {
-	background: $nav_bg;
-}
-
-#share div li:last-child {
-	margin-bottom: 12px;
-}
-
-.yes-js #share .share-inner.active {
-	@include rounded_corners(0 0 2px 2px);
-	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-	position: absolute;
-	width: auto;
-	right: 0;
-	padding: 5px 10px 0 5px;
-	left: auto;
-	float: none;
-}
 
 /* search
 ----------------------------------------------------------------- */

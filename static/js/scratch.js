@@ -3,7 +3,7 @@ YUI().use('node', 'cookie', "event-resize", function(Y) {
 // removes no-js class and adds yes-js if js
 core.setupHtmlClass = function() {
 	Y.all('html').removeClass('no-js').addClass('yes-js');
-	document.domain = 'ubuntu.com';
+	//document.domain = 'ubuntu.com';
 }
 
 core.resizeListener = function() {
@@ -17,7 +17,7 @@ core.globalInit = function() {
 	if (document.documentElement.clientWidth < 768) {
 		core.globalPrepend = 'footer.global';
 		core.setupGlobalNav();
-		Y.one( "#main-nav" ).append('<p id="nav-global-wrapper-link"><a href="#nav-global" class="nav-trigger">Ubuntu websites</a></p>');
+		Y.one( ".nav-global-wrapper" ).append('<p id="nav-global-wrapper-link"><a href="#nav-global" class="nav-trigger">Ubuntu websites</a></p>');
 		Y.one('.nav-global-wrapper').insert('<h2>Ubuntu websites</h2>','before');
 			Y.one('#nav-global h2').setStyle('cursor', 'pointer').append('<span></span>').on('click',function(e) {
 				this.toggleClass('active');
@@ -40,7 +40,7 @@ core.redrawGlobal = function() {
 		if (globalNav) {
 			globalNav.remove();
 			core.setupGlobalNav();
-			Y.one( "header.global #main-nav" ).append('<p id="nav-global-wrapper-link"><a href="#nav-global" class="nav-trigger">Ubuntu websites</a></p>');
+			Y.one( "header.global .nav-primary" ).append('<p id="nav-global-wrapper-link"><a href="#nav-global" class="nav-trigger">Ubuntu websites</a></p>');
 			Y.one('.nav-global-wrapper').insert('<h2>Ubuntu websites</h2>','before');
 			Y.one('#nav-global h2').setStyle('cursor', 'pointer').append('<span></span>').on('click',function(e) {
 				this.toggleClass('active');
@@ -87,12 +87,6 @@ core.redrawNav = function() {
 		}
 };
 
-
-// create share trigger
-core.moveShare = function() {
-	Y.one('#share').appendTo('header.global');
-}
-
 core.cookiePolicy = function() {
 	function open() {
 		YUI().use('node', function(Y) {
@@ -130,8 +124,8 @@ core.setUpNav = function() {
 
 core.mobileNav = function() {
 	Y.all('.nav-toggle').on('click', function(e) {
-		if(Y.all('#box-search div, #share div').hasClass('active')) {
-			Y.all('#box-search div, #share div, .search-toggle, .share-toggle').removeClass('active');
+		if(Y.all('#box-search div').hasClass('active')) {
+			Y.all('#box-search div, .search-toggle').removeClass('active');
 		}
 		Y.all('#main-navigation div, .nav-toggle').toggleClass('active');
 		e.preventDefault();
@@ -146,8 +140,8 @@ core.mobileNav = function() {
 
 core.mobileSearch = function() {
 	Y.all('.search-toggle').on('click', function(e) {
-		if(Y.all('#main-navigation div, #share div').hasClass('active')) {
-			Y.all('#main-navigation div, #share div, .nav-toggle, .share-toggle').removeClass('active');
+		if(Y.all('#main-navigation div').hasClass('active')) {
+			Y.all('#main-navigation div, .nav-toggle').removeClass('active');
 		}
 		Y.all('#box-search div, .search-toggle').toggleClass('active');
 		Y.one('input#s').focus(),9000;
@@ -156,22 +150,6 @@ core.mobileSearch = function() {
 
 	Y.all('.search-toggle').on('bluroutside', function(e) {
     Y.all('#box-search div, .search-toggle').removeClass('active');
-	});
-
-};
-
-core.mobileShare = function() {
-	Y.all('.share-toggle').on('click', function(e) {
-		if(Y.all('#main-navigation div, #box-search div').hasClass('active')) {
-			Y.all('#main-navigation div, #box-search div, .nav-toggle, .search-toggle').removeClass('active');
-		}
-		Y.all('#share div, .share-toggle').toggleClass('active');
-		e.preventDefault();
-		Y.one('#s').blur();
-	});
-
-	Y.all('.share-toggle').on('clickoutside', function(e) {
-    Y.all('#share div, .share-toggle').removeClass('active');
 	});
 
 };
@@ -197,7 +175,7 @@ core.downloadAlert = function() {
 core.externalLinks = function() {
 	Y.all('a').filter(function() {
 	   return this.hostname && this.hostname !== location.hostname;
-	}).addClass( "external" ).append("&nbsp;<span></span>");
+	}).addClass( "external" );
 	Y.all("a:visited").addClass( "external-visited" );
 
 	Y.all("a:has(img)").filter(function() {
@@ -257,18 +235,16 @@ core.searchFilter = function() {
 core.resizeListener();
 core.cookiePolicy();
 core.setupHtmlClass();
-core.cloneSearch();
-core.mobileNav();
-core.moveShare();
-core.setUpNav();
-core.mobileSearch();
-core.mobileShare();
+//core.cloneSearch();
+//core.mobileNav();
+//core.setUpNav();
+//core.mobileSearch();
 core.svgFallback();
 core.downloadAlert();
 core.externalLinks();
 //core.imageSquircle();
 //core.startCarousel();
-core.businessCard();
+//core.businessCard();
 core.searchFilter();
 
 });

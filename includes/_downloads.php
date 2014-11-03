@@ -1,5 +1,5 @@
 <?php $attachments = get_children( array('post_parent' => get_the_ID(), 'post_type' => 'attachment') ); if ( $attachments ) : ?>
-<div class="press-release-downloads four-col clearfix">
+<div class="box box-highlight press-release-downloads four-col clearfix">
 <h2>Downloads</h2>
 <?php
 	$args = array( 'post_type' => 'attachment', 'orderby' => 'menu_order', 'order' => 'ASC','post_status' => null, 'numberposts' => null, 'post_parent' => $post->ID );

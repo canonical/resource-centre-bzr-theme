@@ -20,11 +20,6 @@ if ( !defined('ABSPATH')) exit;
 </div><!-- /#main-content -->
 </div><!-- /.wrapper -->
 
-<?php get_template_part("includes/_share_links"); ?>
-<?php get_template_part("includes/_site_nav"); ?>
-
-</div><!-- /.site-wrapper -->
-
 <footer class="global clearfix" role="contentinfo">
 	<p class="top-link"><a href="#insights.ubuntu.com">Back to the top</a></p>
 	<div class="legal clearfix">
@@ -63,12 +58,12 @@ if ( !defined('ABSPATH')) exit;
 	if(!core){ var core = {}; }
 	core.globalPrepend = 'body';
 </script>
-<script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/core.js"></script>
+<script src="//assets.ubuntu.com/sites/guidelines/js/responsive/core.js"></script>
 <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/global.js"></script>
 <?php if( is_category() || is_search() || is_page( 'events' ) ) : ?>
 <script src="<?php bloginfo('template_directory'); ?>/static/js/core.js"></script>
 <?php endif ; ?>
-<script src="<?php bloginfo('template_directory'); ?>/static/js/scratch.min.js"></script>
+<script src="<?php bloginfo('template_directory'); ?>/static/js/scratch.js"></script>
 <script src="<?php bloginfo('template_directory'); ?>/static/js/plugins/respond.min.js"></script>
 
 </body>

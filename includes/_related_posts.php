@@ -1,9 +1,10 @@
+<div class="box eight-col box-highlight ">
 <div class="related-posts clearfix">
 <h2>You may also be interested in:</h2>
 <ul class="list clearfix no-bullets">
 <?php
 wp_reset_query();
-$max_articles = 3;  // How many articles to display
+$max_articles = 4;  // How many articles to display
 $tags = wp_get_post_tags($post->ID);
 $cnt = 0;
 
@@ -29,8 +30,9 @@ if( $my_query->have_posts() ) :
 		$my_query->the_post();
 	$cnt++;
 ?>
- <li>
+ <li class="eight-col">
 	 <h3><a href="<?php the_permalink() ?>" rel="bookmark" title="Permanent Link to <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h3>
+	 <p><?php echo get_excerpt(); ?></p>
 	 <?php get_template_part("includes/_post_cats"); ?>
 	 </li>
  <?php
@@ -63,8 +65,9 @@ if( $my_query->have_posts() ) :
 	$cnt++;
 if ($cnt > $max_articles) break;
 ?>
- <li>
+ <li class="eight-col">
 	 <h3><a href="<?php the_permalink() ?>" rel="bookmark" title="Permanent Link to <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h3>
+	 <p><?php echo get_excerpt(); ?></p>
 	 <?php get_template_part("includes/_post_cats"); ?>
  </li>
  <?php
@@ -75,4 +78,5 @@ endif; 		// $cnt
 wp_reset_query();
 ?>
 </ul>
+</div>
 </div>

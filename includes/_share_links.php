@@ -12,15 +12,12 @@
 	global $wpdb;
 	global $posted;
 ?>
-<div id="share">
-<div class="share-inner inner-wrapper">
-		<h2>Share 
-		<?php if(is_single() ) : ?>this <?php if('post' == get_post_type()) : ?>article<?php endif;?><?php if('event' == get_post_type()) : ?>event<?php endif;?><?php echo $post_type->labels->title_friendly; ?><?php elseif (is_home()) : ?>this website<?php elseif (is_search()) : ?> these search results
-		<?php else : ?>this page<?php endif; ?>:
-		</h2>
-		<ul class="no-bullets">
+<div class="list-social-wrapper clear clearfix vertical-divider">
+    <div class="share-inner">
+		<h2>Share</h2>
+		<ul class="list-social no-bullets no-margin-bottom">
 			<li>
-				<a id="share-facebook" class="share" href="http://www.facebook.com/sharer.php?s=100&amp;p[url]=<?php if(is_single() ) : ?><?php echo urlencode( the_permalink( $post->ID ) ); ?>
+				<a id="item-facebook"  href="http://www.facebook.com/sharer.php?s=100&amp;p[url]=<?php if(is_single() ) : ?><?php echo urlencode( the_permalink( $post->ID ) ); ?>
 				&amp;p[title]=<?php echo urlencode(the_title()); ?>
 				&amp;p[summary]=<?php echo urlencode(get_excerpt()); ?>
 				&amp;p[images][0]=<?php $src = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), array( 300,300 ), false, '' ); echo $src[0]; ?><?php elseif(is_home() ): ?><?php echo "http://" . $_SERVER['HTTP_HOST']  . $_SERVER['REQUEST_URI']; ?>
@@ -30,13 +27,13 @@
 					&amp;p[title]=Ubuntu%20Insights%20website<?php endif ; ?>">Facebook</a>	
 			</li>
 			<li>
-				<a id="share-twitter" class="share" href="http://twitter.com/share?text=<?php if(is_single() ) : ?><?php echo urlencode(the_title()); ?><?php elseif(is_home() ): ?>Ubuntu%20Insights<?php elseif( is_page() ) : ?>See%20all%20<?php if($cat_plural == '') : ?><?php echo $get_page_name; ?>%20resources<?php else : ?><?php echo $cat_plural; ?><?php endif ; ?>%20on%20Ubuntu%20Insights<?php elseif (is_search()) : ?>I've%20just%20searched%20for%20%27<?php /* Search Count */  $key = wp_specialchars($s, 1); echo $key; _e(''); ?>%27%20on%20the%20Ubuntu%20Insights%20website%20and%20thought%20I'd%20share%20the%20results.%20Check%20them%20out:<?php else : ?>Ubuntu%20Insights%20website<?php endif ; ?>&amp;url=<?php if(is_single() ) : ?><?php echo urlencode( wp_get_shortlink( $post->ID ) ); ?><?php else : ?><?php echo "http://" . $_SERVER['HTTP_HOST']  . $_SERVER['REQUEST_URI']; ?><?php endif; ?>&amp;hashtags=ubuntu" title="Share on Twitter" rel="nofollow">Twitter</a>
+				<a id="item-twitter" class="" href="http://twitter.com/share?text=<?php if(is_single() ) : ?><?php echo urlencode(the_title()); ?><?php elseif(is_home() ): ?>Ubuntu%20Insights<?php elseif( is_page() ) : ?>See%20all%20<?php if($cat_plural == '') : ?><?php echo $get_page_name; ?>%20resources<?php else : ?><?php echo $cat_plural; ?><?php endif ; ?>%20on%20Ubuntu%20Insights<?php elseif (is_search()) : ?>I've%20just%20searched%20for%20%27<?php /* Search Count */  $key = wp_specialchars($s, 1); echo $key; _e(''); ?>%27%20on%20the%20Ubuntu%20Insights%20website%20and%20thought%20I'd%20share%20the%20results.%20Check%20them%20out:<?php else : ?>Ubuntu%20Insights%20website<?php endif ; ?>&amp;url=<?php if(is_single() ) : ?><?php echo urlencode( wp_get_shortlink( $post->ID ) ); ?><?php else : ?><?php echo "http://" . $_SERVER['HTTP_HOST']  . $_SERVER['REQUEST_URI']; ?><?php endif; ?>&amp;hashtags=ubuntu" title="Share on Twitter" rel="nofollow">Twitter</a>
 			</li>
 			<li><?php // no need for any if else nonse for G+ as it uses the data on the page  ?>
-				<a id="share-googleplus" class="share" href="https://plus.google.com/share?url=<?php if(is_single() ) : ?><?php urlencode(the_permalink()); ?><?php else : ?><?php echo "http://" . $_SERVER['HTTP_HOST']  . $_SERVER['REQUEST_URI']; ?><?php endif; ?>">Google+</a>	
+				<a id="item-google" class="" href="https://plus.google.com/share?url=<?php if(is_single() ) : ?><?php urlencode(the_permalink()); ?><?php else : ?><?php echo "http://" . $_SERVER['HTTP_HOST']  . $_SERVER['REQUEST_URI']; ?><?php endif; ?>">Google+</a>	
 			</li>
 			<li>
-				<a id="share-email" class="share" title="Share '<?php the_title(); ?>' via Email" href="mailto:?subject=Saw%20this%20and%20thought%20of%20you&amp;body=
+				<a id="item-email" class="" title="Share '<?php the_title(); ?>' via Email" href="mailto:?subject=Saw%20this%20and%20thought%20of%20you&amp;body=
 				<?php if(is_single() ) : ?>
 					I've%20just%20read%20%27<?php echo str_replace( "&#038;", "%26", get_the_title() ); ?>%27%20on%20the%20Ubuntu%20Insights%20website%20and%20thought%20you%20would%20like%20it.%20Check%20it%20out:%20<?php the_permalink(); ?>
 				<?php elseif( is_page() ) : ?>
@@ -51,5 +48,13 @@
 				<?php endif; ?>">Email</a>
 			</li>
 		</ul>
-	</div>
-</div><!-- /#share -->
+	</div><!-- /.share-inner -->
+    <?php if ( is_single() ) : ?>
+    <div class="share-inner-wrapper">
+    	<ul class="save-links no-bullets inline instapaper_ignore">
+    		<li><a id="social-instapaper" href="http://www.instapaper.com/hello2?url=<?php echo urlencode( the_permalink( $post->ID ) ); ?>&amp;title=<?php echo urlencode( get_the_title() ); ?>" title="Add '<?php echo the_title(); ?>' to Instapaper">Add to Instapaper</a></li>
+    		<li><a id="social-pocket" href="http://getpocket.com/save?url=<?php echo urlencode( the_permalink( $post->ID ) ); ?>&amp;title=<?php echo urlencode( get_the_title() ); ?>" title="Add '<?php echo urlencode(the_title()); ?>' to Pocket">Add to Pocket</a></li>
+    	</ul>
+    </div><!-- /.share-inner-wrapper -->
+    <?php endif ; ?>
+</div><!-- /.list-social-wrapper -->

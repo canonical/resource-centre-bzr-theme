@@ -25,7 +25,8 @@ $paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pa
 $term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
 $category = get_the_category();
 $post = $wp_query->get_queried_object();
-$current_cat = basename(get_permalink());
+//$current_cat = basename(get_permalink());
+$current_tax = $term->slug;
 $post = $wp_query->get_queried_object();
 ?>
 <div class="row row-hero no-border">
@@ -42,6 +43,7 @@ $post = $wp_query->get_queried_object();
 	$query = new WP_Query( array(
 	'posts_per_page' => 10,
 	'category_name' => 'events',
+	'topic' => $current_tax,
   'post_type' => 'event',
   'post__not_in' => $do_not_duplicate,
   'meta_key' => '_start_eventtimestamp',

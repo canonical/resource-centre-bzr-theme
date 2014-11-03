@@ -58,7 +58,7 @@ if ( !defined('ABSPATH')) exit;
 <link rel="apple-touch-icon" sizes="144x144" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/touch-icon-ipad-retina.png" />
 
 <!-- stylesheets -->
-<link rel="stylesheet" href="//assets.ubuntu.com/sites/guidelines/css/dev/ubuntu-styles.css" type="text/css" />
+<link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/responsive/latest/ubuntu-styles.css" />
 <link rel="stylesheet" href="//assets.ubuntu.com/sites/guidelines/css/dev/beta/global.css" type="text/css" />
 <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" />
 <link rel="stylesheet" media="print" href="<?php bloginfo('template_directory'); ?>/static/css/print.css" type="text/css" />
@@ -82,10 +82,10 @@ new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-W3SR7K');</script>
-<!-- End Google Tag Manager -->		
+<!-- End Google Tag Manager -->
 
-<header id="banner" class="banner global" role="banner">
-	<div class="header-inner">
+<header class="banner global" role="banner">
+	<nav role="navigation" class="nav-primary nav-right">
 		<span class="accessibility-aid"><a accesskey="s" href="#main-content">Jump to content</a></span>
 		<div class="logo">
 			<a class="logo-ubuntu" href="<?php echo get_option('home'); ?>/">
@@ -93,14 +93,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 				<span class="site-name">insights</span>
 			</a>
 		</div>
-		<ul id="nav-triggers" class="inline no-bullets">
-			<li><a href="#share" id="share-trigger" class="share-toggle">Share</a></li>
-			<li><a href="#box-search" id="search-trigger" class="search-toggle">Search</a></li>
-			<li><a href="#main-nav" id="menu" class="nav-toggle">Menu</a></li>
-		</ul>
-	</div><!-- ./header-inner -->
+<?php get_template_part("includes/_site_nav"); ?>
+	</nav>
 </header>
 
-<div class="site-wrapper">
 <div class="wrapper clearfix">
 <div id="main-content" class="inner-wrapper clearfix" role="main">

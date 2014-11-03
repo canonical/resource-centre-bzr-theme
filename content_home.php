@@ -5,7 +5,8 @@
 
 ?>
 <?php $category = get_the_category(); $press_cats = array('press-releases', 'news'); ?>	
-	<li<?php if(in_category( $press_cats )) echo ' class="has-time"'; ?>>
+	<div<?php if(in_category( $press_cats )) echo ' class="has-time"'; ?>>
+		<article>
 <?php if ($current_cat == 'downloads') : ?>
 		<h3><a href="<?php echo wp_get_attachment_url( $attachment_id ); ?>"><?php echo $bytes; ?><?php the_title(); ?></a></h3>
 <?php else : ?>
@@ -19,4 +20,5 @@
 		<?php endif ; ?>
 		<?php get_template_part("/includes/_article_meta"); ?>
 		<!--<p><?php //echo getPostViews(get_the_ID()); ?></p>-->
-	</li>
+		</article>
+	</div>
