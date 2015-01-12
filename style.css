@@ -424,7 +424,7 @@ h1 div, h3 span, h2 span {
 .lowercase {
   text-transform: lowercase; }
 
-code {
+pre {
   -o-border-radius: 4px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -437,6 +437,9 @@ code {
   display: inline-block;
   padding: 10px 20px;
   word-break: break-word; }
+
+code {
+	background: #FDF6F2; }
 
 h1 span.taxonomy-title + span {
   text-transform: lowercase;
