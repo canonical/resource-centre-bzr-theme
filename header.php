@@ -26,22 +26,6 @@ if ( !defined('ABSPATH')) exit;
 
 <head>
 
-<!-- Get the Ubuntu font from Google -->
-<script>
-  WebFontConfig = {
-    google: { families: [ 'Ubuntu:300,400,400italic:latin' ] }
-  };
-  (function() {
-    var wf = document.createElement('script');
-    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
-      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-    wf.type = 'text/javascript';
-    wf.async = 'true';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(wf, s);
-  })(); 
-</script>
-
 <title><?php if (is_search()) : ?> <?php echo htmlentities($s,ENT_QUOTES,get_bloginfo('charset')); ?> <?php elseif (is_category()) : ?><?php $term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) ); ?><?php if( $term != '' ) : ?><?php echo $term->name; ?><?php endif; ?> <?php echo strtolower(single_cat_title( '', false, 'right' )); ?><?php if(is_taxonomy('topic', 'category')) : endif ; ?><?php else : ?> <?php wp_title(''); ?><?php endif; ?> <?php if (!is_home()) : ?>|<? endif; ?> <?php bloginfo('name'); ?></title>
 
 <meta charset="utf-8" />
@@ -59,7 +43,7 @@ if ( !defined('ABSPATH')) exit;
 
 <!-- stylesheets -->
 <link rel="stylesheet" type="text/css" media="screen" href="//assets.ubuntu.com/sites/guidelines/css/responsive/latest/ubuntu-styles.css" />
-<link rel="stylesheet" href="//assets.ubuntu.com/sites/guidelines/css/dev/beta/global.css" type="text/css" />
+<link rel="stylesheet" href="//assets.ubuntu.com/sites/ubuntu/1236/u/css/beta/global-responsive.css" type="text/css" />
 <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" />
 <link rel="stylesheet" media="print" href="<?php bloginfo('template_directory'); ?>/static/css/print.css" type="text/css" />
 

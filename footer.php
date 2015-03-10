@@ -60,7 +60,7 @@ if ( !defined('ABSPATH')) exit;
 </script>
 <script src="//assets.ubuntu.com/sites/guidelines/js/responsive/core.js"></script>
 <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/global.js"></script>
-<?php if( is_category() || is_search() || is_page( 'events' ) ) : ?>
+<?php if( is_category() || is_tax( 'group' ) || is_tag() || is_search() || is_page( 'events' ) ) : ?>
 <script src="<?php bloginfo('template_directory'); ?>/static/js/core.js"></script>
 <?php endif ; ?>
 <script src="<?php bloginfo('template_directory'); ?>/static/js/scratch.js"></script>

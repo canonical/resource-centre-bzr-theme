@@ -1,4 +1,4 @@
-<div class="box box-highight press-release-videos four-col clearfix">
+<div class="box box-highlight press-release-videos four-col clearfix">
 <h2>Videos</h2>
 <?php $postVideos = explode(',',get_post_meta($post->ID, 'postVideo', TRUE));
 

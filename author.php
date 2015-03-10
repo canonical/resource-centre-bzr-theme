@@ -31,7 +31,7 @@ if ( !defined('ABSPATH')) exit;
 				<span class="image-wrap avatar" style="width: auto; height: auto;"><img src="<?php bloginfo('url'); ?><?php echo $curauth->user_photo; ?>" alt="<?php echo $curauth->first_name; ?>'s photo" class="avatar-140 photo" width="156" height="156" /></span>
 				<?php else : ?>
 				<?php endif; ?>
-				<h1><?php echo $curauth->display_name; ?></h1>
+				<h1><?php the_author_meta('first_name',$uid); ?> <?php the_author_meta('last_name',$uid); ?></h1>
 		    <?php if(get_the_author_meta('user_job_title',$curauth->ID)) : ?>
 					<p class="role"><?php echo $curauth->user_job_title; ?></p>
 				<?php endif; ?>

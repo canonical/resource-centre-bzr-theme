@@ -44,9 +44,9 @@ $post = $wp_query->get_queried_object();
 	'posts_per_page' => 10,
 	'category_name' => 'events',
 	'topic' => $current_tax,
-  'post_type' => 'event',
-  'post__not_in' => $do_not_duplicate,
-  'meta_key' => '_start_eventtimestamp',
+    'post_type' => 'event',
+    'post__not_in' => $do_not_duplicate,
+    'meta_key' => '_start_eventtimestamp',
 	'orderby' => 'meta_value',
 	'order' => 'DESC',
 	));

@@ -15,9 +15,12 @@
 get_header(); ?>
 
 <?php if (have_posts() ) : ?>
-<div class="row row-hero cat-page-title no-border">
-	<h1 class="inner-wrapper clearfix"><?php wp_title(''); ?></h1>
-</div><!-- /.row -->
+<div class="row glossary-box no-border">
+    <div class="inner-wrapper">
+        <h1><?php wp_title(''); ?></h1>
+    </div>
+</div>
+
 <?php while ( have_posts() ) : the_post(); ?>
 				<?php the_content(); ?>
 <?php endwhile; ?>

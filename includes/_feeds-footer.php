@@ -16,8 +16,11 @@
 <?php elseif ( is_page_template('page-category.php') ) : ?>
 	<a href="<?php bloginfo('url'); ?>/category/<?php echo $current_cat; ?>/feed/">RSS feed</a>
 
-<?php elseif ( is_page_template('taxonomy-topic.php') ) : ?>
+<?php elseif ( is_page_template('page-topics.php') ) : ?>
 	<a href="<?php bloginfo('url'); ?>/topic/<?php echo $current_cat; ?>/feed/">RSS feed</a>
+
+<?php elseif ( is_page_template('page-group.php') ) : ?>
+	<a href="<?php bloginfo('url'); ?>/group/<?php echo $current_cat; ?>/feed/">RSS feed</a>
 
 <?php elseif ( is_page_template('page-events.php') ) : ?>
 	<a href="<?php bloginfo('url'); ?>/category/events/feed/">RSS feed</a>

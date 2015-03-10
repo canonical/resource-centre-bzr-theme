@@ -19,13 +19,12 @@ if ( !defined('ABSPATH')) exit;
 
 get_header(); ?>
 <div class="row glossary-box glossary-box--home no-border<?php if( is_single() ) : echo ' box box-highlight'; endif; ?>">
-    <div class="inner-wrapper">
-        <div class="six-col">
-            <h1>Ubuntu insights</h1>
-            <p class="intro">Welcome to the home of all Ubuntu news, articles, tutorials, e-books and everything else in-between.</p>
-        </div>
-        <div class="six-col last-col"></div>
+  <div class="inner-wrapper">
+    <div class="six-col">
+      <h1>Ubuntu Insights</h1>
+      <p class="intro">Welcome to the home of all Ubuntu news, articles, tutorials, e-books and everything else in-between.</p>
     </div>
+  </div>
 </div>
 
 <?php
@@ -43,16 +42,16 @@ $press_cats = array('press-releases', 'news');
         <div class="eight-col">
         
 <?php /* ============== pull in featured ============== */
-if(is_home() && !is_paged()) : ?><?php
+if(is_home() && !is_paged()) :
 $exclude_cat = 'downloads';
 $category = get_category_by_slug($exclude_cat);
 $my_query = new WP_Query( array(
-	'cat'	=> -$category->cat_ID,
-	'meta_key' => 'dbt_checkbox_featured_home',
-	'order' => 'DESC',
-	'orderby' => 'date',
-	'post_type' => 'post',
-	'posts_per_page' => 1
+	'cat'             => -$category->cat_ID,
+	'meta_key'        => 'dbt_checkbox_featured_home',
+	'order'           => 'DESC',
+	'orderby'         => 'date',
+	'post_type'       => 'post',
+	'posts_per_page'  => 1
 ));
 while ($my_query->have_posts()) : $my_query->the_post();
 $post_type = get_post_type_object( get_post_type($post));
@@ -65,184 +64,139 @@ $do_not_duplicate[] = $post->ID;
 <?php endwhile; ?><?php endif;
 /* ============== end pull in featured ============== */ ?>
 
-<?php /* ============== pull in latest cloud articles ============== */
+<?php /* ============== pull in latest cloud and server articles ============== */
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
 $exclude_cat = 'downloads';
 $category = get_category_by_slug($exclude_cat);
 $query = new WP_Query( array(
-    'cat'	=> -$category->cat_ID,
-    'paged'=>$paged,
-    'post__not_in' => $do_not_duplicate,
-    'post_type' => 'post',
-    'posts_per_page' => 2,
-    'topic' => 'cloud'
+    'cat'	            => -$category->cat_ID,
+    'paged'           => $paged,
+    'post__not_in'    => $do_not_duplicate,
+    'post_type'       => 'post',
+    'posts_per_page'  => 5,
+    'group'           => 'cloud-and-server'
 ));
 ?><?php if (have_posts()) : ?>
 
 <div class="box eight-col">
-	<h2>Ubuntu Cloud</h2>
+	<h2>Cloud and Server</h2>
     <?php
         while( $query->have_posts() ):
-				$query->the_post();
-        $do_not_duplicate[] = $post->ID ?><?php if ('event' == get_post_type()) : ?><?php get_template_part("includes/_event_meta"); ?><?php else : ?><?php get_template_part("content_home"); ?><?php endif ; ?><?php endwhile; ?>
+        $query->the_post();
+        $do_not_duplicate[] = $post->ID ?>
+        <?php get_template_part("content_home"); ?><?php endwhile; ?>
 </div><!-- ./eight-col -->
 <?php endif; // if have_posts ends
 wp_reset_query();
 /* ============== end pull in latest cloud articles ============== */ ?>
-
-<?php /* ============== pull in latest server articles ============== */
-$paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
-$exclude_cat = 'downloads';
-$category = get_category_by_slug($exclude_cat);
-$query = new WP_Query( array(
-    'cat'	=> -$category->cat_ID,
-    'paged'=>$paged,
-    'post__not_in' => $do_not_duplicate,
-    'post_type' => 'post',
-    'posts_per_page' => 2,
-    'topic' => 'server'
-));
-?><?php if (have_posts()) : ?>
-
-<div class="box eight-col">
-    <h2>Ubuntu Server</h2>
-
-        <?php
-            while( $query->have_posts() ):
-            $query->the_post();
-            $do_not_duplicate[] = $post->ID ?><?php if ('event' == get_post_type()) : ?><?php get_template_part("includes/_event_meta"); ?><?php else : ?><?php get_template_part("content_home"); ?><?php endif ; ?><?php endwhile; ?>
-</div><!-- ./eight-col -->
-<?php endif; // if have_posts ends
-wp_reset_query();
-/* ============== end pull in latest server articles ============== */ ?>
-
-<?php /* ============== pull in latest phone articles ============== */
-$paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
-$exclude_cat = 'downloads';
-$category = get_category_by_slug($exclude_cat);
-$query = new WP_Query( array(
-    'cat'	=> -$category->cat_ID,
-    'order' => 'DESC',
-    'paged'=>$paged,
-    'post__not_in' => $do_not_duplicate,
-    'post_type' => 'post',
-    'posts_per_page' => 2,
-    'topic' => 'phone'
-    ));
-?><?php if (have_posts()) : ?>
-<div class="box eight-col">
-<h2>Phone</h2>
-
-    <?php
-        while( $query->have_posts() ):
-            $query->the_post();
-			$do_not_duplicate[] = $post->ID ?>
-			<?php if ('event' == get_post_type()) : ?>
-				<?php get_template_part("includes/_event_meta"); ?>
-			<?php else : ?>
-				<?php get_template_part("content_home"); ?>
-			<?php endif ; ?>
-        <?php endwhile; ?>
-</div><!-- ./eight-col -->
-<?php endif; // if have_posts ends
-wp_reset_query();
-/* ============== end pull in latest phone articles ============== */ ?>
-
-<?php /* ============== pull in latest tablet articles ============== */
-$paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
-$exclude_cat = 'downloads';
-$category = get_category_by_slug($exclude_cat);
-$query = new WP_Query( array(
-    'cat'	=> -$category->cat_ID,
-    'paged'=>$paged,
-    'post__not_in' => $do_not_duplicate,
-    'post_type' => 'post',
-    'posts_per_page' => 2,
-    'topic' => 'tablet'
-));
-?>
-<?php if (have_posts()) : ?>
-<div class="box eight-col">
-	<h2>Tablet</h2>
-    <?php
-        while( $query->have_posts() ):
-									$query->the_post();
-									$do_not_duplicate[] = $post->ID 
-									 ?>
-        <?php if ('event' == get_post_type()) : ?><?php get_template_part("includes/_event_meta"); ?><?php else : ?><?php get_template_part("content_home"); ?><?php endif ; ?>
-    <?php endwhile; ?>
-</div><!-- ./eight-col -->
-<?php endif; // if have_posts ends
-wp_reset_query();
-/* ============== end pull in latest tablet articles ============== */ ?>
 
 <?php /* ============== pull in latest desktop articles ============== */
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
 $exclude_cat = 'downloads';
 $category = get_category_by_slug($exclude_cat);
 $query = new WP_Query( array(
-    'cat'	=> -$category->cat_ID,
-    'paged'=>$paged,
-    'post__not_in' => $do_not_duplicate,
-    'post_type' => 'post',
-    'posts_per_page' => 2,
-    'topic' => 'desktop'
+    'cat'             => -$category->cat_ID,
+    'paged'           => $paged,
+    'post__not_in'    => $do_not_duplicate,
+    'post_type'       => 'post',
+    'posts_per_page'  => 5,
+    'topic'           => 'desktop'
 ));
 ?><?php if (have_posts()) : ?>
 <div class="box eight-col">
-    <h2>Ubuntu Desktop</h2>
+  <h2>Ubuntu Desktop</h2>
 
-        <?php
-            while( $query->have_posts() ):
-                $query->the_post();
-            $do_not_duplicate[] = $post->ID ?><?php if ('event' == get_post_type()) : ?><?php get_template_part("includes/_event_meta"); ?><?php else : ?><?php get_template_part("content_home"); ?><?php endif ; ?><?php endwhile; ?>
+  <?php
+    while( $query->have_posts() ):
+    $query->the_post();
+    $do_not_duplicate[] = $post->ID ?>
+    <?php get_template_part("content_home"); ?><?php endwhile; ?>
 </div><!-- /.eight-col -->
 <?php endif; // if have_posts ends
 wp_reset_query();
 /* ============== end pull in latest desktop articles ============== */ ?>
+
+<?php /* ============== pull in latest phone and tablet articles ============== */
+$paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
+$exclude_cat = 'downloads';
+$category = get_category_by_slug($exclude_cat);
+$query = new WP_Query( array(
+    'cat'             => -$category->cat_ID,
+    'order'           => 'DESC',
+    'paged'           => $paged,
+    'post__not_in'    => $do_not_duplicate,
+    'post_type'       => 'post',
+    'posts_per_page'  => 5,
+    'group'           => 'phone-and-tablet'
+    ));
+?><?php if (have_posts()) : ?>
+<div class="box eight-col">
+<h2>Phone and Tablet</h2>
+
+    <?php
+        while( $query->have_posts() ):
+            $query->the_post();
+			$do_not_duplicate[] = $post->ID ?>
+            <?php get_template_part("content_home"); ?>
+        <?php endwhile; ?>
+</div><!-- ./eight-col -->
+<?php endif; // if have_posts ends
+wp_reset_query();
+/* ============== end pull in latest phone articles ============== */ ?>
 
 <?php /* ============== pull in latest events ============== */
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
 $exclude_cat = 'downloads';
 $category = get_category_by_slug($exclude_cat);
 $query = new WP_Query( array(
-    'cat'	=> -$category->cat_ID,
-    'order' => 'DESC',
-    'orderby' => 'date',
-    'paged'=>$paged,
-    'post__not_in' => $do_not_duplicate,
-    'post_type' => 'event',
-    'posts_per_page' => 2
+  'cat'             => -$category->cat_ID,
+  'order'           => 'ASC',
+  'paged'           => $paged,
+  'post__not_in'    => $do_not_duplicate,
+  'post_type'       => 'event',
+  'meta_key'        => '_end_eventtimestamp',
+  'meta_value'      => $current_timestamp,
+  'orderby'         => 'meta_value',
+  'posts_per_page'  => -1,
+  'meta_compare'    => '>'
 ));
 ?><?php if ( $query->have_posts() ) : ?>
 
-<div class="eight-col box box-highlight no-margin-bottom">
-    <h2>Upcoming and recent events</h2>
-
-    <ul class="no-bullets">
-        <?php
-            while( $query->have_posts() ):
-									$query->the_post();
-            $do_not_duplicate[] = $post->ID ?>
-
-        <li><?php get_template_part("/includes/_event_meta"); ?></li><?php endwhile; ?>
-    </ul>
+<div class="eight-col box no-margin-bottom">
+  <h2>Upcoming events</h2>
+  <ul class="no-bullets">
+    <?php
+      while( $query->have_posts() ):
+      $query->the_post();
+      $do_not_duplicate[] = $post->ID ;
+      // get time gubbin's
+      $current_time = current_time('mysql'); 
+      list( $today_year, $today_month, $today_day, $hour, $minute, $second ) = split( '([^0-9])', $current_time );
+      $end_month = get_post_meta( $post->ID, '_end_month', true );
+      $end_day = get_post_meta( $post->ID, '_end_day', true );
+      $end_year = get_post_meta( $post->ID, '_end_year', true );
+      $eventend = $end_year . $end_month . $end_day;
+      $current_timestamp = $today_year . $today_month . $today_day;
+      ?>
+      <?php if($eventend >= $current_timestamp) : ?>
+    <li><?php get_template_part("/includes/_event_meta"); ?></li><?php endif; ?><?php endwhile; ?>
+  </ul>
+<p><a href="/category/events">View all events</a></p>
 </div><!-- /.eight-col -->
 <?php endif; // if have_posts ends
  wp_reset_query();
 /* ============== end pull in latest events ============== */ ?>
-
 </div><!-- /.eight-col -->
   
 <?php /* ============== links to all topics ============== */ ?>
-<aside class="four-col last-col">
-	<div class="box four-col">
+<aside id="sidebar" class="four-col last-col">
+	<div class="box box-highlight four-col">
     <h2>All topics</h2>
     <ul class="no-bullets">
         <?php
         $style_classes = array('',' last-col');
         $style_index = 0;
-        $taxonomy = 'topic';
+        $taxonomy = 'group';
         $terms = get_terms( $taxonomy, '' );
         if ($terms) {
             foreach($terms as $term) {
@@ -253,7 +207,7 @@ $query = new WP_Query( array(
         ?>
     </ul>
 	</div>
-	<div class="box four-col">
+	<div class="box box-highlight four-col">
 			<?php get_template_part("includes/_share_links"); ?>
 	</div>
 </aside>
@@ -263,13 +217,4 @@ wp_reset_query(); ?>
         
     </div>
 </section>
-
-<div class="article-list clearfix">
-    
-        
-    
-
-    
-    <?php //get_template_part("includes/_pagination"); ?>
-</div><!-- /#articles -->
 <?php get_footer(); ?>

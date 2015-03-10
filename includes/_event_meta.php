@@ -36,11 +36,9 @@
 				<div class="event-details-wrapper clearfix">
 					<?php if(! is_single() ) : ?><h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3><?php endif; ?>
 					<div class="event-map">
-					<a href="<?php the_permalink(); ?>"><?php if(has_post_thumbnail()) : ?>
-						<span class="image-wrap avatar" style="width: auto; height: auto;"><img class="avatar" src="<?php $src = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), array( 156,156 ), false, '' ); echo $src[0]; ?>" alt="" /></span>
-					<?php else : ?>
-						<span class="image-wrap avatar"><img class="avatar" src="//maps.googleapis.com/maps/api/staticmap?center=<?php if ( $location ) : ?><?php echo urlencode($location); ?><?php endif; ?>&amp;zoom=12&amp;size=156x156&amp;sensor=false" alt="" /></span>
-					<?php endif ; ?></a>
+					<a href="<?php the_permalink(); ?>">
+            <span class="image-wrap avatar"><img class="avatar" src="//maps.googleapis.com/maps/api/staticmap?center=<?php if ( $location ) : ?><?php echo urlencode($location); ?><?php endif; ?>&amp;zoom=12&amp;size=106x106&amp;sensor=false" alt="" /></span>
+					</a>
 				</div><!-- /.event-map -->
 				<dl class="event-details">
 						<dt class="accessibility-aid">Date:</dt>

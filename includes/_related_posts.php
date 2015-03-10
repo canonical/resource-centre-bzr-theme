@@ -1,7 +1,6 @@
-<div class="box eight-col box-highlight ">
-<div class="related-posts clearfix">
+<div class="box eight-col box-highlight related-posts clearfix">
 <h2>You may also be interested in:</h2>
-<ul class="list clearfix no-bullets">
+<ul class="list clearfix no-bullets no-margin-bottom">
 <?php
 wp_reset_query();
 $max_articles = 4;  // How many articles to display
@@ -30,8 +29,12 @@ if( $my_query->have_posts() ) :
 		$my_query->the_post();
 	$cnt++;
 ?>
- <li class="eight-col">
-	 <h3><a href="<?php the_permalink() ?>" rel="bookmark" title="Permanent Link to <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h3>
+ <li class="eight-col has-time">
+  <h3><a href="<?php the_permalink() ?>" rel="bookmark" title="Permanent Link to <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h3> 
+  <div class="article-meta eight-col">
+    <p>By <a href="<?php echo get_author_posts_url(get_the_author_meta( 'ID' )); ?>" title="View <?php if(get_the_author_meta('first_name',$uid)): ?><?php the_author_meta('first_name',$uid); ?><?php else : ?><?php the_author_meta('display_name',$uid); ?><?php endif; ?>'s bio and posts"><span><?php the_author_meta('first_name',$uid); ?> <?php the_author_meta('last_name',$uid); ?></span></a> on 
+  	 <time datetime="<?php the_time('Y-m-d') ?>" ><?php the_time('j') ?><?php the_time(' F Y') ?></time></p>
+  </div>
 	 <p><?php echo get_excerpt(); ?></p>
 	 <?php get_template_part("includes/_post_cats"); ?>
 	 </li>
@@ -41,7 +44,6 @@ endif;	 	// have_posts
 endif; 		// tags
 
 if ($cnt < $max_articles) :
-
 	$categories = get_the_category($post->ID);
 if ( $categories ) :
 	$categories = array();
@@ -65,8 +67,12 @@ if( $my_query->have_posts() ) :
 	$cnt++;
 if ($cnt > $max_articles) break;
 ?>
- <li class="eight-col">
+ <li class="eight-col has-time">
 	 <h3><a href="<?php the_permalink() ?>" rel="bookmark" title="Permanent Link to <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h3>
+  <p class="article-meta eight-col">
+  	 By <a href="<?php echo get_author_posts_url(get_the_author_meta( 'ID' )); ?>" title="View <?php if(get_the_author_meta('first_name',$uid)): ?><?php the_author_meta('first_name',$uid); ?><?php else : ?><?php the_author_meta('display_name',$uid); ?><?php endif; ?>'s bio and posts"><span><?php the_author_meta('first_name',$uid); ?> <?php the_author_meta('last_name',$uid); ?></span></a> on 
+  	 <time datetime="<?php the_time('Y-m-d') ?>" ><?php the_time('j') ?><?php the_time(' F Y') ?></time>
+  </p>
 	 <p><?php echo get_excerpt(); ?></p>
 	 <?php get_template_part("includes/_post_cats"); ?>
  </li>
@@ -78,5 +84,4 @@ endif; 		// $cnt
 wp_reset_query();
 ?>
 </ul>
-</div>
 </div>

@@ -48,7 +48,7 @@ function ep_eventposts() {
 		'capability_type' => 'post',
 		'rewrite' => array("slug" => "event"), // Permalinks format
 		'menu_position' => 5,
-    'menu_icon' => get_stylesheet_directory_uri() . '/static/img/admin/calendar-day.png',
+        'menu_icon' => get_stylesheet_directory_uri() . '/static/img/admin/calendar-day.png',
 		'has_archive' => true
 	); 
 
@@ -212,16 +212,13 @@ function ep_eventposts_save_meta( $post_id, $post ) {
     	// Save Locations Meta
     	
     	 $events_meta['_event_location'] = $_POST['_event_location'];	
- 
-     	// Save venue Meta
+         // Save venue Meta
     	
     	 $events_meta['_event_venue'] = $_POST['_event_venue'];	
-   	// Save registration Meta
+         // Save registration Meta
     	
     	 $events_meta['_event_registration'] = $_POST['_event_registration'];	
- 
-
-	// Add values of $events_meta as custom fields
+         // Add values of $events_meta as custom fields
 
 	foreach ( $events_meta as $key => $value ) { // Cycle through the $events_meta array!
 		if ( $post->post_type == 'revision' ) return; // Don't store custom data twice
@@ -294,14 +291,14 @@ function ep_events_query( $query ) {
 	if ( $wp_the_query === $query && !is_admin() && is_post_type_archive( 'event' ) ) {
 		$meta_query = array(
 			array(
-				'key' => '_start_eventtimestamp',
+				'key' => '_end_eventtimestamp',
 				'value' => $current_timestamp,
 				'compare' => '>'
 			)
 		);
 		$query->set( 'meta_query', $meta_query );
 		$query->set( 'orderby', 'meta_value_num' );
-		$query->set( 'meta_key', '_start_eventtimestamp' );
+		$query->set( 'meta_key', '_end_eventtimestamp' );
 		$query->set( 'order', 'ASC' );
 		$query->set( 'posts_per_page', '2' );
 	}

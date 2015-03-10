@@ -27,16 +27,16 @@ Contents:
   font-size: calculateem($size);
 }
 
-$ubuntu_orange:			  #dd4814; 	/* ubuntu orange */
-$light_orange:        #fdf6f2; 	/* used as background on pre text */
-$warm_grey:				    #aea79f; 	/* warm grey */
-$cool_grey:				    #333333; 	/* cool grey */
-$light_grey:			    #f7f7f7; 	/* light grey */
-$meta_grey:						#888; 		/* meta grey */
-$nav_bg:							#F7F7F7;
-$nav_link_color:			#333;
-$nav_border_dark:			#d4d7d4;
-$nav_border_light:		#f2f2f4;
+$ubuntu_orange:     #dd4814; 	/* ubuntu orange */
+$light_orange:      #fdf6f2; 	/* used as background on pre text */
+$warm_grey:         #aea79f; 	/* warm grey */
+$cool_grey:         #333333; 	/* cool grey */
+$light_grey:        #f7f7f7; 	/* light grey */
+$meta_grey:         #888; 		/* meta grey */
+$nav_bg:            #F7F7F7;
+$nav_link_color:    #333;
+$nav_border_dark:   #d4d7d4;
+$nav_border_light:  #f2f2f4;
 
 /* assets database path */
 $asset_path: '//assets.ubuntu.com/sites/ubuntu/latest/u/img/';
@@ -61,6 +61,11 @@ header.banner { margin-bottom: 0; }
 
 header.banner .nav-primary .topics {
     border-top: 0;   
+}
+
+header.banner .nav-primary ul li.active a,
+body.page-template-page-press-php .nav-primary ul li.press-center a {
+    background-color: #b83a10;
 }
 
 header.banner .nav-primary li.press-center {
@@ -133,81 +138,122 @@ footer.global .legal {
 // glossary-box
 // -----------------------------------------------------------------
 .glossary-box { 
-    padding-bottom: 30px; 
-    margin-top: -10px;
+    //padding-bottom: 30px; 
+    //margin-top: -10px;
+    padding: 0;
     
-    img {
-
+    .inner-wrapper {
+        background-size: 210px 210px;
+        background-position: 100% -20px, 80% 148px;
     }
 }
+
+.glossary-box .inner-wrapper {
+    min-height: 330px;
+}
+
+body.category, 
+body.tag,
+body.page-template-page-category-php {
+    .glossary-box,
+    .glossary-box-articles {
+        .inner-wrapper {
+            min-height: 0;
+            padding-bottom: 10px;
+        }
+    }    
+}
+
+body.archive .glossary-box .inner-wrapper {
+    padding-bottom: 0;    
+}
+
+body.tag .glossary-box .inner-wrapper {
+    padding-bottom: 10px;
+}
+
+
+.glossary-box-desktop .inner-wrapper,
+.glossary-box-cloud .inner-wrapper,
+.glossary-box-server .inner-wrapper,
+.glossary-box-phone .inner-wrapper,
+.glossary-box-tablet .inner-wrapper,
+.glossary-box-internet-of-things  .inner-wrapper {
+    background-size: 210px 210px;
+    background-position: 90% 50%;
+    padding-bottom: 40px;
+}
+
+.glossary-box-internet-of-things  .inner-wrapper {
+  background-size: 337px 240px;
+}
+
 .glossary-box--home {
-    padding-top: 60px;
+    padding: 40px 30px 0;
+
+    .inner-wrapper {
+        min-height: 200px;
+    }
 
     .inner-wrapper .last-col {
         background-size: 240px 240px;
-        height: 240px;
-        width: 240px;
+        height: 251px;
+        width: 251px;
         top: -28px;
-        right: 45px;
+        right: 43px;
    }
 }
 
-.glossary-box-cloud .inner-wrapper .last-col {
-    background-size: 220px 220px;
-    height: 240px;
-    width: 240px;
-    right: 70px;
-    top: -20px;
+// cta boxes on single posts
+.box-desktop,
+.box-phone,
+.box-tablet,
+.box-server,
+.box-cloud {
+    background-size: 167px 167px;  
+    background-repeat: no-repeat;
+    background-position: 154% 50%;
+    border: 0;
+    padding-right: 90px;
 }
 
-.glossary-box-desktop .inner-wrapper .last-col {
-    background-image: url('#{$asset_path}desktop/features/image-features.jpg');
-    background-size: 400px 201px;
-    height: 201px;
-    width: 400px;
-    right: 0;
-    top: 30px;
+.box-phone {
+    background-image: url("static/img/pictograms/picto-phone-orange.svg");  
 }
 
-.glossary-box-server .inner-wrapper .last-col {
-    background-image: url('#{$asset_path}server/image-server.svg');
-    background-size: 400px 121px;
-    height: 121px;
-    width: 400px;
-    right: 0;
-    top: 60px;
+.box-tablet {
+    background-image: url("static/img/pictograms/picto-tablet-orange.svg");  
 }
 
-.glossary-box-tablet .inner-wrapper .last-col {
-    background-image: url('#{$asset_path}tablet/image-tablet-music.jpg');
-    background-size: 350px 223px;
-    height: 254px;
-    width: 400px;
-    top: -20px;
+.box-desktop {
+    background-image: url("#{$asset_path}pictograms/picto-pack/picto-desktop-orange.svg");  
 }
 
-.glossary-box-support .inner-wrapper .last-col {
-    background-image: url('#{$asset_path}management/image-management.svg');
-    background-size: 320px 172px;
-    height: 172px;
-    width: 320px;
-    right: 10px;
-    top: 30px;
+.box-server {
+    background-image: url("#{$asset_path}pictograms/picto-pack/picto-server-midaubergine.svg");  
 }
 
-.glossary-box-phone .inner-wrapper .last-col {
-    background-size: 400px 252px;
-    height: 252px;
-    width: 400px;
-    right: 0;
-    top: 0;
+.box-cloud {
+    background-image: url("#{$asset_path}pictograms/picto-pack/picto-cloudcomputing-orange.svg");  
 }
 
-.toggle-message { top: -54px; }
+.box-keep-up-to-date {
+    background-image: url("#{$asset_path}pictograms/picto-pack/picto-projectswelove-orange.svg");  
+}
 
-.close-message { top: -65px; }
+.box-internet-of-things {
+  background-image: url('#{$asset_path}cloud/tools/snappy/snappy.png');
+  background-repeat: no-repeat;
+  background-position: -79% -28%;
+}
 
-.search .row { padding-bottom: 40px; }
+.box-internet-of-things p {
+  padding-right: 50px;
+}
+
+.search .row { 
+  padding-bottom: 40px; 
+}
 
 .search .no-results {
 	display: inline-block;
@@ -237,22 +283,12 @@ form fieldset .search-submit.active {
 
 // single
 // -----------------------------------------------------------------
-body.single #main-content .list-social-wrapper {
-    display: table;
-    
-    > div {
-        display: table-cell;
-        vertical-align: middle;
-        border: inherit;
-    }
+.single #sidebar .list-social li {
+    margin: 0 6px 0 0;   
 }
 
 // aside
 // -----------------------------------------------------------------
-aside .list-social li {
-    margin-right: 20px !important;
-}
-
 
 // footer
 // -----------------------------------------------------------------

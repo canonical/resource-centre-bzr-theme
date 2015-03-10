@@ -6,7 +6,7 @@
 
 	$attachments = get_posts($args);
 	if ($attachments) : ?>
-	<ul class="list no-bullets">
+	<ul class="no-bullets">
 	<?php	foreach ( $attachments as $attachment ) :
 			$alt = get_post_meta($attachment->ID, '_wp_attachment_image_alt', true);
 			$image_title = $attachment->post_title;

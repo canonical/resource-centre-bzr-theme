@@ -34,19 +34,19 @@ if ( !defined('ABSPATH')) exit;
   wp_reset_query();
 	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
 	$query = new WP_Query( array(
-	'posts_per_page' => 1,
-	'topic' => $current_tax,
-    'post_type' => 'productbusinesscard',
-    'post_status' => 'publish',
-    'post__not_in' => $do_not_duplicate,
-	'paged'=>$paged
+	  'posts_per_page'  => 1,
+    'topic'           => $current_tax,
+    'post_type'       => 'productbusinesscard',
+    'post_status'     => 'publish',
+    'post__not_in'    => $do_not_duplicate,
+    'paged'           => $paged
 	));
 
     if ($query->have_posts()) :
 	while( $query->have_posts() ): 
 	$query->the_post(); 
 	$do_not_duplicate[] = $post->ID ?>
-    <div class="row glossary-box glossary-box-<?php echo strtolower(wp_title( '', false, 'right' )); ?> no-border<?php if( is_single() ) : echo ' box box-highlight'; endif; ?>">
+    <div class="row glossary-box glossary-box-<?php echo strtolower(wp_title( '', false, 'right' )); ?> no-border">
         <div class="inner-wrapper">
             <div class="six-col">
                 <h1><?php wp_title(''); ?></h1>
@@ -60,17 +60,17 @@ if ( !defined('ABSPATH')) exit;
 <?php endwhile; ?>
 
 <?php endif; // if have_posts ends 
-
 /* ============== end pull in business card ============== */ ?>
 
-<?php /* ============== pull in featured ============== */
+<?php 
+/* ============== pull in featured ============== */
 	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
 	$query = new WP_Query( array(
-	'posts_per_page' => 1,
-	'topic' => $current_tax,
-	'meta_key' => 'dbt_checkbox_featured',
-  'post_type' => 'any',
-	'paged'=>$paged
+	  'posts_per_page'  => 1,
+    'topic'           => $current_tax,
+    'meta_key'        => 'dbt_checkbox_featured',
+    'post_type'       => 'post',
+    'paged'           => $paged
 	));
 ?>
 <div class="row">
@@ -90,10 +90,10 @@ if ( !defined('ABSPATH')) exit;
 <?php 
 // The Query
 	$new_query = new WP_Query( array(
-	'posts_per_page' => 1,
-	'topic' => $current_tax,
-    'post_type' => 'any',
-	'paged'=>$paged
+	  'posts_per_page'  => 1,
+    'topic'           => $current_tax,
+    'post_type'       => 'post',
+    'paged'           => $paged
 	));
 ?>
 <?php while( $new_query->have_posts() ): $new_query->the_post(); ?>
@@ -115,13 +115,12 @@ $current_tax = basename(get_permalink());
 $exclude_cat ='downloads';
 $category = get_category_by_slug($exclude_cat);
 $query = new WP_Query( array(
-	'posts_per_page' => 2,
-	'topic' => $current_tax,
-	'cat'	=> -$category->cat_ID,
-	//'category_name' => 'news,press-releases',
-    'post_type' => 'post',
-    'post__not_in' => $do_not_duplicate,
-	'paged'=>$paged
+	'posts_per_page'  => 4,
+	'topic'           => $current_tax,
+	'cat'             => -$category->cat_ID,
+  'post_type'       => 'post',
+  'post__not_in'    => $do_not_duplicate,
+	'paged'           => $paged
 ));
 ?>
  
@@ -147,13 +146,13 @@ $query = new WP_Query( array(
   wp_reset_query();
 	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
 	$query = new WP_Query( array(
-	'posts_per_page' => 2,
-	'topic' => $current_tax,
-    'post_type' => 'post',
-    'post__not_in' => $do_not_duplicate,
-    'meta_key' => 'post_views_count',
-    'orderby' => 'meta_value_num',
-	'paged'=>$paged
+	  'posts_per_page'  => 2,
+    'topic'           => $current_tax,
+    'post_type'       => 'post',
+    'post__not_in'    => $do_not_duplicate,
+    'meta_key'        => 'post_views_count',
+    'orderby'         => 'meta_value_num',
+    'paged'           => $paged
 	));
 ?>
 
@@ -173,40 +172,82 @@ $query = new WP_Query( array(
 /* ============== end pull in most viewed articles ============== */
 ?>
 
+<?php /* ============== pull in latest events ============== */
+$paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
+$exclude_cat = 'downloads';
+$category = get_category_by_slug($exclude_cat);
+$query = new WP_Query( array(
+	'topic'           => $current_tax,
+  'order'           => 'ASC',
+  'orderby'         => 'date',
+  'paged'           => $paged,
+  'post__not_in'    => $do_not_duplicate,
+  'post_type'       => 'event',
+  'meta_key'        => '_end_eventtimestamp',
+  'meta_value'      => $current_timestamp,
+	'orderby'         => 'meta_value',
+  'posts_per_page'  => 9999,
+  'meta_compare'    => '>'
+));
+?><?php if ( $query->have_posts() ) : ?>
+
+<div class="eight-col box box-highlight no-margin-bottom">
+    <h2>Upcoming events</h2>
+    <ul class="no-bullets">
+        <?php
+            while( $query->have_posts() ):
+            $query->the_post();
+            $do_not_duplicate[] = $post->ID ;
+                // get time gubbin's
+                $current_time = current_time('mysql'); 
+                list( $today_year, $today_month, $today_day, $hour, $minute, $second ) = split( '([^0-9])', $current_time );
+                $end_month = get_post_meta( $post->ID, '_end_month', true );
+                $end_day = get_post_meta( $post->ID, '_end_day', true );
+                $end_year = get_post_meta( $post->ID, '_end_year', true );
+                $eventend = $end_year . $end_month . $end_day;
+                $current_timestamp = $today_year . $today_month . $today_day;
+            ?>
+            <?php if($eventend >= $current_timestamp) : ?>
+        <li><?php get_template_part("/includes/_event_meta"); ?></li><?php endif; ?><?php endwhile; ?>
+    </ul>
+</div><!-- /.eight-col -->
+<?php endif; // if have_posts ends
+ wp_reset_query();
+/* ============== end pull in latest events ============== */ ?>
+</div><!-- /.eight-col -->
+
+<aside id="sidebar" class="four-col last-col">
 <?php
-/* ============== pull in latest events ============== */
+$myTopics = array("phone","tablet","internet-of-things");
+if( !$current_tax == $myTopics ) :
+/* ============== pull in topic specific cta ============== */
   wp_reset_query();
 	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
 	$query = new WP_Query( array(
-	'posts_per_page' => 2,
-	'post_type' => 'event',
-	'topic' => $current_tax,
-  'post__not_in' => $do_not_duplicate,
-	'paged'=>$paged
+	  'posts_per_page'  => 2,
+    'topic'           => $current_tax,
+    'post_type'       => 'topiccta',
+    'post__not_in'    => $do_not_duplicate,
+    'paged'           => $paged
 	));
 ?>
-
 <?php if ($query->have_posts()) : ?>
-<div class="box box-highlight  eight-col">
-	<h2>Upcoming and recent <span><?php echo strtolower(wp_title( '', false, 'right' )); ?></span> events</h2>
-	<ul class="no-bullets">
-	<?php 
-		while( $query->have_posts() ): 
-		$query->the_post(); 
-		$do_not_duplicate[] = $post->ID ?>
-		<li class="eight-col">
-			<?php get_template_part("/includes/_event_meta"); ?>
-		</li>
-	<?php endwhile; ?>
-	</ul>
-</div><!-- /.box -->
+		<?php 
+			while( $query->have_posts() ): 
+			$query->the_post(); 
+			$do_not_duplicate[] = $post->ID;
+			$slug = basename(get_permalink()); ?>					
+	<div class="box box-highlight box-<?php echo strtolower(wp_title( '', false, 'right' )); ?> box-<?php echo $slug; ?> contextual-footer four-col">
+        <h2><?php the_title(); ?></h2>
+        <?php the_content(); ?>
+	</div><!-- /.box -->
+		<?php endwhile; ?>
 <?php endif; // if have_posts ends 
-/* ============== end pull in latest events ============== */
-?>  
-</div><!-- /.eight-col -->
+wp_reset_query(); 
+/* ============== end pull in topic specific cta ============== */ 
+endif; ?>
 
-<aside class="four-col last-col">
-    <div class="box four-col">
+    <div class="box box-highlight four-col">
     	<h2>All <?php echo strtolower(wp_title( '', false, 'right' )); ?> resources</h2>
     	<ul class="no-bullets no-margin-bottom">
     	<?php
@@ -227,39 +268,8 @@ $query = new WP_Query( array(
     	</ul>
     </div><!-- /.box -->
 <?php /* ============== end links to all topics ============== */ ?>
-    
-<?php
-/* ============== pull in topic specific cta ============== */
-  wp_reset_query();
-	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
-	$query = new WP_Query( array(
-	'posts_per_page' => 1,
-	'topic' => $current_tax,
-    'post_type' => 'topiccta',
-    'post__not_in' => $do_not_duplicate,
-	'paged'=>$paged
-	));
-?>
-<?php if ($query->have_posts()) : ?>
-	<div class="box contextual-footer four-col">
-		<ul class="no-bullets">
-		<?php 
-			while( $query->have_posts() ): 
-			$query->the_post(); 
-			$do_not_duplicate[] = $post->ID ?>					
-			<li>
-				<h2><?php the_title(); ?></h2>
-				<?php the_content(); ?>
-			</li>					
-		<?php endwhile; ?>
-		</ul>
-	</div><!-- /.box -->
-<?php endif; // if have_posts ends 
-
-/* ============== end pull in topic specific cta ============== */
-  wp_reset_query();
-?>    
-<div class="box four-col">
+        
+<div class="box box-highlight four-col">
 <?php get_template_part("includes/_share_links"); ?>
 </div>
 </aside>

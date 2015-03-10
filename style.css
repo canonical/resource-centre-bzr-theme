@@ -48,13 +48,39 @@ Copyright (C) 2012 Canonical Ltd
 /* usage @include box_sizing();*/
 /* General
 ----------------------------------------------------------------- */
-.col, .eight-col, .eleven-col, .five-col, .four-col, .nine-col, .one-col, .seven-col, .six-col, .ten-col, .three-col, .twelve-col, .two-col {
+.col,
+.eight-col,
+.eleven-col,
+.five-col,
+.four-col,
+.nine-col,
+.one-col,
+.seven-col,
+.six-col,
+.ten-col,
+.three-col,
+.twelve-col,
+.two-col {
   -webkit-transition-duration: 0.5s;
   -moz-transition-duration: 0.5s;
   -o-transition-duration: 0.5s;
   transition-duration: 0.5s;
   margin-right: 0; }
 
+@media only screen and (max-width: 767px) {
+  #main-content {
+    background: #fff; }
+    #main-content .box-highlight,
+    #main-content .box,
+    #main-content .featured-box {
+      -o-border-radius: 0;
+      -webkit-border-radius: 0;
+      -moz-border-radius: 0;
+      border-radius: 0;
+      background: none;
+      border: 0;
+      box-shadow: none;
+      padding: 0; } }
 html {
   background: #f7f7f7; }
 
@@ -64,7 +90,7 @@ body {
   -o-transition-duration: 0.5s;
   transition-duration: 0.5s;
   background: #f1f1f1;
-  font-size: 14px;
+  font-size: 16px;
   /* small */ }
 
 .header {
@@ -83,12 +109,13 @@ body {
 #main-content {
   padding-bottom: 0; }
 
-a:link, a:visited {
-  -webkit-transition-duration: 0.15s;
-  -moz-transition-duration: 0.15s;
-  -o-transition-duration: 0.15s;
-  transition-duration: 0.15s;
-  border: 1px solid transparent;
+a:link,
+a:visited {
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  border-bottom: 1px solid transparent;
   text-decoration: none; }
 
 #main-content a.link-cta-ubuntu:visited {
@@ -138,7 +165,8 @@ a:active img, a:focus img, a:hover img {
   padding-top: 20px;
   display: block;
   float: left;
-  margin-top: 10px; }
+  margin-top: 20px;
+  margin-bottom: 0; }
 
 .single-post-cats .inner-wrapper {
   overflow-y: hidden;
@@ -157,7 +185,7 @@ a:active img, a:focus img, a:hover img {
   font-size: 14px;
   font-size: 1.07692em;
   border: 0;
-  margin: 0 10px 5px 0;
+  margin: 0 10px 0 0;
   padding: 0; }
   .single-post-cats li:after {
     content: ","; }
@@ -438,8 +466,7 @@ pre {
   padding: 10px 20px;
   word-break: break-word; }
 
-code {
-	background: #FDF6F2; }
+code { background: #FDF6F2; }
 
 h1 span.taxonomy-title + span {
   text-transform: lowercase;
@@ -482,6 +509,9 @@ header.banner .nav-primary.nav-right .logo-ubuntu {
 #menu.active:after {
   display: none !important; }
 
+header.banner .nav-primary li.nav-internet-of-things a abbr {
+  border: 0;
+  cursor: pointer; }
 header.banner .nav-primary li.press-center {
   display: none; }
 @media only screen and (max-width: 769px) {
@@ -681,37 +711,36 @@ form label {
 
 /* related posts
 ----------------------------------------------------------------- */
-.related-posts {
+#main-content .related-posts {
   display: block;
   float: left;
-  margin-left: -10px;
-  margin-right: -10px;
-  padding: 10px 10px 0;
   width: 100%; }
-  .related-posts h3 {
+  #main-content .related-posts h3 {
     font-size: 1.219em; }
-  .related-posts ul {
+  #main-content .related-posts ul {
     margin-bottom: 0; }
-  .related-posts li span {
-    color: #333; }
-    .related-posts li span a {
-      color: #333;
+  #main-content .related-posts li span {
+    color: #888888; }
+    #main-content .related-posts li span a {
+      color: #888888;
       display: inline-block; }
-      .related-posts li span a:hover {
+      #main-content .related-posts li span a:hover {
         color: #dd4814; }
-      .related-posts li span a:after {
+      #main-content .related-posts li span a:after {
         content: ' '; }
-  .related-posts li ul {
+  #main-content .related-posts li ul {
     clear: both;
     display: block;
     float: left;
     padding-top: 0;
     width: 100%;
     margin-bottom: 0; }
-  .related-posts li:last-child ul {
+  #main-content .related-posts li.eight-col {
+    margin-bottom: 10px; }
+  #main-content .related-posts li:last-child ul {
     border: 0;
     padding-bottom: 0; }
-  .related-posts li li {
+  #main-content .related-posts li li {
     color: #888888;
     font-size: 14px;
     font-size: 1.07692em;
@@ -736,34 +765,27 @@ form label {
             color: #fff !important;
         }
     }*/ }
-    .related-posts li li:after {
+    #main-content .related-posts li li:after {
       content: ","; }
-    .related-posts li li a {
+    #main-content .related-posts li li a {
       color: #888888;
       display: inline-block;
       font-size: 1em;
       padding: 0;
       margin: 0; }
-      .related-posts li li a:active, .related-posts li li a:focus, .related-posts li li a:visited {
+      #main-content .related-posts li li a:active, #main-content .related-posts li li a:focus, #main-content .related-posts li li a:visited {
         color: #888888;
         border-bottom-color: #888888; }
-      .related-posts li li a:hover {
+      #main-content .related-posts li li a:hover {
         color: #dd4814;
         border-bottom-color: #dd4814; }
-  .related-posts li li:last-child:after {
+  #main-content .related-posts li li:last-child:after {
     content: ""; }
+  #main-content .related-posts li a:hover span {
+    color: #dd4814; }
 
 /* end related-posts */
-#sidebar h2 {
-  font-size: 1em;
-  clear: both;
-  color: #888888;
-  float: left;
-  font-weight: 300;
-  margin-bottom: 5px;
-  width: 100%; }
 #sidebar li {
-  border-bottom: 1px dotted #888888;
   clear: both;
   float: left;
   display: block;
@@ -900,11 +922,8 @@ body.post-type-archive .box {
 .has-time time,
 .featured-article time {
   color: #888;
-  display: block;
-  font-size: .875em;
-  margin-bottom: .725em;
-  margin-bottom: .643em;
-  margin-bottom: .572em; }
+  display: inline;
+  margin-bottom: 1em; }
 
 h1.heading-has-time {
   margin-bottom: 5px; }
@@ -1100,35 +1119,6 @@ body.category .article-list .eight-col footer .comment-number {
   bottom: 0;
   left: 0; }
 
-.article-list li .article-image,
-.featured-article .article-image {
-  float: right;
-  margin-left: 10px;
-  margin-bottom: 5px;
-  width: auto; }
-
-.article-list li .article-image img,
-.featured-article .article-image img {
-  height: auto;
-  width: auto;
-  z-index: 3;
-  padding: 0;
-  margin: 0;
-  padding-bottom: 0;
-  vertical-align: top; }
-
-.article-list li.post-video .article-image {
-  height: 100px;
-  width: 100px;
-  overflow: hidden; }
-
-.article-list li.post-video .article-image img {
-  height: 140px;
-  position: relative;
-  width: 186px;
-  margin-top: -20px;
-  margin-left: -40px; }
-
 .article-image a:hover {
   border-bottom: transparent; }
 
@@ -1147,10 +1137,10 @@ body.category .article-list .eight-col footer .comment-number {
   margin-bottom: .615em; }
 
 .vcard .avatar {
-  -o-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
+  -o-border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
   float: left;
   overflow: auto;
   display: inline;
@@ -1160,10 +1150,10 @@ body.category .article-list .eight-col footer .comment-number {
   left: 0; }
 
 .avatar {
-  -o-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px; }
+  -o-border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0; }
 
 .article-meta .role {
   display: block; }
@@ -1191,6 +1181,9 @@ body.single .eight-col img.full-width {
   margin-left: -5em;
   max-width: none; }
 
+body.single h1 {
+  margin-bottom: 5px; }
+
 .article-meta-wrap {
   clear: both;
   display: block;
@@ -1201,17 +1194,11 @@ body.single .eight-col img.full-width {
   margin-bottom: 0; }
 
 .save-links li {
+  display: inline-block;
   margin-bottom: 0;
-  margin-right: 10px;
-  display: inline-block; }
+  margin-right: 10px; }
 
 /* single ebook */
-.single-ebook .article-image,
-.post-e-book .wp-post-image,
-.post-whitepaper .wp-post-image {
-  border: 1px solid #dfdcd9;
-  margin-bottom: 1.25em; }
-
 #content li.post-e-book img.wp-post-image,
 #content li.post-whitepaper img.wp-post-image {
   margin-left: 1px; }
@@ -1261,6 +1248,9 @@ body.category .article-list .eight-col footer p {
 html.yes-js .home #main-content ul.post-cat {
   margin-left: 0; }
 
+.article-meta {
+  margin-bottom: 1em; }
+
 .article-meta ul {
   float: none;
   margin: 0;
@@ -1291,12 +1281,12 @@ html.yes-js .home #main-content ul.post-cat {
 
 .article-meta li,
 .article-meta p {
-  color: #888888; }
+  color: #888888;
+  font-size: 12px;
+  font-size: 0.92308em; }
   .article-meta li a,
   .article-meta p a {
     color: #888888;
-    font-size: 12px;
-    font-size: 0.92308em;
     margin: 0 0 5px 0;
     padding: 0; }
     .article-meta li a:hover,
@@ -1331,7 +1321,7 @@ article footer {
   font-size: 1.25em; }
 
 p.article-meta {
-  color: #333333;
+  color: #888888;
   display: inline-block; }
 
 .eight-col .article-meta {
@@ -1341,7 +1331,7 @@ p.article-meta {
 #main-content .article-meta a:visited {
   color: #888888; }
 
-.article-meta a:hover {
+#main-content .article-meta a:hover {
   color: #dd4814;
   border-bottom-color: #dd4814; }
 
@@ -1349,7 +1339,8 @@ p.article-meta {
   border: 0; }
 
 .single .article-meta {
-  float: left; }
+  float: left;
+  padding-bottom: 10px; }
 
 @media only screen and (max-width: 852px) {
   .single .article-meta {
@@ -1382,22 +1373,6 @@ footer.author-meta {
 
 img.attachment-medium {
   margin-bottom: 1.25em; }
-
-#sidebar .product-business-card h2 {
-  font-size: 1.438em;
-  margin-bottom: .5em;
-  color: #333;
-  float: none;
-  font-weight: 300;
-  width: auto; }
-#sidebar .product-business-card h2 span {
-  display: block; }
-#sidebar .product-business-card img {
-  margin-top: 0;
-  margin-bottom: 20px; }
-
-.product-business-card img.desktop-image {
-  margin-top: 0; }
 
 /* authors page
 ----------------------------------------------------------------- */
@@ -1621,16 +1596,16 @@ body.author li:hover {
   font-size: 1.38462em; }
 
 #social-links {
-  margin-left: 0; }
+  margin-left: 0;
+  padding-top: 10px;
+  float: left; }
 
 #social-links li {
-  background: #ddd;
   clear: none;
   display: inline;
   float: left;
   margin-right: 6px;
   text-indent: -999em;
-  width: 24px;
   width: auto; }
 
 .author #social-links li {
@@ -1638,43 +1613,44 @@ body.author li:hover {
   display: inline-block; }
 
 #social-links li a {
-  background: transparent url(static/img/sprite-social-media.svg);
-  background-color: #ededed;
   border: 0;
   display: block;
-  height: 23px;
+  height: 32px;
   overflow: hidden;
-  width: 23px; }
-
-.opera-mini #welcome-message #social-links li a,
-.no-svg #welcome-message #social-links li a {
-  background: transparent url(static/img/sprite-social-media.png); }
+  width: 32px;
+  padding: 0; }
 
 #social-links li a {
   border: 0; }
 
+#social-links li a.social-twitter,
+#social-links li a#social-twitter {
+  background: url("static/img/icons/icon-twitter-grey.svg") no-repeat;
+  background-size: 32px 32px; }
+
 #social-links li a.social-email,
 #social-links li a#social-email {
-  background-position: 0 -33px; }
+  background: url("static/img/icons/email.svg") no-repeat; }
 
 #social-links li a.social-facebook,
 #social-links li a#social-facebook {
-  background-position: 0 -66px; }
+  background: url("static/img/icons/icon-facebook-grey.svg") no-repeat; }
 
 #social-links li a.social-google,
 #social-links li a#social-google {
-  background-position: 0 -99px; }
+  background: url("static/img/icons/icon-google-grey.svg") no-repeat; }
 
 #social-links li a.social-launchpad,
 #social-links li a#social-launchpad {
-  background-position: 0 -132px; }
+  background: url("static/img/icons/icon-launchpad.svg") no-repeat; }
 
 p.social-rss,
 #social-links li a#social-rss {
   background: transparent url(static/img/sprite-social-media.png) no-repeat 0 -165px; }
 
 p.social-rss {
-  padding: 0 0 0 30px; }
+  padding: 0 0 0 30px;
+  margin-bottom: 20px; }
 
 #social-links li a.social-instapaper,
 #social-links li a#social-instapaper {
@@ -1778,7 +1754,7 @@ p.social-rss {
   padding: 20px 10px .75em; }
 
 #main-content .cat-title {
-  padding-top: 20px;
+  padding-top: 10px;
   padding-bottom: 10px;
   position: relative; }
 
@@ -1787,11 +1763,9 @@ p.social-rss {
 .tax-topic #main-content .cat-title {
   margin-bottom: 10px; }
 
-.category #main-content .cat-title {
-  padding-top: 10px; }
-
 .glossary-box {
-  background: #fff;
+  background: #2c001e;
+  color: #fff;
   margin-top: -10px; }
 
 .glossary-box--home {
@@ -1802,8 +1776,7 @@ p.social-rss {
 
 .glossary-box .inner-wrapper {
   margin: 0;
-  padding: 0;
-  padding-top: 20px; }
+  padding: 30px 0 30px; }
 
 .glossary-box--main .inner-wrapper {
   padding-top: 40px; }
@@ -1824,12 +1797,40 @@ p.social-rss {
   width: 100%; }
 
 .toggle-message:hover {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
   border-bottom: transparent; }
 
 .glossary-box .external span {
   background-image: url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/external-link-orange.svg");
   margin-left: 2px; }
+
+/* the single version of the glossary box */
+.product-business-card {
+  -o-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 4px 0 4px 36px;
+  background-size: 30px 30px;
+  background-repeat: no-repeat; }
+
+.product-business-card--cloud {
+  background-image: url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/pictograms/picto-pack/picto-cloudcomputing-warmgrey.svg"); }
+
+.product-business-card--server {
+  background-image: url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/pictograms/picto-pack/picto-server-warmgrey.svg"); }
+
+.product-business-card--desktop {
+  background-image: url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/pictograms/picto-pack/picto-desktop-warmgrey.svg"); }
+
+.product-business-card--phone {
+  background-image: url("static/img/pictograms/picto-phone-warmgrey.svg"); }
+
+.product-business-card--tablet {
+  background-image: url("static/img/pictograms/picto-tablet-warmgrey.svg"); }
+
+.product-business-card--support {
+  background-image: url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/pictograms/picto-pack/picto-support-warmgrey.svg"); }
 
 /* main nav
 ----------------------------------------------------------------- */
@@ -1994,7 +1995,7 @@ footer.global .top-link a:hover {
 .article-image {
   text-align: center; }
   .article-image img {
-    margin-bottom: 20px; }
+    padding: 40px 0; }
 
 .row {
   clear: both; }
@@ -2125,7 +2126,7 @@ button.search-submit + a {
 form fieldset .search-submit.active,
 .has-filter-wrap fieldset .search-submit {
   background-color: #C03F11;
-  background-image: linear-gradient(#dd4814, #c03f11);
+  background-image: linear-gradient(#DD4814, #C03F11);
   background-image: none;
   position: relative;
   right: auto;
@@ -2601,7 +2602,6 @@ html.no-svg .cookie-policy .link-cta {
   	events
   	search filters
   	vcard
-  
   */
   /**
    * Ubuntu Patterns Stylesheet
@@ -2649,6 +2649,10 @@ html.no-svg .cookie-policy .link-cta {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     padding-left: 9px; }
+    #nav-global a.external {
+      background: none;
+      padding-left: 0;
+      padding-right: 0; }
     #nav-global ul li.open {
       min-width: 122px; }
     #nav-global li.more li {
@@ -2686,7 +2690,7 @@ html.no-svg .cookie-policy .link-cta {
     padding-top: 10px; }
 
   #main-content .cat-title {
-    padding: 10px 30px 0 0; }
+    padding: 0 30px 0 0; }
 
   .page-template-page-category-php #main-content .cat-title,
   .tax-topic #main-content .cat-title {
@@ -2753,6 +2757,10 @@ html.no-svg .cookie-policy .link-cta {
   body.single .row {
     padding-top: 10px; }
 
+  .single #sidebar .list-social li {
+    margin-bottom: 10px;
+    margin-right: 13px; }
+
   #main-content .single-post-cats {
     padding-top: 0; }
 
@@ -2761,96 +2769,88 @@ html.no-svg .cookie-policy .link-cta {
 
   .social-links li {
     float: none;
-    margin-right: 10px;
     margin-right: 0; }
 
   .article-meta-wrap {
-    margin-bottom: 20px; }
+    margin-bottom: 10px; }
 
   .article-meta {
     margin-right: 10px; }
 
   .single .article-meta {
-    margin-bottom: 20px; }
+    margin-bottom: 20px;
+    padding-bottom: 0; }
 
   /* glossary-box
   ----------------------------------------------------------------- */
   .glossary-box {
+    background: #fff;
+    color: #333;
+    margin-top: -20px;
     box-shadow: 0 2px 2px 0 rgba(212, 212, 212, 0.7);
-    padding: 10px 30px 20px;
-    margin-top: -10px; }
+    padding-bottom: 0;
+    padding-top: 0; }
+    .glossary-box .inner-wrapper {
+      background-size: 180px 180px;
+      background-repeat: no-repeat;
+      background-position: 100% -20px, 70% 130%;
+      padding: 40px 0 40px;
+      overflow: hidden; }
     .glossary-box .inner-wrapper .last-col {
       background-repeat: no-repeat;
       background-position: right bottom;
       position: absolute; }
 
   .glossary-box--home {
-    padding: 30px 30px 20px;
+    background: #2c001e;
+    color: #fff;
+    padding: 30px 30px 0;
     margin-top: 0; }
-    .glossary-box--home .inner-wrapper .last-col {
-      background-image: url("//insights.ubuntu.com/wp-content/uploads/picto-knowledge-orange-and-white.png");
-      background-size: 200px 200px;
-      height: 200px;
-      width: 200px;
-      right: 10px;
-      top: -24px; }
+    .glossary-box--home .inner-wrapper {
+      min-height: 165px; }
+      .glossary-box--home .inner-wrapper .last-col {
+        background-image: url("//insights.ubuntu.com/wp-content/uploads/picto-knowledge-orange-and-white.png");
+        background-size: 180px 180px;
+        height: 220px;
+        right: 10px;
+        top: -38px;
+        width: 200px; }
 
-  .glossary-box-cloud .inner-wrapper .last-col {
-    background-image: url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/cloud/image-diversecloudecosystem.svg");
-    background-size: 170px 170px;
-    height: 170px;
-    width: 170px;
-    right: 40px;
-    top: 5px; }
+  body.page-template-page-topics-php .glossary-box-cloud-and-server .inner-wrapper,
+  .glossary-box-desktop .inner-wrapper,
+  .glossary-box-internet-of-things .inner-wrapper {
+    background-size: 180px 180px;
+    background-position: 94% 50%; }
 
-  .glossary-box-desktop .inner-wrapper .last-col {
-    background-image: url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/desktop/features/image-features.jpg");
-    background-size: 280px 140px;
-    height: 140px;
-    width: 280px;
-    right: 0;
-    top: 60px; }
+  .glossary-box-cloud-and-server .inner-wrapper {
+    background-image: url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/pictograms/picto-pack/picto-server-midaubergine.svg"), url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/pictograms/picto-pack/picto-cloudcomputing-orange.svg"); }
 
-  .glossary-box-server .inner-wrapper .last-col {
-    background-image: url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/server/image-server.svg");
-    background-size: 300px 90px;
-    height: 90px;
-    width: 300px;
-    right: 0;
-    top: 60px; }
+  .glossary-box-cloud .inner-wrapper {
+    background-image: url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/pictograms/picto-pack/picto-cloudcomputing-orange.svg"); }
 
-  .glossary-box-tablet .inner-wrapper .last-col {
-    background-image: url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/tablet/image-tablet-music.jpg");
-    background-size: 260px 165px;
-    height: 165px;
-    width: 260px;
-    right: -15px;
-    top: 10px; }
+  .glossary-box-server .inner-wrapper {
+    background-image: url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/pictograms/picto-pack/picto-server-midaubergine.svg"); }
 
-  .glossary-box-support .inner-wrapper .last-col {
-    background-image: url("//insights.ubuntu.com/wp-content/uploads/cloud-management.png");
-    background-size: 320px 172px;
-    height: 172px;
-    width: 320px;
-    right: 0;
-    top: 5px; }
+  .glossary-box-press-centre .inner-wrapper {
+    background-image: url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/pictograms/picto-pack/picto-bookmark-midaubergine.svg"), url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/pictograms/picto-pack/picto-articles-orange.svg"); }
 
-  .glossary-box-phone .inner-wrapper .last-col {
-    background-image: url("//insights.ubuntu.com/wp-content/uploads/phone-insights-1.jpg");
-    background-size: 300px 189px;
-    height: 189px;
-    width: 300px;
-    right: 0;
-    top: 0; }
+  .glossary-box-desktop .inner-wrapper {
+    background-image: url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/pictograms/picto-pack/picto-desktop-orange.svg"); }
 
-  .toggle-message {
-    right: 0;
-    top: -44px; }
+  .glossary-box-phone-and-tablet .inner-wrapper {
+    background-image: url("static/img/pictograms/picto-phone-midaubergine.svg"), url("static/img/pictograms/picto-tablet-orange.svg"); }
 
-  .open-message.active {
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    background-image: url("static/img/icons/info.svg");
-    background-size: 22px 22px; }
+  .glossary-box-phone .inner-wrapper {
+    background-image: url("static/img/pictograms/picto-phone-orange.svg"); }
+
+  .glossary-box-tablet .inner-wrapper {
+    background-image: url("static/img/pictograms/picto-tablet-orange.svg"); }
+
+  .glossary-box-chatter-cloud .inner-wrapper {
+    background-image: url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/pictograms/picto-pack/picto-articles-midaubergine.svg"), url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/pictograms/picto-pack/picto-cloudcomputing-orange.svg"); }
+
+  .glossary-box-internet-of-things .inner-wrapper {
+    background-image: url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/cloud/tools/snappy/snappy.png"); }
 
   .archive .featured-article, .page-template .featured-article {
     margin-bottom: 0; }
@@ -2866,21 +2866,18 @@ html.no-svg .cookie-policy .link-cta {
     right: 0;
     top: 0; }
 
-  #main-content aside .list-social li {
-    margin-right: -2px; }
-
   /* main nav
   ----------------------------------------------------------------- */
-  .type-nav li li:last-child {
-    box-shadow: inset 0 -4px 4px -4px rgba(0, 0, 0, 0.2); }
-
-  .type-nav li li:last-child a:hover {
-    box-shadow: inset 0 -4px 4px -4px rgba(0, 0, 0, 0.15); }
+  header.banner .nav-primary ul li.active a,
+  body.page-template-page-press-php .nav-primary ul li.press-center a {
+    font-weight: 400; }
 
   /* related posts
   ----------------------------------------------------------------- */
   /* product-business-card
   ----------------------------------------------------------------- */
+  .product-business-card p.intro {
+    font-size: 1em; }
   .product-business-card img {
     display: block;
     float: none;
@@ -2965,7 +2962,7 @@ html.no-svg .cookie-policy .link-cta {
   .yes-js {
     /* end main nav */ }
     .yes-js #main-navigation {
-      background: #f7f7f7;
+      background: #F7F7F7;
       float: none;
       margin: 0 auto;
       max-width: 984px;
@@ -2974,7 +2971,7 @@ html.no-svg .cookie-policy .link-cta {
       -webkit-border-radius: 0 0 2px 2px;
       -moz-border-radius: 0 0 2px 2px;
       border-radius: 0 0 2px 2px;
-      background: #f7f7f7;
+      background: #F7F7F7;
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
       width: 400px;
       display: block;
@@ -3015,14 +3012,14 @@ html.no-svg .cookie-policy .link-cta {
   /* search
   ----------------------------------------------------------------- */
   .yes-js #box-search {
-    background: #f7f7f7; }
+    background: #F7F7F7; }
 
   .yes-js #box-search div {
     -webkit-border-radius: 0 0 2px 2px;
     -moz-border-radius: 0 0 2px 2px;
     border-radius: 0 0 2px 2px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-    background: #f7f7f7;
+    background: #F7F7F7;
     padding: 10px; }
 
   .yes-js header.global #box-search {
@@ -3104,6 +3101,10 @@ html.no-svg .cookie-policy .link-cta {
   header.banner .nav-primary .topics {
     border-top: 0; }
 
+  header.banner .nav-primary ul li.active a,
+  body.page-template-page-press-php .nav-primary ul li.press-center a {
+    background-color: #b83a10; }
+
   header.banner .nav-primary li.press-center {
     display: block; }
 
@@ -3163,68 +3164,89 @@ html.no-svg .cookie-policy .link-cta {
     border-bottom: 0; }
 
   .glossary-box {
-    padding-bottom: 30px;
-    margin-top: -10px; }
+    padding: 0; }
+    .glossary-box .inner-wrapper {
+      background-size: 210px 210px;
+      background-position: 100% -20px, 80% 148px; }
+
+  .glossary-box .inner-wrapper {
+    min-height: 330px; }
+
+  body.category .glossary-box .inner-wrapper,
+  body.category .glossary-box-articles .inner-wrapper,
+  body.tag .glossary-box .inner-wrapper,
+  body.tag .glossary-box-articles .inner-wrapper,
+  body.page-template-page-category-php .glossary-box .inner-wrapper,
+  body.page-template-page-category-php .glossary-box-articles .inner-wrapper {
+    min-height: 0;
+    padding-bottom: 10px; }
+
+  body.archive .glossary-box .inner-wrapper {
+    padding-bottom: 0; }
+
+  body.tag .glossary-box .inner-wrapper {
+    padding-bottom: 10px; }
+
+  .glossary-box-desktop .inner-wrapper,
+  .glossary-box-cloud .inner-wrapper,
+  .glossary-box-server .inner-wrapper,
+  .glossary-box-phone .inner-wrapper,
+  .glossary-box-tablet .inner-wrapper,
+  .glossary-box-internet-of-things .inner-wrapper {
+    background-size: 210px 210px;
+    background-position: 90% 50%;
+    padding-bottom: 40px; }
+
+  .glossary-box-internet-of-things .inner-wrapper {
+    background-size: 337px 240px; }
 
   .glossary-box--home {
-    padding-top: 60px; }
+    padding: 40px 30px 0; }
+    .glossary-box--home .inner-wrapper {
+      min-height: 200px; }
     .glossary-box--home .inner-wrapper .last-col {
       background-size: 240px 240px;
-      height: 240px;
-      width: 240px;
+      height: 251px;
+      width: 251px;
       top: -28px;
-      right: 45px; }
+      right: 43px; }
 
-  .glossary-box-cloud .inner-wrapper .last-col {
-    background-size: 220px 220px;
-    height: 240px;
-    width: 240px;
-    right: 70px;
-    top: -20px; }
+  .box-desktop,
+  .box-phone,
+  .box-tablet,
+  .box-server,
+  .box-cloud {
+    background-size: 167px 167px;
+    background-repeat: no-repeat;
+    background-position: 154% 50%;
+    border: 0;
+    padding-right: 90px; }
 
-  .glossary-box-desktop .inner-wrapper .last-col {
-    background-image: url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/desktop/features/image-features.jpg");
-    background-size: 400px 201px;
-    height: 201px;
-    width: 400px;
-    right: 0;
-    top: 30px; }
+  .box-phone {
+    background-image: url("static/img/pictograms/picto-phone-orange.svg"); }
 
-  .glossary-box-server .inner-wrapper .last-col {
-    background-image: url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/server/image-server.svg");
-    background-size: 400px 121px;
-    height: 121px;
-    width: 400px;
-    right: 0;
-    top: 60px; }
+  .box-tablet {
+    background-image: url("static/img/pictograms/picto-tablet-orange.svg"); }
 
-  .glossary-box-tablet .inner-wrapper .last-col {
-    background-image: url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/tablet/image-tablet-music.jpg");
-    background-size: 350px 223px;
-    height: 254px;
-    width: 400px;
-    top: -20px; }
+  .box-desktop {
+    background-image: url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/pictograms/picto-pack/picto-desktop-orange.svg"); }
 
-  .glossary-box-support .inner-wrapper .last-col {
-    background-image: url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/management/image-management.svg");
-    background-size: 320px 172px;
-    height: 172px;
-    width: 320px;
-    right: 10px;
-    top: 30px; }
+  .box-server {
+    background-image: url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/pictograms/picto-pack/picto-server-midaubergine.svg"); }
 
-  .glossary-box-phone .inner-wrapper .last-col {
-    background-size: 400px 252px;
-    height: 252px;
-    width: 400px;
-    right: 0;
-    top: 0; }
+  .box-cloud {
+    background-image: url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/pictograms/picto-pack/picto-cloudcomputing-orange.svg"); }
 
-  .toggle-message {
-    top: -54px; }
+  .box-keep-up-to-date {
+    background-image: url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/pictograms/picto-pack/picto-projectswelove-orange.svg"); }
 
-  .close-message {
-    top: -65px; }
+  .box-internet-of-things {
+    background-image: url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/cloud/tools/snappy/snappy.png");
+    background-repeat: no-repeat;
+    background-position: -79% -28%; }
+
+  .box-internet-of-things p {
+    padding-right: 50px; }
 
   .search .row {
     padding-bottom: 40px; }
@@ -3253,15 +3275,8 @@ html.no-svg .cookie-policy .link-cta {
     float: right;
     margin: 0 0 20px 20px; }
 
-  body.single #main-content .list-social-wrapper {
-    display: table; }
-    body.single #main-content .list-social-wrapper > div {
-      display: table-cell;
-      vertical-align: middle;
-      border: inherit; }
-
-  aside .list-social li {
-    margin-right: 20px !important; }
+  .single #sidebar .list-social li {
+    margin: 0 6px 0 0; }
 
   footer.global .top-link {
     display: none; }
@@ -3280,17 +3295,13 @@ html.no-svg .cookie-policy .link-cta {
 @-webkit-keyframes target-fade {
   0% {
     background-color: rgba(255, 255, 0, 0.3); }
-
   100% {
-    background-color: rgba(0, 0, 0, 0); } }
-
+    background-color: transparent; } }
 @-moz-keyframes target-fade {
   0% {
     background-color: rgba(255, 255, 0, 0.3); }
-
   100% {
-    background-color: rgba(0, 0, 0, 0); } }
-
+    background-color: transparent; } }
 #press-contact {
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
@@ -3323,7 +3334,7 @@ html.no-svg .cookie-policy .link-cta {
   margin-bottom: 30px; }
 
 .content-cat {
-  color: #aea79f;
+  color: #888888;
   font-size: 14px;
   letter-spacing: 1px;
   margin: 0;
@@ -3355,74 +3366,97 @@ html.no-svg .cookie-policy .link-cta {
     margin-bottom: 1em;
     width: 100%; }
   #campaign-sidebar ul li {
-    border-bottom: 1px dotted #aea79f;
+    border-bottom: 1px dotted #888888;
     padding-bottom: 12px; }
 
-.list-social h2 {
+#sidebar .list-social {
   -o-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  border: 0;
-  color: #333;
-  float: left;
-  font-size: 1.25em;
-  left: 0;
-  padding: 0 10px 10px 0;
-  text-transform: none;
-  top: 0;
+  margin-bottom: 0;
   width: 100%; }
-
-.list-social li {
-  width: 45px;
-  height: 45px;
-  text-indent: -999em;
-  display: inline-block;
-  margin-right: 20px; }
-  .list-social li a {
-    background-image: url("static/img/icon-social.svg");
-    background-repeat: no-repeat;
-    display: block;
-    width: 45px;
-    height: 45px;
-    overflow: hidden;
-    background-size: 179px 89px;
-    padding: 0;
-    border: 0; }
-    .list-social li a:link, .list-social li a:visited {
-      transition-duration: 0s; }
-  .list-social li a#item-twitter {
-    background-position: 0 0; }
-  .list-social li a#item-google {
-    background-position: -45px 0; }
-  .list-social li a#item-facebook {
-    background-position: -90px 0; }
-  .list-social li a#item-email {
-    background-image: url("static/img/email.svg");
-    background-size: 45px 45px; }
-  .list-social li a#item-twitter:hover {
-    background-position: 0 -45px; }
-  .list-social li a#item-google:hover {
-    background-position: -45px -45px; }
-  .list-social li a#item-facebook:hover {
-    background-position: -90px -45px; }
-  .list-social li a#item-email:hover {
-    background-image: url("static/img/email_orange.svg"); }
-
-body.single .list-social-wrapper {
-  margin-bottom: 20px; }
-  body.single .list-social-wrapper .list-social {
-    padding-top: 7px; }
-  body.single .list-social-wrapper > div {
-    display: block;
-    border: 0; }
-  body.single .list-social-wrapper h2 {
-    display: none; }
-  body.single .list-social-wrapper li {
-    margin-right: 10px; }
-
-.list-social li:last-child {
-  margin-right: 0; }
+  #sidebar .list-social li {
+    width: 30px;
+    height: 30px;
+    text-indent: -999em;
+    display: inline-block;
+    margin: 0 10px 0 0;
+    float: none; }
+    #sidebar .list-social li:last-child {
+      margin-right: 0; }
+    #sidebar .list-social li a {
+      background-repeat: no-repeat;
+      display: block;
+      width: 30px;
+      height: 30px;
+      overflow: hidden;
+      padding: 0;
+      margin: 0;
+      border: 0; }
+    #sidebar .list-social li a#item-google {
+      background: url("static/img/icons/icon-google-orange.svg");
+      background-image: url("static/img/icons/icon-google-grey.svg");
+      -o-background-size: 100% 100%;
+      -webkit-background-size: 100% 100%;
+      -moz-background-size: 100% 100%;
+      background-size: 100% 100%; }
+    #sidebar .list-social li a#item-twitter {
+      background: url("static/img/icons/icon-twitter-orange.svg");
+      background-image: url("static/img/icons/icon-twitter-grey.svg");
+      -o-background-size: 100% 100%;
+      -webkit-background-size: 100% 100%;
+      -moz-background-size: 100% 100%;
+      background-size: 100% 100%; }
+    #sidebar .list-social li a#item-facebook {
+      background: url("static/img/icons/icon-facebook-orange.svg");
+      background-image: url("static/img/icons/icon-facebook-grey.svg");
+      -o-background-size: 100% 100%;
+      -webkit-background-size: 100% 100%;
+      -moz-background-size: 100% 100%;
+      background-size: 100% 100%; }
+    #sidebar .list-social li a#item-email {
+      background: url("static/img/email_orange.svg");
+      background-image: url("static/img/email.svg");
+      -o-background-size: 100% 100%;
+      -webkit-background-size: 100% 100%;
+      -moz-background-size: 100% 100%;
+      background-size: 100% 100%; }
+    #sidebar .list-social li a#item-linkedin {
+      background: url("static/img/icons/linkedin_orange.svg");
+      background-image: url("static/img/icons/icon-linkedin-grey.svg");
+      -o-background-size: 100% 100%;
+      -webkit-background-size: 100% 100%;
+      -moz-background-size: 100% 100%;
+      background-size: 100% 100%; }
+    #sidebar .list-social li a#item-instapaper {
+      background: url("static/img/icons/icon-instapaper-orange.svg");
+      background-image: url("static/img/icons/icon-instapaper-grey.svg");
+      -o-background-size: 100% 100%;
+      -webkit-background-size: 100% 100%;
+      -moz-background-size: 100% 100%;
+      background-size: 100% 100%; }
+    #sidebar .list-social li a#item-pocket {
+      background: url("static/img/icons/icon-pocket-orange.svg");
+      background-image: url("static/img/icons/icon-pocket-grey.svg");
+      -o-background-size: 100% 100%;
+      -webkit-background-size: 100% 100%;
+      -moz-background-size: 100% 100%;
+      background-size: 100% 100%; }
+    #sidebar .list-social li a#item-twitter:hover {
+      background-image: url("static/img/icons/icon-twitter-orange.svg"); }
+    #sidebar .list-social li a#item-google:hover {
+      background-image: url("static/img/icons/icon-google-orange.svg"); }
+    #sidebar .list-social li a#item-facebook:hover {
+      background-image: url("static/img/icons/icon-facebook-orange.svg"); }
+    #sidebar .list-social li a#item-email:hover {
+      background-image: url("static/img/email_orange.svg"); }
+    #sidebar .list-social li a#item-linkedin:hover {
+      background-image: url("static/img/icons/linkedin_orange.svg"); }
+    #sidebar .list-social li a#item-pocket:hover {
+      background-image: url("static/img/icons/icon-pocket-orange.svg"); }
+    #sidebar .list-social li a#item-instapaper:hover {
+      background-image: url("static/img/icons/icon-instapaper-orange.svg"); }
 
 html.opera-mini footer.global .list-social li a#item-twitter,
 html.no-svg footer.global .list-social li a#item-twitter {
@@ -3448,3 +3482,41 @@ html.no-svg footer.global .list-social li a#item-facebook:hover {
 html.opera-mini footer.global .list-social li a#item-canonical:hover,
 html.no-svg footer.global .list-social li a#item-canonical:hover {
   background-image: url("//www.canonical.com/static/img/icons/icon-social-rss-selected.png"); }
+
+.list-social--small li {
+  background-size: 28px 28px;
+  background-repeat: no-repeat;
+  padding: 2px 0 3px 36px; }
+  .list-social--small li.link-youtube {
+    background-image: url("static/img/icons/icon-youtube-grey.svg"); }
+  .list-social--small li.link-twitter {
+    background-image: url("static/img/icons/icon-twitter-grey.svg"); }
+  .list-social--small li.link-google {
+    background-image: url("static/img/icons/icon-google-grey.svg"); }
+  .list-social--small li.link-facebook {
+    background-image: url("static/img/icons/icon-facebook-grey.svg"); }
+  .list-social--small li:last-child {
+    padding: 0; }
+
+.social-title {
+  background-size: 28px 28px;
+  background-repeat: no-repeat;
+  padding: 1px 0 3px 36px; }
+
+.social-title--twitter {
+  background-image: url("static/img/icons/icon-twitter-cool-grey.svg"); }
+
+.social-title--facebook {
+  background-image: url("static/img/icons/icon-facebook-cool-grey.svg"); }
+
+.social-title--google {
+  background-image: url("static/img/icons/icon-google-cool-grey.svg"); }
+
+.social-title--youtube {
+  background-image: url("static/img/icons/icon-youtube-cool-grey.svg"); }
+
+html.no-svg .list-social--small li {
+  background: none;
+  padding: 0; }
+
+/*# sourceMappingURL=style.css.map */

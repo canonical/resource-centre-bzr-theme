@@ -27,7 +27,7 @@ if ( !defined('ABSPATH')) exit;
 	$post = $wp_query->get_queried_object();
 	$current_cat = basename(get_permalink());
 ?>
-<div class="row glossary-box glossary-box no-border<?php if( is_single() ) : echo ' box box-highlight'; endif; ?>">
+<div class="row glossary-box glossary-box-category no-border<?php if( is_single() ) : echo ' box box-highlight'; endif; ?>">
     <div class="inner-wrapper">
         <div class="six-col no-margin-bottom">
             <h1><?php wp_title(''); ?></h1>
@@ -152,8 +152,8 @@ if ( !defined('ABSPATH')) exit;
 
 </div><!-- /.eight-col -->
 
-<aside class="four-col last-col">
-    <div class="box four-col">
+<aside id="sidebar" class="four-col last-col">
+    <div class="box box-highlight four-col">
 	<h2><?php wp_title(''); ?> by topic</h2>
 		<ul class="no-bullets">
 		<?php
@@ -188,7 +188,7 @@ if ( !defined('ABSPATH')) exit;
 <?php /* ============== end links to all topics ============== */
 wp_reset_query();
 ?>
-<div class="box four-col">
+<div class="box box-highlight four-col">
 <?php get_template_part("includes/_share_links"); ?>
 </div>
 

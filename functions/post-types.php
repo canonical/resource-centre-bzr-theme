@@ -356,7 +356,7 @@ function post_type_webinar()
     'public' => true,
     'publicly_queryable' => true,
     'show_ui' => true, 
-		'show_in_nav_menus' => true,
+    'show_in_nav_menus' => true,
     'query_var' => true,
     'can_export' => true,
     'taxonomies' => array('category', 'post_tag'),

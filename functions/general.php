@@ -1,4 +1,33 @@
 <?php
+    
+function add_group_automatically($post_ID) {
+	global $wpdb;
+	if (has_term( array( 'cloud', 'server' ), 'topic', $post->ID )) {
+        // 422 = cloud-and-server	
+		$cat = array('cloud-and-server');
+		wp_set_object_terms($post_ID, $cat, 'group', true);
+	} 
+	
+	elseif (has_term( array( 'phone', 'tablet' ), 'topic', $post->ID )) {
+        // 415 = phone-and-tablet	
+		$cat = array('phone-and-tablet');
+		wp_set_object_terms($post_ID, $cat, 'group', true);
+	}
+	
+	elseif (has_term( 'internet-of-things', 'topic', $post->ID )) {
+        // 415 = phone-and-tablet	
+		$cat = array('internet-of-things');
+		wp_set_object_terms($post_ID, $cat, 'group', true);
+	}
+
+	elseif (has_term( 'desktop', 'topic', $post->ID )) {
+        // 172 = phone-and-tablet	
+		$cat = array('desktop');
+		wp_set_object_terms($post_ID, $cat, 'group', true);
+	}
+}
+add_action('save_post', 'add_group_automatically');        
+   
 // post types - add new post types here and at the top of post-types.php
 $post_types = array('whitepaper', 'post', 'ebook', 'video', 'attachment', 'casestudy', 'infographic', 'webinar', 'event', 'case-study', 'presskits');
 
@@ -28,7 +57,7 @@ add_action( 'init', 'wpse31422_init' );
  */
 function gb_do_terms_exclusion() {
 $current_user = wp_get_current_user();
-$_menu_unrestricted_users = array( 'admin', 'gbancroft-canonical', 'peterm-ubuntu', 'yaili', 'yaili-2', 'sian-aherne', 'sian.aherne', 'inayaili' );
+$_menu_unrestricted_users = array( 'admin', 'gbancroft-canonical', 'peterm-ubuntu', 'yaili', 'yaili-2', 'tom.callway', 'carolinetarbett', 'inayaili' );
 
 	if(! in_array( $current_user->user_login, $_menu_unrestricted_users ) ) {
 		remove_menu_page( 'edit.php?post_type=productbusinesscard' );
@@ -164,13 +193,13 @@ add_action('widgets_init', 'remove_recent_comments_style');
 function current_to_active($text){
 	$replace = array(
 		// List of classes to replace with "active"
-		'current-cat-parent' => 'active',
+		'current-menu-item' => 'active',
 		'current-cat' => 'active',
 	);
 	$text = str_replace(array_keys($replace), $replace, $text);
 	return $text;
 }
-add_filter ('wp_list_categories','current_to_active');
+add_filter ('wp_nav_menu','current_to_active');
 // end replace "current-cat-" with class "active"
 
 // general
@@ -285,6 +314,27 @@ add_theme_support( 'post-thumbnails' );
 set_post_thumbnail_size( 100, 100, true );
 add_theme_support( 'automatic-feed-links' );
 
+function add_custom_fields_to_rss() {
+    if(get_post_type() == 'event') {
+      $start_date =  get_post_meta(get_the_ID(), '_start_eventtimestamp', true); 
+      $end_date =  get_post_meta(get_the_ID(), '_end_eventtimestamp', true); 
+      $location =  get_post_meta(get_the_ID(), '_event_location', true); 
+      $venue =  get_post_meta(get_the_ID(), '_event_venue', true); 
+        ?>
+        <?php if($start_date != '') { echo '<eventStartDate>', $start_date, '</eventStartDate>'; } ?>
+        <?php if($end_date != '') { echo '<eventEndDate>', $end_date, '</eventEndDate>'; } ?>
+        <?php if($location != '') { echo '<eventLocation>', $location, '</eventLocation>'; } ?>
+        <?php if($venue != '') { echo '<eventVenue>', $venue, '</eventVenue>'; } ?>
+        <?php
+    }
+    if(get_post_type() == 'post') {
+      $videoID =  get_post_meta(get_the_ID(), 'postVideo', true); 
+        ?>
+        <?php if($videoID != '') { echo '<videoID>', $videoID, '</videoID>'; } ?>
+        <?php
+    }
+}
+add_action('rss2_item', 'add_custom_fields_to_rss');
 
 // This theme uses wp_nav_menu() in one location.
 register_nav_menu( 'primary-products', __( 'Products and services menu', 'Insights PLUS' ) );
@@ -303,19 +353,24 @@ if (function_exists('register_sidebar'))
 
 // limit titles to 70 characters long
 function gb_limit_title() {
-?>
-    <script type="text/javascript">
-        jQuery(document).ready( function($)
-        {
-            $('#title').keyup( function()
+$current_user = wp_get_current_user();
+$_menu_unrestricted_users = array( 'admin', 'gbancroft-canonical', 'peterm-ubuntu', 'yaili', 'yaili-2', 'sian-aherne', 'sian.aherne', 'inayaili' );
+
+	if(! in_array( $current_user->user_login, $_menu_unrestricted_users ) ) {?>
+
+       <script type="text/javascript">
+            jQuery(document).ready( function($)
             {
-                var $this = $(this);
-                if($this.val().length > 70)
-                    $this.val($this.val().substr(0, 70));
+                $('#title').keyup( function()
+                {
+                    var $this = $(this);
+                    if($this.val().length > 70)
+                        $this.val($this.val().substr(0, 70));
+                });
             });
-        });
-    </script>
+        </script>
     <?php
+	}
 }
 add_action('admin_head', 'gb_limit_title');
 // end limit titles to 70 characters long

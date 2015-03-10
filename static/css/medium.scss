@@ -21,22 +21,21 @@ Contents:
 	events
 	search filters
 	vcard
-
 */
 
 @import "core-constants";
 @import "core-mixins";
 
-$ubuntu_orange:			  #dd4814; 	/* ubuntu orange */
-$light_orange:        #fdf6f2; 	/* used as background on pre text */
-$warm_grey:				    #aea79f; 	/* warm grey */
-$cool_grey:				    #333333; 	/* cool grey */
-$light_grey:			    #f7f7f7; 	/* light grey */
-$meta_grey:						#888; 		/* meta grey */
-$nav_bg:							#F7F7F7;
-$nav_link_color:			#333;
-$nav_border_dark:			#d4d7d4;
-$nav_border_light:		#f2f2f4;
+$ubuntu_orange:         #dd4814; 	/* ubuntu orange */
+$light_orange:          #fdf6f2; 	/* used as background on pre text */
+$warm_grey:             #aea79f; 	/* warm grey */
+$cool_grey:             #333333; 	/* cool grey */
+$light_grey:            #f7f7f7; 	/* light grey */
+$meta_grey:             #888; 		/* meta grey */
+$nav_bg:                #F7F7F7;
+$nav_link_color:        #333;
+$nav_border_dark:       #d4d7d4;
+$nav_border_light:      #f2f2f4;
 
 $base: 14;
 
@@ -52,7 +51,6 @@ $grid_unit_med:   20;
   font-size: calculateem($size);
 }
 
-
 /* general
 ----------------------------------------------------------------- */
 body { background: url("#{$asset_path}backgrounds/image-background-paper.png") repeat-y center center; }
@@ -67,6 +65,12 @@ body:after {
 #nav-global {
 	@include box_sizing();
 	padding-left: 9px;
+	
+	a.external {
+    	background: none;
+    	padding-left: 0;
+    	padding-right: 0;
+	}
 
 	ul li.open { min-width: 122px; }
 
@@ -105,7 +109,7 @@ body { font-size: 15px; }
 	padding-top: 10px;
 }
 
-#main-content .cat-title { padding: 10px 30px 0 0; }
+#main-content .cat-title { padding: 0 30px 0 0; }
 
 .page-template-page-category-php #main-content .cat-title,
 .tax-topic #main-content .cat-title  {
@@ -175,28 +179,49 @@ form fieldset .search-submit.active {
 ----------------------------------------------------------------- */
 body.single .row { padding-top: 10px; }
 
+.single #sidebar .list-social li {
+    margin-bottom: 10px;   
+    margin-right: 13px;
+}
+
 #main-content .single-post-cats { padding-top: 0; }
 
 .single-post-cats .inner-wrapper { padding-top: 0; }
 
 .social-links li {
 	float: none;
-	margin-right: 10px;
 	margin-right: 0;
 }
 
-.article-meta-wrap { 	margin-bottom: 20px; }
+.article-meta-wrap { 	
+    margin-bottom: 10px; 
+    
+}
 
 .article-meta { margin-right: 10px; }
 
-.single .article-meta { margin-bottom: 20px; }
+.single .article-meta { 
+    margin-bottom: 20px; 
+    padding-bottom: 0;
+}
 
 /* glossary-box
 ----------------------------------------------------------------- */
 .glossary-box { 
+    background: #fff;
+    color: #333;
+    margin-top: -20px;
     box-shadow: 0 2px 2px 0 rgba(212,212,212, .7);
-    padding: 10px 30px 20px;
-    margin-top: -10px;
+    padding-bottom: 0;
+    padding-top: 0;
+
+    .inner-wrapper {
+        background-size: 180px 180px;
+        background-repeat: no-repeat;
+        background-position: 100% -20px, 70% 130%;
+        padding: 40px 0 40px;
+        overflow: hidden;
+    }
     
     .inner-wrapper .last-col {
         background-repeat: no-repeat;
@@ -206,82 +231,70 @@ body.single .row { padding-top: 10px; }
 }
 
 .glossary-box--home { 
-    padding: 30px 30px 20px;
+    background: #2c001e;
+    color: #fff;
+    padding: 30px 30px 0;
     margin-top: 0;
     
-    .inner-wrapper .last-col {
-        background-image: url('//insights.ubuntu.com/wp-content/uploads/picto-knowledge-orange-and-white.png');
-        background-size: 200px 200px;
-        height: 200px;
-        width: 200px;
-        right: 10px;
-        top: -24px;
+    .inner-wrapper {
+        min-height: 165px;
+
+        .last-col {
+            background-image: url('//insights.ubuntu.com/wp-content/uploads/picto-knowledge-orange-and-white.png');
+            background-size: 180px 180px;
+            height: 220px;
+            right: 10px;
+            top: -38px;
+            width: 200px;
+        }
     }
 }
 
-.glossary-box-cloud .inner-wrapper .last-col {
-    background-image: url('#{$asset_path}cloud/image-diversecloudecosystem.svg');
-    background-size: 170px 170px;
-    height: 170px;
-    width: 170px;
-    right: 40px;
-    top: 5px;
+body.page-template-page-topics-php .glossary-box-cloud-and-server .inner-wrapper,
+.glossary-box-desktop .inner-wrapper,
+.glossary-box-internet-of-things  .inner-wrapper {
+    background-size: 180px 180px;
+    background-position: 94% 50%;
 }
 
-.glossary-box-desktop .inner-wrapper .last-col {
-    background-image: url('#{$asset_path}desktop/features/image-features.jpg');
-    background-size: 280px 140px;
-    height: 140px;
-    width: 280px;
-    right: 0;
-    top: 60px;
+.glossary-box-cloud-and-server .inner-wrapper {
+    background-image: url("#{$asset_path}pictograms/picto-pack/picto-server-midaubergine.svg"), url("#{$asset_path}pictograms/picto-pack/picto-cloudcomputing-orange.svg");
 }
 
-.glossary-box-server .inner-wrapper .last-col {
-    background-image: url('#{$asset_path}server/image-server.svg');
-    background-size: 300px 90px;
-    height: 90px;
-    width: 300px;
-    right: 0;
-    top: 60px;
+.glossary-box-cloud .inner-wrapper {
+    background-image: url("#{$asset_path}pictograms/picto-pack/picto-cloudcomputing-orange.svg");
 }
 
-.glossary-box-tablet .inner-wrapper .last-col {
-    background-image: url('#{$asset_path}tablet/image-tablet-music.jpg');
-    background-size: 260px 165px;
-    height: 165px;
-    width: 260px;
-    right: -15px;
-    top: 10px;
+.glossary-box-server .inner-wrapper {
+    background-image: url("#{$asset_path}pictograms/picto-pack/picto-server-midaubergine.svg");
 }
 
-.glossary-box-support .inner-wrapper .last-col {
-    background-image: url('//insights.ubuntu.com/wp-content/uploads/cloud-management.png');
-    background-size: 320px 172px;
-    height: 172px;
-    width: 320px;
-    right: 0;
-    top: 5px;
+.glossary-box-press-centre .inner-wrapper {
+    background-image: url("#{$asset_path}pictograms/picto-pack/picto-bookmark-midaubergine.svg"), url("#{$asset_path}pictograms/picto-pack/picto-articles-orange.svg");
 }
 
-.glossary-box-phone .inner-wrapper .last-col {
-    background-image: url('//insights.ubuntu.com/wp-content/uploads/phone-insights-1.jpg');
-    background-size: 300px 189px;
-    height: 189px;
-    width: 300px;
-    right: 0;
-    top: 0;
+.glossary-box-desktop .inner-wrapper {
+    background-image: url("#{$asset_path}pictograms/picto-pack/picto-desktop-orange.svg");
 }
 
-.toggle-message {
-	right: 0;
-	top: -44px;
+.glossary-box-phone-and-tablet .inner-wrapper {
+    background-image: url("static/img/pictograms/picto-phone-midaubergine.svg"), url("static/img/pictograms/picto-tablet-orange.svg");
 }
 
-.open-message.active {
-	-webkit-tap-highlight-color: rgba(0,0,0,0);
-	background-image: url("static/img/icons/info.svg");
-	background-size: 22px 22px;
+.glossary-box-phone .inner-wrapper {
+    background-image: url("static/img/pictograms/picto-phone-orange.svg");
+}
+
+.glossary-box-tablet .inner-wrapper {
+    background-image: url("static/img/pictograms/picto-tablet-orange.svg");
+}
+
+.glossary-box-chatter-cloud .inner-wrapper {
+    background-image: url("#{$asset_path}pictograms/picto-pack/picto-articles-midaubergine.svg"), url("#{$asset_path}pictograms/picto-pack/picto-cloudcomputing-orange.svg");
+}
+
+.glossary-box-internet-of-things  .inner-wrapper {
+  background-image: url('#{$asset_path}cloud/tools/snappy/snappy.png');
 }
 
 .archive .featured-article, .page-template .featured-article { margin-bottom: 0 }
@@ -300,23 +313,28 @@ body.single .row { padding-top: 10px; }
 	top: 0;
 }
 
-#main-content aside .list-social li {
-    margin-right: -2px;
-}
-
 /* main nav
 ----------------------------------------------------------------- */
-.type-nav li li:last-child { box-shadow: inset 0 -4px 4px -4px rgba(0, 0, 0, .2) }
-.type-nav li li:last-child a:hover{ box-shadow: inset 0 -4px 4px -4px rgba(0, 0, 0, .15) }
+header.banner .nav-primary ul li.active a,
+body.page-template-page-press-php .nav-primary ul li.press-center a {
+    font-weight: 400;
+}
 
 /* related posts
 ----------------------------------------------------------------- */
 /* product-business-card
 ----------------------------------------------------------------- */
-.product-business-card img {
-	display: block;
-	float: none;
-	margin: 0 auto;
+.product-business-card {
+
+    p.intro {
+        font-size: 1em;
+    }
+    
+    img {
+	    display: block;
+        float: none;
+        margin: 0 auto;
+    }
 }
 
 /* events

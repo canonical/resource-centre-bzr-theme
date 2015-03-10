@@ -35,6 +35,35 @@ function add_topics() {
 }
 add_action( 'init', 'add_topics', 0 );
 
+function add_groups() {
+	// Add new "topic" taxonomy to Posts
+	register_taxonomy('group',array('whitepaper', 'ebook', 'article', 'post', 'downloads', 'video', 'attachment', 'casestudy', 'infographic', 'productbusinesscard', 'topiccta', 'webinar', 'event', 'case-study', 'presskits', 'promo'), array(
+		'hierarchical' => true,
+		'show_admin_column' => true,
+		'labels' => array(
+			'name' => _x( 'Group', 'taxonomy general name' ),
+			'singular_name' => _x( 'Group', 'taxonomy singular name' ),
+			'search_items' =>  __( 'Search groups' ),
+			'all_items' => __( 'All groups' ),
+			'parent_item' => __( 'Parent groups' ),
+			'parent_item_colon' => __( 'Parent asset type:' ),
+			'edit_item' => __( 'Edit asset type' ),
+			'update_item' => __( 'Update asset type' ),
+			'add_new_item' => __( 'Add new group' ),
+			'new_item_name' => __( 'New group name' ),
+			'menu_name' => __( 'Groups' ),
+			'menu_position' => 6
+		),
+		'rewrite' => array(
+			'slug' => 'group', // This controls the base slug that will display before each term
+			'with_front' => false, // Don't display the category base before "/locations/"
+			'hierarchical' => true // This will allow URL's like "/locations/boston/cambridge/"
+		),
+	));
+}
+add_action( 'init', 'add_groups', 0 );
+
+
 function add_download_topics() {
 	// Add new "topic" taxonomy to Posts
 	register_taxonomy('download-type',array('post'), array(
