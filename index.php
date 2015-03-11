@@ -24,6 +24,7 @@ get_header(); ?>
       <h1>Ubuntu Insights</h1>
       <p class="intro">Welcome to the home of all Ubuntu news, articles, tutorials, e-books and everything else in-between.</p>
     </div>
+    <div class="six-col last-col"></div>
   </div>
 </div>
 
