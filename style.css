@@ -163,9 +163,9 @@ a:active img, a:focus img, a:hover img {
   border-top: 1px dotted #888888;
   padding: 0;
   padding-top: 20px;
+  padding-bottom: 7px;
   display: block;
   float: left;
-  margin-top: 20px;
   margin-bottom: 0; }
 
 .single-post-cats .inner-wrapper {
@@ -466,7 +466,8 @@ pre {
   padding: 10px 20px;
   word-break: break-word; }
 
-code { background: #FDF6F2; }
+code {
+  background: #FDF6F2; }
 
 h1 span.taxonomy-title + span {
   text-transform: lowercase;
@@ -803,6 +804,14 @@ form label {
   padding: 0;
   width: auto;
   margin-right: 4px; }
+
+#sidebar form li li {
+  margin-bottom: 0;
+  margin-top: 0;
+  width: 100%; }
+
+#sidebar form li li input[type="checkbox"] {
+  padding: 4px; }
 
 #main-content .subscribe + .related-posts {
   border-top: 0;
@@ -1148,6 +1157,14 @@ body.category .article-list .eight-col footer .comment-number {
   margin-top: 4px;
   position: absolute;
   left: 0; }
+
+.single .vcard {
+  border-top: 1px dotted #afa79e;
+  padding-top: 20px; }
+  .single .vcard .avatar {
+    position: relative; }
+  .single .vcard.has-avatar p {
+    padding-left: 120px; }
 
 .avatar {
   -o-border-radius: 0;
@@ -3215,12 +3232,18 @@ html.no-svg .cookie-policy .link-cta {
   .box-phone,
   .box-tablet,
   .box-server,
-  .box-cloud {
+  .box-cloud,
+  .box-digest {
     background-size: 167px 167px;
     background-repeat: no-repeat;
     background-position: 154% 50%;
     border: 0;
     padding-right: 90px; }
+
+  .box-digest {
+    background-position: 87% 36%;
+    background-size: 90px 90px;
+    padding-right: 20px; }
 
   .box-phone {
     background-image: url("static/img/pictograms/picto-phone-orange.svg"); }
@@ -3237,8 +3260,8 @@ html.no-svg .cookie-policy .link-cta {
   .box-cloud {
     background-image: url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/pictograms/picto-pack/picto-cloudcomputing-orange.svg"); }
 
-  .box-keep-up-to-date {
-    background-image: url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/pictograms/picto-pack/picto-projectswelove-orange.svg"); }
+  .box-digest {
+    background-image: url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/pictograms/picto-pack/picto-email-orange.svg"); }
 
   .box-internet-of-things {
     background-image: url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/cloud/tools/snappy/snappy.png");

@@ -74,7 +74,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		<div class="logo">
 			<a class="logo-ubuntu" href="<?php echo get_option('home'); ?>/">
 				<span><img width="106" height="25" src="//assets.ubuntu.com/sites/ubuntu/latest/u/img/logos/logo-ubuntu-orange.png" alt="<?php bloginfo('name'); ?> logo" /></span>
-				<span class="site-name">insights</span>
+				<span class="site-name">Insights</span>
 			</a>
 		</div>
 <?php get_template_part("includes/_site_nav"); ?>

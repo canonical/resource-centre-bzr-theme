@@ -179,13 +179,10 @@ $query = new WP_Query( array(
   'meta_compare'    => '>',
   'meta_key'        => '_end_eventtimestamp',
   'meta_value'      => $current_timestamp,
-  'order'           => 'ASC',
-  'orderby'         => 'date',
   'orderby'         => 'meta_value',
   'paged'           => $paged,
   'post__not_in'    => $do_not_duplicate,
-  'post_type'       => 'event',
-  'posts_per_page'  => 9999
+  'post_type'       => 'event'
 ));
 ?><?php if ( $query->have_posts() ) : ?>
 <div class="eight-col box box-highlight no-margin-bottom">

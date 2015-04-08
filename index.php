@@ -150,17 +150,18 @@ $paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pa
 $exclude_cat = 'downloads';
 $category = get_category_by_slug($exclude_cat);
 $query = new WP_Query( array(
-  'cat'             => -$category->cat_ID,
-  'order'           => 'ASC',
+	'meta_query'      => $meta_query,
+	'orderby'         => 'meta_key',
+	'meta_key'        => '_end_eventtimestamp',
+  'meta_value'      => $current_timestamp,
+	'order'           => 'ASC',
+	'posts_per_page'  => '-1',
+  'compare'         => '>',
   'paged'           => $paged,
   'post__not_in'    => $do_not_duplicate,
-  'post_type'       => 'event',
-  'meta_key'        => '_end_eventtimestamp',
-  'meta_value'      => $current_timestamp,
-  'orderby'         => 'meta_value',
-  'posts_per_page'  => -1,
-  'meta_compare'    => '>'
+  'post_type'       => 'event'
 ));
+
 ?><?php if ( $query->have_posts() ) : ?>
 
 <div class="eight-col box no-margin-bottom">
@@ -172,7 +173,7 @@ $query = new WP_Query( array(
       $do_not_duplicate[] = $post->ID ;
       // get time gubbin's
       $current_time = current_time('mysql'); 
-      list( $today_year, $today_month, $today_day, $hour, $minute, $second ) = split( '([^0-9])', $current_time );
+      list( $today_year, $today_month, $today_day, $hour, $minute, $second ) = explode( '([^0-9])', $current_time );
       $end_month = get_post_meta( $post->ID, '_end_month', true );
       $end_day = get_post_meta( $post->ID, '_end_day', true );
       $end_year = get_post_meta( $post->ID, '_end_year', true );

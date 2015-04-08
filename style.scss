@@ -217,9 +217,10 @@ a:active img, a:focus img, a:hover img { border-bottom: 0; }
 	border-top: 1px dotted $warm_grey;
 	padding: 0;
 	padding-top: 20px;
+	padding-bottom: 7px;
 	display: block;
 	float: left;
-	margin-top: 20px;
+	//margin-top: 20px;
 	margin-bottom: 0
 }
 
@@ -929,6 +930,16 @@ form label {
 
 } // end sidebar
 
+#sidebar form li li {
+  margin-bottom: 0;
+  margin-top: 0;
+  width: 100%; 
+}
+
+#sidebar form li li input[type="checkbox"] {
+  padding: 4px;
+}
+
 #main-content .subscribe + .related-posts {
 	border-top: 0;
 	margin-top: 0;
@@ -1255,6 +1266,19 @@ body.category .article-list .eight-col footer .comment-number { margin-top: 0.34
 	margin-top: 4px;
 	position: absolute;
 	left: 0;
+}
+
+.single .vcard {
+	border-top: 1px dotted #afa79e;
+	padding-top: 20px;	
+  
+  .avatar {
+    position: relative;
+  }
+  
+  &.has-avatar p {
+    padding-left: 120px;
+  }
 }
 
 .avatar { @include rounded_corners(0); }

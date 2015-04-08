@@ -209,12 +209,19 @@ body.tag .glossary-box .inner-wrapper {
 .box-phone,
 .box-tablet,
 .box-server,
-.box-cloud {
+.box-cloud,
+.box-digest {
     background-size: 167px 167px;  
     background-repeat: no-repeat;
     background-position: 154% 50%;
     border: 0;
     padding-right: 90px;
+}
+
+.box-digest {
+  background-position: 87% 36%;
+  background-size: 90px 90px;  
+  padding-right: 20px;
 }
 
 .box-phone {
@@ -237,8 +244,8 @@ body.tag .glossary-box .inner-wrapper {
     background-image: url("#{$asset_path}pictograms/picto-pack/picto-cloudcomputing-orange.svg");  
 }
 
-.box-keep-up-to-date {
-    background-image: url("#{$asset_path}pictograms/picto-pack/picto-projectswelove-orange.svg");  
+.box-digest {
+    background-image: url("#{$asset_path}pictograms/picto-pack/picto-email-orange.svg");  
 }
 
 .box-internet-of-things {

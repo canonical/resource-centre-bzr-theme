@@ -45,7 +45,8 @@ get_header();
     <div class="inner-wrapper">
         <div class="seven-col no-margin-bottom">
             <h1 itemprop="name"><?php the_title(); ?></h1>
-            <p class="intro"><?php echo get_the_excerpt(); ?></p>
+            <?php get_template_part("includes/_post_meta"); ?>
+            <p class="intro clear"><?php echo get_the_excerpt(); ?></p>
         </div>
     </div>
 </div><?php endif; ?>		
@@ -57,16 +58,20 @@ get_header();
 	<p>Thank you! Your download should start automatically. If it doesn't, <a class="" href="<?php echo wp_get_attachment_url( $attachment_id ); ?>">download now</a>.</p>
 </div><!-- /.alert -->
 <?php endif; // end if(($posted == $postdate . $postid)) ?>
+<?php $digest = $_GET['digest']; if($digest != ''): ?>
+<div class="alert">
+	<p>Thank you for subscribing! You will begin receiving emails as new content is posted. <br />You may unsubscribe any time by clicking the link in the email.</p>
+</div><!-- /.alert -->
+<?php endif; // end if(($posted == $postdate . $postid)) ?>
 
 <?php if (have_posts()) : ?>
 <?php while (have_posts()) : the_post(); ?>
 <?php if(!current_user_can('administrator')){ echo setPostViews(get_the_ID()); } ?>
 			
 <div class="content eight-col no-margin-bottom">
-        
 	<div class="box eight-col box-highlight">
 		<?php if ( !has_tag( 'cloud-chatter') ) : ?><h1 itemprop="name"<?php if(in_category( $press_cats )) echo ' class="heading-has-time"'; ?>><?php the_title(); ?></h1><?php endif; ?>
-		<?php if ($category != 'events') : ?>
+		<?php if( ($category != 'events') && !has_tag( 'cloud-chatter')) : ?>
 			<?php get_template_part("includes/_post_meta"); ?>
 		<?php endif ; ?>
 		<?php if ($category == 'events') : ?>
@@ -334,55 +339,23 @@ endif;
 	</div>
 	<?php endif; ?>
 <?php endif; // if event ?>
-<?php /*
+
 <?php $user_login = get_the_author_meta('user_login', $curauth->ID); ?>
 <?php if($user_login != 'canonical') : ?>
-<div id="hcard-<?php echo $curauth->first_name; ?>-<?php echo $curauth->last_name; ?>" class="vcard<?php if(get_the_author_meta('user_photo', $curauth->ID)) echo ' has-avatar '; ?>">
-  <h2>About the author</h2>
-  <?php if(get_the_author_meta('user_photo', $uid)) : ?><span class="image-wrap avatar" style="width: auto; height: auto;"><img src="<?php bloginfo('url'); ?><?php the_author_meta('user_photo',$uid); ?>" alt="<?php echo $curauth->first_name; ?>'s photo" class="avatar-140 photo" width="156" height="156" /></span><?php endif; ?>
-  <h3><a href="<?php echo get_author_posts_url(get_the_author_meta( 'ID' )); ?>" title="View <?php if(get_the_author_meta('first_name',$uid)): ?><?php the_author_meta('first_name',$uid); ?><?php else : ?><?php the_author_meta('display_name',$uid); ?><?php endif; ?>'s bio and posts"><span><?php the_author_meta('first_name',$uid); ?> <?php the_author_meta('last_name',$uid); ?></span></a></h3>
-  <p><?php the_author_meta('user_description',$uid); ?></p>
-</div><? endif; ?> */ ?>
-
+<?php if(get_the_author_meta('user_job_title', $uid)) : ?><div id="hcard-<?php the_author_meta('first_name',$uid); ?>-<?php the_author_meta('last_name',$uid); ?>" class="eight-col vcard<?php if(get_the_author_meta('user_photo', $uid)) echo ' has-avatar '; ?>">
+  <h3>About the author</h3>
+  <?php if(get_the_author_meta('user_photo', $uid)) : ?><div><span class="image-wrap avatar" style="width: auto; height: auto;"><img src="<?php bloginfo('url'); ?><?php the_author_meta('user_photo',$uid); ?>" alt="<?php the_author_meta('first_name',$uid); ?>'s photo" class="avatar-156 photo" width="156" height="156" /></span></div><?php endif; ?>
+  <div><p><?php the_author_meta('first_name',$uid); ?> <?php the_author_meta('last_name',$uid); ?> is <?php if(get_the_author_meta('user_job_title', $uid)) : ?><span class="role"><?php the_author_meta('user_job_title',$uid); ?>.</span><?php endif; ?> <?php the_author_meta('user_description',$uid); ?></p>
+  <p><a href="<?php echo get_author_posts_url(get_the_author_meta( 'ID' )); ?>">More articles by <?php the_author_meta('first_name',$uid); ?></a></p></div>
+</div><?php endif; ?><? endif; ?>
 <?php get_template_part("includes/_cat_headings"); ?>
+
 	</div><!-- /.box -->
 <?php get_template_part("includes/_related_posts"); ?>
 </div><!-- /.eight-col -->
 
 <aside id="sidebar" class="four-col last-col instapaper_ignore">
-<?php
-/* ============== pull in topic specific cta ============== */
-  wp_reset_query();
-  $topic_list = wp_get_post_terms($post->ID, 'topic', array("fields" => "slugs"));
-  $current_tax = $topic_list[0];
-	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
-	$query = new WP_Query( array(
-    'posts_per_page'  => 3,
-    'topic'           => $current_tax,
-    'post_type'       => 'topiccta',
-    'post__not_in'    => $do_not_duplicate,
-    'paged'           => $paged
-	));
-?>
-<?php if ($query->have_posts()) : ?>
-		<?php 
-			while( $query->have_posts() ): 
-			$query->the_post(); 
-			$do_not_duplicate[] = $post->ID;
-			$slug = basename(get_permalink()); ?>					
-	<div class="box box-highlight box-<?php echo $current_tax; ?> box-<?php echo $slug; ?> contextual-footer four-col">
-		<ul class="no-bullets">
-			<li>
-				<h2><a href="<?php echo get_the_excerpt(); ?>"><?php the_title(); ?></a></h2>
-				<?php the_content(); ?>
-			</li>					
-		</ul>
-	</div><!-- /.box -->
-		<?php endwhile; ?>
-<?php endif; // if have_posts ends 
-wp_reset_query(); 
-/* ============== end pull in topic specific cta ============== */ ?>
-
+<?php get_template_part("includes/_digest"); ?>
 <?php $attachments = get_children( array('exclude'     => get_post_thumbnail_id(), 'post_parent' => get_the_ID(), 'post_type' => 'attachment') ); if ((( $attachments )) && ($category == 'news')) : ?>
 
 <?php get_template_part("includes/_downloads"); ?>
@@ -417,8 +390,7 @@ if( ! empty( $press_contact ) ) {
     echo '<h2>Contact details</h2>';
     echo wpautop( $press_contact, false );  
     echo '</div>';
-} 
-?>
+} ?>
 
 <?php //get_template_part("includes/_subscribe"); ?>
 <?php else : ?>
@@ -453,6 +425,39 @@ echo strtolower($term_list[0]); wp_reset_query();?>&nbsp;resources</h2>
 
 <?php if (($category == 'news') &&  (( $attachments ) && (! wp_attachment_is_image($attachment_id) )) ) : ?>
 <?php endif; // if ($category == array('news','press-releases')) ?>
+
+<?php
+/* ============== pull in topic specific cta ============== */
+  wp_reset_query();
+  $topic_list = wp_get_post_terms($post->ID, 'topic', array("fields" => "slugs"));
+  $current_tax = $topic_list[0];
+	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
+	$query = new WP_Query( array(
+    'posts_per_page'  => 3,
+    'topic'           => $current_tax,
+    'post_type'       => 'topiccta',
+    'post__not_in'    => $do_not_duplicate,
+    'paged'           => $paged
+	));
+?>
+<?php if ($query->have_posts()) : ?>
+		<?php 
+			while( $query->have_posts() ): 
+			$query->the_post(); 
+			$do_not_duplicate[] = $post->ID;
+			$slug = basename(get_permalink()); ?>					
+	<div class="box box-highlight box-<?php echo $current_tax; ?> box-<?php echo $slug; ?> contextual-footer four-col">
+		<ul class="no-bullets">
+			<li>
+				<h2><a href="<?php echo get_the_excerpt(); ?>"><?php the_title(); ?></a></h2>
+				<?php the_content(); ?>
+			</li>					
+		</ul>
+	</div><!-- /.box -->
+		<?php endwhile; ?>
+<?php endif; // if have_posts ends 
+wp_reset_query(); 
+/* ============== end pull in topic specific cta ============== */ ?>
 
 <div class="box box-highlight four-col clearfix">
 <?php get_template_part("includes/_share_links"); ?>

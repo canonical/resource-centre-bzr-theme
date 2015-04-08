@@ -300,7 +300,7 @@ function ep_events_query( $query ) {
 		$query->set( 'orderby', 'meta_value_num' );
 		$query->set( 'meta_key', '_end_eventtimestamp' );
 		$query->set( 'order', 'ASC' );
-		$query->set( 'posts_per_page', '2' );
+		$query->set( 'posts_per_page', '999' );
 	}
 
 }

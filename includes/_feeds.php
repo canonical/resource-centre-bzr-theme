@@ -19,6 +19,9 @@
 <?php elseif ( is_page_template('page-topics.php') ) : ?>
 	<link rel="alternate" type="application/rss+xml" title="Ubuntu Insights topic feed" href="<?php bloginfo('url'); ?>/topic/<?php echo $current_cat; ?>/feed/" />
 
+<?php elseif ( is_page_template('page-group.php') ) : ?>
+	<link rel="alternate" type="application/rss+xml" title="Ubuntu Insights group feed" href="<?php bloginfo('url'); ?>/group/<?php echo $current_cat; ?>/feed/" />
+
 <?php elseif ( is_page_template('page-events.php') ) : ?>
 	<link rel="alternate" type="application/rss+xml" title="Ubuntu Insights 'events' feed" href="<?php bloginfo('url'); ?>/category/events/feed/" />
 

@@ -1,5 +1,35 @@
 <?php
-    
+
+// make topics required
+add_action('admin_print_scripts-post.php', 'my_publish_admin_hook');
+add_action('admin_print_scripts-post-new.php', 'my_publish_admin_hook');
+function my_publish_admin_hook(){
+    global $typenow;
+    if (in_array($typenow, array('post','page'))){
+        ?>
+        <script language="javascript" type="text/javascript">
+            jQuery(document).ready(function() {
+                jQuery('#post').submit(function() {
+                    if (jQuery("#set-post-thumbnail").find('img').size() > 0) {
+                        jQuery('#ajax-loading').hide();
+                        jQuery('#publish').removeClass('button-primary-disabled');
+                        return true;
+                    }else{
+                        alert("please set a featured image!!!");
+                        jQuery('#ajax-loading').hide();
+                        jQuery('#publish').removeClass('button-primary-disabled');
+                        return false;
+                    }
+                    return false;
+                });
+            });
+        </script>
+
+        <?php
+    }
+}
+
+// automatically add posts to groups based on selected topic/s    
 function add_group_automatically($post_ID) {
 	global $wpdb;
 	if (has_term( array( 'cloud', 'server' ), 'topic', $post->ID )) {
@@ -321,16 +351,16 @@ function add_custom_fields_to_rss() {
       $location =  get_post_meta(get_the_ID(), '_event_location', true); 
       $venue =  get_post_meta(get_the_ID(), '_event_venue', true); 
         ?>
-        <?php if($start_date != '') { echo '<eventStartDate>', $start_date, '</eventStartDate>'; } ?>
-        <?php if($end_date != '') { echo '<eventEndDate>', $end_date, '</eventEndDate>'; } ?>
-        <?php if($location != '') { echo '<eventLocation>', $location, '</eventLocation>'; } ?>
-        <?php if($venue != '') { echo '<eventVenue>', $venue, '</eventVenue>'; } ?>
+        <?php if($start_date != '') { echo '<eventStartDate><![CDATA[', $start_date, ']]></eventStartDate>'; } ?>
+        <?php if($end_date != '') { echo '<eventEndDate><![CDATA[', $end_date, ']]></eventEndDate>'; } ?>
+        <?php if($location != '') { echo '<eventLocation><![CDATA[', $location, ']]></eventLocation>'; } ?>
+        <?php if($venue != '') { echo '<eventVenue><![CDATA[', $venue, ']]></eventVenue>'; } ?>
         <?php
     }
     if(get_post_type() == 'post') {
       $videoID =  get_post_meta(get_the_ID(), 'postVideo', true); 
         ?>
-        <?php if($videoID != '') { echo '<videoID>', $videoID, '</videoID>'; } ?>
+        <?php if($videoID != '') { echo '<videoID><![CDATA[', $videoID, ']]></videoID>'; } ?>
         <?php
     }
 }
