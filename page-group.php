@@ -244,6 +244,8 @@ wp_reset_query();
 /* ============== end pull in group specific cta ============== */ 
 endif; // has_term ?>
 
+<?php get_template_part("includes/_digest"); ?>
+
 <div class="box box-highlight four-col">
 	<h2>All <?php echo strtolower(wp_title( '', false, 'right' )); ?> resources</h2>
 	<ul class="no-bullets no-margin-bottom">

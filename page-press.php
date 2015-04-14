@@ -225,6 +225,7 @@ wp_reset_query();  // Restore global post data
 </div><!-- /.eight-col -->
 
 <aside id="sidebar" class="four-col last-col">
+<?php get_template_part("includes/_digest"); ?>
     <div class="box box-highlight four-col">
     <h2>News by topic</h2>
 		<ul class="no-bullets">

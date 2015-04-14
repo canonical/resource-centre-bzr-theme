@@ -355,7 +355,41 @@ endif;
 </div><!-- /.eight-col -->
 
 <aside id="sidebar" class="four-col last-col instapaper_ignore">
+<?php
+/* ============== pull in topic specific cta ============== */
+  wp_reset_query();
+  $topic_list = wp_get_post_terms($post->ID, 'topic', array("fields" => "slugs"));
+  $current_tax = $topic_list[0];
+	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
+	$query = new WP_Query( array(
+    'posts_per_page'  => 3,
+    'topic'           => $current_tax,
+    'post_type'       => 'topiccta',
+    'post__not_in'    => $do_not_duplicate,
+    'paged'           => $paged
+	));
+?>
+<?php if ($query->have_posts()) : ?>
+		<?php 
+			while( $query->have_posts() ): 
+			$query->the_post(); 
+			$do_not_duplicate[] = $post->ID;
+			$slug = basename(get_permalink()); ?>					
+	<div class="box box-highlight box-<?php echo $current_tax; ?> box-<?php echo $slug; ?> contextual-footer four-col">
+		<ul class="no-bullets">
+			<li>
+				<h2><a href="<?php echo get_the_excerpt(); ?>"><?php the_title(); ?></a></h2>
+				<?php the_content(); ?>
+			</li>					
+		</ul>
+	</div><!-- /.box -->
+		<?php endwhile; ?>
+<?php endif; // if have_posts ends 
+wp_reset_query(); 
+/* ============== end pull in topic specific cta ============== */ ?>
+
 <?php get_template_part("includes/_digest"); ?>
+
 <?php $attachments = get_children( array('exclude'     => get_post_thumbnail_id(), 'post_parent' => get_the_ID(), 'post_type' => 'attachment') ); if ((( $attachments )) && ($category == 'news')) : ?>
 
 <?php get_template_part("includes/_downloads"); ?>
@@ -426,38 +460,6 @@ echo strtolower($term_list[0]); wp_reset_query();?>&nbsp;resources</h2>
 <?php if (($category == 'news') &&  (( $attachments ) && (! wp_attachment_is_image($attachment_id) )) ) : ?>
 <?php endif; // if ($category == array('news','press-releases')) ?>
 
-<?php
-/* ============== pull in topic specific cta ============== */
-  wp_reset_query();
-  $topic_list = wp_get_post_terms($post->ID, 'topic', array("fields" => "slugs"));
-  $current_tax = $topic_list[0];
-	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
-	$query = new WP_Query( array(
-    'posts_per_page'  => 3,
-    'topic'           => $current_tax,
-    'post_type'       => 'topiccta',
-    'post__not_in'    => $do_not_duplicate,
-    'paged'           => $paged
-	));
-?>
-<?php if ($query->have_posts()) : ?>
-		<?php 
-			while( $query->have_posts() ): 
-			$query->the_post(); 
-			$do_not_duplicate[] = $post->ID;
-			$slug = basename(get_permalink()); ?>					
-	<div class="box box-highlight box-<?php echo $current_tax; ?> box-<?php echo $slug; ?> contextual-footer four-col">
-		<ul class="no-bullets">
-			<li>
-				<h2><a href="<?php echo get_the_excerpt(); ?>"><?php the_title(); ?></a></h2>
-				<?php the_content(); ?>
-			</li>					
-		</ul>
-	</div><!-- /.box -->
-		<?php endwhile; ?>
-<?php endif; // if have_posts ends 
-wp_reset_query(); 
-/* ============== end pull in topic specific cta ============== */ ?>
 
 <div class="box box-highlight four-col clearfix">
 <?php get_template_part("includes/_share_links"); ?>

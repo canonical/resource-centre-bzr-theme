@@ -1,4 +1,4 @@
-<div class="box box-highlight box-digest">  
+<div class="four-col box box-highlight box-digest">  
   <script>
   function fieldValidate(field) {
     /* call Mkto.setError(field, message) and return false to mark a field value invalid */
@@ -23,11 +23,11 @@
       <li>
         <ul class="no-bullets">
           <li>
-            <input class="mktoLogicalField mktoCheckboxList mktoHasWidth" type="checkbox" id="insightscloudserver" name="insightscloudserver" value="yes">
+            <input class="mktoLogicalField mktoCheckboxList mktoHasWidth" type="checkbox" id="insightscloudserver" name="insightscloudserver" checked="checked" value="yes" />
             <label for="insightscloudserver">Cloud and server</label>
           </li>
           <li>
-            <input class="mktoLogicalField mktoCheckboxList mktoHasWidth" type="checkbox" id="insightsdesktop" name="insightsdesktop" value="yes">
+            <input class="mktoLogicalField mktoCheckboxList mktoHasWidth" type="checkbox" id="insightsdesktop" name="insightsdesktop" value="yes" />
             <label for="insightsdesktop">Desktop</label>
           </li>
           <li>

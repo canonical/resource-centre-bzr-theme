@@ -192,6 +192,7 @@ $query = new WP_Query( array(
   
 <?php /* ============== links to all topics ============== */ ?>
 <aside id="sidebar" class="four-col last-col">
+<?php get_template_part("includes/_digest"); ?>
 	<div class="box box-highlight four-col">
     <h2>All topics</h2>
     <ul class="no-bullets">
