@@ -347,7 +347,7 @@ endif;
   <?php if(get_the_author_meta('user_photo', $uid)) : ?><div><span class="image-wrap avatar" style="width: auto; height: auto;"><img src="<?php bloginfo('url'); ?><?php the_author_meta('user_photo',$uid); ?>" alt="<?php the_author_meta('first_name',$uid); ?>'s photo" class="avatar-156 photo" width="156" height="156" /></span></div><?php endif; ?>
   <div><p><?php the_author_meta('first_name',$uid); ?> <?php the_author_meta('last_name',$uid); ?> is <?php if(get_the_author_meta('user_job_title', $uid)) : ?><span class="role"><?php the_author_meta('user_job_title',$uid); ?>.</span><?php endif; ?> <?php the_author_meta('user_description',$uid); ?></p>
   <p><a href="<?php echo get_author_posts_url(get_the_author_meta( 'ID' )); ?>">More articles by <?php the_author_meta('first_name',$uid); ?></a></p></div>
-</div><?php endif; ?><? endif; ?>
+</div><?php endif; ?><?php endif; ?>
 <?php get_template_part("includes/_cat_headings"); ?>
 
 	</div><!-- /.box -->
