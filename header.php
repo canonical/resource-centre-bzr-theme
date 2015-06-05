@@ -55,10 +55,14 @@ if ( !defined('ABSPATH')) exit;
 <script src="<?php bloginfo('template_directory'); ?>/static/js/plugins/modernizr.2.7.1.js"></script>
 
 <!-- RTP tag --> 
-<script>
+<script type='text/javascript'>
 (function(c,h,a,f,i){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-c[a].a=i;var g=h.createElement("script");g.async=true;g.type="text/javascript";
-g.src=f+'?aid='+i;var b=h.getElementsByTagName("script")[0];b.parentNode.insertBefore(g,b);})(window,document,"rtp","//sjrtp3-cdn.marketo.com/rtp-api/v1/rtp.js","canonical");rtp('send','view');rtp('get', 'campaign',true);
+ c[a].a=i;var g=h.createElement("script");g.async=true;g.type="text/javascript";
+ g.src=f+'?aid='+i;var b=h.getElementsByTagName("script")[0];b.parentNode.insertBefore(g,b);
+ })(window,document,"rtp","//sjrtp3-cdn.marketo.com/rtp-api/v1/rtp.js","ubuntu");
+
+rtp('send','view');
+rtp('get', 'campaign',true);
 </script>
 <!-- End of RTP tag -->
 
