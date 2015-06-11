@@ -90,7 +90,6 @@ header.banner .nav-primary li.topics a:visited {
     display: block;
     border-right: 0 !important;
     border-bottom: 0 !important;
-    
 }
 
 .row .inner-wrapper {
@@ -293,6 +292,16 @@ form fieldset .search-submit.active {
 .single #sidebar .list-social li {
     margin: 0 6px 0 0;   
 }
+
+.video-wrapper {
+  padding-top: 50px;
+  margin-bottom: 80px;
+}
+
+.video-wrapper iframe {
+  top: 50px;
+}
+
 
 // aside
 // -----------------------------------------------------------------

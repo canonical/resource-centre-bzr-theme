@@ -4,7 +4,6 @@
 	$term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
 	$current_cat = basename(get_permalink());
 	$current_catt = get_query_var('category_name');
-	$category = get_category_by_slug($current_tax);
 ?>
 
 <?php if (is_home()) : ?>

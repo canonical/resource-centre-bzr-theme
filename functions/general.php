@@ -188,7 +188,7 @@ function ep_event_query( $query ) {
 
 	// http://codex.wordpress.org/Function_Reference/current_time
 	$current_time = current_time('mysql');
-	list( $today_year, $today_month, $today_day, $hour, $minute, $second ) = split( '([^0-9])', $current_time );
+	list( $today_year, $today_month, $today_day, $hour, $minute, $second ) = preg_split( '([^0-9])', $current_time );
 	$current_timestamp = $today_year . $today_month . $today_day . $hour . $minute;
 
 	global $wp_the_query;
@@ -231,9 +231,6 @@ function current_to_active($text){
 }
 add_filter ('wp_nav_menu','current_to_active');
 // end replace "current-cat-" with class "active"
-
-// general
-$the_ga_code = $ga_conversion;
 
 // Add custom taxonomies and custom post types counts to dashboard
 add_action( 'right_now_content_table_end', 'my_add_counts_to_dashboard' );

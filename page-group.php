@@ -155,7 +155,7 @@ $query = new WP_Query( array(
 ?>
 
 <?php if ($query->have_posts()) : ?>
-<div class="box box-highlight  eight-col">
+<div class="box box-highlight eight-col">
 	<h2>Most viewed in <span><?php echo strtolower(wp_title( '', false, 'right' )); ?></span></h2>
 	<ul class="no-bullets">
 	<?php 
@@ -174,76 +174,62 @@ $query = new WP_Query( array(
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
 $exclude_cat = 'downloads';
 $category = get_category_by_slug($exclude_cat);
+$current_time = current_time('mysql'); 
+list( $today_year, $today_month, $today_day, $hour, $minute, $second ) = explode( '([^0-9])', $current_time );
+$end_month = get_post_meta( $post->ID, '_end_month', true );
+$end_day = get_post_meta( $post->ID, '_end_day', true );
+$end_year = get_post_meta( $post->ID, '_end_year', true );
+$eventend = $end_year . $end_month . $end_day;
+$todayistheday = date('Ymd');
+
+$meta_query = array(
+	array(
+		'key' => $eventend,
+		'value' => $todayistheday,
+		'compare' => '>'
+	)
+);
+
 $query = new WP_Query( array(
 	'group'           => $current_tax,
   'meta_compare'    => '>',
   'meta_key'        => '_end_eventtimestamp',
-  'meta_value'      => $current_timestamp,
+	'order'           => 'ASC',
+  'meta_value'      => $todayistheday,
   'orderby'         => 'meta_value',
-  'paged'           => $paged,
   'post__not_in'    => $do_not_duplicate,
   'post_type'       => 'event'
 ));
+
 ?><?php if ( $query->have_posts() ) : ?>
-<div class="eight-col box box-highlight no-margin-bottom">
-  <h2>Upcoming <?php echo strtolower(wp_title( '', false, 'right' )); ?> events</h2>
+
+<div class="eight-col box no-margin-bottom">
+  <h2 class="section-title">Upcoming events</h2>
   <ul class="no-bullets">
-  <?php
-    while( $query->have_posts() ):
+    <?php
+      while( $query->have_posts() ):
       $query->the_post();
       $do_not_duplicate[] = $post->ID ;
       // get time gubbin's
       $current_time = current_time('mysql'); 
-      list( $today_year, $today_month, $today_day, $hour, $minute, $second ) = split( '([^0-9])', $current_time );
+      list( $today_year, $today_month, $today_day, $hour, $minute, $second ) = explode( '([^0-9])', $current_time );
       $end_month = get_post_meta( $post->ID, '_end_month', true );
       $end_day = get_post_meta( $post->ID, '_end_day', true );
       $end_year = get_post_meta( $post->ID, '_end_year', true );
       $eventend = $end_year . $end_month . $end_day;
-      $current_timestamp = $today_year . $today_month . $today_day;
-    ?>
-    <?php if($eventend >= $current_timestamp) : ?>
+      ?>
+      <?php if($eventend >= $todayistheday) : ?>
     <li><?php get_template_part("/includes/_event_meta"); ?></li><?php endif; ?><?php endwhile; ?>
   </ul>
+<p><a href="/category/events">View all events</a></p>
 </div><!-- /.eight-col -->
 <?php endif; // if have_posts ends
  wp_reset_query();
 /* ============== end pull in latest events ============== */ ?>
-
 </div><!-- /.eight-col -->
 
 <aside id="sidebar" class="four-col last-col">
-<?php if( !is_page( array( 'phone-and-tablet', 'internet-of-things' ) )) :
-/* ============== pull in group specific cta ============== */
-wp_reset_query();
-$paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
-$query = new WP_Query( array(
-  'posts_per_page'  => 3,
-  'group'           => $current_tax,
-  'post_type'       => 'topiccta',
-  'orderby'         => 'DESC',
-  'post__not_in'    => $do_not_duplicate,
-  'paged'           => $paged
-));
-?>
-<?php if ($query->have_posts()) : ?>
-  <?php 
-  	while( $query->have_posts() ): 
-  	$query->the_post(); 
-  	$do_not_duplicate[] = $post->ID; 
-  	$terms = get_the_terms( $post->ID , 'topic' );
-  	$slug = basename(get_permalink());
-  	foreach( $terms as $term ) : ?>
-  						
-    <div class="box box-highlight box-<?php echo $term->slug; ?> box-<?php echo $slug; ?> contextual-footer four-col">
-  		<h2><?php the_title(); ?></h2>
-  		<?php the_content(); ?>
-    </div><!-- /.box -->
-  <?php endforeach; endwhile; ?>
-<?php endif; // if have_posts ends 
-wp_reset_query(); 
-/* ============== end pull in group specific cta ============== */ 
-endif; // has_term ?>
-
+  
 <?php get_template_part("includes/_digest"); ?>
 
 <div class="box box-highlight four-col">
@@ -268,6 +254,38 @@ endif; // has_term ?>
 	</ul>
 </div><!-- /.box -->
 <?php /* ============== end links to all groups ============== */ ?>
+
+<?php if( !is_page( array( 'internet-of-things' ) )) :
+/* ============== pull in group specific cta ============== */
+wp_reset_query();
+$paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
+$query = new WP_Query( array(
+  'posts_per_page'  => 3,
+  'group'           => $current_tax,
+  'post_type'       => 'topiccta',
+  'orderby'         => 'DESC',
+  'post__not_in'    => $do_not_duplicate,
+  'paged'           => $paged
+));
+?>
+<?php if ($query->have_posts()) : ?>
+  <?php 
+  	while( $query->have_posts() ): 
+  	$query->the_post(); 
+  	$do_not_duplicate[] = $post->ID; 
+  	$terms = get_the_terms( $post->ID , 'group' );
+  	$slug = basename(get_permalink());
+  	foreach( $terms as $term ) : ?>
+  						
+    <div class="box box-highlight box-<?php echo $term->slug; ?> box-<?php echo $slug; ?> four-col">
+  		<h2><?php the_title(); ?></h2>
+  		<?php the_content(); ?>
+    </div><!-- /.box -->
+  <?php endforeach; endwhile; ?>
+<?php endif; // if have_posts ends 
+wp_reset_query(); 
+/* ============== end pull in group specific cta ============== */ 
+endif; // has_term ?>
         
 <div class="box box-highlight four-col">
 <?php get_template_part("includes/_share_links"); ?>

@@ -1,7 +1,7 @@
 				<?php 
 					global $post, $wp_locale;
 					$current_time = current_time('mysql'); 
-					list( $today_year, $today_month, $today_day, $hour, $minute, $second ) = split( '([^0-9])', $current_time );
+					list( $today_year, $today_month, $today_day, $hour, $minute, $second ) = preg_match( '([^0-9])', $current_time );
 					$current_timestamp = $today_year . $today_month . $today_day . $hour . $minute;
 					// Gets the event start month from the meta field
 					$start_nummonth = get_post_meta( $post->ID, '_start_month', true );

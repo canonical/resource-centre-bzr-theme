@@ -256,7 +256,7 @@ function eventposttype_get_the_event_date() {
     global $post;
     $eventdate = '';
     $month = get_post_meta($post->ID, '_month', true);
-    $eventdate = eventposttype_get_the_month_abbr($month);
+    $eventdate  = eventposttype_get_the_month_abbr($month);
     $eventdate .= ' ' . get_post_meta($post->ID, '_day', true) . ',';
     $eventdate .= ' ' . get_post_meta($post->ID, '_year', true);
     $eventdate .= ' at ' . get_post_meta($post->ID, '_hour', true);
@@ -279,32 +279,25 @@ function eventposttype_get_the_event_date() {
  * @param object $query data
  *
  */
-function ep_events_query( $query ) {
-
-	// http://codex.wordpress.org/Function_Reference/current_time
-	$current_time = current_time('mysql'); 
-	list( $today_year, $today_month, $today_day, $hour, $minute, $second ) = split( '([^0-9])', $current_time );
-	$current_timestamp = $today_year . $today_month . $today_day . $hour . $minute;
-
-	global $wp_the_query;
+function be_event_query( $query ) {
 	
-	if ( $wp_the_query === $query && !is_admin() && is_post_type_archive( 'event' ) ) {
+	if( $query->is_main_query() && !$query->is_feed() && !is_admin() && $query->is_post_type_archive( 'event' ) ) {
 		$meta_query = array(
 			array(
-				'key' => '_end_eventtimestamp',
-				'value' => $current_timestamp,
+				'key' => 'ept_event_date_end',
+				'value' => time(),
 				'compare' => '>'
 			)
 		);
 		$query->set( 'meta_query', $meta_query );
 		$query->set( 'orderby', 'meta_value_num' );
-		$query->set( 'meta_key', '_end_eventtimestamp' );
+		$query->set( 'meta_key', 'ept_event_date_end' );
 		$query->set( 'order', 'ASC' );
-		$query->set( 'posts_per_page', '999' );
+		$query->set( 'posts_per_page', '6' );
 	}
 
 }
 
-add_action( 'pre_get_posts', 'ep_events_query' );
+add_action( 'pre_get_posts', 'be_event_query' );
 
 ?>

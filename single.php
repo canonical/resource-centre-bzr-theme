@@ -303,7 +303,7 @@ endif;
 		<?php endif; ?>
 		<?php endif; // if video  ?>
 			<?php } else { // show this if the post is not gated ?>
-		<?php if ( get_post_meta($post->ID, 'postVideo', true) && ($category != 'news') ) : ?>
+		<?php if ( get_post_meta($post->ID, 'postVideo', true) ) : ?>
 				<?php if ( !empty( $post->post_excerpt ) ) :	the_excerpt(); else : false; endif; ?>
 					<div class="video-wrapper"><iframe class="post-video" width="596" height="335" src="https://www.youtube.com/embed/<?php echo $video_content; ?>?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe></div>
 					<div itemprop="description" class="eight-col"><?php the_content(); ?></div>
@@ -355,42 +355,7 @@ endif;
 </div><!-- /.eight-col -->
 
 <aside id="sidebar" class="four-col last-col instapaper_ignore">
-<?php
-/* ============== pull in topic specific cta ============== */
-  wp_reset_query();
-  $topic_list = wp_get_post_terms($post->ID, 'topic', array("fields" => "slugs"));
-  $current_tax = $topic_list[0];
-	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
-	$query = new WP_Query( array(
-    'posts_per_page'  => 3,
-    'topic'           => $current_tax,
-    'post_type'       => 'topiccta',
-    'post__not_in'    => $do_not_duplicate,
-    'paged'           => $paged
-	));
-?>
-<?php if ($query->have_posts()) : ?>
-		<?php 
-			while( $query->have_posts() ): 
-			$query->the_post(); 
-			$do_not_duplicate[] = $post->ID;
-			$slug = basename(get_permalink()); ?>					
-	<div class="box box-highlight box-<?php echo $current_tax; ?> box-<?php echo $slug; ?> contextual-footer four-col">
-		<ul class="no-bullets">
-			<li>
-				<h2><a href="<?php echo get_the_excerpt(); ?>"><?php the_title(); ?></a></h2>
-				<?php the_content(); ?>
-			</li>					
-		</ul>
-	</div><!-- /.box -->
-		<?php endwhile; ?>
-<?php endif; // if have_posts ends 
-wp_reset_query(); 
-/* ============== end pull in topic specific cta ============== */ ?>
-
-<?php get_template_part("includes/_digest"); ?>
-
-<?php $attachments = get_children( array('exclude'     => get_post_thumbnail_id(), 'post_parent' => get_the_ID(), 'post_type' => 'attachment') ); if ((( $attachments )) && ($category == 'news')) : ?>
+  <?php $attachments = get_children( array('exclude'     => get_post_thumbnail_id(), 'post_parent' => get_the_ID(), 'post_type' => 'attachment') ); if ((( $attachments )) && ($category == 'news')) : ?>
 
 <?php get_template_part("includes/_downloads"); ?>
 
@@ -426,11 +391,48 @@ if( ! empty( $press_contact ) ) {
     echo '</div>';
 } ?>
 
-<?php //get_template_part("includes/_subscribe"); ?>
 <?php else : ?>
 <?php endif; // if category press-releases ends ?>
 <?php endwhile; // while have_posts ends ?>
 <?php endif; // if have_posts ends ?>
+
+<?php if (($category == 'news') &&  (( $attachments ) && (! wp_attachment_is_image($attachment_id) )) ) : ?>
+<?php endif; // if ($category == array('news','press-releases')) ?>
+
+<?php
+/* ============== pull in topic specific cta ============== */
+  wp_reset_query();
+  $topic_list = wp_get_post_terms($post->ID, 'topic', array("fields" => "slugs"));
+  $current_tax = $topic_list[0];
+	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
+	$query = new WP_Query( array(
+    'posts_per_page'  => 3,
+    'topic'           => $current_tax,
+    'post_type'       => 'topiccta',
+    'post__not_in'    => $do_not_duplicate,
+    'paged'           => $paged
+	));
+?>
+<?php if ($query->have_posts()) : ?>
+		<?php 
+			while( $query->have_posts() ): 
+			$query->the_post(); 
+			$do_not_duplicate[] = $post->ID;
+			$slug = basename(get_permalink()); ?>					
+	<div class="box box-highlight box-<?php echo $current_tax; ?> box-<?php echo $slug; ?> contextual-footer four-col">
+		<ul class="no-bullets">
+			<li>
+				<h2><a href="<?php echo get_the_excerpt(); ?>"><?php the_title(); ?></a></h2>
+				<?php the_content(); ?>
+			</li>					
+		</ul>
+	</div><!-- /.box -->
+		<?php endwhile; ?>
+<?php endif; // if have_posts ends 
+wp_reset_query(); 
+/* ============== end pull in topic specific cta ============== */ ?>
+
+<?php get_template_part("includes/_digest"); ?>
 
  <div class="box box-highlight four-col">
     	<h2>All <?php $term_list = wp_get_post_terms($post->ID, 'topic', array("fields" => "names"));
@@ -438,7 +440,7 @@ echo strtolower($term_list[0]); wp_reset_query();?>&nbsp;resources</h2>
     	<ul class="no-bullets no-margin-bottom">
     	<?php	wp_reset_query();
 
-        	$topic_list = wp_get_post_terms($post->ID, 'topic', array("fields" => "slugs"));
+        $topic_list = wp_get_post_terms($post->ID, 'topic', array("fields" => "slugs"));
     		// get all the categories from the database
     		$current_tax = $topic_list[0];
     		$cats = get_categories(); 
@@ -452,16 +454,14 @@ echo strtolower($term_list[0]); wp_reset_query();?>&nbsp;resources</h2>
     		      if (have_posts()) : while (have_posts()) : the_post(); 
     						echo "<li><a href='/topic/" . $current_tax . "?cat=".$cat_id."'>".$cat->name." (" .$wp_query->found_posts . ")</a></li>";
     		      ?>
-    					<?php endwhile; endif; // done our wordpress loop. Will start again for each category ?>
-    			<?php endforeach; wp_reset_query(); // done the foreach statement ?>
+          <?php endwhile; endif; // done our wordpress loop. Will start again for each category ?>
+    			<?php endforeach; wp_reset_query(); // done the foreach statement and reset the mofo ?>
+          <li><a href="/topic/<?php echo $current_tax; ?>">View all <?php 
+echo strtolower($term_list[0]); wp_reset_query();?>&nbsp;resources</a></li>
     	</ul>
 </div>
 
-<?php if (($category == 'news') &&  (( $attachments ) && (! wp_attachment_is_image($attachment_id) )) ) : ?>
-<?php endif; // if ($category == array('news','press-releases')) ?>
-
-
-<div class="box box-highlight four-col clearfix">
+<div class="box box-highlight four-col">
 <?php get_template_part("includes/_share_links"); ?>
 </div>
 

@@ -19,23 +19,34 @@
   <form class='mktoForm mktoNoJS' action='https://pages.canonical.com/index.php/leadCapture/save' method='post'>
     <h2>Sign up for email updates</h2>
     <p>Choose the topics you're interested in</p>
+    <?php 
+      $term_list = wp_get_post_terms($post->ID, 'group', array("fields" => "slugs"));
+      $termsString = $term_list;
+      $current_tax = basename(get_permalink());
+      $cs = 'cloud-and-server';
+      $desktop = 'desktop';
+      $pt = 'phone-and-tablet';
+      $iot = 'internet-of-things';
+    ?>
+    
+    
     <ul class='mktoFormRow clearfix'>
       <li>
         <ul class="no-bullets">
           <li>
-            <input class="mktoLogicalField mktoCheckboxList mktoHasWidth" type="checkbox" id="insightscloudserver" name="insightscloudserver" checked="checked" value="yes" />
+            <input class="mktoLogicalField mktoCheckboxList mktoHasWidth" type="checkbox" id="insightscloudserver" name="insightscloudserver" value="yes"<?php if(in_array($cs, $termsString) or $current_tax == $cs or is_home() or is_page_template( 'page-press.php' )) echo ' checked="checked" ' ?>/>
             <label for="insightscloudserver">Cloud and server</label>
           </li>
           <li>
-            <input class="mktoLogicalField mktoCheckboxList mktoHasWidth" type="checkbox" id="insightsdesktop" name="insightsdesktop" value="yes" />
+            <input class="mktoLogicalField mktoCheckboxList mktoHasWidth" type="checkbox" id="insightsdesktop" name="insightsdesktop" value="yes"<?php if(in_array($desktop, $termsString) or $current_tax == $desktop or is_home() or is_page_template( 'page-press.php' )) echo ' checked="checked" ' ?>/>
             <label for="insightsdesktop">Desktop</label>
           </li>
           <li>
-            <input class="mktoLogicalField mktoCheckboxList mktoHasWidth" type="checkbox" id="insightsphonetablet" name="insightsphonetablet" value="yes">
+            <input class="mktoLogicalField mktoCheckboxList mktoHasWidth" type="checkbox" id="insightsphonetablet" name="insightsphonetablet" value="yes"<?php if(in_array($pt, $termsString) or $current_tax == $pt or is_home() or is_page_template( 'page-press.php' )) echo ' checked="checked" ' ?>/>
             <label for="insightsphonetablet">Phone and tablet</label>
           </li>
           <li>
-            <input class="mktoLogicalField mktoCheckboxList mktoHasWidth" type="checkbox" id="insightsiot" name="insightsiot" value="yes">
+            <input class="mktoLogicalField mktoCheckboxList mktoHasWidth" type="checkbox" id="insightsiot" name="insightsiot" value="yes"<?php if(in_array('internet-of-things', $termsString) or $current_tax == 'internet-of-things' or is_home() or is_page_template( 'page-press.php' )) echo ' checked="checked" ' ?>/>
             <label for="insightsiot"><abbr title="Internet of things">IoT</abbr></label>
           </li>
         </ul>

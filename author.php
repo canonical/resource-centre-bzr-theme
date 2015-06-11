@@ -28,7 +28,7 @@ if ( !defined('ABSPATH')) exit;
 		<div id="author-info" class="<?php if(get_the_author_meta('user_photo', $curauth->ID)) echo 'has-avatar '; ?>seven-col">
 			<header>
 				<?php if(get_the_author_meta('user_photo', $curauth->ID)) : ?>
-				<span class="image-wrap avatar" style="width: auto; height: auto;"><img src="<?php bloginfo('url'); ?><?php echo $curauth->user_photo; ?>" alt="<?php echo $curauth->first_name; ?>'s photo" class="avatar-140 photo" width="156" height="156" /></span>
+				<span class="image-wrap avatar" style="width: auto; height: auto;"><img src="<?php bloginfo('url'); ?>/<?php echo $curauth->user_photo; ?>" alt="<?php echo $curauth->first_name; ?>'s photo" class="avatar-140 photo" width="156" height="156" /></span>
 				<?php else : ?>
 				<?php endif; ?>
 				<h1><?php the_author_meta('first_name',$uid); ?> <?php the_author_meta('last_name',$uid); ?></h1>

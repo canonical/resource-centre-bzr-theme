@@ -59,7 +59,7 @@ $post_type = get_post_type_object( get_post_type($post));
 $do_not_duplicate[] = $post->ID;
 ?>
 <div class="box box-highlight eight-col">
-    <h2>Featured</h2>
+    <h2 class="section-title">Featured</h2>
     <?php get_template_part("content_home_featured"); ?>	
 </div><!-- /.featured-article -->
 <?php endwhile; ?><?php endif;
@@ -79,14 +79,14 @@ $query = new WP_Query( array(
 ));
 ?><?php if (have_posts()) : ?>
 
-<div class="box eight-col">
-	<h2>Cloud and Server</h2>
+<section class="box eight-col">
+	<h2 class="section-title"><a href="/cloud-and-server/">Cloud and Server</a></h2>
     <?php
         while( $query->have_posts() ):
         $query->the_post();
         $do_not_duplicate[] = $post->ID ?>
         <?php get_template_part("content_home"); ?><?php endwhile; ?>
-</div><!-- ./eight-col -->
+</section><!-- ./eight-col -->
 <?php endif; // if have_posts ends
 wp_reset_query();
 /* ============== end pull in latest cloud articles ============== */ ?>
@@ -104,15 +104,15 @@ $query = new WP_Query( array(
     'topic'           => 'desktop'
 ));
 ?><?php if (have_posts()) : ?>
-<div class="box eight-col">
-  <h2>Ubuntu Desktop</h2>
+<section class="box eight-col">
+  <h2 class="section-title"><a href="/desktop">Ubuntu Desktop</a></h2>
 
   <?php
     while( $query->have_posts() ):
     $query->the_post();
     $do_not_duplicate[] = $post->ID ?>
     <?php get_template_part("content_home"); ?><?php endwhile; ?>
-</div><!-- /.eight-col -->
+</section><!-- /.eight-col -->
 <?php endif; // if have_posts ends
 wp_reset_query();
 /* ============== end pull in latest desktop articles ============== */ ?>
@@ -131,8 +131,8 @@ $query = new WP_Query( array(
     'group'           => 'phone-and-tablet'
     ));
 ?><?php if (have_posts()) : ?>
-<div class="box eight-col">
-<h2>Phone and Tablet</h2>
+<section class="box eight-col">
+<h2 class="section-title"><a href="/phone-and-tablet">Phone and Tablet</a></h2>
 
     <?php
         while( $query->have_posts() ):
@@ -140,7 +140,7 @@ $query = new WP_Query( array(
 			$do_not_duplicate[] = $post->ID ?>
             <?php get_template_part("content_home"); ?>
         <?php endwhile; ?>
-</div><!-- ./eight-col -->
+</section><!-- ./eight-col -->
 <?php endif; // if have_posts ends
 wp_reset_query();
 /* ============== end pull in latest phone articles ============== */ ?>
@@ -149,15 +149,29 @@ wp_reset_query();
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
 $exclude_cat = 'downloads';
 $category = get_category_by_slug($exclude_cat);
+$current_time = current_time('mysql'); 
+list( $today_year, $today_month, $today_day, $hour, $minute, $second ) = explode( '([^0-9])', $current_time );
+$end_month = get_post_meta( $post->ID, '_end_month', true );
+$end_day = get_post_meta( $post->ID, '_end_day', true );
+$end_year = get_post_meta( $post->ID, '_end_year', true );
+$eventend = $end_year . $end_month . $end_day;
+$todayistheday = date('Ymd');
+
+$meta_query = array(
+	array(
+		'key' => $eventend,
+		'value' => $todayistheday,
+		'compare' => '>'
+	)
+);
+
 $query = new WP_Query( array(
-	'meta_query'      => $meta_query,
-	'orderby'         => 'meta_key',
-	'meta_key'        => '_end_eventtimestamp',
-  'meta_value'      => $current_timestamp,
+	'group'           => $current_tax,
+  'meta_compare'    => '>',
+  'meta_key'        => '_end_eventtimestamp',
 	'order'           => 'ASC',
-	'posts_per_page'  => '-1',
-  'compare'         => '>',
-  'paged'           => $paged,
+  'meta_value'      => $todayistheday,
+  'orderby'         => 'meta_value',
   'post__not_in'    => $do_not_duplicate,
   'post_type'       => 'event'
 ));
@@ -165,7 +179,7 @@ $query = new WP_Query( array(
 ?><?php if ( $query->have_posts() ) : ?>
 
 <div class="eight-col box no-margin-bottom">
-  <h2>Upcoming events</h2>
+  <h2 class="section-title">Upcoming events</h2>
   <ul class="no-bullets">
     <?php
       while( $query->have_posts() ):
@@ -178,9 +192,8 @@ $query = new WP_Query( array(
       $end_day = get_post_meta( $post->ID, '_end_day', true );
       $end_year = get_post_meta( $post->ID, '_end_year', true );
       $eventend = $end_year . $end_month . $end_day;
-      $current_timestamp = $today_year . $today_month . $today_day;
       ?>
-      <?php if($eventend >= $current_timestamp) : ?>
+      <?php if($eventend >= $todayistheday) : ?>
     <li><?php get_template_part("/includes/_event_meta"); ?></li><?php endif; ?><?php endwhile; ?>
   </ul>
 <p><a href="/category/events">View all events</a></p>
@@ -194,7 +207,7 @@ $query = new WP_Query( array(
 <aside id="sidebar" class="four-col last-col">
 <?php get_template_part("includes/_digest"); ?>
 	<div class="box box-highlight four-col">
-    <h2>All topics</h2>
+    <h2 class="section-title">All topics</h2>
     <ul class="no-bullets">
         <?php
         $style_classes = array('',' last-col');

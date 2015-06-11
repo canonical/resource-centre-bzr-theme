@@ -43,15 +43,6 @@ if ( !defined('ABSPATH')) exit;
 	}
 </script>
 
-<?php /*<script>
-	var size = window.getComputedStyle(document.body,':after').getPropertyValue('content');
-	if (size.indexOf("medium") !=-1) {
-	    console.log(size);
-	} else {
-	    console.log('not');
-	}
-</script> */ ?>
-
 <script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/plugins/yui-combined.min.js"></script>
 
 <script>
