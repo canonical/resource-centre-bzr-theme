@@ -294,9 +294,6 @@ wp_reset_query();  // Restore global post data
 	   </ul>
     
     </div><!-- /.box -->
-    <div class="box box-highlight four-col">
-    <?php get_template_part("includes/_share_links"); ?>
-    </div>
 </aside>
 
 </div><!-- /.inner-wrapper -->

@@ -12,7 +12,7 @@ $cat_plural = get_tax_meta($the_category,'ba_plural');
 global $wpdb;
 global $posted;
 ?>
-	<h2>Share<?php if(is_single() ) : ?> or save<?php endif; ?></h2>
+	<h2 class="off-left">Share<?php if(is_single() ) : ?> or save<?php endif; ?></h2>
 	<ul class="list-social no-bullets">
 		<li>
 			<a id="item-facebook" href="http://www.facebook.com/sharer.php?s=100&amp;p[url]=<?php if(is_single() ) : ?><?php echo urlencode( the_permalink( $post->ID ) ); ?>

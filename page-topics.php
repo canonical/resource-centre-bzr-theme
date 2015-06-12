@@ -270,10 +270,6 @@ endif; ?>
     	</ul>
     </div><!-- /.box -->
 <?php /* ============== end links to all topics ============== */ ?>
-        
-<div class="box box-highlight four-col">
-<?php get_template_part("includes/_share_links"); ?>
-</div>
 </aside>
 
 </div><!-- /.inner-wrapper -->

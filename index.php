@@ -223,9 +223,6 @@ $query = new WP_Query( array(
         ?>
     </ul>
 	</div>
-	<div class="box box-highlight four-col">
-			<?php get_template_part("includes/_share_links"); ?>
-	</div>
 </aside>
 <?php //$terms = get_terms_by_post_type('tag','','snippet','name');
 wp_reset_query(); ?>

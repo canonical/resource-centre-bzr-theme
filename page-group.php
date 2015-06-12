@@ -286,10 +286,6 @@ $query = new WP_Query( array(
 wp_reset_query(); 
 /* ============== end pull in group specific cta ============== */ 
 endif; // has_term ?>
-        
-<div class="box box-highlight four-col">
-<?php get_template_part("includes/_share_links"); ?>
-</div>
 </aside>
 
 </div><!-- /.inner-wrapper -->

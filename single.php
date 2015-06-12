@@ -73,6 +73,9 @@ get_header();
 		<?php if ( !has_tag( 'cloud-chatter') ) : ?><h1 itemprop="name"<?php if(in_category( $press_cats )) echo ' class="heading-has-time"'; ?>><?php the_title(); ?></h1><?php endif; ?>
 		<?php if( ($category != 'events') && !has_tag( 'cloud-chatter')) : ?>
 			<?php get_template_part("includes/_post_meta"); ?>
+			<div class="eight-col">
+        <?php get_template_part("includes/_share_links"); ?>
+      </div>
 		<?php endif ; ?>
 		<?php if ($category == 'events') : ?>
 			<?php get_template_part("/includes/_event_meta"); ?>
@@ -345,7 +348,7 @@ endif;
 <?php if(get_the_author_meta('user_job_title', $uid)) : ?><div id="hcard-<?php the_author_meta('first_name',$uid); ?>-<?php the_author_meta('last_name',$uid); ?>" class="eight-col vcard<?php if(get_the_author_meta('user_photo', $uid)) echo ' has-avatar '; ?>">
   <h3>About the author</h3>
   <?php if(get_the_author_meta('user_photo', $uid)) : ?><div><span class="image-wrap avatar" style="width: auto; height: auto;"><img src="<?php bloginfo('url'); ?><?php the_author_meta('user_photo',$uid); ?>" alt="<?php the_author_meta('first_name',$uid); ?>'s photo" class="avatar-156 photo" width="156" height="156" /></span></div><?php endif; ?>
-  <div><p><?php the_author_meta('first_name',$uid); ?> <?php the_author_meta('last_name',$uid); ?> is <?php if(get_the_author_meta('user_job_title', $uid)) : ?><span class="role"><?php the_author_meta('user_job_title',$uid); ?>.</span><?php endif; ?> <?php the_author_meta('user_description',$uid); ?></p>
+  <div><p><?php the_author_meta('user_description',$uid); ?></p>
   <p><a href="<?php echo get_author_posts_url(get_the_author_meta( 'ID' )); ?>">More articles by <?php the_author_meta('first_name',$uid); ?></a></p></div>
 </div><?php endif; ?><?php endif; ?>
 <?php get_template_part("includes/_cat_headings"); ?>
@@ -459,10 +462,6 @@ echo strtolower($term_list[0]); wp_reset_query();?>&nbsp;resources</h2>
           <li><a href="/topic/<?php echo $current_tax; ?>">View all <?php 
 echo strtolower($term_list[0]); wp_reset_query();?>&nbsp;resources</a></li>
     	</ul>
-</div>
-
-<div class="box box-highlight four-col">
-<?php get_template_part("includes/_share_links"); ?>
 </div>
 
 </aside><!-- /.instapaper_ignore -->
