@@ -3,10 +3,9 @@ $current_tax = basename(get_permalink());
 ?>
     <ul class="main-nav topic-nav no-bullets">
     <li class="nav-cloud-and-server<?php if ( $current_tax == "cloud-and-server" ) : echo ' active'; endif; ?>"><a href="<?php echo get_site_url(); ?>/cloud-and-server/">Cloud and server</a></li>
-    <?php /* <li class="nav-internet-of-things<?php if ( $current_tax == "internet-of-things" ) : echo ' active'; endif; ?>"><a href="<?php echo get_site_url(); ?>/internet-of-things/"><abbr title="Internet of Things">IoT</abbr></a></li> */ ?>
     <li class="nav-desktop<?php if ( $current_tax == "desktop" ) : echo ' active'; endif; ?>"><a href="<?php echo get_site_url(); ?>/desktop/">Desktop</a></li>
     <li class="nav-phone-and-tablet<?php if ( $current_tax == "phone-and-tablet" ) : echo ' active'; endif; ?>"><a href="<?php echo get_site_url(); ?>/phone-and-tablet/">Phone and tablet</a></li>
-    <li class="nav-iot<?php if ( $current_tax == "internet-of-things" ) : echo ' active'; endif; ?>"><a href="<?php echo get_site_url(); ?>/internet-of-things/">IoT</a></li>
+    <li class="nav-iot<?php if ( $current_tax == "internet-of-things" ) : echo ' active'; endif; ?>"><a href="<?php echo get_site_url(); ?>/internet-of-things/">Things</a></li>
     <li class="nav-press-center<?php if ( $current_tax == "press-center" ) : echo ' active'; endif; ?>"><a href="<?php echo get_site_url(); ?>/press-centre/">Press centre</a></li>
 </ul>
 
