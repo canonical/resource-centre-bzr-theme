@@ -47,7 +47,7 @@
           </li>
           <li>
             <input class="mktoLogicalField mktoCheckboxList mktoHasWidth" type="checkbox" id="insightsiot" name="insightsiot" value="yes"<?php if(in_array('internet-of-things', $termsString) or $current_tax == 'internet-of-things' or is_home() or is_page_template( 'page-press.php' )) echo ' checked="checked" ' ?>/>
-            <label for="insightsiot"><abbr title="Internet of things">IoT</abbr></label>
+            <label for="insightsiot"><abbr title="Internet of things">Things</abbr></label>
           </li>
         </ul>
       </li>
