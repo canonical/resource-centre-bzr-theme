@@ -51,7 +51,7 @@ if ( !defined('ABSPATH')) exit;
         <div class="inner-wrapper">
             <div class="six-col no-margin-bottom">
                 <h1><?php wp_title(''); ?></h1>
-                <?php the_content(); ?>
+                <div id="rtp-banner"><?php the_content(); ?></div>
             </div>
         </div>
     </div>

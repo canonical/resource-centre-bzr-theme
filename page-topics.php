@@ -48,9 +48,9 @@ if ( !defined('ABSPATH')) exit;
 	$do_not_duplicate[] = $post->ID ?>
     <div class="row glossary-box glossary-box-<?php echo strtolower(wp_title( '', false, 'right' )); ?> no-border">
         <div class="inner-wrapper">
-            <div class="six-col">
+            <div id="rtp-banner" class="six-col">
                 <h1><?php wp_title(''); ?></h1>
-                <?php the_content(); ?>
+                <div id="rtp-banner"><?php the_content(); ?></div>
             </div>
             <div class="last-col">
             </div>

@@ -421,15 +421,16 @@ if( ! empty( $press_contact ) ) {
 			while( $query->have_posts() ): 
 			$query->the_post(); 
 			$do_not_duplicate[] = $post->ID;
-			$slug = basename(get_permalink()); ?>					
-	<div class="box box-highlight box-<?php echo $current_tax; ?> box-<?php echo $slug; ?> contextual-footer four-col">
+			$slug = basename(get_permalink()); ?>
+      <div id="rtp-rhc" class="box box-highlight contextual-footer four-col">
+	<div class"box-<?php echo $current_tax; ?> box-<?php echo $slug; ?> four-col">
 		<ul class="no-bullets">
 			<li>
 				<h2><a href="<?php echo get_the_excerpt(); ?>"><?php the_title(); ?></a></h2>
 				<?php the_content(); ?>
 			</li>					
 		</ul>
-	</div><!-- /.box -->
+	</div><!-- /.box --></div>
 		<?php endwhile; ?>
 <?php endif; // if have_posts ends 
 wp_reset_query(); 
