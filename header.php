@@ -62,7 +62,8 @@ if ( !defined('ABSPATH')) exit;
  })(window,document,"rtp","//sjrtp3-cdn.marketo.com/rtp-api/v1/rtp.js","ubuntu");
 
 rtp('send','view');
-rtp('get', 'campaign',true);
+rtp('get', 'campaign', autoRender);
+
 </script>
 <!-- End of RTP tag -->
 
