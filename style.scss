@@ -2764,7 +2764,7 @@ blockquote p span {
   padding-right: 30px;
   position: fixed;
   width: 100%;
-  z-index: 100;
+  z-index: 999;
 
   .wrapper { background: transparent; }
 
@@ -2772,7 +2772,7 @@ blockquote p span {
     font-size: 13px;
     margin-bottom: 0;
     margin-left: 0;
-    padding: 8px 0;
+    padding: 10px 0;
     width: 100%;
   }
 
@@ -3076,3 +3076,6 @@ html.no-svg .list-social--small li {
     padding: 0;
 }
 
+.insightera-bar-widget {
+  z-index: 998 !important;
+}
