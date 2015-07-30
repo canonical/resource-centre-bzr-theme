@@ -2151,15 +2151,16 @@ footer.global .top-link a:hover {
 
 /* video
 ----------------------------------------------------------------- */
-.video-wrapper {
+.new-video-wrapper {
+  clear: both;
   position: relative;
   padding-bottom: 56.25%;
-  padding-top: 25px;
+  padding-top: 50px;
   height: 0;
   margin-bottom: 20px;
 }
 
-.video-wrapper iframe {
+.new-video-wrapper iframe {
   position: absolute;
   top: 0;
   left: 0;

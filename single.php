@@ -293,7 +293,7 @@ endif;
 <?php } elseif(($gated_content == 'on' && $posted == $postdate . $postid)) { // show this if is gated and the form has been posted ?>
 
 		<?php if ( get_post_meta($post->ID, 'postVideo', true) ) : ?>
-					<div class="video-wrapper"><iframe class="post-video" width="596" height="335" src="https://www.youtube.com/embed/<?php echo $video_content; ?>?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe></div>
+					<div class="new-video-wrapper"><iframe class="post-video" width="596" height="335" src="https://www.youtube.com/embed/<?php echo $video_content; ?>?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe></div>
 					<?php the_content(); ?>
 		<?php else : ?>
 		<?php if('post' == get_post_type()) : ?>
@@ -308,7 +308,7 @@ endif;
 			<?php } else { // show this if the post is not gated ?>
 		<?php if ( get_post_meta($post->ID, 'postVideo', true) ) : ?>
 				<?php if ( !empty( $post->post_excerpt ) ) :	the_excerpt(); else : false; endif; ?>
-					<div class="video-wrapper"><iframe class="post-video" width="596" height="335" src="https://www.youtube.com/embed/<?php echo $video_content; ?>?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe></div>
+					<div class="new-video-wrapper"><iframe class="post-video" width="596" height="335" src="https://www.youtube.com/embed/<?php echo $video_content; ?>?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe></div>
 					<div itemprop="description" class="eight-col"><?php the_content(); ?></div>
 		<?php elseif('post' == get_post_type() || 'presskits' == get_post_type()) : ?>
 					<div itemprop="description" class="eight-col"><?php the_content(); ?></div>
