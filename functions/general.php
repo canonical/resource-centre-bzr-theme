@@ -1,5 +1,5 @@
 <?php
-
+    
 // make topics required
 add_action('admin_print_scripts-post.php', 'my_publish_admin_hook');
 add_action('admin_print_scripts-post-new.php', 'my_publish_admin_hook');

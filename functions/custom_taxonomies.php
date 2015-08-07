@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Add custom taxonomies
  *
@@ -27,7 +26,7 @@ function add_topics() {
 			'menu_position' => 6
 		),
 		'rewrite' => array(
-			'slug' => 'topic', // This controls the base slug that will display before each term
+  		'slug' => 'topic', // This controls the base slug that will display before each term
 			'with_front' => false, // Don't display the category base before "/locations/"
 			'hierarchical' => true // This will allow URL's like "/locations/boston/cambridge/"
 		),
@@ -55,7 +54,7 @@ function add_groups() {
 			'menu_position' => 6
 		),
 		'rewrite' => array(
-			'slug' => 'group', // This controls the base slug that will display before each term
+  		'slug' => 'group', // This controls the base slug that will display before each term
 			'with_front' => false, // Don't display the category base before "/locations/"
 			'hierarchical' => true // This will allow URL's like "/locations/boston/cambridge/"
 		),

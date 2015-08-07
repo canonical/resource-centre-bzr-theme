@@ -22,7 +22,7 @@ get_header(); ?>
   <div class="inner-wrapper">
     <div class="six-col">
       <h1>Ubuntu Insights</h1>
-      <p class="intro">Welcome to the home of all Ubuntu news, articles, tutorials, e-books and everything else in-between.</p>
+      <p class="intro">Your source for Ubuntu news, articles, tutorials, e-books and everything else in-between.</p>
     </div>
     <div class="six-col last-col"></div>
   </div>
