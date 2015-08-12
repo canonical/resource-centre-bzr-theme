@@ -245,7 +245,7 @@ function custom_post_video() {
 add_action('save_post', 'custom_add_save');
 
 function custom_add_save($postID){
-    if (!defined('DOING_AUTOSAVE') && !DOING_AUTOSAVE) {
+    if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) {
         return $postID;
     }
     else
