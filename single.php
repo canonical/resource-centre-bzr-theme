@@ -79,6 +79,9 @@ get_header();
 		<?php endif ; ?>
 		<?php if ($category == 'events') : ?>
 			<?php get_template_part("/includes/_event_meta"); ?>
+			<div class="eight-col">
+        <?php get_template_part("includes/_share_links"); ?>
+      </div>
 		<?php endif ; ?>
 		<?php if(has_post_thumbnail()) : ?>
 		<div itemprop="image" class="article-image">
