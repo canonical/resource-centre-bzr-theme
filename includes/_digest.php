@@ -57,7 +57,7 @@
       </li>
     
       <li class="mktField mktLblRight">
-        <span class="mktInput mktLblRight"><input class="mktFormCheckbox" name="NewsletterOpt-In" id="NewsletterOpt-In" value="yes" tabindex="9" type="checkbox" required><label>I would like to receive occasional updates from Canonical by email.</label>&nbsp;<span class="mktFormMsg"></span></span>
+        <span class="mktInput mktLblRight"><input class="mktFormCheckbox" name="NewsletterOpt-In" id="NewsletterOpt-In" value="yes" tabindex="9" type="checkbox" /><label>I would like to receive occasional updates from Canonical by email.</label>&nbsp;<span class="mktFormMsg"></span></span>
       </li>
 
       <li>
