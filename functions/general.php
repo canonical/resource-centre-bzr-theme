@@ -87,7 +87,7 @@ add_action( 'init', 'wpse31422_init' );
  */
 function gb_do_terms_exclusion() {
 $current_user = wp_get_current_user();
-$_menu_unrestricted_users = array( 'admin', 'gbancroft-canonical', 'peterm-ubuntu', 'yaili', 'yaili-2', 'tom.callway', 'carolinetarbett', 'inayaili' );
+$_menu_unrestricted_users = array( 'admin', 'gbancroft-canonical', 'peterm-ubuntu', 'yaili', 'yaili-2', 'tom.callway', 'carolinetarbett', 'inayaili', 'rebeccacradick' );
 
 	if(! in_array( $current_user->user_login, $_menu_unrestricted_users ) ) {
 		remove_menu_page( 'edit.php?post_type=productbusinesscard' );
