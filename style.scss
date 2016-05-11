@@ -168,7 +168,6 @@ body {
 
 a:link, 
 a:visited {
-    @include transition_duration(.2s);
     border-bottom: 1px solid transparent;
     text-decoration: none;
 }
