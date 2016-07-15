@@ -243,11 +243,12 @@ $query = new WP_Query( array(
         $terms = get_terms( $taxonomy, '' );
         if ($terms) {
             foreach($terms as $term) {
-                if(($term->slug) != "tv") echo '<li class="' . $style_classes[$style_index%2] . '">' . '<a href="' . $term->slug . '" ' . '>' . $term->name.'</a></li> ';
+                if(($term->slug) != "canonical-announcements") echo '<li class="' . $style_classes[$style_index%2] . '">' . '<a href="' . $term->slug . '" ' . '>' . $term->name.'</a></li> ';
                 $style_index++;
             }
         }
         ?>
+        <li><a href="/canonical-announcements">Canonical announcements</a></li>
     </ul>
 	</div>
 </aside>

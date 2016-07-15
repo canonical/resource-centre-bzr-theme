@@ -50,6 +50,24 @@ function add_group_automatically($post_ID) {
 		wp_set_object_terms($post_ID, $cat, 'group', true);
 	}
 
+	elseif (has_term( 'canonical-announcements', 'topic', $post->ID )) {
+        // 172 = phone-and-tablet	
+		$cat = array('canonical-announcements');
+		wp_set_object_terms($post_ID, $cat, 'group', true);
+	}
+
+	elseif (has_term( 'people-and-culture', 'topic', $post->ID )) {
+        // 172 = phone-and-tablet	
+		$cat = array('people-and-culture');
+		wp_set_object_terms($post_ID, $cat, 'group', true);
+	}
+
+	elseif (has_term( 'internet-of-things', 'topic', $post->ID )) {
+        // 172 = phone-and-tablet	
+		$cat = array('internet-of-things');
+		wp_set_object_terms($post_ID, $cat, 'group', true);
+	}
+
 	elseif (has_term( 'desktop', 'topic', $post->ID )) {
         // 172 = phone-and-tablet	
 		$cat = array('desktop');
@@ -87,7 +105,7 @@ add_action( 'init', 'wpse31422_init' );
  */
 function gb_do_terms_exclusion() {
 $current_user = wp_get_current_user();
-$_menu_unrestricted_users = array( 'admin', 'gbancroft-canonical', 'peterm-ubuntu', 'yaili', 'yaili-2', 'tom.callway', 'tom-callway', 'carolinetarbett', 'amrisha-prashar', 'inayaili', 'rebeccacradick' );
+$_menu_unrestricted_users = array( 'admin', 'gbancroft-canonical', 'peterm-ubuntu', 'yaili', 'yaili-2', 'tom.callway', 'tom-callway', 'carolinetarbett', 'amrisha-prashar', 'canonical', 'deadlight', 'inayaili', 'rebeccacradick' );
 
 	if(! in_array( $current_user->user_login, $_menu_unrestricted_users ) ) {
 		remove_menu_page( 'edit.php?post_type=productbusinesscard' );
@@ -381,7 +399,7 @@ if (function_exists('register_sidebar'))
 // limit titles to 70 characters long
 function gb_limit_title() {
 $current_user = wp_get_current_user();
-$_menu_unrestricted_users = array( 'admin', 'gbancroft-canonical', 'peterm-ubuntu', 'yaili', 'yaili-2', 'sian-aherne', 'sian.aherne', 'inayaili' );
+$_menu_unrestricted_users = array( 'admin', 'gbancroft-canonical', 'peterm-ubuntu', 'yaili', 'yaili-2', 'sian-aherne', 'sian.aherne', 'canonical', 'deadlight', 'inayaili' );
 
 	if(! in_array( $current_user->user_login, $_menu_unrestricted_users ) ) {?>
 
