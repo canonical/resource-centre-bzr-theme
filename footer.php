@@ -50,7 +50,7 @@ if ( !defined('ABSPATH')) exit;
 	core.globalPrepend = 'body';
 </script>
 <script src="//assets.ubuntu.com/sites/guidelines/js/responsive/core.js"></script>
-<script src="//assets.ubuntu.com/sites/ubuntu/latest/u/js/global.js"></script>
+<script src="//assets.ubuntu.com/v1/94052790-global.js"></script>
 <?php if( is_category() || is_tax( 'group' ) || is_tag() || is_search() || is_page( 'events' ) ) : ?>
 <script src="<?php bloginfo('template_directory'); ?>/static/js/core.js"></script>
 <?php endif ; ?>
