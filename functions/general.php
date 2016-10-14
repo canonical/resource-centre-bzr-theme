@@ -119,7 +119,7 @@ $_menu_unrestricted_users = array( 'admin', 'gbancroft-canonical', 'peterm-ubunt
 add_action( 'admin_init', 'gb_do_terms_exclusion' );
 
 function gb_list_terms_exclusions($exclusions,$args) {
-    return $exclusions . " AND ( t.name <> 'News' )  AND ( t.name <> 'Press releases' ) AND ( t.name <> 'Downloads' )";
+    return $exclusions . " AND ( t.name <> 'Downloads' )";
 }
 
 /**
