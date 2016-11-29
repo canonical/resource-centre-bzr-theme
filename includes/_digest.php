@@ -1,4 +1,4 @@
-<div class="four-col box box-highlight box-digest">  
+<div class="four-col box box-highlight box-digest">
   <script>
   function fieldValidate(field) {
     /* call Mkto.setError(field, message) and return false to mark a field value invalid */
@@ -15,11 +15,11 @@
     return "Please enter a valid email address";
   }
   </script>
-  
+
   <form class='mktoForm mktoNoJS' action='https://pages.canonical.com/index.php/leadCapture/save' method='post'>
     <h2>Sign up for email updates</h2>
     <p>Choose the topics you're interested in</p>
-    <?php 
+    <?php
       $term_list = wp_get_post_terms($post->ID, 'group', array("fields" => "slugs"));
       $termsString = $term_list;
       $current_tax = basename(get_permalink());
@@ -28,8 +28,8 @@
       $pt = 'phone-and-tablet';
       $iot = 'internet-of-things';
     ?>
-    
-    
+
+
     <ul class='mktoFormRow clearfix'>
       <li>
         <ul class="no-bullets">
@@ -55,9 +55,9 @@
         <label class="off-left mktoLabel" for='Email'>Your email</label>
         <input type="text" placeholder="Your email" class='mktoField mktoTextField' name='Email' id='Email' required>
       </li>
-    
+
       <li class="mktField mktLblRight">
-        <span class="mktInput mktLblRight"><input class="mktFormCheckbox" name="NewsletterOpt-In" id="NewsletterOpt-In" value="yes" tabindex="9" type="checkbox" /><label>I would like to receive occasional updates from Canonical by email.</label>&nbsp;<span class="mktFormMsg"></span></span>
+        <span class="mktInput mktLblRight"><input class="mktFormCheckbox" name="canonicalUpdatesOptIn" id="canonicalUpdatesOptIn" value="yes" tabindex="9" type="checkbox" /><label>I would like to receive occasional updates from Canonical by email.</label>&nbsp;<span class="mktFormMsg"></span></span>
       </li>
 
       <li>
@@ -69,7 +69,7 @@
         <input type="hidden" name="lpurl" value="https://pages.canonical.com/Insights-Subscription_Insights-Subscription-test.html?cr={creative}&amp;kw={keyword}" />
         <input value="1212" class="mktoField mktoFieldDescriptor" name="formid" type="hidden">
         <input type="hidden" name="ret" value="<?php $theurl = rtrim(get_permalink(),'/'); echo $theurl; ?>?digest=true" />
-        <input value="066-EOV-335" class="mktoField mktoFieldDescriptor" name="munchkinId" type="hidden"> 
+        <input value="066-EOV-335" class="mktoField mktoFieldDescriptor" name="munchkinId" type="hidden">
         <input type="hidden" name="kw" value=""/>
         <input type="hidden" name="cr" value=""/>
         <input type="hidden" name="searchstr" value=""/>
@@ -77,7 +77,7 @@
         <input type="hidden" name="_mkt_trk" value=""/>
       </li>
     </ul>
-  </form>  
+  </form>
 </div>
 
 <script language="JavaScript" src="https://app.marketo.com/js/public/jquery-latest.min.js" type="text/javascript"></script>
