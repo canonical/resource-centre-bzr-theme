@@ -10,3 +10,17 @@ function myFeedExcluder($query) {
 return $query;
 }
 add_filter('pre_get_posts','myFeedExcluder');
+
+// show events and webinars in a feed that contains the tag 'spotlight'
+$url = $_SERVER["REQUEST_URI"];
+$isItSpotlight = strpos($url, 'spotlight');
+
+if ($isItSpotlight!==false) {
+  function myfeed_request( $qv ) {
+      if ( isset( $qv['feed'] ) && !isset( $qv['post_type'] ) ) {
+      $qv['post_type'] = array( 'webinar', 'post', 'event' );
+      }
+      return $qv;
+  }
+  add_filter( 'request', 'myfeed_request' );
+}
