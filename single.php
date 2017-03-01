@@ -8,8 +8,8 @@ if ( !defined('ABSPATH')) exit;
  *
  *
  * @file           single.php
- * @package        Ubuntu blog theme 
- * @author         Canonical Web Team 
+ * @package        Ubuntu blog theme
+ * @author         Canonical Web Team
  * @copyright      2012 Canonical Ltd
  * @license
  * @version        Release: 1.0
@@ -17,8 +17,8 @@ if ( !defined('ABSPATH')) exit;
  * @link           http://codex.wordpress.org/Theme_Development#Footer_.28footer.php.29
  * @since          available since Release 1.0
  */
- 
-get_header(); 
+
+get_header();
 	$field = 'dbt_ga_tracking_label';
 	$ga_conversion = get_post_meta($post->ID, $field, TRUE);
 	$the_ga_code = $ga_conversion;
@@ -33,7 +33,7 @@ get_header();
 	global $wpdb;
 	global $posted;
 	$attachment_id = $wpdb->get_var("SELECT ID FROM $wpdb->posts WHERE post_parent = '$post->ID' AND post_status = 'inherit' AND post_type='attachment' ORDER BY post_date DESC LIMIT 1");
-	$articlecat = $category = get_the_category()->category_nicename; 
+	$articlecat = $category = get_the_category()->category_nicename;
 	$category = get_the_category();
 	$category = $category[0]->category_nicename;
 	$firstCategory = $category[0]->category_description;
@@ -49,7 +49,7 @@ get_header();
             <p class="intro clear"><?php echo get_the_excerpt(); ?></p>
         </div>
     </div>
-</div><?php endif; ?>		
+</div><?php endif; ?>
 
 <div class="row no-border">
 <div class="inner-wrapper">
@@ -67,7 +67,7 @@ get_header();
 <?php if (have_posts()) : ?>
 <?php while (have_posts()) : the_post(); ?>
 <?php if(!current_user_can('administrator')){ echo setPostViews(get_the_ID()); } ?>
-			
+
 <div class="content eight-col no-margin-bottom">
 	<div class="box eight-col box-highlight">
 		<?php if ( !has_tag( 'cloud-chatter') ) : ?><h1 itemprop="name"<?php if(in_category( $press_cats )) echo ' class="heading-has-time"'; ?>><?php the_title(); ?></h1><?php endif; ?>
@@ -100,12 +100,12 @@ get_header();
 					<?php } else { // show this if the form has not been posted ?>
 					<?php if('post' == get_post_type()) the_excerpt(); ?>
 					<div id="gated-content">
-						<p>Please enter your details to view '<?php the_title(); ?>'</p>						
+						<p>Please enter your details to view '<?php the_title(); ?>'</p>
 					<?php $term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) ); ?><?php echo $term->name; ?>
-						
+
 					<?php $theurl = rtrim(get_permalink(),'/'); ?>
 					<div class="eight-col">
-<?php 
+<?php
     if ( is_tax( 'cloud' )) :
         $form_id = '1079'; // cloud
     elseif ( is_tax( 'server' )) :
@@ -117,11 +117,11 @@ get_header();
 
 <style>
 /* Your style here */
-span.mktError span.mktFormMsg { position: relative; left: 68px !important; } 
+span.mktError span.mktFormMsg { position: relative; left: 68px !important; }
 </style>
 
 <script src="/js/mktFormSupport.js"></script>
-    
+
 <script>
   var formEdit = false;
 
@@ -144,7 +144,7 @@ var mktFormLanguage = 'English'
 <script> function mktoGetForm() {return document.getElementById('mktForm_<?php echo $form_id; ?>'); }</script>
 
 <form class="lpeRegForm formNotEmpty" method="post" enctype="application/x-www-form-urlencoded" action="https://pages.canonical.com/index.php/leadCapture/save" id="mktForm_<?php echo $form_id; ?>" name="mktForm_<?php echo $form_id; ?>">
-    
+
     <ul class='mktLblLeft'>
         <li class='mktField' style="display: none;">
             <label>utm_campaign:</label>
@@ -251,7 +251,7 @@ var mktFormLanguage = 'English'
             <input style='display: none;' id='mktFrmReset' type='reset' value='Clear' name='resetButton' onclick='formReset(document.getElementById("mktForm_<?php echo $form_id; ?>")); return false;' />
         </li>
     </ul>
-  
+
     <span style="display:none;"><input type="text" name="_marketo_comments" value="" /></span>
     <input type="hidden" name="lpId" value="1214" />
     <input type="hidden" name="subId" value="30" />
@@ -259,7 +259,7 @@ var mktFormLanguage = 'English'
     <input type="hidden" name="kw" value="" />
     <input type="hidden" name="cr" value="" />
     <input type="hidden" name="searchstr" value="" />
-  
+
 <?php
 // Get terms for post
 $terms = get_the_terms( $post->ID , 'topic' );
@@ -292,7 +292,7 @@ endif;
 </div>
 					</div><!-- /#gated-content -->
 					<?php } // end if market_form completed ?>
-					
+
 <?php } elseif(($gated_content == 'on' && $posted == $postdate . $postid)) { // show this if is gated and the form has been posted ?>
 
 		<?php if ( get_post_meta($post->ID, 'postVideo', true) ) : ?>
@@ -334,8 +334,8 @@ endif;
 		<?php endif; // if video  ?>
 <?php } // end if gated ?>
 <?php if('event' == get_post_type()) : ?>
-<?php 
-	$current_time = current_time('mysql'); 
+<?php
+	$current_time = current_time('mysql');
 	list( $today_year, $today_month, $today_day, $hour, $minute, $second ) = split( '([^0-9])', $current_time );
 	$current_timestamp = $today_year . $today_month . $today_day . $hour . $minute;
 	$event_timestamp = get_post_meta( $post->ID, '_start_eventtimestamp', true ); ?>
@@ -380,20 +380,20 @@ if ( get_post_meta($post->ID, 'dbt_press_links', true) ) :  ?>
 	</div>
 <?php endif; ?>
 
-<?php 
-	if ( get_post_meta($post->ID, 'postVideo', true) ) : 
-		get_template_part("includes/_videos"); 
-	endif; 
+<?php
+	if ( get_post_meta($post->ID, 'postVideo', true) ) :
+		get_template_part("includes/_videos");
+	endif;
 ?>
 
-<?php 
+<?php
 $press_contact = make_clickable(get_post_meta( get_the_ID(), 'dbt_press_contact', true ));
 
 // check if the custom field has a value
 if( ! empty( $press_contact ) ) {
     echo '<div class="box box-highlight four-col">';
     echo '<h2>Contact details</h2>';
-    echo wpautop( $press_contact, false );  
+    echo wpautop( $press_contact, false );
     echo '</div>';
 } ?>
 
@@ -420,23 +420,23 @@ if( ! empty( $press_contact ) ) {
 	));
 ?>
 <?php if ($query->have_posts()) : ?>
-		<?php 
-			while( $query->have_posts() ): 
-			$query->the_post(); 
+		<?php
+			while( $query->have_posts() ):
+			$query->the_post();
 			$do_not_duplicate[] = $post->ID;
 			$slug = basename(get_permalink()); ?>
-      <div id="rtp-rhc" class="box box-highlight contextual-footer four-col">
+      <div id="rtp-<?php echo $current_tax; ?>" class="box box-highlight contextual-footer four-col">
 	<div class"box-<?php echo $current_tax; ?> box-<?php echo $slug; ?> four-col">
 		<ul class="no-bullets">
 			<li>
 				<h2><a href="<?php echo get_the_excerpt(); ?>"><?php the_title(); ?></a></h2>
 				<?php the_content(); ?>
-			</li>					
+			</li>
 		</ul>
 	</div><!-- /.box --></div>
 		<?php endwhile; ?>
-<?php endif; // if have_posts ends 
-wp_reset_query(); 
+<?php endif; // if have_posts ends
+wp_reset_query();
 /* ============== end pull in topic specific cta ============== */ ?>
 
 <?php get_template_part("includes/_digest"); ?>
@@ -450,7 +450,7 @@ echo strtolower($term_list[0]); wp_reset_query();?>&nbsp;resources</h2>
         $topic_list = wp_get_post_terms($post->ID, 'topic', array("fields" => "slugs"));
     		// get all the categories from the database
     		$current_tax = $topic_list[0];
-    		$cats = get_categories(); 
+    		$cats = get_categories();
     		// loop through the categries
     			foreach ($cats as $cat) :
     				// setup the cateogory ID
@@ -458,12 +458,12 @@ echo strtolower($term_list[0]); wp_reset_query();?>&nbsp;resources</h2>
     				// create a custom wordpress query
     				query_posts("topic=$current_tax&cat=$cat_id&posts_per_page=1");
     				// start the wordpress loop!
-    		      if (have_posts()) : while (have_posts()) : the_post(); 
+    		      if (have_posts()) : while (have_posts()) : the_post();
     						echo "<li><a href='/topic/" . $current_tax . "?cat=".$cat_id."'>".$cat->name." (" .$wp_query->found_posts . ")</a></li>";
     		      ?>
           <?php endwhile; endif; // done our wordpress loop. Will start again for each category ?>
     			<?php endforeach; wp_reset_query(); // done the foreach statement and reset the mofo ?>
-          <li><a href="/topic/<?php echo $current_tax; ?>">View all <?php 
+          <li><a href="/topic/<?php echo $current_tax; ?>">View all <?php
 echo strtolower($term_list[0]); wp_reset_query();?>&nbsp;resources</a></li>
     	</ul>
 </div>
@@ -471,8 +471,8 @@ echo strtolower($term_list[0]); wp_reset_query();?>&nbsp;resources</a></li>
 </aside><!-- /.instapaper_ignore -->
 
 </div><!-- /.inner-wrapper -->
-</div><!-- /.row --> 
+</div><!-- /.row -->
 
-<?php // dynamic_sidebar( 'search-sidebar' ); ?>	
+<?php // dynamic_sidebar( 'search-sidebar' ); ?>
 
 <?php get_footer(); ?>
