@@ -22,5 +22,5 @@ if ($isItSpotlight !== false) {
     }
     return $qv;
     }
-    add_filter( 'request', 'myfeed_request' );
+  add_filter( 'request', 'myfeed_request' );
 }
