@@ -16,9 +16,9 @@ $url = $_SERVER["REQUEST_URI"];
 $isItSpotlight = strpos($url, 'spotlight');
 
 if ($isItSpotlight !== false) {
-    function myfeed_request( $qv ) {
-        if ( isset( $qv['feed'] ) && !isset( $qv['post_type'] ) ) {
-        $qv['post_type'] = array( 'webinar', 'post', 'event' );
+  function myfeed_request( $qv ) {
+    if ( isset( $qv['feed'] ) && !isset( $qv['post_type'] ) ) {
+      $qv['post_type'] = array( 'webinar', 'post', 'event' );
     }
     return $qv;
     }
