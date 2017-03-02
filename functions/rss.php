@@ -21,6 +21,6 @@ if ($isItSpotlight !== false) {
       $qv['post_type'] = array( 'webinar', 'post', 'event' );
     }
     return $qv;
-    }
+  }
   add_filter( 'request', 'myfeed_request' );
 }
