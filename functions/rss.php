@@ -10,3 +10,17 @@ function myFeedExcluder($query) {
 return $query;
 }
 add_filter('pre_get_posts','myFeedExcluder');
+
+
+$url = $_SERVER["REQUEST_URI"];
+$isItSpotlight = strpos($url, 'spotlight');
+
+if ($isItSpotlight !== false) {
+  function myfeed_request( $qv ) {
+    if ( isset( $qv['feed'] ) && !isset( $qv['post_type'] ) ) {
+      $qv['post_type'] = array( 'webinar', 'post', 'event' );
+    }
+    return $qv;
+  }
+  add_filter( 'request', 'myfeed_request' );
+}
