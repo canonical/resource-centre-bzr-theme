@@ -1,13 +1,13 @@
 @charset "UTF-8";
-/* 
+/*
 Theme Name: Ubuntu Resources
 Theme URI: http://canonical.com
 Description: Ubuntu resource hub theme
 Version: 1
-Author: Canonical Ltd 
+Author: Canonical Ltd
 Author URI: http://canonical.com
 
-Copyright (C) 2012 Canonical Ltd 
+Copyright (C) 2012 Canonical Ltd
 */
 .wf-ubuntu-n3-loading h1, .wf-ubuntu-n3-loading h2, .wf-ubuntu-n3-loading h3, .wf-ubuntu-n3-loading dl, .wf-ubuntu-n3-loading p, .wf-ubuntu-n3-loading span, .wf-ubuntu-n4-loading h1, .wf-ubuntu-n4-loading h2, .wf-ubuntu-n4-loading h3, .wf-ubuntu-n4-loading dl, .wf-ubuntu-n4-loading p, .wf-ubuntu-n4-loading span, .wf-ubuntu-i4-loading h1, .wf-ubuntu-i4-loading h2, .wf-ubuntu-i4-loading h3, .wf-ubuntu-i4-loading dl, .wf-ubuntu-i4-loading p, .wf-ubuntu-i4-loading span {
   visibility: hidden; }
@@ -744,24 +744,24 @@ form label {
     margin: 0 5px 5px 0;
     border: 0 !important;
     padding-top: 0;
-    /*a {
-    	border: 0;
-    	margin: 0;
-    	@include font_size (14);
-    	@include rounded_corners(4px);
-    	@include transition_duration;
-    	background: #e1e1e1;
-    	color: $cool_grey;
-    	display: inline-block;
-        padding: 2px 12px 3px;
-        margin-bottom: 5px;
-        
-        &:hover {
-            background: $ubuntu_orange;
-            border-bottom-color: #eee; 
-            color: #fff !important;
-        }
-    }*/ }
+        /*a {
+        	border: 0;
+        	margin: 0;
+        	@include font_size (14);
+        	@include rounded_corners(4px);
+        	@include transition_duration;
+        	background: #e1e1e1;
+        	color: $cool_grey;
+        	display: inline-block;
+            padding: 2px 12px 3px;
+            margin-bottom: 5px;
+
+            &:hover {
+                background: $ubuntu_orange;
+                border-bottom-color: #eee;
+                color: #fff !important;
+            }
+        }*/ }
     #main-content .related-posts li li:after {
       content: ","; }
     #main-content .related-posts li li a {
@@ -900,9 +900,6 @@ body.post-type-archive .box {
   padding-bottom: 0;
   position: relative; }
 
-.single .box {
-  margin-bottom: 20px; }
-
 .article-list {
   margin-bottom: 0; }
 
@@ -921,16 +918,25 @@ body.post-type-archive .box {
   color: #333333;
   margin-bottom: 20px; }
 
+.single .box {
+  margin-bottom: 20px; }
 .single .row h2 {
   font-size: 1.438em; }
-
-.single .row h3 {
-  font-size: 1.25em; }
-
-.row h2 a {
+.single h2 a {
   font-size: 13px;
   font-size: 1em;
   margin-bottom: .5em; }
+@media only screen and (min-width: 768px) {
+  .single .fixed-sticky {
+    position: -webkit-sticky;
+    position: -moz-sticky;
+    position: -ms-sticky;
+    position: -o-sticky;
+    position: sticky;
+    top: 20px;
+    flex: 1; }
+  .single .row .full-height {
+    display: flex; } }
 
 .has-time h3,
 .featured-article h3 {

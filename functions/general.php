@@ -1,5 +1,5 @@
 <?php
-    
+
 // make topics required
 add_action('admin_print_scripts-post.php', 'my_publish_admin_hook');
 add_action('admin_print_scripts-post-new.php', 'my_publish_admin_hook');
@@ -29,53 +29,53 @@ function my_publish_admin_hook(){
     }
 }
 
-// automatically add posts to groups based on selected topic/s    
+// automatically add posts to groups based on selected topic/s
 function add_group_automatically($post_ID) {
 	global $wpdb;
 	if (has_term( array( 'cloud', 'server' ), 'topic', $post->ID )) {
-        // 422 = cloud-and-server	
+        // 422 = cloud-and-server
 		$cat = array('cloud-and-server');
 		wp_set_object_terms($post_ID, $cat, 'group', true);
-	} 
-	
+	}
+
 	elseif (has_term( array( 'phone', 'tablet' ), 'topic', $post->ID )) {
-        // 415 = phone-and-tablet	
+        // 415 = phone-and-tablet
 		$cat = array('phone-and-tablet');
 		wp_set_object_terms($post_ID, $cat, 'group', true);
 	}
-	
+
 	elseif (has_term( 'internet-of-things', 'topic', $post->ID )) {
-        // 415 = phone-and-tablet	
+        // 415 = phone-and-tablet
 		$cat = array('internet-of-things');
 		wp_set_object_terms($post_ID, $cat, 'group', true);
 	}
 
 	elseif (has_term( 'canonical-announcements', 'topic', $post->ID )) {
-        // 172 = phone-and-tablet	
+        // 172 = phone-and-tablet
 		$cat = array('canonical-announcements');
 		wp_set_object_terms($post_ID, $cat, 'group', true);
 	}
 
 	elseif (has_term( 'people-and-culture', 'topic', $post->ID )) {
-        // 172 = phone-and-tablet	
+        // 172 = phone-and-tablet
 		$cat = array('people-and-culture');
 		wp_set_object_terms($post_ID, $cat, 'group', true);
 	}
 
 	elseif (has_term( 'internet-of-things', 'topic', $post->ID )) {
-        // 172 = phone-and-tablet	
+        // 172 = phone-and-tablet
 		$cat = array('internet-of-things');
 		wp_set_object_terms($post_ID, $cat, 'group', true);
 	}
 
 	elseif (has_term( 'desktop', 'topic', $post->ID )) {
-        // 172 = phone-and-tablet	
+        // 172 = phone-and-tablet
 		$cat = array('desktop');
 		wp_set_object_terms($post_ID, $cat, 'group', true);
 	}
 }
-add_action('save_post', 'add_group_automatically');        
-   
+add_action('save_post', 'add_group_automatically');
+
 // post types - add new post types here and at the top of post-types.php
 $post_types = array('whitepaper', 'post', 'ebook', 'video', 'attachment', 'casestudy', 'infographic', 'webinar', 'event', 'case-study', 'presskits');
 
@@ -105,7 +105,7 @@ add_action( 'init', 'wpse31422_init' );
  */
 function gb_do_terms_exclusion() {
 $current_user = wp_get_current_user();
-$_menu_unrestricted_users = array( 'admin', 'gbancroft-canonical', 'peterm-ubuntu', 'yaili', 'yaili-2', 'tom.callway', 'tom-callway', 'carolinetarbett', 'amrisha-prashar', 'canonical', 'deadlight', 'inayaili', 'rebeccacradick' );
+$_menu_unrestricted_users = array( 'admin', 'root', 'gbancroft-canonical', 'peterm-ubuntu', 'yaili', 'yaili-2', 'tom.callway', 'tom-callway', 'carolinetarbett', 'amrisha-prashar', 'canonical', 'deadlight', 'inayaili', 'rebeccacradick' );
 
 	if(! in_array( $current_user->user_login, $_menu_unrestricted_users ) ) {
 		remove_menu_page( 'edit.php?post_type=productbusinesscard' );
@@ -114,7 +114,7 @@ $_menu_unrestricted_users = array( 'admin', 'gbancroft-canonical', 'peterm-ubunt
 		remove_meta_box('download-typediv', 'Post', 'side');
 		add_filter( 'list_terms_exclusions', 'gb_list_terms_exclusions', 10, 2 );
 	}
-	
+
 }
 add_action( 'admin_init', 'gb_do_terms_exclusion' );
 
@@ -134,7 +134,7 @@ function gb_list_terms_exclusions($exclusions,$args) {
  *					Defaults to 'page'.
  * @return string|void
  */
- 
+
 function t5_embed_post( $atts ) {
 	$defaults = array (
 		'id'    			=> FALSE,
@@ -146,15 +146,15 @@ function t5_embed_post( $atts ) {
 	extract( shortcode_atts( $defaults, $atts ) );
 
 	//$page_title = apply_filters( 'the_title', get_the_title() );
- 
+
 	// Not enough input data.
 	if ( ! $id and ! $title )
 	{
 		return;
 	}
- 
+
 	$post = FALSE;
- 
+
 	if ( $id )
 	{
 		$post = get_post( $id );
@@ -163,24 +163,24 @@ function t5_embed_post( $atts ) {
 	{
 		$post = get_page_by_title( $title, OBJECT, $type );
 	}
-	 
+
 	if ( $post )
 	{
 		if ( $excerpt )
 		{
 			$page_excerpt = apply_filters( 'the_excerpt', $post->post_excerpt );
-			if ( $show_title ) 
+			if ( $show_title )
 			{
 				$page_title = strip_tags(apply_filters( 'the_content', $post->post_title ));
 			}
-			return '<h2>'. $page_title . '</h2>' . $page_excerpt . '';					
+			return '<h2>'. $page_title . '</h2>' . $page_excerpt . '';
 		} else {
 			$page_content = apply_filters( 'the_content', $post->post_content );
-			if ( $show_title ) 
+			if ( $show_title )
 			{
 				$page_title = strip_tags(apply_filters( 'the_content', $post->post_title ));
 			}
-			return '<h2>'. $page_title . '</h2>' . $page_content . '';		
+			return '<h2>'. $page_title . '</h2>' . $page_content . '';
 		}
 	}
 }
@@ -361,10 +361,10 @@ add_theme_support( 'automatic-feed-links' );
 
 function add_custom_fields_to_rss() {
     if(get_post_type() == 'event') {
-      $start_date =  get_post_meta(get_the_ID(), '_start_eventtimestamp', true); 
-      $end_date =  get_post_meta(get_the_ID(), '_end_eventtimestamp', true); 
-      $location =  get_post_meta(get_the_ID(), '_event_location', true); 
-      $venue =  get_post_meta(get_the_ID(), '_event_venue', true); 
+      $start_date =  get_post_meta(get_the_ID(), '_start_eventtimestamp', true);
+      $end_date =  get_post_meta(get_the_ID(), '_end_eventtimestamp', true);
+      $location =  get_post_meta(get_the_ID(), '_event_location', true);
+      $venue =  get_post_meta(get_the_ID(), '_event_venue', true);
         ?>
         <?php if($start_date != '') { echo '<eventStartDate><![CDATA[', $start_date, ']]></eventStartDate>'; } ?>
         <?php if($end_date != '') { echo '<eventEndDate><![CDATA[', $end_date, ']]></eventEndDate>'; } ?>
@@ -373,7 +373,7 @@ function add_custom_fields_to_rss() {
         <?php
     }
     if(get_post_type() == 'post') {
-      $videoID =  get_post_meta(get_the_ID(), 'postVideo', true); 
+      $videoID =  get_post_meta(get_the_ID(), 'postVideo', true);
         ?>
         <?php if($videoID != '') { echo '<videoID><![CDATA[', $videoID, ']]></videoID>'; } ?>
         <?php
