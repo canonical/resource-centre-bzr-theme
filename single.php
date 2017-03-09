@@ -52,7 +52,7 @@ get_header();
 </div><?php endif; ?>
 
 <div class="row no-border">
-<div class="inner-wrapper">
+<div class="inner-wrapper full-height">
 <?php if(($posted == $postdate . $postid)): // for gated content ?>
 <div class="alert">
 	<p>Thank you! Your download should start automatically. If it doesn't, <a class="" href="<?php echo wp_get_attachment_url( $attachment_id ); ?>">download now</a>.</p>
@@ -405,39 +405,6 @@ if( ! empty( $press_contact ) ) {
 <?php if (($category == 'news') &&  (( $attachments ) && (! wp_attachment_is_image($attachment_id) )) ) : ?>
 <?php endif; // if ($category == array('news','press-releases')) ?>
 
-<?php
-/* ============== pull in topic specific cta ============== */
-  wp_reset_query();
-  $topic_list = wp_get_post_terms($post->ID, 'topic', array("fields" => "slugs"));
-  $current_tax = $topic_list[0];
-	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
-	$query = new WP_Query( array(
-    'posts_per_page'  => 3,
-    'topic'           => $current_tax,
-    'post_type'       => 'topiccta',
-    'post__not_in'    => $do_not_duplicate,
-    'paged'           => $paged
-	));
-?>
-<?php if ($query->have_posts()) : ?>
-		<?php
-			while( $query->have_posts() ):
-			$query->the_post();
-			$do_not_duplicate[] = $post->ID;
-			$slug = basename(get_permalink()); ?>
-      <div id="rtp-<?php echo $current_tax; ?>" class="box box-highlight contextual-footer four-col">
-	<div class"box-<?php echo $current_tax; ?> box-<?php echo $slug; ?> four-col">
-		<ul class="no-bullets">
-			<li>
-				<h2><a href="<?php echo get_the_excerpt(); ?>"><?php the_title(); ?></a></h2>
-				<?php the_content(); ?>
-			</li>
-		</ul>
-	</div><!-- /.box --></div>
-		<?php endwhile; ?>
-<?php endif; // if have_posts ends
-wp_reset_query();
-/* ============== end pull in topic specific cta ============== */ ?>
 
 <?php get_template_part("includes/_digest"); ?>
 
@@ -468,6 +435,41 @@ echo strtolower($term_list[0]); wp_reset_query();?>&nbsp;resources</a></li>
     	</ul>
 </div>
 
+<?php
+/* ============== pull in topic specific cta ============== */
+  wp_reset_query();
+  $topic_list = wp_get_post_terms($post->ID, 'topic', array("fields" => "slugs"));
+  $current_tax = $topic_list[0];
+	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
+	$query = new WP_Query( array(
+    'posts_per_page'  => 3,
+    'topic'           => $current_tax,
+    'post_type'       => 'topiccta',
+    'post__not_in'    => $do_not_duplicate,
+    'paged'           => $paged
+	));
+?>
+<?php if ($query->have_posts()) : ?>
+		<?php
+			while ($query->have_posts()) :
+			$query->the_post();
+			$do_not_duplicate[] = $post->ID;
+			$slug = basename(get_permalink());
+		?>
+      <div id="rtp-<?php echo $current_tax; ?>" class="box box-highlight contextual-footer four-col fixed-sticky">
+				<div class"box-<?php echo $current_tax; ?> box-<?php echo $slug; ?> four-col">
+					<ul class="no-bullets">
+						<li>
+							<h2><a href="<?php echo get_the_excerpt(); ?>"><?php the_title(); ?></a></h2>
+							<?php the_content(); ?>
+						</li>
+					</ul>
+				</div>
+			</div>
+		<?php endwhile; ?>
+<?php endif; // if have_posts ends
+wp_reset_query();
+/* ============== end pull in topic specific cta ============== */ ?>
 </aside><!-- /.instapaper_ignore -->
 
 </div><!-- /.inner-wrapper -->
