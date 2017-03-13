@@ -450,14 +450,15 @@ echo strtolower($term_list[0]); wp_reset_query();?>&nbsp;resources</a></li>
 	));
 ?>
 <?php if ($query->have_posts()) : ?>
+	<div class="fixed-sticky four-col">
 		<?php
 			while ($query->have_posts()) :
 			$query->the_post();
 			$do_not_duplicate[] = $post->ID;
 			$slug = basename(get_permalink());
 		?>
-      <div id="rtp-<?php echo $current_tax; ?>" class="box box-highlight contextual-footer four-col fixed-sticky">
-				<div class"box-<?php echo $current_tax; ?> box-<?php echo $slug; ?> four-col">
+      <div id="rtp-<?php echo $current_tax; ?>" class="box box-highlight contextual-footer four-col">
+				<div class="box-<?php echo $current_tax; ?> box-<?php echo $slug; ?> four-col">
 					<ul class="no-bullets">
 						<li>
 							<h2><a href="<?php echo get_the_excerpt(); ?>"><?php the_title(); ?></a></h2>
@@ -467,6 +468,7 @@ echo strtolower($term_list[0]); wp_reset_query();?>&nbsp;resources</a></li>
 				</div>
 			</div>
 		<?php endwhile; ?>
+	</div>
 <?php endif; // if have_posts ends
 wp_reset_query();
 /* ============== end pull in topic specific cta ============== */ ?>
