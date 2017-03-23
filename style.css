@@ -621,20 +621,19 @@ header.banner .logo-ubuntu span.site-name {
   width: auto; }
 
 .alert {
-  -o-border-radius: 4px 4px 4px 4px;
-  -webkit-border-radius: 4px 4px 4px 4px;
-  -moz-border-radius: 4px 4px 4px 4px;
-  border-radius: 4px 4px 4px 4px;
-  background: #38b44a;
-  color: #fff;
-  margin: 0 auto 1.25em;
-  max-width: 984px;
-  padding: 10px 20px 2px;
-  position: relative; }
-
-#main-content .alert a, #main-content .alert p a, #main-content .alert a:link, #main-content .alert a:visited {
-  color: #fff;
-  font-weight: 500; }
+  border: 0;
+  border-radius: .125rem;
+  border-style: solid;
+  border-top-width: 3px;
+  box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.2);
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  padding: .625rem;
+  width: 100%;
+  border-color: #0e8420;
+  background-color: #fff;
+  box-sizing: border-box; }
 
 .alert p {
   margin-bottom: 0;
@@ -643,7 +642,7 @@ header.banner .logo-ubuntu span.site-name {
 #close-alert {
   position: absolute;
   right: 20px;
-  top: 10px; }
+  top: 1rem; }
 
 .block-click {
   cursor: pointer; }

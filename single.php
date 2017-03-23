@@ -53,22 +53,22 @@ get_header();
 
 <div class="row no-border">
 <div class="inner-wrapper full-height">
-<?php if(($posted == $postdate . $postid)): // for gated content ?>
-<div class="alert">
-	<p>Thank you! Your download should start automatically. If it doesn't, <a class="" href="<?php echo wp_get_attachment_url( $attachment_id ); ?>">download now</a>.</p>
-</div><!-- /.alert -->
-<?php endif; // end if(($posted == $postdate . $postid)) ?>
-<?php $digest = $_GET['digest']; if($digest != ''): ?>
-<div class="alert">
-	<p>Thank you for subscribing! You will begin receiving emails as new content is posted. <br />You may unsubscribe any time by clicking the link in the email.</p>
-</div><!-- /.alert -->
-<?php endif; // end if(($posted == $postdate . $postid)) ?>
 
 <?php if (have_posts()) : ?>
 <?php while (have_posts()) : the_post(); ?>
 <?php if(!current_user_can('administrator')){ echo setPostViews(get_the_ID()); } ?>
 
 <div class="content eight-col no-margin-bottom">
+	<?php if(($posted == $postdate . $postid)): // for gated content ?>
+		<div class="alert">
+			<p>Thank you! Your download should start automatically. If it doesn't, <a class="" href="<?php echo wp_get_attachment_url( $attachment_id ); ?>">download now</a>.</p>
+		</div><!-- /.alert -->
+	<?php endif; // end if(($posted == $postdate . $postid)) ?>
+	<?php $digest = $_GET['digest']; if($digest != ''): ?>
+		<div class="alert">
+			<p>Thank you for subscribing! You will begin receiving emails as new content is posted. You may unsubscribe any time by clicking the link in the email.</p>
+		</div><!-- /.alert -->
+	<?php endif; // end if(($posted == $postdate . $postid)) ?>
 	<div class="box eight-col box-highlight">
 		<?php if ( !has_tag( 'cloud-chatter') ) : ?><h1 itemprop="name"<?php if(in_category( $press_cats )) echo ' class="heading-has-time"'; ?>><?php the_title(); ?></h1><?php endif; ?>
 		<?php if( ($category != 'events') && !has_tag( 'cloud-chatter')) : ?>
@@ -457,8 +457,8 @@ echo strtolower($term_list[0]); wp_reset_query();?>&nbsp;resources</a></li>
 			$do_not_duplicate[] = $post->ID;
 			$slug = basename(get_permalink());
 		?>
-      <div id="rtp-<?php echo $current_tax; ?>" class="box box-highlight contextual-footer four-col">
-				<div class="box-<?php echo $current_tax; ?> box-<?php echo $slug; ?> four-col">
+      <div id="rtp-<?php echo $current_tax; ?>" class="box box-<?php echo $current_tax; ?> box-highlight contextual-footer four-col">
+				<div class="box-<?php echo $slug; ?> four-col">
 					<ul class="no-bullets">
 						<li>
 							<h2><a href="<?php echo get_the_excerpt(); ?>"><?php the_title(); ?></a></h2>
