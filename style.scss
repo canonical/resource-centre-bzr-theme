@@ -697,20 +697,19 @@ header.banner .logo-ubuntu span.site-name {
 }
 
 .alert {
-	@include rounded_corners;
-	background: #38b44a;
-	color: #fff;
-	margin: 0 auto 1.25em;
-	max-width: 984px;
-	padding: 10px 20px 2px;
-	position: relative;
-}
-
-#main-content{
-	.alert a, .alert p a, .alert a:link, .alert a:visited {
-		color: #fff;
-		font-weight: 500;
-	}
+  border: 0;
+  border-radius: .125rem;
+  border-style: solid;
+  border-top-width: 3px;
+  box-shadow: 0 1px 5px 1px rgba(0,0,0,.2);
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  padding: .625rem;
+  width: 100%;
+  border-color: #0e8420;
+  background-color: #fff;
+  box-sizing: border-box;
 }
 
 .alert p {
@@ -721,7 +720,7 @@ header.banner .logo-ubuntu span.site-name {
 #close-alert {
 	position: absolute;
 	right: 20px;
-	top: 10px;
+	top: 1rem;
 }
 
 .block-click { cursor: pointer; }
@@ -1057,7 +1056,7 @@ body.post-type-archive .box {
   .row h2 {
   	font-size: 1.438em;
   }
-  
+
   h2 a {
   	@include font_size(13);
   	margin-bottom: .5em;
