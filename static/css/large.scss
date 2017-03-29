@@ -247,16 +247,6 @@ body.tag .glossary-box .inner-wrapper {
     background-image: url("#{$asset_path}pictograms/picto-pack/picto-email-orange.svg");  
 }
 
-.box-internet-of-things {
-  background-image: url('#{$asset_path}cloud/tools/snappy/snappy.png');
-  background-repeat: no-repeat;
-  background-position: -79% -28%;
-}
-
-.box-internet-of-things p {
-  padding-right: 50px;
-}
-
 .search .row { 
   padding-bottom: 40px; 
 }
