@@ -3277,14 +3277,6 @@ html.no-svg .cookie-policy .link-cta {
   .box-digest {
     background-image: url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/pictograms/picto-pack/picto-email-orange.svg"); }
 
-  .box-internet-of-things {
-    background-image: url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/cloud/tools/snappy/snappy.png");
-    background-repeat: no-repeat;
-    background-position: -79% -28%; }
-
-  .box-internet-of-things p {
-    padding-right: 50px; }
-
   .search .row {
     padding-bottom: 40px; }
 
