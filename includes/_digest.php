@@ -1,24 +1,8 @@
 <div class="four-col box box-highlight box-digest">
-  <script>
-  function fieldValidate(field) {
-    /* call Mkto.setError(field, message) and return false to mark a field value invalid */
-    /* return 'skip' to bypass the built-in validations */
-    return true;
-  }
-  function getRequiredFieldMessage(domElement, label) {
-    return "This field is required";
-  }
-  function getTelephoneInvalidMessage(domElement, label) {
-    return "Please enter a valid telephone number";
-  }
-  function getEmailInvalidMessage(domElement, label) {
-    return "Please enter a valid email address";
-  }
-  </script>
 
-  <form class='mktoForm mktoNoJS' action='https://pages.canonical.com/index.php/leadCapture/save' method='post'>
-    <h2>Sign up for email updates</h2>
-    <p>Choose the topics you're interested in</p>
+<form action="https://pages.canonical.com/index.php/leadCapture/save" method="post" id="mktoForm_1212">
+  <h2>Sign up for email updates</h2>
+  <p>Choose the topics you're interested in</p>
     <?php
       $term_list = wp_get_post_terms($post->ID, 'group', array("fields" => "slugs"));
       $termsString = $term_list;
@@ -29,8 +13,7 @@
       $iot = 'internet-of-things';
     ?>
 
-
-    <ul class='mktoFormRow clearfix'>
+    <ul class="no-bullets">
       <li>
         <ul class="no-bullets">
           <li>
@@ -51,19 +34,16 @@
           </li>
         </ul>
       </li>
-      <li class='mktoFormCol'>
-        <label class="off-left mktoLabel" for='Email'>Your email</label>
-        <input type="text" placeholder="Your email" class='mktoField mktoTextField' name='Email' id='Email' required>
+      <li  class="mktFormReq mktField">
+        <label for="Email" class="mktoLabel">Work email: <span>*</span></label>
+        <input required  id="Email" name="Email" maxlength="255" type="email" class="mktoField mktoEmailField  mktoRequired" >
       </li>
-
       <li class="mktField mktLblRight">
         <span class="mktInput mktLblRight"><input class="mktFormCheckbox" name="canonicalUpdatesOptIn" id="canonicalUpdatesOptIn" value="yes" tabindex="9" type="checkbox" /><label>I would like to receive occasional updates from Canonical by email.</label>&nbsp;<span class="mktFormMsg"></span></span>
       </li>
-
-      <li>
-        <span style="display:none;"><input type="text" name="_marketo_comments" value=""></span>
+      <li  class="mktField">
         <span class='mktoButtonWrap'><button type='submit' class='mktoButton'>Subscribe now</button></span>
-
+        
         <input value="1959" class="mktoField mktoFieldDescriptor" name="lpId" type="hidden">
         <input value="30" class="mktoField mktoFieldDescriptor" name="subId" type="hidden">
         <input type="hidden" name="lpurl" value="https://pages.canonical.com/Insights-Subscription_Insights-Subscription-test.html?cr={creative}&amp;kw={keyword}" />
@@ -77,7 +57,15 @@
         <input type="hidden" name="_mkt_trk" value=""/>
       </li>
     </ul>
-  </form>
+</form>
 </div>
 
-<script language="JavaScript" src="https://app.marketo.com/js/public/jquery-latest.min.js" type="text/javascript"></script>
+<script src="https://assets.ubuntu.com/v1/5d7e5bbf-jquery-2.2.0.min.js"></script>
+<script src="https://assets.ubuntu.com/v1/d55f58bb-jquery.validate.js"></script>
+
+<script>
+$("#mktoForm_1212").validate({
+    errorElement: "span",
+    errorClass: "mktFormMsg mktError"
+});
+</script>
