@@ -9,7 +9,6 @@
       $current_tax = basename(get_permalink());
       $cs = 'cloud-and-server';
       $desktop = 'desktop';
-      $pt = 'phone-and-tablet';
       $iot = 'internet-of-things';
     ?>
 
@@ -23,10 +22,6 @@
           <li>
             <input class="mktoLogicalField mktoCheckboxList mktoHasWidth" type="checkbox" id="insightsdesktop" name="insightsdesktop" value="yes"<?php if(in_array($desktop, $termsString) or $current_tax == $desktop or is_home() or is_page_template( 'page-press.php' )) echo ' checked="checked" ' ?>/>
             <label for="insightsdesktop">Desktop</label>
-          </li>
-          <li>
-            <input class="mktoLogicalField mktoCheckboxList mktoHasWidth" type="checkbox" id="insightsphonetablet" name="insightsphonetablet" value="yes"<?php if(in_array($pt, $termsString) or $current_tax == $pt or is_home() or is_page_template( 'page-press.php' )) echo ' checked="checked" ' ?>/>
-            <label for="insightsphonetablet">Phone and tablet</label>
           </li>
           <li>
             <input class="mktoLogicalField mktoCheckboxList mktoHasWidth" type="checkbox" id="insightsiot" name="insightsiot" value="yes"<?php if(in_array('internet-of-things', $termsString) or $current_tax == 'internet-of-things' or is_home() or is_page_template( 'page-press.php' )) echo ' checked="checked" ' ?>/>
