@@ -144,34 +144,6 @@ $query = new WP_Query( array(
 wp_reset_query();
 /* ============== end pull in latest desktop articles ============== */ ?>
 
-<?php /* ============== pull in latest phone and tablet articles ============== */
-$paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
-$exclude_cat = 'downloads';
-$category = get_category_by_slug($exclude_cat);
-$query = new WP_Query( array(
-    'cat'             => -$category->cat_ID,
-    'order'           => 'DESC',
-    'paged'           => $paged,
-    'post__not_in'    => $do_not_duplicate,
-    'post_type'       => 'post',
-    'posts_per_page'  => 5,
-    'group'           => 'phone-and-tablet'
-    ));
-?><?php if (have_posts()) : ?>
-<section class="box eight-col">
-<h2 class="section-title"><a href="/phone-and-tablet">Phone and Tablet</a></h2>
-
-    <?php
-        while( $query->have_posts() ):
-            $query->the_post();
-			$do_not_duplicate[] = $post->ID ?>
-            <?php get_template_part("content_home"); ?>
-        <?php endwhile; ?>
-</section><!-- ./eight-col -->
-<?php endif; // if have_posts ends
-wp_reset_query();
-/* ============== end pull in latest phone articles ============== */ ?>
-
 <?php /* ============== pull in latest events ============== */
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
 $exclude_cat = 'downloads';
