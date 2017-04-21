@@ -34,8 +34,9 @@ if ( !defined('ABSPATH')) exit;
 <meta name="author" content="Canonical" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<!-- shortcut icons -->
-<link rel="shortcut icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/favicon.ico" />
+<link rel="icon" type="image/png" href="https://assets.ubuntu.com/v1/cb22ba5d-favicon-16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="https://assets.ubuntu.com/v1/49a1a858-favicon-32x32.png" sizes="32x32" />
+
 <link rel="apple-touch-icon" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/touch-icon-iphone.png" />
 <link rel="apple-touch-icon" sizes="72x72" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/touch-icon-ipad.png" />
 <link rel="apple-touch-icon" sizes="114x114" href="//assets.ubuntu.com/sites/ubuntu/latest/u/img/touch-icon-iphone-retina.png" />
