@@ -1,12 +1,12 @@
-/* 
+/*
 Theme Name: Ubuntu Resources
 Theme URI: http://canonical.com
 Description: Ubuntu resource hub theme
 Version: 1
-Author: Canonical Ltd 
+Author: Canonical Ltd
 Author URI: http://canonical.com
 
-Copyright (C) 2012 Canonical Ltd 
+Copyright (C) 2012 Canonical Ltd
 
 Contents:
 
@@ -17,7 +17,7 @@ Contents:
 	share
 	product-business-card
 
-*/	
+*/
 
 @import 'core-constants';
 @import 'core-mixins';
@@ -46,7 +46,7 @@ $grid_unit_small: 10;
 $grid_unit_med:   20;
 
 body {
-	background-attachment: fixed; 
+	background-attachment: fixed;
 	font-size: 16px;
 }
 
@@ -60,7 +60,7 @@ body:after {
 header.banner { margin-bottom: 0; }
 
 header.banner .nav-primary .topics {
-    border-top: 0;   
+    border-top: 0;
 }
 
 header.banner .nav-primary ul li.active a,
@@ -121,8 +121,8 @@ h1 { font-size: 2.8125em; }
 	position: relative;
 }
 
-footer.global .legal { 
-	padding-left: 0; 
+footer.global .legal {
+	padding-left: 0;
 	padding-top: 13px;
 }
 
@@ -136,11 +136,11 @@ footer.global .legal {
 
 // glossary-box
 // -----------------------------------------------------------------
-.glossary-box { 
-    //padding-bottom: 30px; 
+.glossary-box {
+    //padding-bottom: 30px;
     //margin-top: -10px;
     padding: 0;
-    
+
     .inner-wrapper {
         background-size: 210px 210px;
         background-position: 100% -20px, 80% 148px;
@@ -151,7 +151,7 @@ footer.global .legal {
     min-height: 330px;
 }
 
-body.category, 
+body.category,
 body.tag,
 body.page-template-page-category-php {
     .glossary-box,
@@ -160,11 +160,11 @@ body.page-template-page-category-php {
             min-height: 0;
             padding-bottom: 10px;
         }
-    }    
+    }
 }
 
 body.archive .glossary-box .inner-wrapper {
-    padding-bottom: 0;    
+    padding-bottom: 0;
 }
 
 body.tag .glossary-box .inner-wrapper {
@@ -203,58 +203,14 @@ body.tag .glossary-box .inner-wrapper {
    }
 }
 
-// cta boxes on single posts
-.box-desktop,
-.box-phone,
-.box-tablet,
-.box-server,
-.box-cloud,
-.box-digest {
-    background-size: 167px 167px;  
-    background-repeat: no-repeat;
-    background-position: 154% 50%;
-    border: 0;
-    padding-right: 90px;
-}
-
-.box-digest {
-  background-position: 87% 36%;
-  background-size: 90px 90px;  
-  padding-right: 20px;
-}
-
-.box-phone {
-    background-image: url("static/img/pictograms/picto-phone-orange.svg");  
-}
-
-.box-tablet {
-    background-image: url("static/img/pictograms/picto-tablet-orange.svg");  
-}
-
-.box-desktop {
-    background-image: url("#{$asset_path}pictograms/picto-pack/picto-desktop-orange.svg");  
-}
-
-.box-server {
-    background-image: url("#{$asset_path}pictograms/picto-pack/picto-server-midaubergine.svg");  
-}
-
-.box-cloud {
-    background-image: url("#{$asset_path}pictograms/picto-pack/picto-cloudcomputing-orange.svg");  
-}
-
-.box-digest {
-    background-image: url("#{$asset_path}pictograms/picto-pack/picto-email-orange.svg");  
-}
-
-.search .row { 
-  padding-bottom: 40px; 
+.search .row {
+  padding-bottom: 40px;
 }
 
 .search .no-results {
 	display: inline-block;
 	float: left;
-	margin-bottom: 40px;	
+	margin-bottom: 40px;
 	width: 100%;
 }
 
@@ -280,7 +236,7 @@ form fieldset .search-submit.active {
 // single
 // -----------------------------------------------------------------
 .single #sidebar .list-social li {
-    margin: 0 6px 0 0;   
+    margin: 0 6px 0 0;
 }
 
 .video-wrapper {
@@ -300,12 +256,12 @@ form fieldset .search-submit.active {
 // -----------------------------------------------------------------
 footer.global .top-link { display: none; }
 
-.yes-js #main-nav.active li li a { 
-	font-size: 18px; 
+.yes-js #main-nav.active li li a {
+	font-size: 18px;
 }
 
 // press centre
-// ----------------------------------------------------------------- 
+// -----------------------------------------------------------------
 body.page-template-page-press-php .row-resource-list .six-col {
 	min-height: 13em;
 }

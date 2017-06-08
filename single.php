@@ -457,7 +457,7 @@ echo strtolower($term_list[0]); wp_reset_query();?>&nbsp;resources</a></li>
 			$do_not_duplicate[] = $post->ID;
 			$slug = basename(get_permalink());
 		?>
-      <div id="rtp-<?php echo $current_tax; ?>" class="box box-<?php echo $current_tax; ?> box-highlight contextual-footer four-col">
+      <div id="rtp-<?php echo $current_tax; ?>" class="box box-highlight contextual-footer four-col">
 				<div class="box-<?php echo $slug; ?> four-col">
 					<ul class="no-bullets">
 						<li>
