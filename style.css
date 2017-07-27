@@ -806,9 +806,7 @@ form label {
   width: 100%; }
 
 #sidebar form li input[type="checkbox"] {
-  padding: 4px;
-  position: relative;
-  top: 3px; }
+  vertical-align: text-bottom; }
 
 #main-content .subscribe + .related-posts {
   border-top: 0;
