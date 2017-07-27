@@ -934,8 +934,10 @@ form label {
   width: 100%;
 }
 
-#sidebar form li li input[type="checkbox"] {
-  padding: 4px;
+#sidebar form li input[type="checkbox"]{
+	padding: 4px;
+	position: relative;
+	top: 3px;
 }
 
 #main-content .subscribe + .related-posts {
