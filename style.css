@@ -805,8 +805,8 @@ form label {
   margin-top: 0;
   width: 100%; }
 
-#sidebar form li li input[type="checkbox"] {
-  padding: 4px; }
+#sidebar form li input[type="checkbox"] {
+  vertical-align: text-bottom; }
 
 #main-content .subscribe + .related-posts {
   border-top: 0;
@@ -3066,15 +3066,15 @@ html.no-svg .cookie-policy .link-cta {
 /* @section Large / Desktop viewport
 -------------------------------------------------------------- */
 @media only screen and (min-width: 984px) {
-  /* 
+  /*
   Theme Name: Ubuntu Resources
   Theme URI: http://canonical.com
   Description: Ubuntu resource hub theme
   Version: 1
-  Author: Canonical Ltd 
+  Author: Canonical Ltd
   Author URI: http://canonical.com
   
-  Copyright (C) 2012 Canonical Ltd 
+  Copyright (C) 2012 Canonical Ltd
   
   Contents:
   
@@ -3241,41 +3241,6 @@ html.no-svg .cookie-policy .link-cta {
       width: 251px;
       top: -28px;
       right: 43px; }
-
-  .box-desktop,
-  .box-phone,
-  .box-tablet,
-  .box-server,
-  .box-cloud,
-  .box-digest {
-    background-size: 167px 167px;
-    background-repeat: no-repeat;
-    background-position: 154% 50%;
-    border: 0;
-    padding-right: 90px; }
-
-  .box-digest {
-    background-position: 87% 36%;
-    background-size: 90px 90px;
-    padding-right: 20px; }
-
-  .box-phone {
-    background-image: url("static/img/pictograms/picto-phone-orange.svg"); }
-
-  .box-tablet {
-    background-image: url("static/img/pictograms/picto-tablet-orange.svg"); }
-
-  .box-desktop {
-    background-image: url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/pictograms/picto-pack/picto-desktop-orange.svg"); }
-
-  .box-server {
-    background-image: url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/pictograms/picto-pack/picto-server-midaubergine.svg"); }
-
-  .box-cloud {
-    background-image: url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/pictograms/picto-pack/picto-cloudcomputing-orange.svg"); }
-
-  .box-digest {
-    background-image: url("//assets.ubuntu.com/sites/ubuntu/latest/u/img/pictograms/picto-pack/picto-email-orange.svg"); }
 
   .search .row {
     padding-bottom: 40px; }
