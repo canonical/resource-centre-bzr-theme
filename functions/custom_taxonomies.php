@@ -9,8 +9,9 @@
 function add_topics() {
 	// Add new "topic" taxonomy to Posts
 	register_taxonomy('topic',array('whitepaper', 'ebook', 'article', 'post', 'downloads', 'video', 'attachment', 'casestudy', 'infographic', 'productbusinesscard', 'topiccta', 'webinar', 'event', 'case-study', 'presskits', 'promo'), array(
-		'hierarchical' => true,
-		'show_admin_column' => true,
+    'hierarchical' => true,
+    'show_admin_column' => true,
+    'show_in_rest' => true,
 		'labels' => array(
 			'name' => _x( 'Topic', 'taxonomy general name' ),
 			'singular_name' => _x( 'Topic', 'taxonomy singular name' ),
@@ -28,7 +29,7 @@ function add_topics() {
 		'rewrite' => array(
   		'slug' => 'topic', // This controls the base slug that will display before each term
 			'with_front' => false, // Don't display the category base before "/locations/"
-			'hierarchical' => true // This will allow URL's like "/locations/boston/cambridge/"
+      'hierarchical' => true // This will allow URL's like "/locations/boston/cambridge/"
 		),
 	));
 }
@@ -38,7 +39,8 @@ function add_groups() {
 	// Add new "topic" taxonomy to Posts
 	register_taxonomy('group',array('whitepaper', 'ebook', 'article', 'post', 'downloads', 'video', 'attachment', 'casestudy', 'infographic', 'productbusinesscard', 'topiccta', 'webinar', 'event', 'case-study', 'presskits', 'promo'), array(
 		'hierarchical' => true,
-		'show_admin_column' => true,
+    'show_admin_column' => true,
+    'show_in_rest' => true,
 		'labels' => array(
 			'name' => _x( 'Group', 'taxonomy general name' ),
 			'singular_name' => _x( 'Group', 'taxonomy singular name' ),
