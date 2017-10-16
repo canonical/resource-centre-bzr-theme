@@ -111,16 +111,6 @@ $meta_box = array(
             'id' => $prefix . 'press_contact',
             'type' => 'textarea'
         ),
-				array(
-            'name' => 'Featured post <br />(landing pages)',
-            'id' => $prefix . 'checkbox_featured',
-            'type' => 'checkbox'
-        ),
-				array(
-            'name' => 'Featured post <br />(home page)',
-            'id' => $prefix . 'checkbox_featured_home',
-            'type' => 'checkbox'
-        ),
         array(
             'name' => 'Tick if gated',
             'id' => $prefix . 'checkbox_gated',
