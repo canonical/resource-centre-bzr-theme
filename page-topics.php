@@ -68,9 +68,10 @@ if ( !defined('ABSPATH')) exit;
 	$query = new WP_Query( array(
 	  'posts_per_page'  => 1,
     'topic'           => $current_tax,
-    'meta_key'        => 'dbt_checkbox_featured',
     'post_type'       => 'post',
-    'paged'           => $paged
+      'paged'           => $paged,
+      'post__in'  => get_option( 'sticky_posts' ),
+      'ignore_sticky_posts' => 1
 	));
 ?>
 <div class="row">
