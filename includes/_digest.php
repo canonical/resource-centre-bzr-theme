@@ -27,6 +27,10 @@
             <input class="mktoLogicalField mktoCheckboxList mktoHasWidth" type="checkbox" id="insightsiot" name="insightsiot" value="yes"<?php if(in_array('internet-of-things', $termsString) or $current_tax == 'internet-of-things' or is_home() or is_page_template( 'page-press.php' )) echo ' checked="checked" ' ?>/>
             <label for="insightsiot">Internet of Things</label>
           </li>
+          <li>
+            <input class="mktoLogicalField mktoCheckboxList mktoHasWidth" type="checkbox" id="insightswebinar" name="insightswebinar" value="yes" checked="checked" />
+            <label for="insightswebinar">Webinars</label>
+          </li>
         </ul>
       </li>
       <li  class="mktFormReq mktField">
@@ -38,7 +42,7 @@
       </li>
       <li  class="mktField">
         <span class='mktoButtonWrap'><button type='submit' class='mktoButton'>Subscribe now</button></span>
-        
+
         <input value="1959" class="mktoField mktoFieldDescriptor" name="lpId" type="hidden">
         <input value="30" class="mktoField mktoFieldDescriptor" name="subId" type="hidden">
         <input type="hidden" name="lpurl" value="https://pages.canonical.com/Insights-Subscription_Insights-Subscription-test.html?cr={creative}&amp;kw={keyword}" />
