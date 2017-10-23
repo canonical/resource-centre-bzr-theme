@@ -28,8 +28,8 @@
             <label for="insightsiot">Internet of Things</label>
           </li>
           <li>
-            <input class="mktoLogicalField mktoCheckboxList mktoHasWidth" type="checkbox" id="insightswebinar" name="insightswebinar" value="yes" checked="checked" />
-            <label for="insightswebinar">Webinars</label>
+            <input class="mktoLogicalField mktoCheckboxList mktoHasWidth" type="checkbox" id="insights_tutorials" name="insights_tutorials" value="yes" checked="checked" />
+            <label for="insights_tutorials">Tutorials</label>
           </li>
         </ul>
       </li>
