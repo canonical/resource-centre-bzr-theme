@@ -207,22 +207,6 @@ function mytheme_save_data($post_id) {
     }
 }
 
-//Adds the youtube box in admin
-function custom_post_video() {
-    global $post;
-    ?>
-    <div class="inside">
-        <p>
-        	<label for="postVideo">Code</label>
-        	<input type="text" name="postVideo" id="postVideo" value="<?php echo get_post_meta($post->ID, 'postVideo', true); ?>">
-        </p>
-        <p>Enter the YouTube video 11 digit code here e.g from this url http://www.youtube.com/watch?v=D6z6hn6wZlg you need the 11 digits after ?v= i.e <strong>D6z6hn6wZlg</strong></p>
-
-        <p>Enter the codes comma separated (no space) if you have more than one e.g: <strong>h384z7Ph0gU,5_4fXQcxFRs</strong></p>
-    </div>
-<?php
-}
-
 add_action('save_post', 'custom_add_save');
 
 function custom_add_save($postID){
