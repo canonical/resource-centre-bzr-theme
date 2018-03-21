@@ -7,6 +7,9 @@ Version: 0.1
 Author: Devin Price
 Author URI: http://www.wptheming.com
 License: GPLv2 or later
+
+Updated - 21 March 2018 by Peter Mahnke
+Added to the rest api as /wp-json/wp/v2/event?_embed=True
 */
 
 /**
@@ -48,14 +51,49 @@ function ep_eventposts() {
 		'capability_type' => 'post',
 		'rewrite' => array("slug" => "event"), // Permalinks format
 		'menu_position' => 5,
-        'menu_icon' => get_stylesheet_directory_uri() . '/static/img/admin/calendar-day.png',
+    'menu_icon' => get_stylesheet_directory_uri() . '/static/img/admin/calendar-day.png',
+    'show_in_rest' => true,
 		'has_archive' => true
-	); 
+	);
 
 	register_post_type( 'event', $args );
 }
 
 add_action( 'init', 'ep_eventposts' );
+
+/**
+  * Updated - 21 March 2018
+  * add custom fields to rest api
+**/
+add_action( 'rest_api_init', 'slug_register_fields' );
+function slug_register_fields() {
+    foreach(
+        array(
+            '_event_location',
+            '_event_venue',
+            '_event_registration',
+            '_start_day',
+            '_start_month',
+            '_start_year',
+            '_end_day',
+            '_end_month',
+            '_end_year'
+        ) as $field
+    ) {
+        register_rest_field( 'event',
+            $field,
+            array(
+                'get_callback'    => 'slug_get_event_data',
+                'update_callback' => null,
+                'schema'          => null,
+            )
+        );
+    }
+}
+function slug_get_event_data( $object, $field_name, $request ) {
+    return get_post_meta( $object[ 'id' ], $field_name, true );
+}
+
 
 /**
  * Adds event post metaboxes for start time and end time
@@ -102,15 +140,15 @@ function ept_event_date($post, $args) {
 	if ( empty( $year ) ) {
 		$year = gmdate( 'Y', $time_adj );
 	}
-	
+
 	$hour = get_post_meta($post->ID, $metabox_id . '_hour', true);
- 
+
     if ( empty($hour) ) {
         $hour = gmdate( 'H', $time_adj );
     }
- 
+
     $min = get_post_meta($post->ID, $metabox_id . '_minute', true);
- 
+
     if ( empty($min) ) {
         $min = '00';
     }
@@ -129,7 +167,7 @@ function ept_event_date($post, $args) {
     echo '<input type="text" name="' . $metabox_id . '_year" value="' . $year . '" size="4" maxlength="4" /> ';
     //echo '<input type="text" name="' . $metabox_id . '_hour" value="' . $hour . '" size="2" maxlength="2"/>:';
     //echo '<input type="text" name="' . $metabox_id . '_minute" value="' . $min . '" size="2" maxlength="2" />';
- 
+
 }
 
 function ept_event_location() {
@@ -181,11 +219,11 @@ function ep_eventposts_save_meta( $post_id, $post ) {
 
 	// OK, we're authenticated: we need to find and save the data
 	// We'll put it into an array to make it easier to loop though
-	
+
 	$metabox_ids = array( '_start', '_end' );
 
 	foreach ($metabox_ids as $key ) {
-	    
+
 		$aa = $_POST[$key . '_year'];
 		$mm = $_POST[$key . '_month'];
 		$jj = $_POST[$key . '_day'];
@@ -200,7 +238,7 @@ function ep_eventposts_save_meta( $post_id, $post ) {
 		$hh = ($hh > 23 ) ? 23 : $hh;
 		$mn = sprintf('%02d',$mn);
 		$mn = ($mn > 59 ) ? 59 : $mn;
-		
+
 		$events_meta[$key . '_year'] = $aa;
 		$events_meta[$key . '_month'] = $mm;
 		$events_meta[$key . '_day'] = $jj;
@@ -208,16 +246,16 @@ function ep_eventposts_save_meta( $post_id, $post ) {
 		$events_meta[$key . '_minute'] = $mn;
 		$events_meta[$key . '_eventtimestamp'] = $aa . $mm . $jj . $hh . $mn;
 	}
-    
+
     	// Save Locations Meta
-    	
-    	 $events_meta['_event_location'] = $_POST['_event_location'];	
+
+    	 $events_meta['_event_location'] = $_POST['_event_location'];
          // Save venue Meta
-    	
-    	 $events_meta['_event_venue'] = $_POST['_event_venue'];	
+
+    	 $events_meta['_event_venue'] = $_POST['_event_venue'];
          // Save registration Meta
-    	
-    	 $events_meta['_event_registration'] = $_POST['_event_registration'];	
+
+    	 $events_meta['_event_registration'] = $_POST['_event_registration'];
          // Add values of $events_meta as custom fields
 
 	foreach ( $events_meta as $key => $value ) { // Cycle through the $events_meta array!
@@ -240,7 +278,7 @@ add_action( 'save_post', 'ep_eventposts_save_meta', 1, 2 );
  */
 
 // Get the Month Abbreviation
- 
+
 function eventposttype_get_the_month_abbr($month) {
     global $wp_locale;
     for ( $i = 1; $i < 13; $i = $i +1 ) {
@@ -249,9 +287,9 @@ function eventposttype_get_the_month_abbr($month) {
                 }
     return $monthabbr;
 }
- 
+
 // Display the date
- 
+
 function eventposttype_get_the_event_date() {
     global $post;
     $eventdate = '';
@@ -274,13 +312,13 @@ function eventposttype_get_the_event_date() {
 
 /**
  * Customize Event Query using Post Meta
- * 
+ *
  * @link http://www.billerickson.net/customize-the-wordpress-query/
  * @param object $query data
  *
  */
 function be_event_query( $query ) {
-	
+
 	if( $query->is_main_query() && !$query->is_feed() && !is_admin() && $query->is_post_type_archive( 'event' ) ) {
 		$meta_query = array(
 			array(

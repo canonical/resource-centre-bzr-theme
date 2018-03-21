@@ -19,15 +19,47 @@ function user_profiles( $contactmethods ) {
     $contactmethods['location'] = 'Location (Indicate your city and country. Eg. London, United Kingdom)';
     //add user image
     //$contactmethods['user_photo'] = 'User photo';
- 
+
     return $contactmethods;
     }
     add_filter('user_contactmethods','user_profiles',10,1);
- 
+
 add_action( 'show_user_profile', 'my_show_extra_profile_fields' );
 add_action( 'edit_user_profile', 'my_show_extra_profile_fields' );
 
 add_action( 'register_form', 'ts_show_extra_register_fields' );
+
+/**
+  * updated - 21 March 2018
+  * add custom user fields to the user to rest api
+  * /wp-json/wp/v2/users?_embed=True ...
+**/
+add_action( 'rest_api_init', 'user_register_fields' );
+function user_register_fields() {
+    foreach( array (
+    'user_job_title',
+    'user_website_title',
+    'user_google',
+    'user_twitter',
+    'user_facebook',
+    'user_photo',
+    'user_location'
+    ) as $field ) {
+        register_rest_field( 'user',
+            $field,
+            array(
+                'get_callback'    => 'user_get_contact_data',
+                'update_callback' => null,
+                'schema'          => null,
+              )
+            );
+          }
+        }
+function user_get_contact_data( $user, $field_name, $request ) {
+  return get_user_meta( $user['id'], $field_name, true );
+}
+
+
 
 function my_show_extra_profile_fields( $user ) { ?>
 <h3>Extra profile information</h3>
@@ -59,7 +91,7 @@ function my_save_extra_profile_fields( $user_id ) {
 	if(current_user_can('edit_posts', $user_id ))
 		update_usermeta( $user_id, 'displayonteam', $_POST['displayonteam'] );
 	update_usermeta( $user_id, 'guestblogger', $_POST['guestblogger'] );
-}    
+}
 // end of adding custom fields to WP user profile
 
 // removing WP user profile fields
@@ -79,8 +111,8 @@ function custom_user_contactmethods( $user ) {
 }
 // end removing WP user profile fields
 
-// remove user bio html filtering 
+// remove user bio html filtering
 remove_filter('pre_user_description', 'wp_filter_kses');
-// end remove user bio html filtering 
+// end remove user bio html filtering
 
 ?>
