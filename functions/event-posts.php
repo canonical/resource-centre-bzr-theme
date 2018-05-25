@@ -87,6 +87,14 @@ function slug_register_fields() {
                 'update_callback' => null,
                 'schema'          => null,
             )
+				);
+				register_rest_field( 'post',
+            $field,
+            array(
+                'get_callback'    => 'slug_get_event_data',
+                'update_callback' => null,
+                'schema'          => null,
+            )
         );
     }
 }
@@ -112,6 +120,15 @@ function ep_eventposts_metaboxes() {
 	add_meta_box( 'ept_event_registration', 'Event registration', 'ept_event_registration', 'event', 'normal', 'default', array('id'=>'_end') );
 }
 add_action( 'admin_init', 'ep_eventposts_metaboxes' );
+
+function ep_posts_metaboxes() {
+	add_meta_box( 'ept_event_date_start', 'Start Date', 'ept_event_date', 'post', 'side', 'default', array( 'id' => '_start') );
+	add_meta_box( 'ept_event_date_end', 'End Date', 'ept_event_date', 'post', 'side', 'default', array('id'=>'_end') );
+	add_meta_box( 'ept_event_location', 'Event Location', 'ept_event_location', 'post', 'normal', 'default', array('id'=>'_end') );
+	add_meta_box( 'ept_event_venue', 'Event Venue', 'ept_event_venue', 'post', 'normal', 'default', array('id'=>'_end') );
+	add_meta_box( 'ept_event_registration', 'Event registration', 'ept_event_registration', 'post', 'normal', 'default', array('id'=>'_end') );
+}
+add_action( 'admin_init', 'ep_posts_metaboxes' );
 
 // Metabox HTML
 
