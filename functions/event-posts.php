@@ -128,7 +128,7 @@ function ep_posts_metaboxes() {
 	add_meta_box( 'ept_event_venue', 'Event Venue', 'ept_event_venue', 'post', 'normal', 'default', array('id'=>'_end') );
 	add_meta_box( 'ept_event_registration', 'Event registration', 'ept_event_registration', 'post', 'normal', 'default', array('id'=>'_end') );
 }
-add_action( 'admin_init', 'ep_posts_metaboxes' );
+// add_action( 'admin_init', 'ep_posts_metaboxes' );
 
 // Metabox HTML
 
