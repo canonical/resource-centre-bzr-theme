@@ -6,7 +6,7 @@ add_theme_support( 'automatic-feed-links' );
 function myFeedExcluder($query) {
  if ($query->is_feed) {
    $query->set('cat','-1554,-1551,-1552,-1553,-344,-347,-346,-345');
-   $query->set('tag','-3184');
+   $query->set('tag__not_in','3184');
  }
 return $query;
 }
