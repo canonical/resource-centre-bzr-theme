@@ -1,482 +1,796 @@
-<?php
+<!doctype html>
 
-// Exit if accessed directly
-if ( !defined('ABSPATH')) exit;
+<html prefix="og: http://ogp.me/ns#" class="" lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-/**
- * Single Template
- *
- *
- * @file           single.php
- * @package        Ubuntu blog theme
- * @author         Canonical Web Team
- * @copyright      2012 Canonical Ltd
- * @license
- * @version        Release: 1.0
- * @filesource     wp-content/themes/insights-theme/single.php
- * @link           http://codex.wordpress.org/Theme_Development#Footer_.28footer.php.29
- * @since          available since Release 1.0
- */
+  <title>Preview | Ubuntu blog</title>
 
-get_header();
-	$field = 'dbt_ga_tracking_label';
-	$ga_conversion = get_post_meta($post->ID, $field, TRUE);
-	$the_ga_code = $ga_conversion;
-	$key = 'postVideo';
-	$video_content = get_post_meta($post->ID, $key, TRUE);
-	$lock = 'dbt_checkbox_gated';
-	$gated_content = get_post_meta($post->ID, $lock, TRUE);
-	$posted = $_GET['posted'];
-	$postdate = get_the_time('sgymd');
-	$postid = get_the_ID();
-	$post_type = get_post_type_object( get_post_type($post) );
-	global $wpdb;
-	global $posted;
-	$attachment_id = $wpdb->get_var("SELECT ID FROM $wpdb->posts WHERE post_parent = '$post->ID' AND post_status = 'inherit' AND post_type='attachment' ORDER BY post_date DESC LIMIT 1");
-	$articlecat = $category = get_the_category()->category_nicename;
-	$category = get_the_category();
-	$category = $category[0]->category_nicename;
-	$firstCategory = $category[0]->category_description;
-	$registration = get_post_meta( $post->ID, '_event_registration', true );
-	$press_cats = array('press-releases', 'news');
-?>
+  <link rel="preconnect" href="https://res.cloudinary.com">
 
-<?php if ( has_tag( 'cloud-chatter') ) : ?><div class="row glossary-box glossary-box-chatter-cloud no-border">
-    <div class="inner-wrapper">
-        <div class="seven-col no-margin-bottom">
-            <h1 itemprop="name"><?php the_title(); ?></h1>
-            <?php get_template_part("includes/_post_meta"); ?>
-            <p class="intro clear"><?php echo get_the_excerpt(); ?></p>
-        </div>
+
+  <script src="https://assets.ubuntu.com/v1/703e23c9-lazysizes+noscript+native-loading.5.1.2.min.js" defer></script>
+
+  <!-- Temporary fix for IE11 (see: https://github.com/canonical-web-and-design/ubuntu.com/issues/6660) -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=URLSearchParams%2CArray.from%2CNodeList.prototype.forEach%2Cfetch%2CString.prototype.startsWith%2CElement.prototype.closest"></script>
+  <script src="https://assets.ubuntu.com/v1/4176b39e-serialize.js"></script>
+  <script src="https://www.google.com/recaptcha/api.js?onload=CaptchaCallback&render=explicit" defer></script>
+  <script src="https://ubuntu.com/static/js/build/main.min.js?v=b9ce682" defer></script>
+
+  <link rel="stylesheet" type="text/css" media="screen" href="https://ubuntu.com/static/css/styles.css?v=7f1ff52">
+  <link rel="stylesheet" type="text/css" media="print" href="https://ubuntu.com/static/css/print.css?v=92ca18c">
+  <script>performance.mark("Stylesheets finished")</script>
+
+  <link rel="canonical" href="https://snapcraft.io/blog/work-smart-not-hard-fun-applications-to-help-you-do-less-in-your-day">
+
+  <link rel="shortcut icon" href="https://assets.ubuntu.com/v1/49a1a858-favicon-32x32.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="https://assets.ubuntu.com/v1/17b68252-apple-touch-icon-180x180-precomposed-ubuntu.png">
+
+  <link type="text/plain" rel="author" href="https://ubuntu.com/static/files/humans.txt?v=44f44f8">
+
+
+
+  <link rel="preload" as="font" type="font/woff2" href="https://assets.ubuntu.com/v1/e8c07df6-Ubuntu-L_W.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="https://assets.ubuntu.com/v1/7f100985-Ubuntu-Th_W.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="https://assets.ubuntu.com/v1/f8097dea-Ubuntu-LI_W.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="https://assets.ubuntu.com/v1/fff37993-Ubuntu-R_W.woff2" crossorigin>
+
+  <meta name="description" content="Modern-day life is fast, hectic, demanding. Time is precious, and we often need to be able to squeeze every atom of efficiency from our environment and our tools. But sometimes, the best thing you can do for your productivity is – to do nothing. Sometimes, less is more. In this article, we want to show  […]">
+
+  <meta name="theme-color" content="#E95420">
+  <meta name="twitter:account_id" content="4503599627481511">
+  <meta name="twitter:site" content="@ubuntu">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ubuntu.com/blog/work-smart-not-hard-fun-applications-to-help-you-do-less-in-your-day">
+  <meta property="og:site_name" content="Ubuntu">
+  <meta name="copydoc" content="https://drive.google.com/drive/folders/0B4s80tIYQW4BMjNiMGFmNzQtNDkxZC00YmQ0LWJiZWUtNTk2YThlY2MzZmJh">
+  <meta name="google-site-verification" content="ddh2iq7ZuKf1LpkL_gtM_T7DkKDVD7ibq6Ceue4a_3M">
+
+
+  <meta name="twitter:title" content="Work smart, not hard &#8211; fun applications to help you do less in your day | Ubuntu">
+  <meta property="og:title" content="Work smart, not hard &#8211; fun applications to help you do less in your day | Ubuntu">
+
+
+  <meta name="twitter:description" content="Modern-day life is fast, hectic, demanding. Time is precious, and we often need to be able to squeeze every atom of efficiency from our environment and our tools. But sometimes, the best thing you can do for your productivity is – to do nothing. Sometimes, less is more. In this article, we want to show  […]">
+  <meta property="og:description" content="Modern-day life is fast, hectic, demanding. Time is precious, and we often need to be able to squeeze every atom of efficiency from our environment and our tools. But sometimes, the best thing you can do for your productivity is – to do nothing. Sometimes, less is more. In this article, we want to show  […]">
+
+
+
+  <!-- Meta image: https://admin.insights.ubuntu.com/wp-content/uploads/c576/matthew-henry-U5rMrSI7Pn4-unsplash-smaller.jpg -->
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://admin.insights.ubuntu.com/wp-content/uploads/c576/matthew-henry-U5rMrSI7Pn4-unsplash-smaller.jpg">
+  <meta property="og:image" content="https://admin.insights.ubuntu.com/wp-content/uploads/c576/matthew-henry-U5rMrSI7Pn4-unsplash-smaller.jpg">
+
+
+          <!-- Google Analytics and Google Optimize -->
+        <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-1018242-59', 'auto', {'allowLinker': true});
+        ga('require', 'GTM-N2MDH37');
+        ga('require', 'linker');
+        ga('linker:autoLink', ['conjure-up.io', 'login.ubuntu.com', 'www.ubuntu.com',
+        'ubuntu.com', 'insights.ubuntu.com', 'developer.ubuntu.com', 'cn.ubuntu.com',
+        'design.ubuntu.com', 'maas.io', 'canonical.com', 'landscape.canonical.com',
+        'pages.ubuntu.com', '/tutorials', 'docs.ubuntu.com']);
+        </script>
+        <!-- End Google Analytics and Google Optimize -->
+
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-K92JCQ');</script>
+        <!-- End Google Tag Manager -->
+</head>
+
+<body class="blog-article">
+  <!-- google tag manager -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K92JCQ" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <!-- end google tag manager -->
+
+<header id="navigation" class="p-navigation">
+  <div class="p-navigation__row u-fixed-width">
+    <div class="p-navigation__banner">
+      <div class="p-navigation__logo">
+        <a class="p-navigation__link" href="https://ubuntu.com/">
+          <svg class="p-navigation__image" width="107px" height="32px" viewBox="0 0 107 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="ubuntu-logo"><path d="M100.470409,13.7615448 C96.9385448,13.7615448 94.0754031,10.8982838 94.0754031,7.36627238 C94.0754031,3.83426097 96.9385448,0.971 100.470409,0.971 C104.002273,0.971 106.865415,3.83426097 106.865415,7.36627238 C106.865415,10.8982838 104.002273,13.7615448 100.470409,13.7615448 Z M96.479398,6.59820047 C96.0559273,6.59820047 95.7123568,6.9417853 95.7123568,7.36727117 C95.7123568,7.78976066 96.0559273,8.13434429 96.479398,8.13434429 C96.9038674,8.13434429 97.2504342,7.78976066 97.2504342,7.36727117 C97.2504342,6.9417853 96.9038674,6.59820047 96.479398,6.59820047 Z M101.966539,10.0919788 C101.601995,10.3017254 101.475153,10.7731557 101.684891,11.1377152 C101.898624,11.5092663 102.369036,11.6341154 102.73358,11.4213725 C103.103118,11.2116259 103.22996,10.7401956 103.015228,10.3726397 C102.803493,10.0030862 102.334079,9.87823709 101.966539,10.0929776 L101.966539,10.0919788 Z M98.1493106,7.36727117 C98.1493106,6.6081884 98.5268386,5.93500183 99.104117,5.52949182 L98.5428187,4.58762991 C97.8686614,5.03708681 97.3682869,5.72425648 97.1605465,6.52828495 C97.4062394,6.72804357 97.5580496,7.02768151 97.5580496,7.36727117 C97.5580496,7.70386446 97.4062394,8.00649877 97.1605465,8.20425981 C97.3682869,9.00828828 97.8696601,9.69445915 98.5428187,10.1419185 L99.104117,9.20305294 C98.5268386,8.79754293 98.1493106,8.12435636 98.1493106,7.36727117 Z M100.392506,5.11998664 C101.568037,5.11998664 102.529835,6.02089804 102.62971,7.16951013 L103.726339,7.14953427 C103.671408,6.30555408 103.30187,5.54147734 102.73358,4.98714716 C102.438948,5.09501681 102.100372,5.08003492 101.809735,4.90924129 C101.518099,4.74144405 101.337325,4.4577868 101.286389,4.15015852 C101.001745,4.07225265 100.703118,4.03030334 100.392506,4.03030334 C99.8631682,4.03030334 99.3617949,4.15415369 98.9143542,4.37388818 L99.4486863,5.33073199 C99.735328,5.19589492 100.057925,5.12098543 100.392506,5.12098543 L100.392506,5.11998664 Z M100.392506,9.61155932 C100.056926,9.61155932 99.735328,9.53565105 99.4486863,9.40181277 L98.9143542,10.3586566 C99.3607962,10.5783911 99.8631682,10.7022414 100.392506,10.7022414 C100.704117,10.7022414 101.001745,10.6622897 101.286389,10.5823862 C101.336327,10.2727604 101.518099,9.98810433 101.809735,9.82130588 C102.103368,9.65350864 102.438948,9.63553036 102.73358,9.74839398 C103.302868,9.18607345 103.670409,8.42599188 103.726339,7.5810129 L102.62971,7.56503221 C102.529835,8.71064793 101.568037,9.61056053 100.392506,9.61056053 L100.392506,9.61155932 Z M101.966539,4.64156473 C102.334079,4.85430767 102.803493,4.72945853 103.015228,4.35990507 C103.22996,3.993348 103.103118,3.52091885 102.735578,3.30917471 C102.370035,3.09942815 101.899623,3.22427729 101.686888,3.59183316 C101.474154,3.95839024 101.600996,4.4288218 101.966539,4.64056594 L101.966539,4.64156473 Z M12.7910109,24.1489933 C12.1418224,24.3107977 11.2828961,24.4855865 10.2172282,24.6663681 C9.15056154,24.850146 7.91610464,24.942035 6.5178525,24.942035 C5.29737813,24.942035 4.27365781,24.7642498 3.43970028,24.4086795 C2.60774025,24.0541079 1.93857672,23.551715 1.4322097,22.9005019 C0.922846416,22.2512863 0.558302106,21.4842132 0.335580515,20.6032777 C0.109862669,19.7153506 0,18.7385309 0,17.6598343 L0,8.76857793 L2.83146059,8.76857793 L2.83146059,17.0515693 C2.83146059,18.9822364 3.13508106,20.3635673 3.746317,21.1945632 C4.35555543,22.0275567 5.38127325,22.4430546 6.82247172,22.4430546 C7.12609218,22.4430546 7.44169767,22.4330667 7.76629191,22.4110932 C8.09188491,22.3911174 8.39750288,22.3661475 8.67915081,22.3361837 C8.96279625,22.3062199 9.22247165,22.2762561 9.45617951,22.2462924 C9.68988736,22.214331 9.85568012,22.1813708 9.95955028,22.1384227 L9.95955028,8.76857793 L12.7910109,8.76857793 L12.7910109,24.1499921 L12.7910109,24.1489933 Z M19.7033702,9.46773311 C20.049937,9.24600104 20.5722841,9.01028586 21.2734076,8.76857793 C21.9725337,8.5258712 22.7785262,8.40202085 23.6943813,8.40202085 C24.8299618,8.40202085 25.8396996,8.60777223 26.7235947,9.01128466 C27.6084886,9.41679466 28.3535572,9.98710554 28.9637944,10.7192209 C29.5700366,11.4483399 30.0324586,12.3212851 30.3470653,13.3360589 C30.6636695,14.3518315 30.8204735,15.469481 30.8204735,16.6880086 C30.8204735,17.9664638 30.6327082,19.1180723 30.2551802,20.1438328 C29.8786508,21.1685946 29.3463163,22.0365458 28.6571777,22.7466877 C27.9660416,23.459826 27.1350804,24.005167 26.1583014,24.3917 C25.1865161,24.7782329 24.0908857,24.971 22.8694126,24.971 C21.5490631,24.971 20.3825213,24.8781122 19.366791,24.6953331 C18.3520594,24.512554 17.5191006,24.328776 16.8699121,24.1459969 L16.8699121,1.45940984 L19.7023715,0.971998793 L19.7023715,9.46773311 L19.700374,9.46773311 L19.7033702,9.46773311 Z M20.9078646,22.3661475 C21.4242191,22.4390594 22.0664163,22.4730184 22.8404488,22.4730184 C24.3605486,22.4730184 25.5820217,21.9686279 26.4938819,20.9648408 C27.4077395,19.9590561 27.8651677,18.5327795 27.8651677,16.686011 C27.8651677,15.8739922 27.7852676,15.1129119 27.6214724,14.4007724 C27.4586759,13.6896317 27.1940067,13.0763727 26.8294624,12.557999 C26.4639193,12.0386266 25.9905111,11.636113 25.4152302,11.3394714 C24.8339568,11.0438287 24.1388258,10.8970061 23.3278395,10.8970061 C22.5548058,10.8970061 21.8456923,11.0298456 21.195505,11.2915294 C20.5463165,11.5582071 20.0469408,11.8308776 19.7023715,12.1155337 L19.7023715,22.1354263 C19.9880144,22.2203237 20.3885138,22.296232 20.9078646,22.3661475 Z M46.6257165,24.1489933 C45.976528,24.3107977 45.1176017,24.4855865 44.0529326,24.6663681 C42.9872647,24.850146 41.7528078,24.942035 40.3505606,24.942035 C39.1340813,24.942035 38.1083635,24.7642498 37.2764034,24.4086795 C36.4444434,24.0541079 35.7742811,23.551715 35.2689128,22.9005019 C34.7575521,22.2512863 34.3940065,21.4842132 34.1702862,20.6032777 C33.9475646,19.7173482 33.8367032,18.7395297 33.8367032,17.6618319 L33.8367032,8.77057551 L36.6681637,8.77057551 L36.6681637,17.0535669 C36.6681637,18.984234 36.9717842,20.3655649 37.5810226,21.1965608 C38.1902611,22.0295542 39.2149802,22.4450522 40.6571774,22.4450522 C40.9617966,22.4450522 41.2784008,22.4350643 41.6029951,22.4130908 C41.9275893,22.3931149 42.2322085,22.3681451 42.5168527,22.3381813 C42.7994994,22.3082175 43.0591748,22.2782537 43.2938814,22.2482899 C43.5255918,22.2153298 43.693382,22.1823696 43.7962534,22.1384227 L43.7962534,8.77057551 L46.6287128,8.77057551 L46.6287128,24.1519896 L46.6267153,24.1519896 L46.6257165,24.1489933 Z M50.7066153,9.22602518 C51.3558038,9.06222311 52.2177263,8.89142948 53.2953793,8.70665275 C54.3710347,8.52686999 55.6084878,8.43398223 57.010735,8.43398223 C58.2711594,8.43398223 59.3148547,8.61176741 60.1468148,8.96633897 C60.9807723,9.32190932 61.6449421,9.8183095 62.1423203,10.4585359 C62.6396986,11.0977635 62.9912591,11.8648366 63.1940057,12.7557601 C63.3957535,13.6526763 63.4976262,14.6354887 63.4976262,15.7121877 L63.4976262,24.6054417 L60.6641681,24.6054417 L60.6641681,16.3214515 C60.6641681,15.3456307 60.5982505,14.513636 60.467414,13.8244687 C60.3355788,13.1313063 60.117851,12.5759773 59.812233,12.1494927 C59.5096113,11.7200116 59.1011219,11.4123833 58.5937561,11.220615 C58.0873891,11.0238528 57.4551794,10.9289675 56.7061157,10.9289675 C56.4014965,10.9289675 56.0868898,10.9419518 55.764293,10.9619276 C55.4387,10.9819035 55.1280883,11.0078721 54.8354541,11.0378359 C54.5358287,11.0677997 54.2761533,11.1037563 54.0414466,11.143708 C53.8057413,11.1836597 53.6389498,11.2156211 53.5380759,11.2335994 L53.5380759,24.6044429 L50.7066153,24.6044429 L50.7066153,9.22602518 Z M70.0444424,8.76857793 L76.0449416,8.76857793 L76.0449416,11.143708 L70.0444424,11.143708 L70.0444424,18.4548737 C70.0444424,19.2439202 70.106365,19.9031237 70.2292115,20.4175021 C70.3490617,20.9368746 70.5328319,21.3443822 70.7765273,21.6380273 C71.0202227,21.9296749 71.3258407,22.1374239 71.6893862,22.262273 C72.0549293,22.3841258 72.4813962,22.4440534 72.9677882,22.4440534 C73.8396983,22.4440534 74.5298356,22.3471705 75.0401976,22.1544034 C75.5465646,21.9606375 75.8921327,21.8248017 76.0739054,21.7419018 L76.6831439,24.0591019 C76.3994984,24.2009305 75.8961277,24.3827108 75.1750291,24.6054417 C74.455928,24.8301702 73.6389492,24.9430338 72.7250916,24.9430338 C71.6484374,24.9430338 70.7595485,24.8061991 70.058425,24.5305322 C69.3592989,24.2548653 68.796003,23.8453601 68.3705349,23.2970227 C67.9430692,22.7496841 67.6434438,22.0744999 67.4716585,21.2724691 C67.2978757,20.4684406 67.2119831,19.5405618 67.2119831,18.4858362 L67.2119831,4.35191473 L70.0424449,3.8625061 L70.0424449,8.77057551 L70.0444424,8.77057551 L70.0444424,8.76857793 Z M91.4556778,24.1489933 C90.803493,24.3107977 89.947563,24.4855865 88.8788988,24.6663681 C87.8142297,24.850146 86.5817703,24.942035 85.1835182,24.942035 C83.9630438,24.942035 82.9393235,24.7642498 82.1073634,24.4086795 C81.2714084,24.0541079 80.6022449,23.551715 80.0958779,22.9005019 C79.5865146,22.2512863 79.2239678,21.4842132 78.9972512,20.6032777 C78.7775258,19.7173482 78.6626694,18.7395297 78.6626694,17.6618319 L78.6626694,8.77057551 L81.4991238,8.77057551 L81.4991238,17.0535669 C81.4991238,18.984234 81.8027442,20.3655649 82.4109839,21.1965608 C83.0202223,22.0295542 84.0459402,22.4450522 85.4871386,22.4450522 C85.7917578,22.4450522 86.1063646,22.4350643 86.4319576,22.4130908 C86.7535556,22.3931149 87.0591735,22.3681451 87.3438177,22.3381813 C87.6274632,22.3082175 87.8891361,22.2782537 88.1198477,22.2482899 C88.3535555,22.2153298 88.5223445,22.1823696 88.6242172,22.1384227 L88.6242172,8.77057551 L91.4576753,8.77057551 L91.4576753,24.1519896 L91.4556778,24.1519896 L91.4556778,24.1489933 Z" id="ubuntu" fill="#FFFFFF" fill-rule="nonzero"></path></g></svg>
+          <script>performance.mark("Logo rendered")</script>
+        </a>
+        <h5 class="p-navigation--secondary__logo u-hide--nav-threshold-up">
+          <a class="p-navigation--secondary__banner" href="https://ubuntu.com/blog">
+            Blog
+          </a>
+        </h5>
+      </div>
     </div>
-</div><?php endif; ?>
-
-<div class="row no-border">
-<div class="inner-wrapper full-height">
-
-<?php if (have_posts()) : ?>
-<?php while (have_posts()) : the_post(); ?>
-<?php if(!current_user_can('administrator')){ echo setPostViews(get_the_ID()); } ?>
-
-<div class="content eight-col no-margin-bottom">
-	<?php if(($posted == $postdate . $postid)): // for gated content ?>
-		<div class="alert">
-			<p>Thank you! Your download should start automatically. If it doesn't, <a class="" href="<?php echo wp_get_attachment_url( $attachment_id ); ?>">download now</a>.</p>
-		</div><!-- /.alert -->
-	<?php endif; // end if(($posted == $postdate . $postid)) ?>
-	<?php $digest = $_GET['digest']; if($digest != ''): ?>
-		<div class="alert">
-			<p>Thank you for subscribing! You will begin receiving emails as new content is posted. You may unsubscribe any time by clicking the link in the email.</p>
-		</div><!-- /.alert -->
-	<?php endif; // end if(($posted == $postdate . $postid)) ?>
-	<div class="box eight-col box-highlight">
-		<?php if ( !has_tag( 'cloud-chatter') ) : ?><h1 itemprop="name"<?php if(in_category( $press_cats )) echo ' class="heading-has-time"'; ?>><?php the_title(); ?></h1><?php endif; ?>
-		<?php if( ($category != 'events') && !has_tag( 'cloud-chatter')) : ?>
-			<?php get_template_part("includes/_post_meta"); ?>
-			<div class="eight-col">
-        <?php get_template_part("includes/_share_links"); ?>
+    <nav class="p-navigation__nav">
+      <span class="u-off-screen">
+        <a href="#main-content">Jump to main content</a>
+      </span>
+      <ul class="p-navigation__links u-hide js-show-nav" role="menu">
+        <li class="p-navigation__dropdown-link" role="menuitem" id="enterprise" onmouseover="fetchDropdown('https://ubuntu.com/templates/_navigation-enterprise-h', 'enterprise-content'); this.onmouseover = null;">
+          <a class="p-navigation__link-anchor" href="#enterprise-content" onfocus="fetchDropdown('https://ubuntu.com/templates/_navigation-enterprise-h', 'enterprise-content');">Enterprise</a>
+        </li>
+        <li class="p-navigation__dropdown-link" role="menuitem" id="developer" onmouseover="fetchDropdown('https://ubuntu.com/templates/_navigation-developer-h', 'developer-content'); this.onmouseover = null;">
+          <a class="p-navigation__link-anchor" href="#developer-content" onfocus="fetchDropdown('https://ubuntu.com/templates/_navigation-developer-h', 'developer-content');">Developer</a>
+        </li>
+        <li class="p-navigation__dropdown-link" role="menuitem" id="community" onmouseover="fetchDropdown('https://ubuntu.com/templates/_navigation-community-h', 'community-content'); this.onmouseover = null;">
+          <a class="p-navigation__link-anchor" href="#community-content" onfocus="fetchDropdown('https://ubuntu.com/templates/_navigation-community-h', 'community-content');">Community</a>
+        </li>
+        <li class="p-navigation__dropdown-link" role="menuitem" id="download" onmouseover="fetchDropdown('https://ubuntu.com/templates/_navigation-download-h', 'download-content'); this.onmouseover = null;">
+          <a class="p-navigation__link-anchor" href="#download-content" onfocus="fetchDropdown('https://ubuntu.com/templates/_navigation-download-h', 'download-content');">Download</a>
+        </li>
+      </ul>
+      <noscript>
+        <ul class="p-navigation__links" role="menu">
+          <li class="p-navigation__dropdown-link--noscript" role="menuitem"><a class="p-navigation__link-anchor" href="https://ubuntu.com/openstack">OpenStack</a></li>
+          <li class="p-navigation__dropdown-link--noscript" role="menuitem"><a class="p-navigation__link-anchor" href="https://ubuntu.com/kubernetes">Kubernetes</a></li>
+          <li class="p-navigation__dropdown-link--noscript" role="menuitem"><a class="p-navigation__link-anchor" href="https://ubuntu.com/desktop">Desktop</a></li>
+          <li class="p-navigation__dropdown-link--noscript" role="menuitem"><a class="p-navigation__link-anchor" href="https://ubuntu.com/internet-of-things">IoT</a></li>
+          <li class="p-navigation__dropdown-link--noscript" role="menuitem"><a class="p-navigation__link-anchor" href="https://ubuntu.com/support">Support</a></li>
+          <li class="p-navigation__dropdown-link--noscript" role="menuitem"><a class="p-navigation__link-anchor" href="https://ubuntu.com/download">Downloads</a></li>
+        </ul>
+      </noscript>
+      <div class="p-navigation__search">
+        <form action="/search" class="p-search-box" id="google-appliance-search-form">
+          <input type="search" class="p-search-box__input" name="q" placeholder="Search" required="" aria-label="Search">
+          <button type="reset" class="p-search-box__reset u-no-margin--right"><i class="p-icon--close">Clear</i></button>
+          <button type="submit" class="p-search-box__button"><i class="p-icon--search">Search</i></button>
+        </form>
       </div>
-		<?php endif ; ?>
-		<?php if ($category == 'events') : ?>
-			<?php get_template_part("/includes/_event_meta"); ?>
-			<div class="eight-col">
-        <?php get_template_part("includes/_share_links"); ?>
-      </div>
-		<?php endif ; ?>
-		<?php if(has_post_thumbnail()) : ?>
-		<div itemprop="image" class="article-image">
-		<?php if ( is_mobile_phone() ) : ?>
-			<?php the_post_thumbnail('small'); ?>
-		<?php else : ?>
-		<?php if ($category == 'events') : else : ?>
-			<?php the_post_thumbnail('large'); ?>
-		<?php endif ; endif ; ?>
-		</div><!-- /.article-image -->
-		<?php endif ; ?>
-		<?php //if(the_post_thumbnail_caption()) : echo "<p>", the_post_thumbnail_caption(), "</p>"; endif ; ?>
-			<?php if('post' != get_post_type() && $gated_content == 'on') { the_content(); } ?>
-			<?php if(($gated_content == 'on') && ($posted != $postdate . $postid)) { ?>
-					<?php if($posted == $postdate . $postid ) { // check if the form has been posted ?>
-					<?php } else { // show this if the form has not been posted ?>
-					<?php if('post' == get_post_type()) the_excerpt(); ?>
-					<div id="gated-content">
-						<p>Please enter your details to view '<?php the_title(); ?>'</p>
-					<?php $term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) ); ?><?php echo $term->name; ?>
+    </nav>
+  </div>
 
-					<?php $theurl = rtrim(get_permalink(),'/'); ?>
-					<div class="eight-col">
-<?php
-    if ( is_tax( 'cloud' )) :
-        $form_id = '1079'; // cloud
-    elseif ( is_tax( 'server' )) :
-        $form_id = '1074'; // server
-    elseif ( is_tax( 'desktop' )) :
-        $form_id = '1075'; // desktop
-    endif;
-?>
-
-<style>
-/* Your style here */
-span.mktError span.mktFormMsg { position: relative; left: 68px !important; }
-</style>
-
-<script src="/js/mktFormSupport.js"></script>
-
-<script>
-  var formEdit = false;
-
-  var socialSignOn = {
-    isEnabled: false,
-    enabledNetworks: [''],
-    cfId: '',
-    codeSnippet: ''
-  };
-</script>
-
-<script>
-var profiling = {
-  isEnabled: true,
-  numberOfProfilingFields: 2,
-  alwaysShowFields: ['NewsletterOpt-In', 'Company', 'LastName', 'FirstName',  'mktDummyEntry']
-};
-var mktFormLanguage = 'English'
-</script>
-<script> function mktoGetForm() {return document.getElementById('mktForm_<?php echo $form_id; ?>'); }</script>
-
-<form class="lpeRegForm formNotEmpty" method="post" enctype="application/x-www-form-urlencoded" action="https://pages.canonical.com/index.php/leadCapture/save" id="mktForm_<?php echo $form_id; ?>" name="mktForm_<?php echo $form_id; ?>">
-
-    <ul class='mktLblLeft'>
-        <li class='mktField' style="display: none;">
-            <label>utm_campaign:</label>
-            <span class='mktInput'>
-                <input class='mktFormHidden' name="utm_campaign" id="utm_campaign" type='hidden' value="" />
-                <span class='mktFormMsg'></span>
-            </span>
-        </li>
-        <li class='mktField' style="display: none;">
-            <label>utm_medium:</label>
-            <span class='mktInput'>
-                <input class='mktFormHidden' name="utm_medium" id="utm_medium" type='hidden' value="blank" />
-                <span class='mktFormMsg'></span>
-            </span>
-        </li>
-        <li class='mktField' style="display: none;">
-            <label>utm_source:</label>
-            <span class='mktInput'>
-                <input class='mktFormHidden' name="utm_source" id="utm_source" type='hidden' value="Blank" />
-                <span class='mktFormMsg'></span>
-            </span>
-        </li>
-        <li class='mktFormReq mktField'>
-            <label>First name:</label>
-            <span class='mktInput'>
-                <input class='mktFormText mktFormString mktFReq' name="FirstName" id="FirstName" type='text' value=""  maxlength='255' tabIndex='4' />
-                <span class='mktFormMsg'></span>
-            </span>
-        </li>
-        <li class='mktFormReq mktField'>
-            <label>Last name:</label>
-            <span class='mktInput'>
-                <input class='mktFormText mktFormString mktFReq' name="LastName" id="LastName" type='text' value=""  maxlength='255' tabIndex='5' />
-                <span class='mktFormMsg'></span>
-            </span>
-        </li>
-        <li class='mktFormReq mktField'>
-            <label>Company name:</label>
-            <span class='mktInput'>
-                <input class='mktFormText mktFormString mktFReq' name="Company" id="Company" type='text' value=""  maxlength='255' tabIndex='6' />
-                <span class='mktFormMsg'></span>
-            </span>
-        </li>
-        <li class='mktFormReq mktField'>
-            <label>Job Role:</label>
-            <span class='mktInput'>
-                <select class='mktFormSelect mktFReq' name="Job_Role__c" id="Job_Role__c" size='1'   tabIndex='7'>
-                    <option value='Please select' selected='selected'>Please select</option>
-                    <option value='Business and Project Management'>Business and Project Management</option>
-                    <option value='Database Development and Administration'>Database Development and Administration</option>
-                    <option value='Education'>Education</option>
-                    <option value='Enterprise Systems Analysis &amp; Integration'>Enterprise Systems Analysis &amp; Integration</option>
-                    <option value='Hardware Operations and Management'>Hardware Operations and Management</option><option value='Home User'>Home User</option>
-                    <option value='Individual'>Individual</option>
-                    <option value='Network Design and Administration'>Network Design and Administration</option>
-                    <option value='Owner/Self Employed'>Owner/Self Employed</option>
-                    <option value='Press and Communications'>Press and Communications</option>
-                    <option value='Programming/Software Engineering'>Programming/Software Engineering</option><option value='Smartphone User'>Smartphone User</option>
-                    <option value='Technical Support'>Technical Support</option>
-                    <option value='Technical Writing'>Technical Writing</option>
-                    <option value='Ubuntu Enthusiast'>Ubuntu Enthusiast</option>
-                    <option value='Web Development and Administration'>Web Development and Administration</option>
-                </select>
-                <span class='mktFormMsg'></span>
-            </span>
-        </li>
-        <li class='mktFormReq mktField'>
-            <label>Email Address:</label>
-            <span class='mktInput'>
-                <input class='mktFormText mktFormEmail mktFReq' name="Email" id="Email" type='text' value=""  maxlength='255' tabIndex='8' />
-                <span class='mktFormMsg'></span>
-            </span>
-        </li>
-        <li class='mktField'>
-            <label>Currently Using Ubuntu:</label>
-            <span class='mktInput'>
-                <input class='mktFormText mktFormPicklist' name="CurrentlyUsingUbuntu" id="CurrentlyUsingUbuntu" type='text' value=""  maxlength='255' tabIndex='9' />
-                <span class='mktFormMsg'></span>
-            </span>
-        </li>
-        <li class='mktField'>
-            <label>Number of Employees:</label>
-            <span class='mktInput'>
-                <select class='mktFormSelect' name="num_employees__c" id="num_employees__c" size='1'   tabIndex='10'>
-                    <option value='None' selected='selected'>None</option>
-                    <option value='&lt;500'>&lt;500</option>
-                    <option value='501-1000'>501-1000</option>
-                    <option value='1001-2000'>1001-2000</option>
-                    <option value='2001-5000'>2001-5000</option>
-                    <option value='5000+'>5000+</option>
-                </select>
-                <span class='mktFormMsg'></span>
-            </span>
-        </li>
-        <li class='mktField mktLblRight'>
-            <span class='mktInput mktLblRight'>
-                <input class='mktFormCheckbox' name="NewsletterOpt-In" id="NewsletterOpt-In" type='checkbox' value="1"   tabIndex='11' />
-                <label>I would like to receive occasional news from Canonical by email.                                         </label>&nbsp;
-                <span class='mktFormMsg'></span>
-            </span>
-        </li>
-        <li id='mktFrmButtons' class="clear">
-            <input id='mktFrmSubmit' type='submit' value='Submit' name='submitButton' onclick='formSubmit(document.getElementById("mktForm_<?php echo $form_id; ?>")); return false;' />&nbsp;
-            <input style='display: none;' id='mktFrmReset' type='reset' value='Clear' name='resetButton' onclick='formReset(document.getElementById("mktForm_<?php echo $form_id; ?>")); return false;' />
-        </li>
-    </ul>
-
-    <span style="display:none;"><input type="text" name="_marketo_comments" value="" /></span>
-    <input type="hidden" name="lpId" value="1214" />
-    <input type="hidden" name="subId" value="30" />
-    <input type="hidden" name="munchkinId" value="066-EOV-335" />
-    <input type="hidden" name="kw" value="" />
-    <input type="hidden" name="cr" value="" />
-    <input type="hidden" name="searchstr" value="" />
-
-<?php
-// Get terms for post
-$terms = get_the_terms( $post->ID , 'topic' );
-if ($terms) :
-	foreach( $terms as $term ) :
-		echo '<input type="hidden" name="lpurl" value="https://pages.canonical.com/confirmed-download-'.$term->slug. '.html?cr={creative}&amp;kw={keyword}" />';
-	unset($term);
-endforeach;
-endif;
-?>
-    <input type="hidden" name="formid" value="<?php echo $form_id; ?>" />
-    <input type="hidden" name="returnURL" value="<?php the_permalink() ?>?posted=<?php echo $postdate . $postid; ?>" />
-    <input type="hidden" name="retURL" value="<?php the_permalink() ?>?posted=<?php echo $postdate . $postid; ?>" />
-    <input type="hidden" name="returnLPId" value="-1" />
-    <input type="hidden" name="_mkt_disp" value="return" />
-    <input type="hidden" name="_mkt_trk" value="id:066-EOV-335" />
-</form>
-
-<script src="/js/mktFormSupport.js"></script>
-
-<script>
-    function formSubmit(elt) {
-        return Mkto.formSubmit(elt);
-    }
-    function formReset(elt) {
-        return Mkto.formReset(elt);
-    }
-</script>
-
-</div>
-					</div><!-- /#gated-content -->
-					<?php } // end if market_form completed ?>
-
-<?php } elseif(($gated_content == 'on' && $posted == $postdate . $postid)) { // show this if is gated and the form has been posted ?>
-
-		<?php if ( get_post_meta($post->ID, 'postVideo', true) ) : ?>
-					<div class="new-video-wrapper"><iframe class="post-video" width="596" height="335" src="https://www.youtube.com/embed/<?php echo $video_content; ?>?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe></div>
-					<?php the_content(); ?>
-		<?php else : ?>
-		<?php if('post' == get_post_type()) : ?>
-					<div itemprop="description" class="eight-col"><?php the_content(); ?></div>
-					<div id="download-item">
-						<p><a class="link-cta-ubuntu" href="<?php echo wp_get_attachment_url( $attachment_id ); ?>">Download  <?php $term_id = the_category_ID($echo=false); $saved_data = get_tax_meta($term_id,'ba_singular'); echo $saved_data; ?></a></p>
-					</div>
-		<?php else : ?>
-					<iframe width="1" height="1" frameborder="0" src="<?php echo wp_get_attachment_url( $attachment_id ); ?>"></iframe>
-		<?php endif; ?>
-		<?php endif; // if video  ?>
-			<?php } else { // show this if the post is not gated ?>
-		<?php if ( get_post_meta($post->ID, 'postVideo', true) ) : ?>
-				<?php if ( !empty( $post->post_excerpt ) ) :	the_excerpt(); else : false; endif; ?>
-					<div class="new-video-wrapper"><iframe class="post-video" width="596" height="335" src="https://www.youtube.com/embed/<?php echo $video_content; ?>?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe></div>
-					<div itemprop="description" class="eight-col"><?php the_content(); ?></div>
-		<?php elseif('post' == get_post_type() || 'presskits' == get_post_type()) : ?>
-					<div itemprop="description" class="eight-col"><?php the_content(); ?></div>
-					<?php if ($category != 'news') : ?>
-						<?php $attachments = get_children( array('post_parent' => get_the_ID(), 'post_type' => 'attachment') ); if ( $attachments ) : if (! wp_attachment_is_image($attachment_id) ) : ?>
-					<div id="download-item">
-						<p><a class="link-cta-ubuntu" href="<?php echo wp_get_attachment_url( $attachment_id ); ?>?utm_source=<?php the_title(); ?>&amp;utm_medium=download+link&amp;utm_content=<?php echo $post_type->labels->title_friendly, ''; ?>">Download  <?php $term_id = the_category_ID($echo=false); $saved_data = get_tax_meta($term_id,'ba_singular'); echo $saved_data; ?></a></p>
-					</div><?php endif; endif; endif; // end if ( $attachments ) ?>
-		<?php else : ?>
-					<div itemprop="description" class="eight-col"><?php the_content(); ?></div>
-		<?php if(!$gated_content && $posted) : ?>
-					<iframe width="1" height="1" src="<?php echo wp_get_attachment_url( $attachment_id ); ?>" style='display:none;'></iframe>
-		<?php else : ?>
-						<?php $attachments = get_children( array('post_parent' => get_the_ID(), 'post_type' => 'attachment') );
-							if ( $attachments ) : ?>
-					<div id="download-item">
-						<p><a class="link-cta-ubuntu" href="<?php echo wp_get_attachment_url( $attachment_id ); ?>?utm_source=<?php the_title(); ?>&amp;utm_medium=download+link&amp;utm_content=<?php echo $post_type->labels->title_friendly, ''; ?>">Download <?php single_cat_title(); ?></a></p>
-					</div><?php endif ; // end if ( $attachments ) ?>
-		<?php endif; ?>
-		<?php endif; // if video  ?>
-<?php } // end if gated ?>
-<?php if('event' == get_post_type()) : ?>
-<?php
-	$current_time = current_time('mysql');
-	list( $today_year, $today_month, $today_day, $hour, $minute, $second ) = split( '([^0-9])', $current_time );
-	$current_timestamp = $today_year . $today_month . $today_day . $hour . $minute;
-	$event_timestamp = get_post_meta( $post->ID, '_start_eventtimestamp', true ); ?>
-	<?php if(($current_timestamp <= $event_timestamp) && $registration) : ?>
-	<div id="download-item">
-		<p><a itemprop="url" class="link-cta-ubuntu" href="<?php echo $registration; ?>">Register now</a></p>
-	</div>
-	<?php endif; ?>
-<?php endif; // if event ?>
-
-<?php $user_login = get_the_author_meta('user_login', $curauth->ID); ?>
-<?php if($user_login != 'canonical') : ?>
-<?php if(get_the_author_meta('user_job_title', $uid)) : ?><div id="hcard-<?php the_author_meta('first_name',$uid); ?>-<?php the_author_meta('last_name',$uid); ?>" class="eight-col vcard<?php if(get_the_author_meta('user_photo', $uid)) echo ' has-avatar '; ?>">
-  <h3>About the author</h3>
-  <?php if(get_the_author_meta('user_photo', $uid)) : ?><div><span class="image-wrap avatar" style="width: auto; height: auto;"><img src="<?php bloginfo('url'); ?><?php the_author_meta('user_photo',$uid); ?>" alt="<?php the_author_meta('first_name',$uid); ?>'s photo" class="avatar-156 photo" width="156" height="156" /></span></div><?php endif; ?>
-  <div><p><?php the_author_meta('user_description',$uid); ?></p>
-  <p><a href="<?php echo get_author_posts_url(get_the_author_meta( 'ID' )); ?>">More articles by <?php the_author_meta('first_name',$uid); ?></a></p></div>
-</div><?php endif; ?><?php endif; ?>
-<?php get_template_part("includes/_cat_headings"); ?>
-
-	</div><!-- /.box -->
-<?php get_template_part("includes/_related_posts"); ?>
-</div><!-- /.eight-col -->
-
-<aside id="sidebar" class="four-col last-col instapaper_ignore">
-  <?php $attachments = get_children( array('exclude'     => get_post_thumbnail_id(), 'post_parent' => get_the_ID(), 'post_type' => 'attachment') ); if ((( $attachments )) && ($category == 'news')) : ?>
-
-<?php get_template_part("includes/_downloads"); ?>
-
-<?php $pressLinks = preg_split("/\\r\\n|\\r|\\n/", get_post_meta($post->ID, 'dbt_press_links', true ) );
-
-if ( get_post_meta($post->ID, 'dbt_press_links', true) ) :  ?>
-	<div class="box box-highlight press-release-videos four-col clearfix">
-		<h2>Links</h2>
-		<ul class="no-bullets">
-	<?php foreach ( $pressLinks as $pressLink ) : ?>
-		 <li>
-			 <?php echo $pressLink; ?>
-     </li>
-	<?php endforeach; ?>
-		</ul>
-	</div>
-<?php endif; ?>
-
-<?php
-	if ( get_post_meta($post->ID, 'postVideo', true) ) :
-		get_template_part("includes/_videos");
-	endif;
-?>
-
-<?php
-$press_contact = make_clickable(get_post_meta( get_the_ID(), 'dbt_press_contact', true ));
-
-// check if the custom field has a value
-if( ! empty( $press_contact ) ) {
-    echo '<div class="box box-highlight four-col">';
-    echo '<h2>Contact details</h2>';
-    echo wpautop( $press_contact, false );
-    echo '</div>';
-} ?>
-
-<?php else : ?>
-<?php endif; // if category press-releases ends ?>
-<?php endwhile; // while have_posts ends ?>
-<?php endif; // if have_posts ends ?>
-
-<?php if (($category == 'news') &&  (( $attachments ) && (! wp_attachment_is_image($attachment_id) )) ) : ?>
-<?php endif; // if ($category == array('news','press-releases')) ?>
-
-
-<?php get_template_part("includes/_digest"); ?>
-
- <div class="box box-highlight four-col">
-    	<h2>All <?php $term_list = wp_get_post_terms($post->ID, 'topic', array("fields" => "names"));
-echo strtolower($term_list[0]); wp_reset_query();?>&nbsp;resources</h2>
-    	<ul class="no-bullets no-margin-bottom">
-    	<?php	wp_reset_query();
-
-        $topic_list = wp_get_post_terms($post->ID, 'topic', array("fields" => "slugs"));
-    		// get all the categories from the database
-    		$current_tax = $topic_list[0];
-    		$cats = get_categories();
-    		// loop through the categries
-    			foreach ($cats as $cat) :
-    				// setup the cateogory ID
-    				$cat_id= $cat->term_id;
-    				// create a custom wordpress query
-    				query_posts("topic=$current_tax&cat=$cat_id&posts_per_page=1");
-    				// start the wordpress loop!
-    		      if (have_posts()) : while (have_posts()) : the_post();
-    						echo "<li><a href='/topic/" . $current_tax . "?cat=".$cat_id."'>".$cat->name." (" .$wp_query->found_posts . ")</a></li>";
-    		      ?>
-          <?php endwhile; endif; // done our wordpress loop. Will start again for each category ?>
-    			<?php endforeach; wp_reset_query(); // done the foreach statement and reset the mofo ?>
-          <li><a href="/topic/<?php echo $current_tax; ?>">View all <?php
-echo strtolower($term_list[0]); wp_reset_query();?>&nbsp;resources</a></li>
-    	</ul>
+</header>
+<div class="dropdown-window-overlay fade-animation"></div>
+<div class="dropdown-window slide-animation">
+  <div class="u-hide" id="enterprise-content"></div>
+  <div class="u-hide" id="developer-content">  </div>
+  <div class="u-hide" id="community-content"></div>
+  <div class="u-hide" id="download-content"></div>
 </div>
 
-<?php
-/* ============== pull in topic specific cta ============== */
-  wp_reset_query();
-  $topic_list = wp_get_post_terms($post->ID, 'topic', array("fields" => "slugs"));
-  $current_tax = $topic_list[0];
-	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Needed for pagination
-	$query = new WP_Query( array(
-    'posts_per_page'  => 3,
-    'topic'           => $current_tax,
-    'post_type'       => 'topiccta',
-    'post__not_in'    => $do_not_duplicate,
-    'paged'           => $paged
-	));
-?>
-<?php if ($query->have_posts()) : ?>
-	<div class="fixed-sticky four-col">
-		<?php
-			while ($query->have_posts()) :
-			$query->the_post();
-			$do_not_duplicate[] = $post->ID;
-			$slug = basename(get_permalink());
-		?>
-      <div id="rtp-<?php echo $current_tax; ?>" class="box box-highlight contextual-footer four-col">
-				<div class="box-<?php echo $slug; ?> four-col">
-					<ul class="no-bullets">
-						<li>
-							<h2><a href="<?php echo get_the_excerpt(); ?>"><?php the_title(); ?></a></h2>
-							<?php the_content(); ?>
-						</li>
-					</ul>
-				</div>
-			</div>
-		<?php endwhile; ?>
-	</div>
-<?php endif; // if have_posts ends
-wp_reset_query();
-/* ============== end pull in topic specific cta ============== */ ?>
-</aside><!-- /.instapaper_ignore -->
 
-</div><!-- /.inner-wrapper -->
-</div><!-- /.row -->
+<nav class="p-navigation--secondary">
+  <div class="row">
+    <div class="col-12 u-equal-height">
+      <a class="p-navigation--secondary__banner u-hide--nav-threshold-down" href="https://ubuntu.com/blog">
+        <h5 class="p-navigation--secondary__logo">
+          Blog
+        </h5>
+      </a>
 
-<?php // dynamic_sidebar( 'search-sidebar' ); ?>
+      <ul class="breadcrumbs--secondary">
+          <li class="breadcrumbs__item">
+            <a class="breadcrumbs__link p-link--soft" href="https://ubuntu.com/blog">Overview</a>
+          </li>
+          <li class="breadcrumbs__item">
+            <a class="breadcrumbs__link p-link--soft" href="https://ubuntu.com/blog/internet-of-things">Internet of Things</a>
+          </li>
+          <li class="breadcrumbs__item">
+            <a class="breadcrumbs__link p-link--soft" href="https://ubuntu.com/blog/desktop">Desktop</a>
+          </li>
+          <li class="breadcrumbs__item">
+            <a class="breadcrumbs__link p-link--soft" href="https://ubuntu.com/blog/cloud-and-server">Cloud and Server</a>
+          </li>
+          <li class="breadcrumbs__item p-contextual-menu u-hide--small">
+            <a aria-controls="#topics" data-trigger="hover" class="breadcrumbs__link u-no-margin--bottom p-link--soft p-contextual-menu__toggle" href="#">Topics</a>
+            <span class="p-contextual-menu__dropdown" id="topics" aria-hidden="true" aria-label="submenu" style="left: 1rem; font-size: .875rem;">
+              <span class="p-contextual-menu__group">
+                <a href="https://ubuntu.com/blog/topics/design" class="p-contextual-menu__link breadcrumbs p-link--soft">Design</a>
+                <a href="https://ubuntu.com/blog/topics/juju" class="p-contextual-menu__link breadcrumbs p-link--soft">Juju</a>
+                <a href="https://ubuntu.com/blog/topics/maas" class="p-contextual-menu__link breadcrumbs p-link--soft">MAAS</a>
+                <a href="https://ubuntu.com/blog/topics/robotics" class="p-contextual-menu__link breadcrumbs p-link--soft">Robotics</a>
+                <a href="https://ubuntu.com/blog/topics/snapcraft" class="p-contextual-menu__link breadcrumbs p-link--soft">Snapcraft</a>
+              </span>
+            </span>
+          </li>
+          <li class="breadcrumbs__item">
+            <a class="breadcrumbs__link p-link--soft" href="https://ubuntu.com/blog/press-centre">Press centre</a>
+          </li>
+          <li class="breadcrumbs__item u-hide--medium u-hide--large">
+            <a class="breadcrumbs__link p-link--soft " href="https://ubuntu.com/blog/topics/design">Design</a>
+          </li>
 
-<?php get_footer(); ?>
+          <li class="breadcrumbs__item u-hide--medium u-hide--large">
+            <a class="breadcrumbs__link p-link--soft " href="https://ubuntu.com/blog/topics/juju">Juju</a>
+          </li>
+
+          <li class="breadcrumbs__item u-hide--medium u-hide--large">
+            <a class="breadcrumbs__link p-link--soft " href="https://ubuntu.com/blog/topics/maas">MAAS</a>
+          </li>
+
+          <li class="breadcrumbs__item u-hide--medium u-hide--large">
+            <a class="breadcrumbs__link p-link--soft " href="https://ubuntu.com/blog/topics/robotics">Robotics</a>
+          </li>
+
+          <li class="breadcrumbs__item u-hide--medium u-hide--large">
+            <a class="breadcrumbs__link p-link--soft " href="https://ubuntu.com/blog/topics/snapcraft">Snapcraft</a>
+          </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<script>
+  var nav = document.querySelector('.js-show-nav');
+  var hash = window.location.hash;
+  nav.classList.remove('u-hide');
+
+  // If the page loads with a preselected hash load and open the menu
+  if (hash) {
+    try {
+      var selected = nav.querySelector(hash);
+    } catch(error) {
+      console.warn("Hash " + hash + " not found in topnav");
+    }
+    if (selected) {
+      selected.onmouseover();
+    }
+  }
+
+  function fetchDropdown(url, id) {
+    var div = document.getElementById(id);
+    var req = new XMLHttpRequest();
+    req.open('GET', url);
+    req.send();
+    req.addEventListener('load', function() {
+      div.innerHTML = this.responseText;
+    });
+  }
+</script>
+
+  <div class="wrapper u-no-margin--top">
+    <div id="main-content" class="inner-wrapper">
+        <article>
+          <header class="p-strip--image is-shallow" style="background-image: url(https://assets.ubuntu.com/v1/f8a323a7-image-background-paper.png);">
+            <div class="row">
+              <div class="col-8">
+                <h1><?php the_title(); ?></h1>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-8">
+                <div class="p-media-object">
+                  <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+                    <img src="https://secure.gravatar.com/avatar/fe0589ad41ef5c32641d0dbf4e77a589?s=96&amp;d=mm&amp;r=g" class="p-media-object__image is-round">
+
+
+                  <div class="p-media-object__details">
+
+                      <h3 class="p-media-object__title">
+                        <a href="https://ubuntu.com/blog/author/<?php echo get_the_author_meta( 'nickname' ); ?>" title="More about <?php echo get_the_author_meta( 'display_name' ); ?>"><?php echo get_the_author_meta( 'display_name' ); ?></a>
+                      </h3>
+
+                    <p class="p-media-object__content">on <?php echo get_the_date()?></p>
+                    <?php endwhile; endif; // done our wordpress loop. Will start again for each category ?>
+                  </div>
+                </div>
+              </div>
+              <div class="col-4">
+                <ul class="p-inline-list-icons u-no-padding--left u-no-margin--left">
+                  <li class="p-inline-list__item">
+                    Share on:
+                  </li>
+
+                  <li class="p-inline-list__item">
+                    <a class="p-icon--facebook" title="Share on Facebook" href="">
+                      Facebook
+                    </a>
+                  </li>
+
+                  <li class="p-inline-list__item">
+                    <a class="p-icon--twitter" title="Share on Twitter" href="">
+                      Twitter
+                    </a>
+                  </li>
+
+                  <li class="p-inline-list__item">
+                    <a class="p-icon--linkedin" title="Share on LinkedIn" href="">
+                    LinkedIn
+                  </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-10">
+                <p>
+                  <strong>Tags:</strong>
+                  <?php
+                    if (have_posts()) : while (have_posts()) : the_post();
+                      $post_tags = get_the_tags();
+                      if ( $post_tags ) {
+                        foreach( $post_tags as $tag ) {
+                          echo '<a href="https://ubuntu.com/blog/tag/'.$tag->name.'">'.$tag->name.'</a>, ';
+                        }
+                      }
+                    endwhile; endif; // done our wordpress loop. Will start again for each category
+                  ?>
+                </p>
+              </div>
+            </div>
+          </header>
+
+          <section class="p-strip is-shallow" style="overflow-x: initial;">
+            <div class="row u-equal-height">
+              <div class="col-8">
+                <div class="p-post__content">
+                    <?php the_content(); ?>
+                </div>
+              </div>
+
+              <div class="col-4">
+                <div style="position: sticky; top: 2rem;">
+                  <div class="blog-p-card--muted">
+                    <header class="blog-p-card__header">
+                      <h5 class="p-muted-heading u-no-margin--bottom">Newsletter signup</h5>
+                    </header>
+
+                    <div class="blog-p-card__content">
+                      <form action="https://pages.canonical.com/index.php/leadCapture/save" method="post" id="mktoForm_1212" novalidate="novalidate" onsubmit="ga('send', 'Newsletter', 'Signup', 'New homepage newsletter signup');">
+                        <h3 class="p-card--title p-heading--four">Select topics you&rsquo;re <br />interested in</h3>
+
+                        <ul class="p-list">
+                          <li class="p-list__item u-clearfix">
+                            <input class="mktoLogicalField mktoCheckboxList mktoHasWidth" type="checkbox" id="insightscloudserver" name="insightscloudserver" value="Cloud and server" />
+                            <label for="insightscloudserver">Cloud and Server</label>
+                          </li>
+
+                          <li class="p-list__item u-clearfix">
+                            <input class="mktoLogicalField mktoCheckboxList mktoHasWidth" type="checkbox" id="insightsdesktop" name="insightsdesktop" value="Desktop" />
+                            <label for="insightsdesktop">Desktop</label>
+                          </li>
+
+                          <li class="p-list__item u-clearfix">
+                            <input class="mktoLogicalField mktoCheckboxList mktoHasWidth" type="checkbox" id="insightsiot" name="insightsiot" value="Internet of Things" />
+                            <label for="insightsiot">Internet of Things</label>
+                          </li>
+
+                          <li class="p-list__item u-clearfix">
+                            <input class="mktoLogicalField mktoCheckboxList mktoHasWidth" id="insightsrobotics" name="insightsrobotics" value="Robotics" type="checkbox">
+                            <label for="insightsrobotics">Robotics</label>
+                          </li>
+
+                          <li class="p-list__item u-clearfix">
+                            <input class="mktoLogicalField mktoCheckboxList mktoHasWidth" id="insightstutorials" name="insightstutorials" value="Tutorials" type="checkbox">
+                            <label for="insightstutorials">Tutorials</label>
+                          </li>
+                        </ul>
+
+                        <div class="mktFormReq mktField">
+                          <label>
+                            <span class="u-no-margin--top">Work email: <span>*</span></span>
+                            <input required  id="Email" name="Email" maxlength="255" type="email" class="mktoField mktoEmailField mktoRequired" />
+                          </label>
+                        </div>
+
+                        <div class="mktField mktLblRight">
+                          <span class="mktInput mktLblRight">
+                            <input class="u-no-margin--top mktFormCheckbox" name="canonicalUpdatesOptIn" id="CanonicalUpdatesOptIn" value="Receive updates" type="checkbox" />
+                            <label for="CanonicalUpdatesOptIn" class="p-form__label u-no-margin--top">
+                              <small>I agree to receive information about Canonical’s products and services.</small>
+                            </label>
+                            <span class="mktFormMsg"></span>
+                          </span>
+                        </div>
+
+                        <div class="g-recaptcha" data-sitekey="6LfYBloUAAAAAINm0KzbEv6TP0boLsTEzpdrB8if"></div>
+
+                        <p>
+                          <small>In submitting this form, I confirm that I have read and agree to <a href="https://ubuntu.com/legal/data-privacy/newsletter">Canonical’s Privacy Notice</a> and <a href="https://ubuntu.com/legal/data-privacy">Privacy Policy</a>.</small>
+                        </p>
+
+                        <div>
+                          <span class="mktoButtonWrap p-card--content">
+                            <button type="submit" class="u-no-margin--bottom">Subscribe now</button>
+                          </span>
+
+                          <input type="hidden" name="Consent_to_Processing__c" value="yes" />
+
+                          <input value="1959" class="mktoField mktoFieldDescriptor" name="lpId" type="hidden">
+
+                          <input value="30" class="mktoField mktoFieldDescriptor" name="subId" type="hidden">
+
+                          <input name="lpurl" value="https://pages.canonical.com/Insights-Subscription_Insights-Subscription-test.html?cr={creative}&amp;kw={keyword}" type="hidden">
+                          <input value="1212" class="mktoField mktoFieldDescriptor" name="formid" type="hidden">
+                          <input type="hidden" name="ret" value="?newsletter=true" />
+                          <input value="066-EOV-335" class="mktoField mktoFieldDescriptor" name="munchkinId" type="hidden">
+                          <input name="kw" value="" type="hidden">
+                          <input name="cr" value="" type="hidden">
+                          <input name="searchstr" value="" type="hidden">
+                          <input name="_mkt_disp" value="return" type="hidden">
+                          <input name="_mkt_trk" value="id:066-EOV-335&amp;token:_mch-ubuntu.com-1473266321199-95160" type="hidden">
+                          <input type="hidden" name="thankyoumessage" value="Thank you for subscribing!<br />You will begin receiving emails as new content is posted. You may unsubscribe any time by clicking the link in the email.">
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+
+                  <script src="https://assets.ubuntu.com/v1/5d7e5bbf-jquery-2.2.0.min.js"></script>
+                  <script src="https://assets.ubuntu.com/v1/d55f58bb-jquery.validate.js"></script>
+                  <script>
+                    $("#mktoForm_1212").validate({
+                      errorPlacement: function(error, element) {
+                        error.appendTo( element.parent().addClass( "p-form-validation is-error" ));
+                        error.appendTo( element.addClass( "p-form-validation__input" ));
+                      },
+                      errorElement: "span",
+                      errorClass: "p-form-validation__message"
+                    });
+                  </script>
+                </div>
+              </div>
+            </div>
+          </section>
+        </article>
+        <section class="p-strip--light is-shallow">
+          <div class="row">
+            <div class="col-8">
+              <h3>Related posts</h3>
+            </div>
+          </div>
+
+          <div class="row p-divider">
+            <div class="col-4 p-divider__block">
+              <h4>
+                <a href="https://ubuntu.com/blog/we-are-changing-the-way-you-build-snaps-from-github-repos">
+                  We are changing the way you build snaps from GitHub repos
+                </a>
+              </h4>
+              <p>On the 11th March 2020 we introduced a new process for building a snap using GitHub repos to snapcraft.io. Here is all you need to know about this update....</p>
+            </div>
+
+            <div class="col-4 p-divider__block">
+              <h4>
+                <a href="https://ubuntu.com/blog/gnome-3-34-snapcraft-extension">
+                  GNOME 3.34 snapcraft extension
+                </a>
+              </h4>
+              <p>We constantly strive to empower developers. Part of that aim extends to making development easier, for example improving build tools and documentation. As an...</p>
+            </div>
+
+            <div class="col-4 p-divider__block">
+              <h4>
+                <a href="https://ubuntu.com/blog/an-adventure-through-the-snap-store">
+                  An adventure through the Snap Store
+                </a>
+              </h4>
+              <p>An application store with a large number of entries is a double-edged sword. It’s often a good sign of a vibrant, thriving community of software creators,...</p>
+            </div>
+          </div>
+        </section>
+      </div><!-- /.inner-wrapper -->
+    </div><!-- /.wrapper -->
+
+    <footer class="p-footer p-strip u-clearfix">
+      <div class="u-fixed-width p-footer__container">
+        <p class="u-hide--medium u-hide--large link-to-top"><a href="#"><small>Back to top</small></a></p>
+        <nav id="main-navigation" class="p-footer__nav u-clearfix row u-no-padding--left u-no-padding--right">
+          <div class="p-footer__nav-col col-2 u-no-margin--bottom">
+            <ul class="p-footer__links">
+              <li class="p-footer__item">
+                <h2 class="p-footer__title">
+                  <a class="p-link--soft" href="https://ubuntu.com/openstack">OpenStack</a>
+                </h2>
+                <ul class="second-level-nav">
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/openstack/what-is-openstack">What is OpenStack</a></li>
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/openstack/features">Features</a></li>
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/openstack/managed">Managed</a></li>
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/openstack/consulting">Consulting</a></li>
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/openstack/compare">Compare</a></li>
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/tco-calculator">TCO calculator</a></li>
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/openstack/install">Install</a></li>
+                </ul>
+              </li>
+              <li class="p-footer__item">
+                <h2 class="p-footer__title">
+                  <a class="p-link--soft" href="https://ubuntu.com/pricing">Pricing</a>
+                </h2>
+                <ul class="second-level-nav">
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/pricing/infra">Support</a></li>
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/pricing/consulting">Consulting</a></li>
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/pricing/devices">Devices</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div class="p-footer__nav-col col-2 u-no-margin--bottom">
+            <ul class="p-footer__links">
+              <li class="p-footer__item">
+                <h2 class="p-footer__title">
+                  <a class="p-link--soft" href="https://ubuntu.com/kubernetes">Kubernetes</a>
+                </h2>
+                <ul class="second-level-nav">
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/kubernetes/features">Features</a></li>
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/kubernetes/managed">Managed</a></li>
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/tco-calculator">TCO calculator</a></li>
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/kubernetes/install">Install</a></li>
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/kubernetes/docs">Docs</a></li>
+                </ul>
+              </li>
+              <li class="p-footer__item">
+                <h2 class="p-footer__title">
+                  <a class="p-link--soft" href="https://ubuntu.com/kubeflow">Kubeflow</a>
+                </h2>
+                <ul class="second-level-nav">
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/kubeflow/what-is-kubeflow">What is Kubeflow</a></li>
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/kubeflow/features">Features</a></li>
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/kubeflow/install">Install</a></li>
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/kubeflow/consulting">Consulting</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div class="p-footer__nav-col col-2 u-no-margin--bottom">
+            <ul class="p-footer__links">
+              <li class="p-footer__item">
+                <h2 class="p-footer__title">
+                  <a class="p-link--soft" href="https://ubuntu.com/desktop">Desktop</a>
+                </h2>
+
+                <ul class="second-level-nav">
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/desktop/features">Features</a></li>
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/desktop/organisations">Organisations</a></li>
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/desktop/developers">Developers</a></li>
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/desktop/partners">Partners</a></li>
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/desktop/statistics">Statistics</a></li>
+                </ul>
+              </li>
+              <li class="p-footer__item">
+                <h2 class="p-footer__title">
+                  <a class="p-link--soft" href="https://ubuntu.com/internet-of-things">IoT</a>
+                </h2>
+                <ul class="second-level-nav">
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/internet-of-things/digital-signage">Digital signage</a></li>
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/robotics">Robotics</a></li>
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/internet-of-things/gateways">Gateways</a></li>
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/internet-of-things/appstore">App store</a></li>
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/embedded">Embedded Linux</a></li>
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/automotive">Automotive</a></li>
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/internet-of-things/networking">Networking</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div class="p-footer__nav-col col-2 u-no-margin--bottom">
+            <ul class="p-footer__links">
+              <li class="p-footer__item">
+                <h2 class="p-footer__title">
+                  <a class="p-link--soft" href="https://ubuntu.com/server">Server</a>
+                </h2>
+                <ul class="second-level-nav">
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/server/hyperscale">Hyperscale</a></li>
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/server/docs">Docs</a></li>
+                </ul>
+              </li>
+              <li class="p-footer__item">
+                <h2 class="p-footer__title">
+                  <a class="p-link--soft" href="https://ubuntu.com/support">Support</a>
+                </h2>
+                <ul class="second-level-nav">
+                      <li class="p-footer-list--margin"><a href="https://ubuntu.com/support/plans-and-pricing">Pricing</a></li>
+                      <li class="p-footer-list--margin"><a href="https://ubuntu.com/support/community-support">Community support</a></li>
+                      <li class="p-footer-list--margin"><a href="https://ubuntu.com/esm">ESM</a></li>
+                      <li class="p-footer-list--margin"><a href="https://ubuntu.com/livepatch">Livepatch</a></li>
+                </ul>
+              </li>
+              <li class="p-footer__item">
+                <h2 class="p-footer__title">
+                  <a class="p-link--soft" href="https://ubuntu.com/security">Security</a>
+                </h2>
+                <ul class="second-level-nav">
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/security/certifications">Certifications</a></li>
+                  <li class="p-footer-list--margin"><a href="https://usn.ubuntu.com">Notices</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div class="p-footer__nav-col col-2 u-no-margin--bottom">
+            <ul class="p-footer__links">
+              <li class="p-footer__item">
+                <h2 class="p-footer__title">
+                  <a class="p-link--soft" href="https://ubuntu.com/download">Downloads</a>
+                </h2>
+                <ul class="second-level-nav">
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/download/cloud">Cloud</a></li>
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/download/iot">IoT</a></li>
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/download/raspberry-pi">Raspberry Pi</a></li>
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/download/server">Server</a></li>
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/download/desktop">Desktop</a></li>
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/download/alternative-downloads">Alternative downloads</a></li>
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/download/flavours">Ubuntu flavours</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div class="p-footer__nav-col col-2 u-no-margin--bottom last-col">
+            <ul class="p-footer__links">
+              <li class="p-footer__item p-footer__item--spaced">
+                <h2 class="p-footer__title p-footer__title-text">
+                  <span>Sectors</span>
+                </h2>
+                <ul class="second-level-nav">
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/telecommunications">Telco</a></li>
+                  <li class="p-footer-list--margin"><a href="https://ubuntu.com/financial-services">Finance</a></li>
+                </ul>
+              </li>
+              <li>
+                <ul class="second-level-nav second-level-nav-small">
+                  <li class="p-footer-list--margin p-footer-list-single-child">
+                    <a class="p-link--soft" href="https://ubuntu.com/public-cloud"><small>Public cloud</small></a>
+                  </li>
+                  <li class="p-footer-list--margin p-footer-list-single-child">
+                    <a class="p-link--soft" href="https://ubuntu.com/containers"><small>Containers</small></a>
+                  </li>
+                  <li class="p-footer-list--margin p-footer-list-single-child">
+                    <a class="p-link--soft" href="https://ubuntu.com/core"><small>Core</small></a>
+                  </li>
+                  <li class="p-footer-list--margin p-footer-list-single-child">
+                    <a class="p-link--soft" href="https://ubuntu.com/tutorials"><small>Tutorials</small></a>
+                  </li>
+                  <li class="p-footer-list--margin p-footer-list-single-child">
+                    <a class="p-link--soft" href="https://ubuntu.com/managed-apps"><small>Managed apps</small></a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <hr class="p-footer__divider" />
+        <div class="p-footer--secondary row">
+          <div class="col-7">
+            <nav>
+              <ul class="p-inline-list">
+                <li class="u-hide--small p-inline-list__item">
+                  <a class="p-button--neutral" href="https://ubuntu.com/contact-us"><small class="u-no-padding--top">Contact us</small></a>
+                </li>
+                <li class="u-hide--medium u-hide--large p-inline-list__item">
+                  <a class="p-link--soft" href="https://ubuntu.com/contact-us"><small>Contact us</small></a>
+                </li>
+                <li class="p-inline-list__item">
+                  <a class="p-link--soft" href="https://ubuntu.com/about"><small>About us</small></a>
+                </li>
+                <li class="p-inline-list__item">
+                  <a class="p-link--soft" href="https://ubuntu.com/community"><small>Community</small></a>
+                </li>
+                <li class="p-inline-list__item">
+                  <a class="p-link--soft" href="http://www.canonical.com/careers"><small>Careers</small></a>
+                </li>
+                <li class="p-inline-list__item">
+                  <a class="p-link--soft" href="https://ubuntu.com/blog"><small>Blog</small></a>
+                </li>
+                <li class="p-inline-list__item">
+                  <a class="p-link--soft" href="https://ubuntu.com/engage"><small>Resources</small></a>
+                </li>
+                <li class="p-inline-list__item">
+                  <a class="p-link--soft" href="https://ubuntu.com/blog/press-centre"><small>Press centre</small></a>
+                </li>
+              </ul>
+            </nav>
+          <p class="p-footer--secondary__content"><small>&copy; 2020 Canonical Ltd. Ubuntu and Canonical are
+          registered trademarks of Canonical Ltd.</small></p>
+          <nav class="p-footer--secondary__nav">
+            <ul class="p-inline-list--middot u-no-margin--bottom">
+              <li class="p-inline-list__item">
+                <a class="p-link--soft" accesskey="8" href="https://ubuntu.com/legal"><small>Legal information</small></a>
+              </li>
+              <li class="p-inline-list__item">
+                <a class="p-link--soft" accesskey="9" href="https://ubuntu.com/legal/data-privacy"><small>Data privacy</small></a>
+              </li>
+              <li class="p-inline-list__item">
+                <a class="p-link--soft" href="https://github.com/canonical-websites/www.ubuntu.com/issues/new" id="report-a-bug">
+                  <small>Report a bug on this site</small>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="p-footer__nav-col col-5">
+          <ul class="p-inline-list-icons">
+            <li class="p-inline-list__item">
+              <a class="p-inline-list__link--twitter" title="Follow Ubuntu on Twitter" href="https://twitter.com/ubuntu"><svg
+                class="p-inline-list_icon" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 44 44">
+                <defs>
+                  <style>
+                    .twitter-icon {
+                      fill: #666666;
+                    }
+
+                    .cls-2 {
+                      fill: #fff;
+                    }
+                  </style>
+                </defs>
+                <g>
+                  <path class="twitter-icon" d="M21.996-.002c-12.15 0-22 9.85-22 22s9.85 22 22 22 22-9.85 22-22-9.85-22-22-22z" />
+                </g>
+                <path class="cls-2" d="M25.18 10.95c-2.06.636-4.04 3.464-3.42 6.664-6.834-.42-9.852-4.144-11.667-5.926-1.85 3.32.048 6.55 1.704 7.594-.874.05-1.932-.335-2.457-.67-.2 3.064 2.255 5.188 4.344 5.738-.668.203-1.297.23-2.373.067.917 3.082 3.378 3.907 5.21 4.042-2.36 2.082-5.192 2.536-8.274 2.383 7.99 4.97 16.056 1.912 19.983-1.99 3.296-3.275 4.77-8.18 4.82-12.57.756-.623 2.282-1.945 2.696-2.98-.6.236-1.792.796-3.034.846 1.023-.683 2.195-2.05 2.318-3.117-1.133.627-2.444 1.17-3.567 1.344-2.117-2.078-4.178-2.076-6.284-1.426z" />
+              </svg></a>
+            </li>
+            <li class="p-inline-list__item">
+              <a class="p-inline-list__link--facebook" title="Follow Ubuntu on Facebook" href="https://www.facebook.com/ubuntulinux/"><svg
+                xmlns="http://www.w3.org/2000/svg" viewbox="0 0 32 32">
+                <defs>
+                  <style>
+                    .facebook-icon {
+                      fill: #666666;
+                    }
+
+                    .cls-2 {
+                      fill: #fff;
+                    }
+                  </style>
+                </defs>
+                <g>
+                  <path class="facebook-icon" d="M15.947 0C7.14 0 0 7.143 0 15.95 0 24.76 7.142 31.9 15.95 31.9s15.948-7.14 15.948-15.95c0-4.23-1.68-8.286-4.672-11.277C24.234 1.68 20.176 0 15.946 0z" />
+                </g>
+                <path class="cls-2" d="M18.632 5.102c-2.91 0-4.904 1.776-4.904 5.04v2.55h-3.293v3.814h3.293V26.87c1.353-.18 2.678-.53 3.942-1.045v-9.31h3.285l.492-3.812h-3.784v-2.18c0-1.104.357-2.238 1.894-1.855h2.02V5.252c-.978-.103-1.96-.154-2.943-.15h-.002z" />
+              </svg></a>
+            </li>
+            <li class="p-inline-list__item">
+              <a class="p-inline-list__link--linkedin" title="Find Canonical on LinkedIn" href="https://www.linkedin.com/company/ubuntu/"><svg
+                xmlns="http://www.w3.org/2000/svg" viewbox="0 0 33 33">
+                <defs>
+                  <style>
+                    .linkedin-icon {
+                      fill: #666666;
+                    }
+
+                    .cls-2 {
+                      fill: #fff;
+                    }
+                  </style>
+                </defs>
+                <g>
+                  <path class="linkedin-icon" d="M16.26 0C7.28 0 0 7.28 0 16.26s7.28 16.262 16.26 16.262 16.262-7.28 16.262-16.26C32.522 7.28 25.242 0 16.262 0z" />
+                </g>
+                <path class="cls-2" d="M7 8.512v16.38c0 .758.63 1.37 1.404 1.37h16.192c.775 0 1.404-.612 1.404-1.37V8.512c0-.755-.63-1.37-1.404-1.37H8.404C7.63 7.143 7 7.757 7 8.513zm5.76 14.636H9.89v-8.634h2.87v8.634zm-1.435-9.812h-.02c-.962 0-1.585-.663-1.585-1.492 0-.847.642-1.492 1.624-1.492s1.586.645 1.604 1.492c0 .83-.623 1.492-1.623 1.492zm3.022 9.812s.038-7.824 0-8.634h2.87v1.252h-.02c.38-.59 1.058-1.454 2.607-1.454 1.888 0 3.303 1.234 3.303 3.885v4.95h-2.87V18.53c0-1.162-.415-1.953-1.453-1.953-.793 0-1.265.534-1.472 1.05-.076.184-.095.44-.095.7v4.82h-2.87z" />
+              </svg></a>
+            </li>
+            <li class="p-inline-list__item">
+              <a class="p-inline-list__link--rss" title="Use the Ubuntu Blog rss feed" href="https://ubuntu.com/blog/feed"><svg width="32px" height="32px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <defs>
+                  <style>
+                    .rss-icon {
+                      fill: #666666;
+                    }
+
+                    .cls-2 {
+                      fill: #E5E5E5;
+                    }
+                  </style>
+                </defs>
+                <g class="rss-icon">
+                  <circle cx="20" cy="20" r="20"></circle>
+                </g>
+                <g class="cls-2" transform="translate(10.000000, 8.000000)">
+                  <circle cx="3" cy="18.875" r="3"></circle>
+                  <path d="M14.5,21.875 L10.25,21.875 C10.25,16.2140813 5.66091869,11.625 3.55271368e-15,11.625 L3.55271368e-15,7.375 C8.00812887,7.375 14.5,13.8668711 14.5,21.875 Z"></path>
+                  <path d="M17.5,21.875 C17.5,12.2100169 9.66498312,4.375 7.10542736e-15,4.375 L7.10542736e-15,0 C12.0812289,0 21.875,9.7937711 21.875,21.875 L17.5,21.875 Z"></path>
+                </g>
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <script>
+      /* Add the page to the report a bug link */
+      var bugLink = document.querySelector('#report-a-bug');
+      bugLink.href += '?body=%0a%0a%0a---%0a*Reported%20from:%20' + location.href + '*';
+    </script>
+    <span class="u-off-screen"><a href="#">Go to the top of the page</a></span>
+  </div>
+</footer>
+</body>
+</html>
