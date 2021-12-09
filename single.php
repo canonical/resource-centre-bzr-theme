@@ -16,10 +16,10 @@
   <script src="https://polyfill.io/v3/polyfill.min.js?features=URLSearchParams%2CArray.from%2CNodeList.prototype.forEach%2Cfetch%2CString.prototype.startsWith%2CElement.prototype.closest"></script>
   <script src="https://assets.ubuntu.com/v1/4176b39e-serialize.js"></script>
   <script src="https://www.google.com/recaptcha/api.js?onload=CaptchaCallback&render=explicit" defer></script>
-  <script src="https://ubuntu.com/static/js/build/main.min.js?v=b9ce682" defer></script>
+  <script src="https://ubuntu.com/static/js/dist/main.js" defer></script>
 
-  <link rel="stylesheet" type="text/css" media="screen" href="https://ubuntu.com/static/css/styles.css?v=7f1ff52">
-  <link rel="stylesheet" type="text/css" media="print" href="https://ubuntu.com/static/css/print.css?v=92ca18c">
+  <link rel="stylesheet" type="text/css" media="screen" href="https://ubuntu.com/static/css/styles.css">
+  <link rel="stylesheet" type="text/css" media="print" href="https://ubuntu.com/static/css/print.css">
   <script>performance.mark("Stylesheets finished")</script>
 
   <link rel="canonical" href="https://snapcraft.io/blog/work-smart-not-hard-fun-applications-to-help-you-do-less-in-your-day">
@@ -27,7 +27,7 @@
   <link rel="shortcut icon" href="https://assets.ubuntu.com/v1/49a1a858-favicon-32x32.png" type="image/x-icon">
   <link rel="apple-touch-icon" href="https://assets.ubuntu.com/v1/17b68252-apple-touch-icon-180x180-precomposed-ubuntu.png">
 
-  <link type="text/plain" rel="author" href="https://ubuntu.com/static/files/humans.txt?v=44f44f8">
+  <link type="text/plain" rel="author" href="https://ubuntu.com/static/files/humans.txt">
 
 
 
