@@ -12,6 +12,11 @@ function add_topics() {
     'hierarchical' => true,
     'show_admin_column' => true,
     'show_in_rest' => true,
+    // Topics are phased out of the authoring flow: no classic metabox, no
+    // quick edit. The block editor panel is hidden via rest_prepare_taxonomy
+    // in taxonomy-lockdown.php. Taxonomy stays registered and REST-readable.
+    'meta_box_cb' => false,
+    'show_in_quick_edit' => false,
 		'labels' => array(
 			'name' => _x( 'Topic', 'taxonomy general name' ),
 			'singular_name' => _x( 'Topic', 'taxonomy singular name' ),
@@ -41,6 +46,15 @@ function add_groups() {
 		'hierarchical' => true,
     'show_admin_column' => true,
     'show_in_rest' => true,
+    // Groups are a curated vocabulary: only Administrators create, rename or
+    // delete them. Hierarchical taxonomies derive the block editor's "Add new
+    // group" affordance from edit_terms, so this removes that link for editors.
+    'capabilities' => array(
+      'manage_terms' => 'manage_categories',
+      'edit_terms'   => 'manage_options',
+      'delete_terms' => 'manage_options',
+      'assign_terms' => 'edit_posts',
+    ),
 		'labels' => array(
 			'name' => _x( 'Group', 'taxonomy general name' ),
 			'singular_name' => _x( 'Group', 'taxonomy singular name' ),

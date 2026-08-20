@@ -74,7 +74,9 @@ function add_group_automatically($post_ID) {
 		wp_set_object_terms($post_ID, $cat, 'group', true);
 	}
 }
-add_action('save_post', 'add_group_automatically');
+// Unhooked (taxonomy lockdown): this re-added retired groups from stored
+// topic terms on every save. Groups are now curated by administrators only.
+// add_action('save_post', 'add_group_automatically');
 
 // post types - add new post types here and at the top of post-types.php
 $post_types = array('whitepaper', 'post', 'ebook', 'video', 'attachment', 'casestudy', 'infographic', 'webinar', 'event', 'case-study', 'presskits');

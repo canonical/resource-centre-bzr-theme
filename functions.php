@@ -8,4 +8,5 @@ require('functions/metaboxes.php');
 require('functions/custom_taxonomies.php');
 require('functions/event-posts.php');
 require('functions/categories.php');
+require('functions/taxonomy-lockdown.php');
 ?>
