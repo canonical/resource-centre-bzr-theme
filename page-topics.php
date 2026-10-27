@@ -201,7 +201,7 @@ $query = new WP_Query( array(
             $do_not_duplicate[] = $post->ID ;
                 // get time gubbin's
                 $current_time = current_time('mysql'); 
-                list( $today_year, $today_month, $today_day, $hour, $minute, $second ) = split( '([^0-9])', $current_time );
+                list( $today_year, $today_month, $today_day, $hour, $minute, $second ) = preg_split( '/[^0-9]/', $current_time );
                 $end_month = get_post_meta( $post->ID, '_end_month', true );
                 $end_day = get_post_meta( $post->ID, '_end_day', true );
                 $end_year = get_post_meta( $post->ID, '_end_year', true );

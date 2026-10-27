@@ -54,7 +54,7 @@ wp_reset_query();
 <?php 
 	global $post, $wp_locale;
 	$current_time = current_time('mysql'); 
-	list( $today_year, $today_month, $today_day, $hour, $minute, $second ) = split( '([^0-9])', $current_time );
+	list( $today_year, $today_month, $today_day, $hour, $minute, $second ) = preg_split( '/[^0-9]/', $current_time );
 	$end_month = get_post_meta( $post->ID, '_end_month', true );
 	$end_day = get_post_meta( $post->ID, '_end_day', true );
 	$end_year = get_post_meta( $post->ID, '_end_year', true );
@@ -116,7 +116,7 @@ wp_reset_query();
 <?php 
 	global $post, $wp_locale;
 	$current_time = current_time('mysql'); 
-	list( $today_year, $today_month, $today_day, $hour, $minute, $second ) = split( '([^0-9])', $current_time );
+	list( $today_year, $today_month, $today_day, $hour, $minute, $second ) = preg_split( '/[^0-9]/', $current_time );
 	$end_month = get_post_meta( $post->ID, '_end_month', true );
 	$end_day = get_post_meta( $post->ID, '_end_day', true );
 	$end_year = get_post_meta( $post->ID, '_end_year', true );

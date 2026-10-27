@@ -554,7 +554,7 @@ function wdd_in_category_count($catslugs = '', $display = true) {
 
 	$post_count = 0;
 	$slug_where = '';
-	$catslugs_arr = split(',', $catslugs);
+	$catslugs_arr = explode(',', $catslugs);
 
 	foreach ($catslugs_arr as $catslugkey => $catslug) {
 		if ( $catslugkey > 0 ) {
