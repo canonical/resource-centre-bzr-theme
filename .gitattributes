@@ -1,0 +1,9 @@
+# Files left out of the theme zip (git archive)
+.gitattributes          export-ignore
+.github                 export-ignore
+.bzrignore              export-ignore
+*.backup                export-ignore
+*.old                   export-ignore
+untitled[[:space:]]file export-ignore
+*.scss                  export-ignore
+*.map                   export-ignore

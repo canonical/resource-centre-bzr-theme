@@ -2,3 +2,6 @@
 config.rb
 compass_app_log.txt
 .DS_Store
+.git
+.github
+.gitattributes

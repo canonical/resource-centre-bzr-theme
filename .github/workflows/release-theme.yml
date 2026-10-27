@@ -1,0 +1,35 @@
+name: Build theme zip
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  THEME_SLUG: resource-centre
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build zip
+        run: git archive --format=zip --prefix="$THEME_SLUG/" -o "$THEME_SLUG.zip" HEAD
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.THEME_SLUG }}
+          path: ${{ env.THEME_SLUG }}.zip
+
+      # Tagged builds become a GitHub release. The latest one is always at
+      # https://github.com/<owner>/<repo>/releases/latest/download/resource-centre.zip
+      - name: Publish release
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" "$THEME_SLUG.zip" --title "$GITHUB_REF_NAME" --generate-notes
