@@ -8,9 +8,14 @@ on:
 
 permissions:
   contents: write
+  packages: write
 
 env:
   THEME_SLUG: resource-centre
+  # wordpress-k8s charm revision whose image the theme is added to.
+  # Keep this in step with the revision deployed in the Juju model.
+  CHARM_REVISION: 190
+  IMAGE: ghcr.io/${{ github.repository }}/wordpress-image
 
 jobs:
   php-check:
@@ -59,3 +64,42 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh release create "$GITHUB_REF_NAME" "$THEME_SLUG.zip" --title "$GITHUB_REF_NAME" --generate-notes
+
+  image:
+    needs: php-check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Export theme files
+        run: |
+          mkdir -p .github/image/theme
+          git archive HEAD | tar -x -C .github/image/theme
+
+      - name: Look up the charm's image
+        run: |
+          url=$(curl -sf -X POST https://api.charmhub.io/v2/charms/refresh \
+            -H 'Content-Type: application/json' \
+            -d "{\"context\":[],\"actions\":[{\"action\":\"download\",\"instance-key\":\"x\",\"name\":\"wordpress-k8s\",\"revision\":$CHARM_REVISION}],\"fields\":[\"resources\"]}" \
+            | jq -r '.results[0].charm.resources[] | select(.name=="wordpress-image") | .download.url')
+          creds=$(curl -sfL "$url")
+          user=$(jq -r .Username <<<"$creds"); pass=$(jq -r .Password <<<"$creds")
+          echo "::add-mask::$pass"
+          echo "$pass" | docker login registry.jujucharms.com -u "$user" --password-stdin
+          echo "BASE_IMAGE=$(jq -r .ImageName <<<"$creds")" >> "$GITHUB_ENV"
+
+      - name: Build image
+        run: docker build --build-arg BASE_IMAGE="$BASE_IMAGE" -t "$IMAGE:build" .github/image
+
+      - name: Check theme is in the image
+        run: docker run --rm --entrypoint ls "$IMAGE:build" /var/www/html/wp-content/themes/resource-centre/style.css
+
+      # Tagged builds are pushed as <tag>-charm<revision> and latest
+      - name: Push image
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          echo "${{ github.token }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+          for t in "$GITHUB_REF_NAME-charm$CHARM_REVISION" latest; do
+            docker tag "$IMAGE:build" "$IMAGE:$t"
+            docker push "$IMAGE:$t"
+          done
