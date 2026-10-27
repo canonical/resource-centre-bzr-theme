@@ -286,7 +286,7 @@ if(!class_exists('uwpqsfprocess')){
 		
   }//end result	 
 
-  function ajax_pagination($pagenumber, $pages = '', $range = 4, $id,$getdata){
+  function ajax_pagination($pagenumber, $pages, $range, $id, $getdata){
 	$showitems = ($range * 2)+1;  
 	 
 	$paged = $pagenumber;
